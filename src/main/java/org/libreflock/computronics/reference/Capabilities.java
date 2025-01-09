@@ -1,23 +1,29 @@
 package org.libreflock.computronics.reference;
 
-import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.INBT;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.common.util.Lazy;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.common.util.NonNullSupplier;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.libreflock.computronics.api.audio.AudioPacket;
 import org.libreflock.computronics.api.audio.IAudioReceiver;
 import org.libreflock.computronics.api.audio.IAudioSource;
 import org.libreflock.computronics.audio.AudioUtils;
 
+import java.util.concurrent.Callable;
+
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
@@ -37,28 +43,28 @@ public class Capabilities {
 
 	public void init() {
 		MinecraftForge.EVENT_BUS.register(this);
-		CapabilityManager.INSTANCE.register(IAudioSource.class, new NullCapabilityStorage<IAudioSource>(), DefaultAudioSource.class);
-		CapabilityManager.INSTANCE.register(IAudioReceiver.class, new NullCapabilityStorage<IAudioReceiver>(), DefaultAudioReceiver.class);
+		CapabilityManager.INSTANCE.register(IAudioSource.class, new NullCapabilityStorage<IAudioSource>(), new AudioSourceFactory());
+		CapabilityManager.INSTANCE.register(IAudioReceiver.class, new NullCapabilityStorage<IAudioReceiver>(), new AudioReceiverFactory());
 	}
 
-	public static boolean hasAny(@Nullable ICapabilityProvider provider, EnumFacing dir, Capability... caps) {
+	public static boolean hasAny(@Nullable ICapabilityProvider provider, Direction dir, Capability... caps) {
 		if(provider == null) {
 			return false;
 		}
 		for(Capability cap : caps) {
-			if(provider.hasCapability(cap, dir)) {
+			if(provider.getCapability(cap, dir) != null) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public static boolean hasAll(@Nullable ICapabilityProvider provider, EnumFacing dir, Capability... caps) {
+	public static boolean hasAll(@Nullable ICapabilityProvider provider, Direction dir, Capability... caps) {
 		if(provider == null) {
 			return false;
 		}
 		for(Capability cap : caps) {
-			if(!provider.hasCapability(cap, dir)) {
+			if(provider.getCapability(cap, dir) == null) {
 				return false;
 			}
 		}
@@ -66,28 +72,28 @@ public class Capabilities {
 	}
 
 	@Nullable
-	public static <T> T getFirst(@Nullable ICapabilityProvider provider, EnumFacing dir, Iterable<Capability<? extends T>> caps) {
+	public static <T> T getFirst(@Nullable ICapabilityProvider provider, Direction dir, Iterable<Capability<? extends T>> caps) {
 		if(provider == null) {
 			return null;
 		}
 		for(Capability<? extends T> cap : caps) {
-			if(provider.hasCapability(cap, dir)) {
-				return provider.getCapability(cap, dir);
+			if(provider.getCapability(cap, dir) != null) {
+				return (T) provider.getCapability(cap, dir);
 			}
 		}
 		return null;
 	}
 
 	@Nullable
-	public static <T> T getFirst(@Nullable ICapabilityProvider provider, EnumFacing dir, Capability<? extends T> first, Capability<? extends T> second) {
+	public static <T> T getFirst(@Nullable ICapabilityProvider provider, Direction dir, Capability<? extends T> first, Capability<? extends T> second) {
 		if(provider == null) {
 			return null;
 		}
-		if(provider.hasCapability(first, dir)) {
-			return provider.getCapability(first, dir);
+		if(provider.getCapability(first, dir) != null) {
+			return (T) provider.getCapability(first, dir);
 		}
-		if(provider.hasCapability(second, dir)) {
-			return provider.getCapability(second, dir);
+		if(provider.getCapability(second, dir) != null) {
+			return (T) provider.getCapability(second, dir);
 		}
 		return null;
 	}
@@ -97,30 +103,35 @@ public class Capabilities {
 		final TileEntity tile = e.getObject();
 		if(tile instanceof IAudioSource) {
 			e.addCapability(AUDIO_SOURCE_KEY, new ICapabilityProvider() {
-				@Override
-				public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-					return capability == AUDIO_SOURCE_CAPABILITY;
-				}
+				// // @Override
+				// public boolean hasCapability(Capability<?> capability, @Nullable Direction facing) {
+				// 	return capability == AUDIO_SOURCE_CAPABILITY;
+				// }
 
-				@Nullable
+				// @Nullable
+				// @Override
+				// public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
+				// 	return hasCapability(capability, facing) ? AUDIO_SOURCE_CAPABILITY.<T>cast((IAudioSource) tile) : null;
+				// }
+
 				@Override
-				public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-					return hasCapability(capability, facing) ? AUDIO_SOURCE_CAPABILITY.<T>cast((IAudioSource) tile) : null;
-				}
+				@Nonnull
+				public <T>
+				LazyOptional<T> getCapability(@Nonnull final Capability<T> cap, final @Nullable Direction side) {
+					return cap.orEmpty((Capability<T>) AUDIO_SOURCE_CAPABILITY, LazyOptional.of((NonNullSupplier<T>) tile));
+				};
+
 			});
 		}
 		if(tile instanceof IAudioReceiver) {
 			e.addCapability(AUDIO_RECEIVER_KEY, new ICapabilityProvider() {
 				@Override
-				public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-					return capability == AUDIO_RECEIVER_CAPABILITY;
-				}
+				@Nonnull
+				public <T>
+				LazyOptional<T> getCapability(@Nonnull final Capability<T> cap, final @Nullable Direction side) {
+					return cap.orEmpty((Capability<T>) AUDIO_RECEIVER_CAPABILITY, LazyOptional.of((NonNullSupplier<T>) tile));
+				};
 
-				@Nullable
-				@Override
-				public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-					return hasCapability(capability, facing) ? AUDIO_RECEIVER_CAPABILITY.<T>cast((IAudioReceiver) tile) : null;
-				}
 			});
 		}
 	}
@@ -135,16 +146,31 @@ public class Capabilities {
 
 		@Nullable
 		@Override
-		public NBTBase writeNBT(Capability<T> capability, T instance, EnumFacing side) {
+		public INBT writeNBT(Capability<T> capability, T instance, Direction side) {
 			return null;
 		}
 
 		@Override
-		public void readNBT(Capability<T> capability, T instance, EnumFacing side, NBTBase nbt) {
+		public void readNBT(Capability<T> capability, T instance, Direction side, INBT nbt) {
+		}
+	}
+
+
+	static class AudioSourceFactory implements Callable {
+		public DefaultAudioSource call() {
+			return new DefaultAudioSource();
+		}
+	}
+
+	static class AudioReceiverFactory implements Callable{
+		public DefaultAudioReceiver call() {
+			return new DefaultAudioReceiver();
 		}
 	}
 
 	private static class DefaultAudioSource implements IAudioSource {
+
+		// DefaultAudioSource () {}
 
 		@Override
 		public int getSourceId() {
@@ -152,7 +178,7 @@ public class Capabilities {
 		}
 
 		@Override
-		public boolean connectsAudio(EnumFacing side) {
+		public boolean connectsAudio(Direction side) {
 			return false;
 		}
 	}
@@ -166,8 +192,8 @@ public class Capabilities {
 		}
 
 		@Override
-		public Vec3d getSoundPos() {
-			return new Vec3d(0, 0, 0);
+		public Vector3d getSoundPos() {
+			return new Vector3d(0, 0, 0);
 		}
 
 		@Override
@@ -176,7 +202,7 @@ public class Capabilities {
 		}
 
 		@Override
-		public void receivePacket(AudioPacket packet, @Nullable EnumFacing side) {
+		public void receivePacket(AudioPacket packet, @Nullable Direction side) {
 
 		}
 
@@ -186,7 +212,7 @@ public class Capabilities {
 		}
 
 		@Override
-		public boolean connectsAudio(EnumFacing side) {
+		public boolean connectsAudio(Direction side) {
 			return false;
 		}
 	}

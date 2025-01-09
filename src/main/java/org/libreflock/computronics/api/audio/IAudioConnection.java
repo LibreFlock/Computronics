@@ -1,8 +1,8 @@
 package org.libreflock.computronics.api.audio;
 
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 
 public interface IAudioConnection {
 
-	boolean connectsAudio(EnumFacing side);
+	boolean connectsAudio(Direction side);
 }
