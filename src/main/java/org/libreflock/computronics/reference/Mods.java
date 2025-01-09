@@ -1,6 +1,6 @@
 package org.libreflock.computronics.reference;
 
-import cpw.mods.fml.common.versioning.ArtifactVersion;
+import net.minecraftforge.fml.common.versioning.ArtifactVersion;
 
 import java.util.HashMap;
 
@@ -17,31 +17,39 @@ public class Mods {
 
 	//Computer mods
 	public static final String
-		OpenComputers = "OpenComputers",
-		ComputerCraft = "ComputerCraft",
+		OpenComputers = "opencomputers",
+		ComputerCraft = "computercraft",
 		TIS3D = "tis3d";
 
 	//Other mods
 	public static final String
 		AE2 = "appliedenergistics2",
+		Albedo = "albedo",
 		ArmourersWorkshop = "armourersWorkshop",
 		BetterStorage = "betterstorage",
 		BuildCraftCore = "BuildCraft|Core",
 		BuildCraftTransport = "BuildCraft|Transport",
-		EnderIO = "EnderIO",
+		CharsetAudio = "CharsetAudio",
+		CharsetLib = "CharsetLib",
+		Conventional = "conventional",
+		EnderIO = "enderio",
+		EnderIO_PowerTools = "enderiopowertools",
+		EnderIO_Machines = "enderiomachines",
 		Factorization = "factorization",
-		Flamingo = "Flamingo",
-		Forestry = "Forestry",
+		Flamingo = "flamingo",
+		Forestry = "forestry",
 		FSP = "Steamcraft",
 		GregTech = "gregtech",
+		Mirage = "mirage",
 		MFR = "MineFactoryReloaded",
 		OpenBlocks = "OpenBlocks",
 		OpenPeripheral = "OpenPeripheralCore",
 		RedLogic = "RedLogic",
 		ProjectRed = "ProjRed|Core",
-		Railcraft = "Railcraft",
-		StorageDrawers = "StorageDrawers",
-		Waila = "Waila";
+		Railcraft = "railcraft",
+		StorageDrawers = "storagedrawers",
+		TheOneProbe = "theoneprobe",
+		Waila = "waila";
 
 	//APIs
 	public static class API {
@@ -50,10 +58,12 @@ public class Mods {
 			BuildCraftBlueprints = "BuildCraftAPI|blueprints",
 			BuildCraftStatements = "BuildCraftAPI|statements",
 			BuildCraftTiles = "BuildCraftAPI|tiles",
-			CoFHAPI_Energy = "CoFHAPI|energy",
+			CharsetAudio = "CharsetAPI|Audio",
+			CharsetWires = "CharsetAPI|Wires",
 			DraconicEvolution = "DraconicEvolution|API",
 			Gendustry = "gendustryAPI",
-			Mekanism_Energy = "MekanismAPI|energy";
+			Mekanism_Energy = "MekanismAPI|energy",
+			NoteBetter = "notebetter|api";
 
 		public static boolean hasAPI(String name) {
 			return org.libreflock.lib.reference.Mods.API.hasAPI(name);
@@ -65,7 +75,6 @@ public class Mods {
 
 		public static final String
 			BuildCraftTiles = "[1.1,)",
-			Forestry = "[4.2.0,)",
 			Gendustry = "[2.0.0,)",
 			GregTech5 = "[MC1710]",
 			GregTech6 = "[GT6-MC1710]";
@@ -85,6 +94,10 @@ public class Mods {
 
 	public static boolean hasEnergyMod() {
 		return org.libreflock.lib.reference.Mods.hasEnergyMod();
+	}
+
+	public static boolean hasBundledRedstoneMod() {
+		return org.libreflock.lib.reference.Mods.hasBundledRedstoneMod();
 	}
 
 	private static final HashMap<String, Boolean> loadedClasses = new HashMap<String, Boolean>();

@@ -1,41 +1,23 @@
 package org.libreflock.computronics.block;
 
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import li.cil.oc.api.network.Environment;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Optional;
 import org.libreflock.computronics.reference.Mods;
 import org.libreflock.computronics.tile.TileSpeaker;
 
-public class BlockSpeaker extends BlockMachineSidedIcon {
-	private IIcon mFront;
+public class BlockSpeaker extends BlockPeripheral {
 
 	public BlockSpeaker() {
-		super("speaker");
-		this.setBlockName("computronics.speaker");
-		this.setRotation(Rotation.SIX);
+		super("speaker", Rotation.SIX);
+		this.setTranslationKey("computronics.speaker");
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int metadata) {
+	public TileEntity createTileEntity(World world, IBlockState stat) {
 		return new TileSpeaker();
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getAbsoluteSideIcon(int sideNumber, int metadata) {
-		return sideNumber == 2 ? mFront : super.getAbsoluteSideIcon(sideNumber, metadata);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister r) {
-		super.registerBlockIcons(r);
-		mFront = r.registerIcon("computronics:speaker_front");
 	}
 
 	@Override

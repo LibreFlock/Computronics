@@ -1,7 +1,7 @@
 package org.libreflock.computronics.audio;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.api.audio.AudioPacketClientHandler;
 import org.libreflock.lib.audio.StreamingAudioPlayer;

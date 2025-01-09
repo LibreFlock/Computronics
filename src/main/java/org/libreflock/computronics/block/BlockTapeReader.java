@@ -1,60 +1,45 @@
 package org.libreflock.computronics.block;
 
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import li.cil.oc.api.network.Environment;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Optional;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.reference.Mods;
 import org.libreflock.computronics.tile.TapeDriveState;
 import org.libreflock.computronics.tile.TileTapeDrive;
 
-public class BlockTapeReader extends BlockMachineSidedIcon {
-
-	private IIcon mFront;
+public class BlockTapeReader extends BlockPeripheral {
 
 	public BlockTapeReader() {
-		super("tape_drive");
-		this.setBlockName("computronics.tapeDrive");
+		super("tape_drive", Rotation.FOUR);
+		this.setTranslationKey("computronics.tapeDrive");
 		this.setGuiProvider(Computronics.guiTapeDrive);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int metadata) {
+	public TileEntity createTileEntity(World world, IBlockState state) {
 		return new TileTapeDrive();
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getAbsoluteSideIcon(int sideNumber, int metadata) {
-		return sideNumber == 2 ? mFront : super.getAbsoluteSideIcon(sideNumber, metadata);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister r) {
-		super.registerBlockIcons(r);
-		mFront = r.registerIcon("computronics:tape_drive_front");
-	}
-
-	@Override
-	public boolean receivesRedstone(IBlockAccess world, int x, int y, int z) {
+	public boolean receivesRedstone(IBlockAccess world, BlockPos pos) {
 		return true;
 	}
 
 	@Override
-	public boolean hasComparatorInputOverride() {
+	@Deprecated
+	public boolean hasComparatorInputOverride(IBlockState state) {
 		return true;
 	}
 
 	@Override
-	public int getComparatorInputOverride(World world, int x, int y, int z, int side) {
-		TileEntity tile = world.getTileEntity(x, y, z);
+	@Deprecated
+	public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos) {
+		TileEntity tile = world.getTileEntity(pos);
 		if(tile == null || !(tile instanceof TileTapeDrive)) {
 			return 0;
 		}

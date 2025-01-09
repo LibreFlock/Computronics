@@ -1,106 +1,121 @@
 package org.libreflock.computronics.block;
 
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import li.cil.oc.api.network.Environment;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Optional;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.item.block.IBlockWithDifferentColors;
 import org.libreflock.computronics.item.block.IBlockWithSpecialText;
 import org.libreflock.computronics.reference.Config;
 import org.libreflock.computronics.reference.Mods;
 import org.libreflock.computronics.tile.TileChatBox;
 import org.libreflock.computronics.util.StringUtil;
-import org.libreflock.lib.block.TileEntityBase;
+import org.libreflock.lib.tile.TileEntityBase;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlockChatBox extends BlockMachineSidedIcon implements IBlockWithSpecialText {
+public class BlockChatBox extends BlockPeripheral implements IBlockWithSpecialText, IBlockWithDifferentColors {
 
-	private IIcon mSide;
+	public static final PropertyBool CREATIVE = PropertyBool.create("creative");
 
 	public BlockChatBox() {
-		super("chatbox");
+		super("chatbox", Rotation.NONE);
 		this.setCreativeTab(Computronics.tab);
-		this.setIconName("computronics:chatbox");
-		this.setBlockName("computronics.chatBox");
-		this.setRotation(Rotation.FOUR);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(CREATIVE, false));
+		this.setTranslationKey("computronics.chatBox");
 	}
 
 	// I'm such a cheater.
 	@Override
-	public int getRenderColor(int meta) {
-		return meta >= 8 ? 0xFF60FF : 0xFFFFFF;
+	public int getRenderColor(IBlockState state) {
+		return state.getValue(CREATIVE) ? 0xFF60FF : 0xFFFFFF;
 	}
 
 	// Cheaters never win! ~ jaquadro
 	@Override
-	public int colorMultiplier(IBlockAccess world, int x, int y, int z) {
-		int meta = world.getBlockMetadata(x, y, z);
-		if(meta >= 8) {
-			return getRenderColor(meta);
-		}
-		return super.colorMultiplier(world, x, y, z);
+	@SideOnly(Side.CLIENT)
+	public int colorMultiplier(IBlockState state, IBlockAccess world, BlockPos pos, int renderPass) {
+		return state.getValue(CREATIVE) ? getRenderColor(state) : super.colorMultiplier(state, world, pos, renderPass);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int metadata) {
+	public int getColorFromItemstack(ItemStack stack, int pass) {
+		return (stack.getItemDamage() & 8) != 0 ? 0xFF60FF : 0xFFFFFF;
+	}
+
+	@Override
+	public TileEntity createTileEntity(World world, IBlockState state) {
 		return new TileChatBox();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public void getSubBlocks(Item item, CreativeTabs creativeTabs, List blockList) {
-		blockList.add(new ItemStack(item, 1, 0));
+	public void getSubBlocks(CreativeTabs creativeTabs, NonNullList<ItemStack> blockList) {
+		blockList.add(new ItemStack(this, 1, 0));
 		if(Config.CHATBOX_CREATIVE) {
-			blockList.add(new ItemStack(item, 1, 8));
+			blockList.add(new ItemStack(this, 1, 8));
 		}
 	}
 
 	@Override
-	public int damageDropped(int metadata) {
-		return metadata & (~7);
+	@Deprecated
+	public IBlockState getStateFromMeta(int meta) {
+		return super.getStateFromMeta(meta).withProperty(CREATIVE, (meta & 8) != 0);
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getAbsoluteSideIcon(int sideNumber, int metadata) {
-		return mSide;
+	public int getMetaFromState(IBlockState state) {
+		return super.getMetaFromState(state) | (state.getValue(CREATIVE) ? 8 : 0);
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister r) {
-		super.registerBlockIcons(r);
-		mSide = r.registerIcon("computronics:chatbox_side");
+	public int damageDropped(IBlockState state) {
+		return getMetaFromState(state);
 	}
 
 	@Override
-	public boolean emitsRedstone(IBlockAccess world, int x, int y, int z, int side) {
+	protected BlockStateContainer createActualBlockState() {
+		return new BlockStateContainer(this, CREATIVE);
+	}
+
+	@Override
+	protected IBlockState createDefaultState() {
+		return super.createDefaultState().withProperty(CREATIVE, false);
+	}
+
+	@Override
+	public boolean emitsRedstone(IBlockAccess world, BlockPos pos, EnumFacing side) {
 		return Config.REDSTONE_REFRESH;
 	}
 
 	@Override
-	public boolean hasComparatorInputOverride() {
+	@Deprecated
+	public boolean hasComparatorInputOverride(IBlockState state) {
 		return Config.REDSTONE_REFRESH;
 	}
 
 	@Override
-	public int getComparatorInputOverride(World world, int x, int y, int z, int side) {
-		TileEntity tile = world.getTileEntity(x, y, z);
+	@Deprecated
+	public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos) {
+		TileEntity tile = world.getTileEntity(pos);
 		if(tile instanceof TileEntityBase) {
-			return ((TileEntityBase) tile).requestCurrentRedstoneValue(side);
+			return ((TileEntityBase) tile).requestCurrentRedstoneValue(null);
 		}
-		return super.getComparatorInputOverride(world, x, y, z, side);
+		return super.getComparatorInputOverride(state, world, pos);
 	}
 
 	@Override
@@ -109,16 +124,16 @@ public class BlockChatBox extends BlockMachineSidedIcon implements IBlockWithSpe
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean wat) {
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World world, List<String> list, ITooltipFlag flag) {
 		if(stack.getItemDamage() >= 8) {
-			list.add(EnumChatFormatting.GRAY + StringUtil.localize("tooltip.computronics.chatBox.creative"));
+			list.add(TextFormatting.GRAY + StringUtil.localize("tooltip.computronics.chatBox.creative"));
 		}
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
-		return (stack.getItemDamage() >= 8 ? "tile.computronics.chatBox.creative" : this.getUnlocalizedName());
+	public String getTranslationKey(ItemStack stack) {
+		return (stack.getItemDamage() >= 8 ? "tile.computronics.chatBox.creative" : this.getTranslationKey());
 	}
 
 	@Override

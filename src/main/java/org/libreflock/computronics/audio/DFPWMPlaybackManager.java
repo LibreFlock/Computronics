@@ -5,6 +5,7 @@ import org.libreflock.lib.audio.StreamingAudioPlayer;
 import org.libreflock.lib.audio.StreamingPlaybackManager;
 
 public class DFPWMPlaybackManager extends StreamingPlaybackManager {
+
 	public DFPWMPlaybackManager(boolean isClient) {
 		super(isClient);
 	}

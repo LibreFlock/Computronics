@@ -1,7 +1,7 @@
 package org.libreflock.computronics.audio;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.api.audio.AudioPacketClientHandler;
 import org.libreflock.computronics.reference.Config;
@@ -26,6 +26,7 @@ import org.libreflock.computronics.util.sound.Instruction.SetWhiteNoise;
 import org.libreflock.lib.audio.StreamingAudioPlayer;
 import org.libreflock.lib.network.Packet;
 
+import javax.annotation.Nullable;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayDeque;
@@ -42,7 +43,7 @@ public class SoundCardPacketClientHandler extends AudioPacketClientHandler {
 	private Map<String, AudioProcess> processMap = new HashMap<String, AudioProcess>();
 	private int sampleRate = Config.SOUND_SAMPLE_RATE;
 
-	public void setProcess(String address, AudioProcess process) {
+	public void setProcess(String address, @Nullable AudioProcess process) {
 		if(process != null) {
 			processMap.put(address, process);
 		} else {
@@ -131,7 +132,7 @@ public class SoundCardPacketClientHandler extends AudioPacketClientHandler {
 		}
 
 		if(data.size() > 0) {
-			StreamingAudioPlayer codec = Computronics.opencomputers.audio.getPlayer(codecId);
+			StreamingAudioPlayer codec = Computronics.instance.soundCardAudio.getPlayer(codecId);
 			codec.setSampleRate(sampleRate);
 			codec.push(data.toByteArray());
 		}
@@ -139,7 +140,7 @@ public class SoundCardPacketClientHandler extends AudioPacketClientHandler {
 
 	@Override
 	protected void playData(int packetId, int codecId, float x, float y, float z, int distance, byte volume, String deviceId) {
-		StreamingAudioPlayer codec = Computronics.opencomputers.audio.getPlayer(codecId);
+		StreamingAudioPlayer codec = Computronics.instance.soundCardAudio.getPlayer(codecId);
 
 		codec.setHearing(distance, (volume * Config.SOUND_VOLUME) / (127.0F * 127.0F));
 		try {

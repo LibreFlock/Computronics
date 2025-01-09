@@ -3,6 +3,8 @@ package org.libreflock.computronics.audio;
 import net.minecraft.client.audio.ITickableSound;
 import net.minecraft.client.audio.PositionedSound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 
 /**
  * @author SleepyTrousers, Vexatos
@@ -11,17 +13,25 @@ public class MachineSound extends PositionedSound implements ITickableSound {
 
 	private boolean donePlaying;
 
+	public MachineSound(ResourceLocation sound, BlockPos pos, float volume, float pitch) {
+		this(sound, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, volume, pitch, true);
+	}
+
 	public MachineSound(ResourceLocation sound, float x, float y, float z, float volume, float pitch) {
 		this(sound, x, y, z, volume, pitch, true);
 	}
 
+	public MachineSound(ResourceLocation sound, BlockPos pos, float volume, float pitch, boolean repeat) {
+		this(sound, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, volume, pitch, repeat);
+	}
+
 	public MachineSound(ResourceLocation sound, float x, float y, float z, float volume, float pitch, boolean repeat) {
-		super(sound);
+		super(sound, SoundCategory.BLOCKS);
 		this.xPosF = x;
 		this.yPosF = y;
 		this.zPosF = z;
 		this.volume = volume;
-		this.field_147663_c = pitch;
+		this.pitch = pitch;
 		this.repeat = repeat;
 	}
 
