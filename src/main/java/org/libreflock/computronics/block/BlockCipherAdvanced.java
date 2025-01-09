@@ -1,4 +1,4 @@
-package org.libreflock.computronics.block;
+package pl.asie.computronics.block;
 
 import li.cil.oc.api.network.Environment;
 import net.minecraft.block.state.IBlockState;
@@ -9,10 +9,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.libreflock.computronics.item.block.IBlockWithSpecialText;
-import org.libreflock.computronics.reference.Mods;
-import org.libreflock.computronics.tile.TileCipherBlockAdvanced;
-import org.libreflock.computronics.util.StringUtil;
+import pl.asie.computronics.item.block.IBlockWithSpecialText;
+import pl.asie.computronics.reference.Mods;
+import pl.asie.computronics.tile.TileCipherBlockAdvanced;
+import pl.asie.computronics.util.StringUtil;
 
 import javax.annotation.Nullable;
 import java.util.List;

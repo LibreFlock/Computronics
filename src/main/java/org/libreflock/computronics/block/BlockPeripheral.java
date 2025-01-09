@@ -1,4 +1,4 @@
-package org.libreflock.computronics.block;
+package pl.asie.computronics.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -15,21 +15,21 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.libreflock.computronics.Computronics;
-import org.libreflock.computronics.oc.block.IComputronicsEnvironmentBlock;
-import org.libreflock.computronics.oc.manual.IBlockWithDocumentation;
-import org.libreflock.computronics.reference.Mods;
-import org.libreflock.computronics.tile.TileEntityPeripheralBase;
-import org.libreflock.computronics.util.internal.IBlockWithColor;
-import org.libreflock.lib.block.BlockBase;
-import org.libreflock.lib.util.ColorUtils;
-import org.libreflock.lib.util.ColorUtils.Color;
-import org.libreflock.lib.util.internal.IColorable;
+import pl.asie.computronics.Computronics;
+import pl.asie.computronics.oc.block.IComputronicsEnvironmentBlock;
+import pl.asie.computronics.oc.manual.IBlockWithDocumentation;
+import pl.asie.computronics.reference.Mods;
+import pl.asie.computronics.tile.TileEntityPeripheralBase;
+import pl.asie.computronics.util.internal.IBlockWithColor;
+import pl.asie.lib.block.BlockBase;
+import pl.asie.lib.util.ColorUtils;
+import pl.asie.lib.util.ColorUtils.Color;
+import pl.asie.lib.util.internal.IColorable;
 
-import static org.libreflock.lib.util.WorldUtils.notifyBlockUpdate;
+import static pl.asie.lib.util.WorldUtils.notifyBlockUpdate;
 
 @Optional.InterfaceList({
-	@Optional.Interface(iface = "org.libreflock.computronics.oc.block.IComputronicsEnvironmentBlock", modid = Mods.OpenComputers)
+	@Optional.Interface(iface = "pl.asie.computronics.oc.block.IComputronicsEnvironmentBlock", modid = Mods.OpenComputers)
 })
 public abstract class BlockPeripheral extends BlockBase implements IComputronicsEnvironmentBlock, IBlockWithDocumentation, IBlockWithColor {
 

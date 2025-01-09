@@ -1,4 +1,4 @@
-package org.libreflock.computronics.block;
+package pl.asie.computronics.block;
 
 import li.cil.oc.api.network.Environment;
 import net.minecraft.block.Block;
@@ -7,8 +7,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
-import org.libreflock.computronics.reference.Mods;
-import org.libreflock.computronics.tile.TileIronNote;
+import pl.asie.computronics.reference.Mods;
+import pl.asie.computronics.tile.TileIronNote;
 //import powercrystals.minefactoryreloaded.api.rednet.IRedNetInputNode;
 //import powercrystals.minefactoryreloaded.api.rednet.connectivity.RedNetConnectionType;
 

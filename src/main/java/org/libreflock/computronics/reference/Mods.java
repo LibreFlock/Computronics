@@ -1,4 +1,4 @@
-package org.libreflock.computronics.reference;
+package pl.asie.computronics.reference;
 
 import net.minecraftforge.fml.common.versioning.ArtifactVersion;
 
@@ -66,7 +66,7 @@ public class Mods {
 			NoteBetter = "notebetter|api";
 
 		public static boolean hasAPI(String name) {
-			return org.libreflock.lib.reference.Mods.API.hasAPI(name);
+			return pl.asie.lib.reference.Mods.API.hasAPI(name);
 		}
 	}
 
@@ -81,23 +81,23 @@ public class Mods {
 	}
 
 	public static boolean isLoaded(String name) {
-		return org.libreflock.lib.reference.Mods.isLoaded(name);
+		return pl.asie.lib.reference.Mods.isLoaded(name);
 	}
 
 	public static ArtifactVersion getVersion(String name) {
-		return org.libreflock.lib.reference.Mods.getVersion(name);
+		return pl.asie.lib.reference.Mods.getVersion(name);
 	}
 
 	public static boolean hasVersion(String name, String version) {
-		return org.libreflock.lib.reference.Mods.hasVersion(name, version);
+		return pl.asie.lib.reference.Mods.hasVersion(name, version);
 	}
 
 	public static boolean hasEnergyMod() {
-		return org.libreflock.lib.reference.Mods.hasEnergyMod();
+		return pl.asie.lib.reference.Mods.hasEnergyMod();
 	}
 
 	public static boolean hasBundledRedstoneMod() {
-		return org.libreflock.lib.reference.Mods.hasBundledRedstoneMod();
+		return pl.asie.lib.reference.Mods.hasBundledRedstoneMod();
 	}
 
 	private static final HashMap<String, Boolean> loadedClasses = new HashMap<String, Boolean>();

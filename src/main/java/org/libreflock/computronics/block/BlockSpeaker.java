@@ -1,12 +1,12 @@
-package org.libreflock.computronics.block;
+package pl.asie.computronics.block;
 
 import li.cil.oc.api.network.Environment;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
-import org.libreflock.computronics.reference.Mods;
-import org.libreflock.computronics.tile.TileSpeaker;
+import pl.asie.computronics.reference.Mods;
+import pl.asie.computronics.tile.TileSpeaker;
 
 public class BlockSpeaker extends BlockPeripheral {
 

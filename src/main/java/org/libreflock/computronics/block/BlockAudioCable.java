@@ -1,4 +1,4 @@
-package org.libreflock.computronics.block;
+package pl.asie.computronics.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -18,18 +18,18 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.libreflock.computronics.Computronics;
-import org.libreflock.computronics.item.block.IBlockWithDifferentColors;
-import org.libreflock.computronics.oc.manual.IBlockWithDocumentation;
-import org.libreflock.computronics.tile.TileAudioCable;
-import org.libreflock.computronics.util.internal.IBlockWithColor;
-import org.libreflock.lib.block.BlockBase;
-import org.libreflock.lib.util.ColorUtils;
-import org.libreflock.lib.util.internal.IColorable;
+import pl.asie.computronics.Computronics;
+import pl.asie.computronics.item.block.IBlockWithDifferentColors;
+import pl.asie.computronics.oc.manual.IBlockWithDocumentation;
+import pl.asie.computronics.tile.TileAudioCable;
+import pl.asie.computronics.util.internal.IBlockWithColor;
+import pl.asie.lib.block.BlockBase;
+import pl.asie.lib.util.ColorUtils;
+import pl.asie.lib.util.internal.IColorable;
 
 import javax.annotation.Nullable;
 
-import static org.libreflock.lib.util.WorldUtils.notifyBlockUpdate;
+import static pl.asie.lib.util.WorldUtils.notifyBlockUpdate;
 
 public class BlockAudioCable extends BlockBase implements IBlockWithDocumentation, IBlockWithDifferentColors, IBlockWithColor {
 
