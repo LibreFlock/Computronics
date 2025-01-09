@@ -129,6 +129,9 @@ repositories {
     // flatDir {
     //     dir 'libs'
     // }
+    flatDir {
+        dir 'libs'
+    }
 }
 
 dependencies {
@@ -155,6 +158,11 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    compileOnly fg.deobf("blank:OpenComputers-MC${minecraft_version}-${oc.version}-api.jar")
+    compileOnly fg.deobf("blank:OpenComputers-MC${minecraft_version}-${oc.version}-javadoc.jar")
+    runtimeOnly fg.deobf("blank:OpenComputers-MC${minecraft_version}-${oc.version}.jar")
+
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
