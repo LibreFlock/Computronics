@@ -1,8 +1,7 @@
 package org.libreflock.asielib;
 
 import net.minecraft.network.INetHandler;
-import net.minecraft.network.play.IServerPlayNetHandler;
-import net.minecraft.network.NetHandlerPlayServer;
+import net.minecraft.network.play.ServerPlayNetHandler;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.DimensionType;
@@ -37,7 +36,7 @@ public class CommonProxy {
 	public void handlePacket(MessageHandlerBase client, MessageHandlerBase server, Packet packet, INetHandler handler) {
 		try {
 			if(server != null) {
-				server.onMessage(packet, handler, ((IServerPlayNetHandler) handler));
+				server.onMessage(packet, handler, ((ServerPlayNetHandler) handler).player);
 			}
 		} catch(Exception e) {
 			AsieLibMod.log.warn("Caught a network exception! Is someone sending malformed packets?");
