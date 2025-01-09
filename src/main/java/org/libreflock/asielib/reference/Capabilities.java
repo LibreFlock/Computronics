@@ -1,4 +1,4 @@
-package pl.asie.lib.reference;
+package org.libreflock.asielib.reference;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagInt;
@@ -12,7 +12,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import pl.asie.lib.util.internal.IColorable;
+import org.libreflock.asielib.util.internal.IColorable;
 
 import javax.annotation.Nullable;
 

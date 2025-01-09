@@ -1,6 +1,6 @@
-package pl.asie.lib.util;
+package org.libreflock.asielib.util;
 
-import pl.asie.lib.AsieLibMod;
+import org.libreflock.asielib.AsieLibMod;
 
 import java.io.File;
 

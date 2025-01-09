@@ -1,4 +1,4 @@
-package pl.asie.lib.network;
+package org.libreflock.asielib.network;
 
 import com.google.gson.Gson;
 import io.netty.buffer.ByteBuf;
@@ -8,7 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import pl.asie.lib.util.WorldUtils;
+import org.libreflock.asielib.util.WorldUtils;
 
 import javax.annotation.Nullable;
 import java.io.IOException;

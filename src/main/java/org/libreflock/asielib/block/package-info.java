@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.lib.block;
+package org.libreflock.asielib.block;
 
 import mcp.MethodsReturnNonnullByDefault;
 

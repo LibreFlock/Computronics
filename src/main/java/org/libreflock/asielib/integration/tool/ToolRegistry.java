@@ -1,7 +1,7 @@
-package pl.asie.lib.integration.tool;
+package org.libreflock.asielib.integration.tool;
 
-import pl.asie.lib.api.tool.IToolProvider;
-import pl.asie.lib.api.tool.IToolRegistry;
+import org.libreflock.asielib.api.tool.IToolProvider;
+import org.libreflock.asielib.api.tool.IToolRegistry;
 
 import java.util.ArrayList;
 import java.util.Iterator;

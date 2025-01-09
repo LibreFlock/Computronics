@@ -1,11 +1,11 @@
-package pl.asie.lib.tile;
+package org.libreflock.asielib.tile;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.energy.IEnergyStorage;
-import pl.asie.lib.AsieLibMod;
-import pl.asie.lib.api.tile.IBattery;
+import org.libreflock.asielib.AsieLibMod;
+import org.libreflock.asielib.api.tile.IBattery;
 
 import javax.annotation.Nullable;
 

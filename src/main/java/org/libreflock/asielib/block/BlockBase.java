@@ -1,4 +1,4 @@
-package pl.asie.lib.block;
+package org.libreflock.asielib.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -20,11 +20,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import pl.asie.lib.gui.managed.IGuiProvider;
-import pl.asie.lib.integration.Integration;
-import pl.asie.lib.reference.Mods;
-import pl.asie.lib.tile.TileEntityBase;
-import pl.asie.lib.util.ItemUtils;
+import org.libreflock.asielib.gui.managed.IGuiProvider;
+import org.libreflock.asielib.integration.Integration;
+import org.libreflock.asielib.reference.Mods;
+import org.libreflock.asielib.tile.TileEntityBase;
+import org.libreflock.asielib.util.ItemUtils;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

@@ -1,11 +1,11 @@
-package pl.asie.lib.api.tile;
+package org.libreflock.asielib.api.tile;
 
 /*import cofh.api.tileentity.ITileInfo;
 import net.minecraftforge.fml.common.Optional;
 import gregtech.api.interfaces.tileentity.IGregTechDeviceInformation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.util.ForgeDirection;
-import pl.asie.lib.reference.Mods;*/
+import org.libreflock.asielib.reference.Mods;*/
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;

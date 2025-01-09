@@ -1,4 +1,4 @@
-package pl.asie.lib.item;
+package org.libreflock.asielib.item;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

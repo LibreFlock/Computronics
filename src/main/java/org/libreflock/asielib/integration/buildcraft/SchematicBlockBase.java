@@ -1,4 +1,4 @@
-package pl.asie.lib.integration.buildcraft;
+package org.libreflock.asielib.integration.buildcraft;
 
 import buildcraft.api.blueprints.IBuilderContext;
 import buildcraft.api.blueprints.SchematicTile;
@@ -7,8 +7,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import pl.asie.lib.block.BlockBase;
-import pl.asie.lib.tile.TileMachine;
+import org.libreflock.asielib.block.BlockBase;
+import org.libreflock.asielib.tile.TileMachine;
 
 import java.util.List;
 

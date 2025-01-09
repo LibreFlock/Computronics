@@ -1,4 +1,4 @@
-package pl.asie.lib.util;
+package org.libreflock.asielib.util;
 
 /**
  * <p>Encodes and decodes to and from Base64 notation.</p>

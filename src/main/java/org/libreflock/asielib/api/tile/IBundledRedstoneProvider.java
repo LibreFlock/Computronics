@@ -1,11 +1,11 @@
-package pl.asie.lib.api.tile;
+package org.libreflock.asielib.api.tile;
 
 /*import net.minecraftforge.fml.common.Optional;
 import mods.immibis.redlogic.api.wiring.IBundledEmitter;
 import mods.immibis.redlogic.api.wiring.IBundledUpdatable;
 import mods.immibis.redlogic.api.wiring.IConnectable;
 import mrtjp.projectred.api.IBundledTile;
-import pl.asie.lib.reference.Mods;*/
+import org.libreflock.asielib.reference.Mods;*/
 
 import net.minecraft.util.EnumFacing;
 

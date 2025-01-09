@@ -1,9 +1,9 @@
-package pl.asie.lib.integration.tool.cofh;
+package org.libreflock.asielib.integration.tool.cofh;
 
 import cofh.api.item.IToolHammer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import pl.asie.lib.api.tool.IToolProvider;
+import org.libreflock.asielib.api.tool.IToolProvider;
 
 /**
  * @author Vexatos

@@ -1,4 +1,4 @@
-package pl.asie.lib.tweak.enchantment;
+package org.libreflock.asielib.tweak.enchantment;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
@@ -16,8 +16,8 @@ import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import pl.asie.lib.AsieLibMod;
-import pl.asie.lib.util.RayTracer;
+import org.libreflock.asielib.AsieLibMod;
+import org.libreflock.asielib.util.RayTracer;
 
 /**
  * @author Vexatos

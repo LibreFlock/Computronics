@@ -1,9 +1,9 @@
-package pl.asie.lib.util;
+package org.libreflock.asielib.util;
 
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import pl.asie.lib.util.internal.IColorable;
+import org.libreflock.asielib.util.internal.IColorable;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;

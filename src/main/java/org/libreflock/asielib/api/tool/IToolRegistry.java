@@ -1,11 +1,11 @@
-package pl.asie.lib.api.tool;
+package org.libreflock.asielib.api.tool;
 
 /**
  * Allows you to register instances of
- * {@link pl.asie.lib.api.tool.IToolProvider}.
+ * {@link org.libreflock.asielib.api.tool.IToolProvider}.
  * <p/>
  * You need to send a method registering your instances of
- * {@link pl.asie.lib.api.tool.IToolProvider}
+ * {@link org.libreflock.asielib.api.tool.IToolProvider}
  * using {@link net.minecraftforge.fml.common.event.FMLInterModComms#sendMessage}.
  * <p/>
  * Note that method sent must have the following
@@ -22,7 +22,7 @@ package pl.asie.lib.api.tool;
 public interface IToolRegistry extends Iterable<IToolProvider> {
 
 	/**
-	 * Registers a new {@link pl.asie.lib.api.tool.IToolProvider}.
+	 * Registers a new {@link org.libreflock.asielib.api.tool.IToolProvider}.
 	 */
 	public void registerToolProvider(IToolProvider provider);
 }

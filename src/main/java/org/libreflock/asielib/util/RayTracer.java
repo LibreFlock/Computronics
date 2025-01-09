@@ -1,4 +1,4 @@
-package pl.asie.lib.util;
+package org.libreflock.asielib.util;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

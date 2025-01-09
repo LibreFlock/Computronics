@@ -1,4 +1,4 @@
-package pl.asie.computronics.network;
+package org.libreflock.computronics.network;
 
 import javax.annotation.Nullable;
 

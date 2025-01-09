@@ -1,4 +1,4 @@
-package pl.asie.lib.tile;
+package org.libreflock.asielib.tile;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,7 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import pl.asie.lib.util.WorldUtils;
+import org.libreflock.asielib.util.WorldUtils;
 
 import javax.annotation.Nullable;
 

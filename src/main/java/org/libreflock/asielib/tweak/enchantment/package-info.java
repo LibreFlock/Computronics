@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.lib.tweak.enchantment;
+package org.libreflock.asielib.tweak.enchantment;
 
 import mcp.MethodsReturnNonnullByDefault;
 

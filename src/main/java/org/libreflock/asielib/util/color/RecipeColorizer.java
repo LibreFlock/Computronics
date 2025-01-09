@@ -1,4 +1,4 @@
-package pl.asie.lib.util.color;
+package org.libreflock.asielib.util.color;
 
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.EnumDyeColor;
@@ -9,7 +9,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import pl.asie.lib.util.ColorUtils;
+import org.libreflock.asielib.util.ColorUtils;
 
 import java.util.ArrayList;
 import java.util.List;

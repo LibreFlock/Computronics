@@ -1,9 +1,9 @@
-package pl.asie.lib.gui.container;
+package org.libreflock.asielib.gui.container;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
-import pl.asie.lib.tile.TileEntityBase;
+import org.libreflock.asielib.tile.TileEntityBase;
 
 public abstract class ContainerBase extends ContainerInventory {
 

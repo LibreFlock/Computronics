@@ -1,4 +1,4 @@
-package pl.asie.lib.util;
+package org.libreflock.asielib.util;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;

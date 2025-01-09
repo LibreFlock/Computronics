@@ -1,9 +1,9 @@
-package pl.asie.lib.integration.tool.appeng;
+package org.libreflock.asielib.integration.tool.appeng;
 
 import appeng.api.implementations.items.IAEWrench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import pl.asie.lib.api.tool.IToolProvider;
+import org.libreflock.asielib.api.tool.IToolProvider;
 
 /**
  * @author Vexatos

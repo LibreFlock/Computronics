@@ -1,4 +1,4 @@
-package pl.asie.lib.network;
+package org.libreflock.asielib.network;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetHandler;

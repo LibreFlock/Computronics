@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.lib.util.color;
+package org.libreflock.asielib.util.color;
 
 import mcp.MethodsReturnNonnullByDefault;
 

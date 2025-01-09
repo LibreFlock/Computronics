@@ -1,4 +1,4 @@
-package pl.asie.lib.util.color;
+package org.libreflock.asielib.util.color;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

@@ -1,4 +1,4 @@
-package pl.asie.lib.reference;
+package org.libreflock.asielib.reference;
 
 import com.google.common.collect.Iterables;
 import net.minecraftforge.fml.common.Loader;

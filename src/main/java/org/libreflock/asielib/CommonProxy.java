@@ -1,11 +1,16 @@
-package pl.asie.lib;
+package org.libreflock.asielib;
 
 import net.minecraft.network.INetHandler;
+import net.minecraft.network.play.IServerPlayNetHandler;
 import net.minecraft.network.NetHandlerPlayServer;
+import net.minecraft.util.RegistryKey;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import pl.asie.lib.network.MessageHandlerBase;
-import pl.asie.lib.network.Packet;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.fml.server.ServerLifecycleHooks;
+import org.libreflock.asielib.network.MessageHandlerBase;
+import org.libreflock.asielib.network.Packet;
 
 import javax.annotation.Nullable;
 import java.io.File;
@@ -21,8 +26,8 @@ public class CommonProxy {
 	}
 
 	@Nullable
-	public World getWorld(int dimensionId) {
-		return FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(dimensionId);
+	public ServerWorld getWorld(RegistryKey<World> dimensionId) {
+		return ServerLifecycleHooks.getCurrentServer().getLevel(dimensionId);
 	}
 
 	public int getCurrentClientDimension() {
@@ -32,7 +37,7 @@ public class CommonProxy {
 	public void handlePacket(MessageHandlerBase client, MessageHandlerBase server, Packet packet, INetHandler handler) {
 		try {
 			if(server != null) {
-				server.onMessage(packet, handler, ((NetHandlerPlayServer) handler).player);
+				server.onMessage(packet, handler, ((IServerPlayNetHandler) handler));
 			}
 		} catch(Exception e) {
 			AsieLibMod.log.warn("Caught a network exception! Is someone sending malformed packets?");

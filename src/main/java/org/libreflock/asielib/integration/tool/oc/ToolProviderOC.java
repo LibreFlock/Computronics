@@ -1,11 +1,11 @@
-package pl.asie.lib.integration.tool.oc;
+package org.libreflock.asielib.integration.tool.oc;
 
 import li.cil.oc.api.internal.Wrench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import pl.asie.lib.api.tool.IToolProvider;
+import org.libreflock.asielib.api.tool.IToolProvider;
 
 /**
  * @author Vexatos

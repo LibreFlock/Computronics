@@ -1,12 +1,12 @@
-package pl.asie.lib.integration;
+package org.libreflock.asielib.integration;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import pl.asie.lib.AsieLibMod;
-import pl.asie.lib.api.tool.IToolProvider;
-import pl.asie.lib.integration.tool.ToolRegistry;
+import org.libreflock.asielib.AsieLibMod;
+import org.libreflock.asielib.api.tool.IToolProvider;
+import org.libreflock.asielib.integration.tool.ToolRegistry;
 
 public class Integration {
 

@@ -1,4 +1,4 @@
-package pl.asie.lib;
+package org.libreflock.asielib;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraftforge.common.MinecraftForge;
@@ -12,13 +12,13 @@ import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
-import pl.asie.lib.api.AsieLibAPI;
-import pl.asie.lib.api.tool.IToolRegistry;
-import pl.asie.lib.integration.Integration;
-import pl.asie.lib.integration.tool.ToolProviders;
-import pl.asie.lib.reference.Capabilities;
-import pl.asie.lib.reference.Mods;
-import pl.asie.lib.tweak.enchantment.EnchantmentTweak;
+import org.libreflock.asielib.api.AsieLibAPI;
+import org.libreflock.asielib.api.tool.IToolRegistry;
+import org.libreflock.asielib.integration.Integration;
+import org.libreflock.asielib.integration.tool.ToolProviders;
+import org.libreflock.asielib.reference.Capabilities;
+import org.libreflock.asielib.reference.Mods;
+import org.libreflock.asielib.tweak.enchantment.EnchantmentTweak;
 
 import java.lang.reflect.Method;
 import java.util.Random;
@@ -37,7 +37,7 @@ public class AsieLibMod extends AsieLibAPI {
 	@Instance(value = Mods.AsieLib)
 	public static AsieLibMod instance;
 
-	@SidedProxy(clientSide = "pl.asie.lib.ClientProxy", serverSide = "pl.asie.lib.CommonProxy")
+	@SidedProxy(clientSide = "org.libreflock.asielib.ClientProxy", serverSide = "org.libreflock.asielib.CommonProxy")
 	public static CommonProxy proxy;
 
 	@EventHandler

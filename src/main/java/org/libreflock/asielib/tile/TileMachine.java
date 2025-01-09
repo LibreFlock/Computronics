@@ -1,4 +1,4 @@
-package pl.asie.lib.tile;
+package org.libreflock.asielib.tile;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -10,7 +10,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
-import pl.asie.lib.api.tile.IBattery;
+import org.libreflock.asielib.api.tile.IBattery;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;

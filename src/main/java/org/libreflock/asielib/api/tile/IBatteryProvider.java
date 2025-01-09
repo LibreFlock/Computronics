@@ -1,8 +1,8 @@
-package pl.asie.lib.api.tile;
+package org.libreflock.asielib.api.tile;
 
 import cofh.redstoneflux.api.IEnergyReceiver;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.lib.reference.Mods;
+import org.libreflock.asielib.reference.Mods;
 
 @Optional.InterfaceList({
 	//@Optional.Interface(iface = "cofh.api.tileentity.IEnergyInfo", modid = Mods.API.CoFHTileEntities),

@@ -1,4 +1,4 @@
-package pl.asie.lib.tweak.enchantment;
+package org.libreflock.asielib.tweak.enchantment;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentDamage;

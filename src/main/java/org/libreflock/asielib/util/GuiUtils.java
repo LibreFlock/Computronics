@@ -1,13 +1,13 @@
-package pl.asie.lib.util;
+package org.libreflock.asielib.util;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.inventory.Container;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.lib.gui.GuiBase;
-import pl.asie.lib.gui.container.ContainerBase;
-import pl.asie.lib.tile.TileEntityBase;
+import org.libreflock.asielib.gui.GuiBase;
+import org.libreflock.asielib.gui.container.ContainerBase;
+import org.libreflock.asielib.tile.TileEntityBase;
 
 public class GuiUtils {
 

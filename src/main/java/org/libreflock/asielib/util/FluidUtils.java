@@ -1,4 +1,4 @@
-package pl.asie.lib.util;
+package org.libreflock.asielib.util;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;

@@ -1,4 +1,4 @@
-package pl.asie.lib;
+package org.libreflock.asielib;
 
 public class AsieLibEvents {
 	/* @SubscribeEvent

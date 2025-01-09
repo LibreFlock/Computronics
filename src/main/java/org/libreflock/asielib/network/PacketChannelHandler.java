@@ -1,4 +1,4 @@
-package pl.asie.lib.network;
+package org.libreflock.asielib.network;
 
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandler.Sharable;
@@ -8,7 +8,7 @@ import net.minecraft.network.INetHandler;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
-import pl.asie.lib.AsieLibMod;
+import org.libreflock.asielib.AsieLibMod;
 
 import java.util.List;
 

@@ -1,11 +1,11 @@
-package pl.asie.lib;
+package org.libreflock.asielib;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.INetHandler;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import pl.asie.lib.network.MessageHandlerBase;
-import pl.asie.lib.network.Packet;
+import org.libreflock.asielib.network.MessageHandlerBase;
+import org.libreflock.asielib.network.Packet;
 
 import java.io.File;
 

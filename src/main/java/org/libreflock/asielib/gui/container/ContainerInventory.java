@@ -1,4 +1,4 @@
-package pl.asie.lib.gui.container;
+package org.libreflock.asielib.gui.container;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -6,7 +6,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import pl.asie.lib.AsieLibMod;
+import org.libreflock.asielib.AsieLibMod;
 
 import javax.annotation.Nullable;
 

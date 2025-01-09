@@ -1,4 +1,4 @@
-package pl.asie.lib.gui.managed;
+package org.libreflock.asielib.gui.managed;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;

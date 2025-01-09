@@ -1,9 +1,9 @@
-package pl.asie.lib.integration.tool.mekanism;
+package org.libreflock.asielib.integration.tool.mekanism;
 
 import mekanism.api.IMekWrench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import pl.asie.lib.api.tool.IToolProvider;
+import org.libreflock.asielib.api.tool.IToolProvider;
 
 /**
  * @author Vexatos

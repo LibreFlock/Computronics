@@ -1,4 +1,4 @@
-package pl.asie.lib.gui.managed;
+package org.libreflock.asielib.gui.managed;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,9 +8,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.lib.gui.GuiBase;
-import pl.asie.lib.gui.container.ContainerBase;
-import pl.asie.lib.tile.TileEntityBase;
+import org.libreflock.asielib.gui.GuiBase;
+import org.libreflock.asielib.gui.container.ContainerBase;
+import org.libreflock.asielib.tile.TileEntityBase;
 
 import javax.annotation.Nullable;
 

@@ -1,15 +1,15 @@
-package pl.asie.lib.integration.tool;
+package org.libreflock.asielib.integration.tool;
 
-//import pl.asie.lib.integration.tool.appeng.ToolProviderAE2;
-//import pl.asie.lib.integration.tool.cofh.ToolProviderCoFH;
+//import org.libreflock.asielib.integration.tool.appeng.ToolProviderAE2;
+//import org.libreflock.asielib.integration.tool.cofh.ToolProviderCoFH;
 
-import pl.asie.lib.integration.tool.enderio.ToolProviderEnderIO;
-import pl.asie.lib.integration.tool.oc.ToolProviderOC;
-import pl.asie.lib.reference.Mods;
+import org.libreflock.asielib.integration.tool.enderio.ToolProviderEnderIO;
+import org.libreflock.asielib.integration.tool.oc.ToolProviderOC;
+import org.libreflock.asielib.reference.Mods;
 
-import static pl.asie.lib.integration.Integration.registerToolProvider;
+import static org.libreflock.asielib.integration.Integration.registerToolProvider;
 
-//import pl.asie.lib.integration.tool.mekanism.ToolProviderMekanism
+//import org.libreflock.asielib.integration.tool.mekanism.ToolProviderMekanism
 
 /**
  * @author Vexatos

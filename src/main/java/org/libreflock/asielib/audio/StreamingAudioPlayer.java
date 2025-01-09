@@ -1,4 +1,4 @@
-package pl.asie.lib.audio;
+package org.libreflock.asielib.audio;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.SoundCategory;
@@ -7,7 +7,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.AL10;
-import pl.asie.lib.AsieLibMod;
+import org.libreflock.asielib.AsieLibMod;
 
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;

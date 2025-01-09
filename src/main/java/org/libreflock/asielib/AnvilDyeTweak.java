@@ -1,10 +1,10 @@
-package pl.asie.lib;
+package org.libreflock.asielib;
 
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import pl.asie.lib.util.ChatUtils;
-import pl.asie.lib.util.ColorUtils;
+import org.libreflock.asielib.util.ChatUtils;
+import org.libreflock.asielib.util.ColorUtils;
 
 public class AnvilDyeTweak {
 

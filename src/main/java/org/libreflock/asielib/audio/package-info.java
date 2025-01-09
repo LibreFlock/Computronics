@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.lib.audio;
+package org.libreflock.asielib.audio;
 
 import mcp.MethodsReturnNonnullByDefault;
 

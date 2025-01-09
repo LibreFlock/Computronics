@@ -1,4 +1,4 @@
-package pl.asie.lib.audio;
+package org.libreflock.asielib.audio;
 
 import java.util.HashMap;
 

@@ -1,4 +1,4 @@
-package pl.asie.lib.util.color;
+package org.libreflock.asielib.util.color;
 
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import pl.asie.lib.util.FluidUtils;
+import org.libreflock.asielib.util.FluidUtils;
 
 /**
  * @author Vexatos

@@ -1,4 +1,4 @@
-package pl.asie.lib.api.tool;
+package org.libreflock.asielib.api.tool;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

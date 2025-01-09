@@ -1,11 +1,11 @@
-package pl.asie.lib.api.tile;
+package org.libreflock.asielib.api.tile;
 
 /*import net.minecraftforge.fml.common.Optional;
 import mods.immibis.redlogic.api.wiring.IConnectable;
 import mods.immibis.redlogic.api.wiring.IRedstoneEmitter;
 import mods.immibis.redlogic.api.wiring.IRedstoneUpdatable;
 import mrtjp.projectred.api.IBundledTile;
-import pl.asie.lib.reference.Mods;*/
+import org.libreflock.asielib.reference.Mods;*/
 
 /*@Optional.InterfaceList({
 	@Optional.Interface(iface = "mods.immibis.redlogic.api.wiring.IRedstoneEmitter", modid = Mods.RedLogic),

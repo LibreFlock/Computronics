@@ -1,4 +1,4 @@
-package pl.asie.lib.gui;
+package org.libreflock.asielib.gui;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;

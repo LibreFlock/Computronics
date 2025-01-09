@@ -1,11 +1,11 @@
-package pl.asie.lib.integration.tool.enderio;
+package org.libreflock.asielib.integration.tool.enderio;
 
 import crazypants.enderio.api.tool.ITool;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import pl.asie.lib.api.tool.IToolProvider;
+import org.libreflock.asielib.api.tool.IToolProvider;
 
 /**
  * @author Vexatos

@@ -1,10 +1,10 @@
-package pl.asie.lib.integration.tool.buildcraft;
+package org.libreflock.asielib.integration.tool.buildcraft;
 
 import buildcraft.api.tools.IToolWrench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import pl.asie.lib.api.tool.IToolProvider;
+import org.libreflock.asielib.api.tool.IToolProvider;
 
 /**
  * @author Vexatos

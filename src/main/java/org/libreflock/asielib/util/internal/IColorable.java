@@ -1,4 +1,4 @@
-package pl.asie.lib.util.internal;
+package org.libreflock.asielib.util.internal;
 
 /**
  * @author Vexatos

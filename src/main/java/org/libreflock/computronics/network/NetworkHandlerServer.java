@@ -1,23 +1,23 @@
-package pl.asie.computronics.network;
+package org.libreflock.computronics.network;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.INetHandler;
 import net.minecraft.tileentity.TileEntity;
-import pl.asie.computronics.Computronics;
+import org.libreflock.computronics.Computronics;
 import pl.asie.computronics.reference.Mods;
 import pl.asie.computronics.tape.PortableDriveManager;
 import pl.asie.computronics.tape.PortableTapeDrive;
 import pl.asie.computronics.tile.TapeDriveState.State;
 import pl.asie.computronics.tile.TileTapeDrive;
-import pl.asie.lib.network.MessageHandlerBase;
-import pl.asie.lib.network.Packet;
+import org.libreflock.asielib.network.MessageHandlerBase;
+import org.libreflock.asielib.network.Packet;
 
 import java.io.IOException;
 
 public class NetworkHandlerServer extends MessageHandlerBase {
 
 	@Override
-	public void onMessage(Packet packet, INetHandler handler, EntityPlayer player, int command)
+	public void onMessage(Packet packet, INetHandler handler, PlayerEntity player, int command)
 		throws IOException {
 		PacketType type = PacketType.of(command);
 		if(type == null) {

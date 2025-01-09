@@ -1,4 +1,4 @@
-package pl.asie.lib.api;
+package org.libreflock.asielib.api;
 
 public class AsieLibAPI {
 
