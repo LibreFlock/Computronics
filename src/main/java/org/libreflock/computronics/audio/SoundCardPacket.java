@@ -1,4 +1,4 @@
-package pl.asie.computronics.audio;
+package org.libreflock.computronics.audio;
 
 import pl.asie.computronics.api.audio.AudioPacket;
 import pl.asie.computronics.api.audio.IAudioSource;

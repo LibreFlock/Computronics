@@ -1,4 +1,4 @@
-package pl.asie.computronics.audio;
+package org.libreflock.computronics.audio;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

@@ -1,4 +1,4 @@
-package pl.asie.computronics;
+package org.libreflock.computronics;
 
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.registry.EntityRegistry;

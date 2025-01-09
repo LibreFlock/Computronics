@@ -1,4 +1,4 @@
-package pl.asie.computronics.audio;
+package org.libreflock.computronics.audio;
 
 import net.minecraft.util.MathHelper;
 import pl.asie.computronics.Computronics;

@@ -1,4 +1,4 @@
-package pl.asie.computronics.audio;
+package org.libreflock.computronics.audio;
 
 import pl.asie.computronics.reference.Config;
 import pl.asie.lib.audio.StreamingAudioPlayer;

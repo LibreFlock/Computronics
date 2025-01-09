@@ -1,4 +1,4 @@
-package pl.asie.computronics.audio;
+package org.libreflock.computronics.audio;
 
 import net.minecraft.client.audio.ITickableSound;
 import net.minecraft.client.audio.PositionedSound;
