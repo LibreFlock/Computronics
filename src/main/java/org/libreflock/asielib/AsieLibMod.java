@@ -3,6 +3,9 @@ package org.libreflock.asielib;
 import com.google.common.collect.ImmutableList;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -11,6 +14,11 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.Logger;
 import org.libreflock.asielib.api.AsieLibAPI;
 import org.libreflock.asielib.api.tool.IToolRegistry;
@@ -22,9 +30,11 @@ import org.libreflock.asielib.tweak.enchantment.EnchantmentTweak;
 
 import java.lang.reflect.Method;
 import java.util.Random;
+import java.util.stream.Collectors;
 
-@Mod(modid = Mods.AsieLib, name = Mods.AsieLib_NAME, version = "@AL_VERSION@",
-	dependencies = "required-after:forge@[14.21.1.2387,)")
+/*@Mod(modid = Mods.AsieLib, name = Mods.AsieLib_NAME, version = "@AL_VERSION@",
+	dependencies = "required-after:forge@[14.21.1.2387,)")*/
+@Mod("asielib")
 public class AsieLibMod extends AsieLibAPI {
 
 	public Configuration config;
@@ -37,11 +47,24 @@ public class AsieLibMod extends AsieLibAPI {
 	@Instance(value = Mods.AsieLib)
 	public static AsieLibMod instance;
 
-	@SidedProxy(clientSide = "org.libreflock.asielib.ClientProxy", serverSide = "org.libreflock.asielib.CommonProxy")
-	public static CommonProxy proxy;
+	//@SidedProxy(clientSide = "org.libreflock.asielib.ClientProxy", serverSide = "org.libreflock.asielib.CommonProxy")
+	//public static CommonProxy proxy;
+	// yes i know its deprecated shhhhh
+	public static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
+	public AsieLibMod() {
+		// Register the setup method for modloading
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+		// Register the enqueueIMC method for modloading
+		//FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
+		// Register the processIMC method for modloading
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
+		// Register the doClientStuff method for modloading
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
+		// Register ourselves for server and other game events we are interested in
+		MinecraftForge.EVENT_BUS.register(this);
+	}
+	private void setup(final FMLCommonSetupEvent event) {
 		AsieLibAPI.instance = this;
 		ToolProviders.registerToolProviders();
 		log = event.getModLog();
@@ -58,9 +81,8 @@ public class AsieLibMod extends AsieLibAPI {
 			log.info("Hey, you! Yes, you! Thanks for using AsieLauncher! ~asie");
 		}
 	}
-
-	@EventHandler
-	public void init(FMLInitializationEvent event) {
+	@SubscribeEvent
+	public void init(FMLServerStartingEvent event) { // probably the wrong event ngl
 
 		//packet = new PacketHandler(Mods.AsieLib, new NetworkHandlerClient(), null);
 
@@ -79,9 +101,9 @@ public class AsieLibMod extends AsieLibAPI {
 		Capabilities.INSTANCE.init();
 	}
 
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
-		config.save();
+	@SubscribeEvent
+	public void postInit(FMLClientSetupEvent event) { // i have no idea
+		// config.save();
 	}
 
 	/**
@@ -91,10 +113,10 @@ public class AsieLibMod extends AsieLibAPI {
 	 * FMLInterModComms.sendMessage("asielib", "addToolProvider", "com.example.examplemod.tool.ToolProviders.register")
 	 * @see IToolRegistry
 	 */
-	@EventHandler
 	@SuppressWarnings("unchecked")
-	public void receiveIMC(FMLInterModComms.IMCEvent event) {
-		ImmutableList<FMLInterModComms.IMCMessage> messages = event.getMessages();
+	public void processIMC(InterModProcessEvent event) {
+		ImmutableList<InterModComms.IMCMessage> messages = event.getIMCStream().map(m->m.getMessageSupplier().get()).
+				collect(Collectors.toList());
 		for(FMLInterModComms.IMCMessage message : messages) {
 			if(message.key.equalsIgnoreCase("addtoolprovider") && message.isStringMessage()) {
 				try {
