@@ -1,4 +1,4 @@
-package pl.asie.computronics.client;
+package org.libreflock.computronics.client;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;

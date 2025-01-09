@@ -1,4 +1,4 @@
-package pl.asie.computronics.client.model;
+package org.libreflock.computronics.client.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
