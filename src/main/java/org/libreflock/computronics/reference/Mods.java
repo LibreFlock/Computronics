@@ -1,4 +1,4 @@
-package pl.asie.computronics.reference;
+package org.libreflock.computronics.reference;
 
 import cpw.mods.fml.common.versioning.ArtifactVersion;
 
@@ -56,7 +56,7 @@ public class Mods {
 			Mekanism_Energy = "MekanismAPI|energy";
 
 		public static boolean hasAPI(String name) {
-			return pl.asie.lib.reference.Mods.API.hasAPI(name);
+			return org.libreflock.lib.reference.Mods.API.hasAPI(name);
 		}
 	}
 
@@ -72,19 +72,19 @@ public class Mods {
 	}
 
 	public static boolean isLoaded(String name) {
-		return pl.asie.lib.reference.Mods.isLoaded(name);
+		return org.libreflock.lib.reference.Mods.isLoaded(name);
 	}
 
 	public static ArtifactVersion getVersion(String name) {
-		return pl.asie.lib.reference.Mods.getVersion(name);
+		return org.libreflock.lib.reference.Mods.getVersion(name);
 	}
 
 	public static boolean hasVersion(String name, String version) {
-		return pl.asie.lib.reference.Mods.hasVersion(name, version);
+		return org.libreflock.lib.reference.Mods.hasVersion(name, version);
 	}
 
 	public static boolean hasEnergyMod() {
-		return pl.asie.lib.reference.Mods.hasEnergyMod();
+		return org.libreflock.lib.reference.Mods.hasEnergyMod();
 	}
 
 	private static final HashMap<String, Boolean> loadedClasses = new HashMap<String, Boolean>();

@@ -1,4 +1,4 @@
-package pl.asie.computronics.reference;
+package org.libreflock.computronics.reference;
 
 import net.minecraftforge.common.config.Configuration;
 

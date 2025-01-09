@@ -1,9 +1,9 @@
-package pl.asie.computronics.reference;
+package org.libreflock.computronics.reference;
 
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.config.Configuration;
-import pl.asie.computronics.Computronics;
-import pl.asie.lib.util.EnergyConverter;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.lib.util.EnergyConverter;
 
 /**
  * @author Vexatos
