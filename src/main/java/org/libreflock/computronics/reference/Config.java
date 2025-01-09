@@ -1,9 +1,125 @@
 package org.libreflock.computronics.reference;
 
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.common.config.Configuration;
+import org.apache.commons.lang3.tuple.Pair;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.lib.util.EnergyConverter;
+
+public class OptionsHolder
+{
+	public static class Common
+	{
+		private static final int defaultInt1 = 37;
+		private static final boolean defaultBool1 = true;
+
+		//public final ConfigValue<Integer> Int1;
+		//public final ConfigValue<Boolean> Bool1;
+
+		public static ConfigValue<Integer> CHATBOX_DISTANCE; // = 40;
+		public static ConfigValue<Boolean> CHATBOX_MAGIC; // = false;
+		public final ConfigValue<Integer> CAMERA_DISTANCE;
+		public static int TAPEDRIVE_DISTANCE = 24;
+		public static int TAPEDRIVE_BUFFER_MS = 750;
+		public static int PORTABLE_TAPEDRIVE_DISTANCE = 8;
+		public static int RADAR_RANGE = 8;
+		public static int FX_RANGE = 256;
+		public static boolean RADAR_ONLY_DISTANCE = true;
+		public static boolean CIPHER_CAN_LOCK = true;
+		public static double CIPHER_ENERGY_STORAGE = 1600.0;
+		public static double CIPHER_KEY_CONSUMPTION = 1600.0;
+		public static double CIPHER_WORK_CONSUMPTION = 16.0;
+		public static double RADAR_ENERGY_COST_OC = 5.0;
+		public static double RADAR_CC_TIME = 0.5;
+		public static double FX_ENERGY_COST = 0.2;
+		public static double BEEP_ENERGY_COST = 1.0;
+		public static double SOUND_CARD_ENERGY_COST = 1.0;
+		public static double SPOOFING_ENERGY_COST = 0.2;
+		public static double COLORFUL_UPGRADE_COLOR_CHANGE_COST = 0.2;
+		public static double LIGHT_BOARD_COLOR_CHANGE_COST = 0.2;
+		public static double LIGHT_BOARD_COLOR_MAINTENANCE_COST = 0.02;
+		public static double BOOM_BOARD_MAINTENANCE_COST = 0.02;
+		public static double RACK_CAPACITOR_CAPACITY = 7500;
+		public static double SWITCH_BOARD_MAINTENANCE_COST = 0.02;
+		public static String CHATBOX_PREFIX = "ChatBox";
+		public static double LOCOMOTIVE_RELAY_RANGE = 128.0;
+		public static double LOCOMOTIVE_RELAY_BASE_POWER = 20.0;
+		public static boolean LOCOMOTIVE_RELAY_CONSUME_CHARGE = true;
+		public static boolean TICKET_MACHINE_CONSUME_RF = true;
+		public static boolean GREGTECH_RECIPES = false;
+		public static boolean NON_OC_RECIPES = false;
+		public static boolean FORESTRY_BEES = true;
+		public static boolean BUILDCRAFT_STATION = true;
+
+		public static int SOUND_SAMPLE_RATE = 44100;
+		public static byte SOUND_VOLUME = 32;
+		public static int SOUND_RADIUS = 24;
+		public static int SOUND_CARD_MAX_DELAY = 5000; // TODO
+		public static int SOUND_CARD_QUEUE_SIZE = 1024; // TODO
+		public static int SOUND_CARD_CHANNEL_COUNT = 8; // TODO
+
+		public static boolean TTS_ENABLED;
+		public static int TTS_MAX_LENGTH = 300; // TODO
+
+		public static boolean OC_UPGRADE_CAMERA;
+		public static boolean OC_UPGRADE_CHATBOX;
+		public static boolean OC_UPGRADE_RADAR;
+		public static boolean OC_CARD_FX;
+		public static boolean OC_CARD_SPOOF;
+		public static boolean OC_CARD_BEEP;
+		public static boolean OC_CARD_BOOM;
+		public static boolean OC_UPGRADE_COLORFUL;
+		public static boolean OC_CARD_NOISE;
+		public static boolean OC_CARD_SOUND;
+		public static boolean OC_BOARD_LIGHT;
+		public static boolean OC_BOARD_BOOM;
+		public static boolean OC_BOARD_CAPACITOR;
+		public static boolean OC_BOARD_SWITCH;
+		public static boolean OC_UPGRADE_SPEECH;
+
+		public static boolean OC_MAGICAL_MEMORY;
+
+		public static boolean CC_OPEN_MULTI_PERIPHERAL = true;
+		public static boolean CC_ALL_MULTI_PERIPHERALS = true;
+		public static boolean CC_ALWAYS_FIRST = true;
+
+		public static boolean TIS3D_MODULE_COLORFUL = true;
+		public static boolean TIS3D_MODULE_TAPE_READER = true;
+		public static boolean TIS3D_MODULE_BOOM = true;
+
+		public static String TAPE_LENGTHS;
+		public static boolean REDSTONE_REFRESH, CHATBOX_CREATIVE;
+
+		public static boolean MUST_UPDATE_TILE_ENTITIES = false;
+
+		public Common(ForgeConfigSpec.Builder builder)
+		{
+			/*builder.push("category1");
+			this.Int1 = builder.comment("This is a nice description of your option. Make it a lot longer than this. Max is 60, default is 37. Enjoy...")
+					.worldRestart()
+					.defineInRange("Short but readable name", defaultInt1, 1, 60);
+			this.Bool1 = builder.comment("asdasd as asd asd asd asdas aasd as asd asd. asd as asd asd. asdasdad asd.")
+					.define("Short but readable name 2", defaultBool1);*/
+			builder.push("Camera");
+			this.CAMERA_DISTANCE = builder.comment("The maximum camera distance, in blocks.")
+							.defineInRange("Distance", 32, 16, 256);
+
+			builder.pop();
+		}
+	}
+
+	public static final Common COMMON;
+	public static final ForgeConfigSpec COMMON_SPEC;
+
+	static //constructor
+	{
+		Pair<Common, ForgeConfigSpec> commonSpecPair = new ForgeConfigSpec.Builder().configure(Common::new);
+		COMMON = commonSpecPair.getLeft();
+		COMMON_SPEC = commonSpecPair.getRight();
+	}
+}
 
 /**
  * @author Vexatos
