@@ -2,8 +2,10 @@ package org.libreflock.asielib;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.INetHandler;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.thread.EffectiveSide;
 import org.libreflock.asielib.network.MessageHandlerBase;
 import org.libreflock.asielib.network.Packet;
 
@@ -18,30 +20,30 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public File getMinecraftDirectory() {
-		return Minecraft.getMinecraft().gameDir;
+		return Minecraft.getInstance().gameDirectory;
 	}
 
 	@Override
-	public World getWorld(int dimensionId) {
-		if(getCurrentClientDimension() != dimensionId) {
+	public World getWorld(RegistryKey<World> dimensionId) {
+		if(getCurrentClientDimension().equals(dimensionId)) {
 			return null;
 		} else {
-			return Minecraft.getMinecraft().world;
+			return Minecraft.getInstance().level;
 		}
 	}
 
 	@Override
-	public int getCurrentClientDimension() {
-		return Minecraft.getMinecraft().world != null ? Minecraft.getMinecraft().world.provider.getDimension() : super.getCurrentClientDimension();
+	public RegistryKey<World> getCurrentClientDimension() {
+		return Minecraft.getInstance().level != null ? Minecraft.getInstance().player.level.dimension() : super.getCurrentClientDimension();
 	}
 
 	@Override
 	public void handlePacket(MessageHandlerBase client, MessageHandlerBase server, Packet packet, INetHandler handler) {
 		try {
-			switch(FMLCommonHandler.instance().getEffectiveSide()) {
+			switch(EffectiveSide.get()) {
 				case CLIENT:
 					if(client != null) {
-						client.onMessage(packet, handler, Minecraft.getMinecraft().player);
+						client.onMessage(packet, handler, Minecraft.getInstance().player);
 					}
 					break;
 				case SERVER:

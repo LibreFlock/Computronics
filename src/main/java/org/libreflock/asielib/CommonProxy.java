@@ -25,12 +25,13 @@ public class CommonProxy {
 	}
 
 	@Nullable
-	public ServerWorld getWorld(RegistryKey<World> dimensionId) {
+	public World getWorld(RegistryKey<World> dimensionId) {
 		return ServerLifecycleHooks.getCurrentServer().getLevel(dimensionId);
 	}
 
-	public int getCurrentClientDimension() {
-		return -9001;
+	public RegistryKey<World> getCurrentClientDimension() {
+		/*return -9001;*/
+		return World.OVERWORLD; // default to overworld
 	}
 
 	public void handlePacket(MessageHandlerBase client, MessageHandlerBase server, Packet packet, INetHandler handler) {
