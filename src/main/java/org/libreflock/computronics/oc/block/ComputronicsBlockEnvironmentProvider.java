@@ -1,4 +1,4 @@
-package pl.asie.computronics.oc.block;
+package org.libreflock.computronics.oc.block;
 
 import li.cil.oc.api.driver.EnvironmentProvider;
 import net.minecraft.item.ItemBlock;

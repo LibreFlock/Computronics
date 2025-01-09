@@ -1,10 +1,10 @@
-package pl.asie.computronics.oc.driver;
+package org.libreflock.computronics.oc.driver;
 
 import li.cil.oc.api.driver.DeviceInfo;
 import li.cil.oc.api.network.ComponentConnector;
 import li.cil.oc.api.network.Node;
 import li.cil.oc.api.prefab.ManagedEnvironment;
-import pl.asie.computronics.util.OCUtils;
+import org.libreflock.computronics.util.OCUtils;
 
 import java.util.Map;
 

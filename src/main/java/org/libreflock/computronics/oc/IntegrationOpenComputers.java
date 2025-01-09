@@ -1,4 +1,4 @@
-package pl.asie.computronics.oc;
+package org.libreflock.computronics.oc;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Optional;

@@ -1,4 +1,4 @@
-package pl.asie.computronics.oc.driver;
+package org.libreflock.computronics.oc.driver;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 import li.cil.oc.api.driver.DeviceInfo;

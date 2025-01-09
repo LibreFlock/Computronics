@@ -1,4 +1,4 @@
-package pl.asie.computronics.oc.client;
+package org.libreflock.computronics.oc.client;
 
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.eventhandler.EventPriority;
@@ -15,10 +15,10 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import org.lwjgl.opengl.GL11;
-import pl.asie.computronics.client.model.ModelRadar;
-import pl.asie.computronics.item.ItemOpenComputers;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.internal.Triple;
+import org.libreflock.computronics.client.model.ModelRadar;
+import org.libreflock.computronics.item.ItemOpenComputers;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.internal.Triple;
 
 import java.util.Arrays;
 import java.util.HashMap;

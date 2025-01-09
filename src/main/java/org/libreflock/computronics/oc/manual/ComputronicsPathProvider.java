@@ -1,4 +1,4 @@
-package pl.asie.computronics.oc.manual;
+package org.libreflock.computronics.oc.manual;
 
 import li.cil.oc.api.Manual;
 import li.cil.oc.api.manual.PathProvider;

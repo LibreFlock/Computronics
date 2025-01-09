@@ -1,4 +1,4 @@
-package pl.asie.computronics.oc.manual;
+package org.libreflock.computronics.oc.manual;
 
 import net.minecraft.item.ItemStack;
 

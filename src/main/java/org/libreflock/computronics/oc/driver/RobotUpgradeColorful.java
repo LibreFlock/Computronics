@@ -1,4 +1,4 @@
-package pl.asie.computronics.oc.driver;
+package org.libreflock.computronics.oc.driver;
 
 import li.cil.oc.api.Network;
 import li.cil.oc.api.internal.Robot;
@@ -8,8 +8,8 @@ import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.Visibility;
 import net.minecraft.nbt.NBTTagCompound;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.util.OCUtils;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.util.OCUtils;
 
 /**
  * @author Vexatos

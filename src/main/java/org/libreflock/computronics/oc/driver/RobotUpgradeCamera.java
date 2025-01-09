@@ -1,4 +1,4 @@
-package pl.asie.computronics.oc.driver;
+package org.libreflock.computronics.oc.driver;
 
 import li.cil.oc.api.Network;
 import li.cil.oc.api.driver.DeviceInfo;
@@ -13,8 +13,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.util.ForgeDirection;
-import pl.asie.computronics.util.Camera;
-import pl.asie.computronics.util.OCUtils;
+import org.libreflock.computronics.util.Camera;
+import org.libreflock.computronics.util.OCUtils;
 
 import java.util.Map;
 
