@@ -1,4 +1,4 @@
-package pl.asie.computronics.block;
+package org.libreflock.computronics.block;
 
 import cpw.mods.fml.common.Optional;
 import net.minecraft.block.material.Material;

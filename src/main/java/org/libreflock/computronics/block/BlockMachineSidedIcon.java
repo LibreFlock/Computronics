@@ -1,4 +1,4 @@
-package pl.asie.computronics.block;
+package org.libreflock.computronics.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
