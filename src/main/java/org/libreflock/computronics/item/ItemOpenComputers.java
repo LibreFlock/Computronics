@@ -1,4 +1,4 @@
-package pl.asie.computronics.item;
+package org.libreflock.computronics.item;
 
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;

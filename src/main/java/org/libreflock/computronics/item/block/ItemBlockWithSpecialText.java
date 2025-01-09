@@ -1,4 +1,4 @@
-package pl.asie.computronics.item.block;
+package org.libreflock.computronics.item.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
