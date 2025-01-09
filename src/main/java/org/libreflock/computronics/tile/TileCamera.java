@@ -1,4 +1,4 @@
-package pl.asie.computronics.tile;
+package org.libreflock.computronics.tile;
 
 import cpw.mods.fml.common.Optional;
 import dan200.computercraft.api.lua.ILuaContext;
@@ -9,11 +9,11 @@ import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import net.minecraftforge.common.util.ForgeDirection;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.Camera;
-import pl.asie.computronics.util.OCUtils;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.Camera;
+import org.libreflock.computronics.util.OCUtils;
 
 public class TileCamera extends TileEntityPeripheralBase {
 

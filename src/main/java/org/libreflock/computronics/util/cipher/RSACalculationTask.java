@@ -1,6 +1,6 @@
-package pl.asie.computronics.util.cipher;
+package org.libreflock.computronics.util.cipher;
 
-import pl.asie.lib.util.Base64;
+import org.libreflock.lib.util.Base64;
 
 import java.math.BigInteger;
 import java.security.KeyPair;

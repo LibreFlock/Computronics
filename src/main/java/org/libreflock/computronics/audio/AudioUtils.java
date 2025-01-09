@@ -1,10 +1,10 @@
 package org.libreflock.computronics.audio;
 
 import net.minecraft.util.MathHelper;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.api.audio.AudioPacketRegistry;
-import pl.asie.computronics.network.PacketType;
-import pl.asie.lib.network.Packet;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.api.audio.AudioPacketRegistry;
+import org.libreflock.computronics.network.PacketType;
+import org.libreflock.lib.network.Packet;
 
 public final class AudioUtils {
 

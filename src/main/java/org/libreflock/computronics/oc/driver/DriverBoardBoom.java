@@ -19,11 +19,11 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.apache.commons.lang3.tuple.Pair;
-import pl.asie.computronics.oc.IntegrationOpenComputers;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.OCUtils;
-import pl.asie.computronics.util.boom.SelfDestruct;
+import org.libreflock.computronics.oc.IntegrationOpenComputers;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.OCUtils;
+import org.libreflock.computronics.util.boom.SelfDestruct;
 
 import java.util.ArrayDeque;
 import java.util.EnumSet;

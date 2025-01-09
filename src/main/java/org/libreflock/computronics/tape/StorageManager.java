@@ -1,9 +1,9 @@
-package pl.asie.computronics.tape;
+package org.libreflock.computronics.tape;
 
 import net.minecraftforge.common.DimensionManager;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.lib.util.MiscUtils;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.lib.util.MiscUtils;
 
 import java.io.File;
 import java.util.Random;

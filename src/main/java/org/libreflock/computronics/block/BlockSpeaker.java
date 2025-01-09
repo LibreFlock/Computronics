@@ -8,8 +8,8 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.tile.TileSpeaker;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.tile.TileSpeaker;
 
 public class BlockSpeaker extends BlockMachineSidedIcon {
 	private IIcon mFront;

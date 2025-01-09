@@ -1,4 +1,4 @@
-package pl.asie.computronics.util.collect;
+package org.libreflock.computronics.util.collect;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Maps;

@@ -3,12 +3,12 @@ package org.libreflock.computronics;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraft.world.World;
-import pl.asie.computronics.api.audio.AudioPacketDFPWM;
-import pl.asie.computronics.api.audio.AudioPacketRegistry;
-import pl.asie.computronics.audio.SoundCardPacket;
-import pl.asie.computronics.item.entity.EntityItemIndestructable;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.lib.network.Packet;
+import org.libreflock.computronics.api.audio.AudioPacketDFPWM;
+import org.libreflock.computronics.api.audio.AudioPacketRegistry;
+import org.libreflock.computronics.audio.SoundCardPacket;
+import org.libreflock.computronics.item.entity.EntityItemIndestructable;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.lib.network.Packet;
 
 import java.io.IOException;
 

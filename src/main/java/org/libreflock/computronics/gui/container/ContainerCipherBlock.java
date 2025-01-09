@@ -3,8 +3,8 @@ package org.libreflock.computronics.gui.container;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import pl.asie.lib.block.ContainerBase;
-import pl.asie.lib.block.TileEntityBase;
+import org.libreflock.lib.block.ContainerBase;
+import org.libreflock.lib.block.TileEntityBase;
 
 public class ContainerCipherBlock extends ContainerBase {
 

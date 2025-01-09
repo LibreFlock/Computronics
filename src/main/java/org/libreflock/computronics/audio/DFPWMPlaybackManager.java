@@ -1,8 +1,8 @@
 package org.libreflock.computronics.audio;
 
-import pl.asie.computronics.reference.Config;
-import pl.asie.lib.audio.StreamingAudioPlayer;
-import pl.asie.lib.audio.StreamingPlaybackManager;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.lib.audio.StreamingAudioPlayer;
+import org.libreflock.lib.audio.StreamingPlaybackManager;
 
 public class DFPWMPlaybackManager extends StreamingPlaybackManager {
 	public DFPWMPlaybackManager(boolean isClient) {

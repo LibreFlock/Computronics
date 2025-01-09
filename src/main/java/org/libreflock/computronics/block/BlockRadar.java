@@ -7,9 +7,9 @@ import li.cil.oc.api.network.Environment;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.tile.TileRadar;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.tile.TileRadar;
 
 public class BlockRadar extends BlockMachineSidedIcon {
 	public BlockRadar() {

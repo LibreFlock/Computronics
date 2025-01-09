@@ -1,10 +1,10 @@
-package pl.asie.computronics.util.chat;
+package org.libreflock.computronics.util.chat;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.event.ServerChatEvent;
-import pl.asie.computronics.api.chat.ChatAPI;
-import pl.asie.computronics.api.chat.IChatListener;
-import pl.asie.computronics.api.chat.IChatListenerRegistry;
+import org.libreflock.computronics.api.chat.ChatAPI;
+import org.libreflock.computronics.api.chat.IChatListener;
+import org.libreflock.computronics.api.chat.IChatListenerRegistry;
 
 import java.util.WeakHashMap;
 

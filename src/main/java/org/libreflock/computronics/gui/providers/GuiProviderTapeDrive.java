@@ -8,16 +8,16 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.gui.GuiTapePlayer;
-import pl.asie.computronics.gui.IGuiTapeDrive;
-import pl.asie.computronics.gui.container.ContainerTapeReader;
-import pl.asie.computronics.network.PacketType;
-import pl.asie.computronics.tile.TapeDriveState;
-import pl.asie.computronics.tile.TileTapeDrive;
-import pl.asie.lib.block.ContainerInventory;
-import pl.asie.lib.gui.managed.GuiProviderBase;
-import pl.asie.lib.network.Packet;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.gui.GuiTapePlayer;
+import org.libreflock.computronics.gui.IGuiTapeDrive;
+import org.libreflock.computronics.gui.container.ContainerTapeReader;
+import org.libreflock.computronics.network.PacketType;
+import org.libreflock.computronics.tile.TapeDriveState;
+import org.libreflock.computronics.tile.TileTapeDrive;
+import org.libreflock.lib.block.ContainerInventory;
+import org.libreflock.lib.gui.managed.GuiProviderBase;
+import org.libreflock.lib.network.Packet;
 
 /**
  * @author Vexatos

@@ -1,4 +1,4 @@
-package pl.asie.computronics.tile;
+package org.libreflock.computronics.tile;
 
 import cpw.mods.fml.common.Optional;
 import dan200.computercraft.api.lua.ILuaContext;
@@ -12,15 +12,15 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
-import pl.asie.computronics.cc.CCRadarProxy;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.OCUtils;
-import pl.asie.computronics.util.RadarUtils;
-import pl.asie.computronics.util.TableUtils;
-import pl.asie.lib.api.tile.IBatteryProvider;
-import pl.asie.lib.tile.BatteryBasic;
-import pl.asie.lib.util.EnergyConverter;
+import org.libreflock.computronics.cc.CCRadarProxy;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.OCUtils;
+import org.libreflock.computronics.util.RadarUtils;
+import org.libreflock.computronics.util.TableUtils;
+import org.libreflock.lib.api.tile.IBatteryProvider;
+import org.libreflock.lib.tile.BatteryBasic;
+import org.libreflock.lib.util.EnergyConverter;
 
 import java.util.HashSet;
 import java.util.Map;

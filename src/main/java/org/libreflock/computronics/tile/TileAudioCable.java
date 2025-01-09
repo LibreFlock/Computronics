@@ -1,4 +1,4 @@
-package pl.asie.computronics.tile;
+package org.libreflock.computronics.tile;
 
 import gnu.trove.set.hash.TIntHashSet;
 import net.minecraft.nbt.NBTTagCompound;
@@ -6,13 +6,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import pl.asie.computronics.api.audio.AudioPacket;
-import pl.asie.computronics.api.audio.IAudioConnection;
-import pl.asie.computronics.api.audio.IAudioReceiver;
-import pl.asie.computronics.audio.AudioUtils;
-import pl.asie.lib.block.TileEntityBase;
-import pl.asie.lib.util.ColorUtils;
-import pl.asie.lib.util.internal.IColorable;
+import org.libreflock.computronics.api.audio.AudioPacket;
+import org.libreflock.computronics.api.audio.IAudioConnection;
+import org.libreflock.computronics.api.audio.IAudioReceiver;
+import org.libreflock.computronics.audio.AudioUtils;
+import org.libreflock.lib.block.TileEntityBase;
+import org.libreflock.lib.util.ColorUtils;
+import org.libreflock.lib.util.internal.IColorable;
 
 public class TileAudioCable extends TileEntityBase implements IAudioReceiver, IColorable {
 	private final TIntHashSet packetIds = new TIntHashSet();

@@ -3,14 +3,14 @@ package org.libreflock.computronics.network;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetHandler;
 import net.minecraft.tileentity.TileEntity;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.tape.PortableDriveManager;
-import pl.asie.computronics.tape.PortableTapeDrive;
-import pl.asie.computronics.tile.TapeDriveState.State;
-import pl.asie.computronics.tile.TileTapeDrive;
-import pl.asie.lib.network.MessageHandlerBase;
-import pl.asie.lib.network.Packet;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.tape.PortableDriveManager;
+import org.libreflock.computronics.tape.PortableTapeDrive;
+import org.libreflock.computronics.tile.TapeDriveState.State;
+import org.libreflock.computronics.tile.TileTapeDrive;
+import org.libreflock.lib.network.MessageHandlerBase;
+import org.libreflock.lib.network.Packet;
 
 import java.io.IOException;
 

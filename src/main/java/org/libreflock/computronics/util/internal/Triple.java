@@ -1,4 +1,4 @@
-package pl.asie.computronics.util.internal;
+package org.libreflock.computronics.util.internal;
 
 /**
  * Tiny immutable triple of floats

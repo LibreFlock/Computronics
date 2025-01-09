@@ -6,10 +6,10 @@ import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.Visibility;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.util.OCUtils;
-import pl.asie.computronics.util.sound.AudioType;
-import pl.asie.computronics.util.sound.Channel;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.util.OCUtils;
+import org.libreflock.computronics.util.sound.AudioType;
+import org.libreflock.computronics.util.sound.Channel;
 
 import java.util.Map;
 

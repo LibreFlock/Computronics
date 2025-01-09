@@ -1,4 +1,4 @@
-package pl.asie.computronics.tile;
+package org.libreflock.computronics.tile;
 
 import cpw.mods.fml.common.Optional;
 import dan200.computercraft.api.lua.ILuaContext;
@@ -9,12 +9,12 @@ import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.ServerChatEvent;
-import pl.asie.computronics.api.chat.ChatAPI;
-import pl.asie.computronics.api.chat.IChatListener;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.ChatBoxUtils;
-import pl.asie.computronics.util.OCUtils;
+import org.libreflock.computronics.api.chat.ChatAPI;
+import org.libreflock.computronics.api.chat.IChatListener;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.ChatBoxUtils;
+import org.libreflock.computronics.util.OCUtils;
 
 public class TileChatBox extends TileEntityPeripheralBase implements IChatListener {
 

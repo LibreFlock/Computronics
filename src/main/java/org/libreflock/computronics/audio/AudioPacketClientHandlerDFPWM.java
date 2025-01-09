@@ -2,10 +2,10 @@ package org.libreflock.computronics.audio;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.api.audio.AudioPacketClientHandler;
-import pl.asie.lib.audio.StreamingAudioPlayer;
-import pl.asie.lib.network.Packet;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.api.audio.AudioPacketClientHandler;
+import org.libreflock.lib.audio.StreamingAudioPlayer;
+import org.libreflock.lib.network.Packet;
 
 import java.io.IOException;
 

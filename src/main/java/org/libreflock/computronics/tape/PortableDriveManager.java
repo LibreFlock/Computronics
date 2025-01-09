@@ -1,4 +1,4 @@
-package pl.asie.computronics.tape;
+package org.libreflock.computronics.tape;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -11,10 +11,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.item.ItemPortableTapeDrive;
-import pl.asie.computronics.tile.TapeDriveState.State;
-import pl.asie.lib.audio.StreamingAudioPlayer;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.item.ItemPortableTapeDrive;
+import org.libreflock.computronics.tile.TapeDriveState.State;
+import org.libreflock.lib.audio.StreamingAudioPlayer;
 
 import java.util.Iterator;
 import java.util.Map;

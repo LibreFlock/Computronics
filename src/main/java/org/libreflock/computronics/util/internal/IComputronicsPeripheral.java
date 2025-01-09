@@ -1,4 +1,4 @@
-package pl.asie.computronics.util.internal;
+package org.libreflock.computronics.util.internal;
 
 /**
  * Only used to check whether a peripheral belongs to Computronics

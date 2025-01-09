@@ -8,18 +8,18 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.gui.GuiTapePlayer;
-import pl.asie.computronics.gui.IGuiTapeDrive;
-import pl.asie.computronics.gui.container.ContainerPortableTapeDrive;
-import pl.asie.computronics.item.ItemPortableTapeDrive;
-import pl.asie.computronics.network.PacketType;
-import pl.asie.computronics.tape.PortableDriveManager;
-import pl.asie.computronics.tape.PortableTapeDrive;
-import pl.asie.computronics.tile.TapeDriveState;
-import pl.asie.lib.block.ContainerInventory;
-import pl.asie.lib.gui.managed.GuiProviderBase;
-import pl.asie.lib.network.Packet;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.gui.GuiTapePlayer;
+import org.libreflock.computronics.gui.IGuiTapeDrive;
+import org.libreflock.computronics.gui.container.ContainerPortableTapeDrive;
+import org.libreflock.computronics.item.ItemPortableTapeDrive;
+import org.libreflock.computronics.network.PacketType;
+import org.libreflock.computronics.tape.PortableDriveManager;
+import org.libreflock.computronics.tape.PortableTapeDrive;
+import org.libreflock.computronics.tile.TapeDriveState;
+import org.libreflock.lib.block.ContainerInventory;
+import org.libreflock.lib.gui.managed.GuiProviderBase;
+import org.libreflock.lib.network.Packet;
 
 /**
  * @author Vexatos

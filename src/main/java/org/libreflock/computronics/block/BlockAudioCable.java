@@ -14,12 +14,12 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.client.AudioCableRender;
-import pl.asie.computronics.oc.manual.IBlockWithDocumentation;
-import pl.asie.computronics.tile.TileAudioCable;
-import pl.asie.lib.block.BlockBase;
-import pl.asie.lib.util.ColorUtils;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.client.AudioCableRender;
+import org.libreflock.computronics.oc.manual.IBlockWithDocumentation;
+import org.libreflock.computronics.tile.TileAudioCable;
+import org.libreflock.lib.block.BlockBase;
+import org.libreflock.lib.util.ColorUtils;
 
 import java.util.ArrayList;
 

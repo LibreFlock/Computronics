@@ -1,4 +1,4 @@
-package pl.asie.computronics.tile;
+package org.libreflock.computronics.tile;
 
 import cpw.mods.fml.common.Optional;
 import dan200.computercraft.api.lua.ILuaContext;
@@ -15,9 +15,9 @@ import mrtjp.projectred.api.IBundledTile;
 import mrtjp.projectred.api.ProjectRedAPI;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.NoteUtils;
-import pl.asie.computronics.util.OCUtils;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.NoteUtils;
+import org.libreflock.computronics.util.OCUtils;
 
 import java.util.ArrayList;
 import java.util.List;

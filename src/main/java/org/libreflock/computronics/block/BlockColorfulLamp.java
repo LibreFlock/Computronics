@@ -13,12 +13,12 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.client.LampRender;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.tile.TileColorfulLamp;
-import pl.asie.computronics.util.LampUtil;
-import pl.asie.lib.integration.Integration;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.client.LampRender;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.tile.TileColorfulLamp;
+import org.libreflock.computronics.util.LampUtil;
+import org.libreflock.lib.integration.Integration;
 import powercrystals.minefactoryreloaded.api.rednet.IRedNetInputNode;
 import powercrystals.minefactoryreloaded.api.rednet.connectivity.RedNetConnectionType;
 

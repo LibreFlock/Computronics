@@ -1,10 +1,10 @@
-package pl.asie.computronics.util;
+package org.libreflock.computronics.util;
 
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraft.world.World;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.network.PacketType;
-import pl.asie.lib.network.Packet;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.network.PacketType;
+import org.libreflock.lib.network.Packet;
 
 public class ParticleUtils {
 	public static void sendParticlePacket(String name, World worldObj, double x, double y, double z, double vx, double vy, double vz) {

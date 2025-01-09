@@ -1,8 +1,8 @@
-package pl.asie.computronics.util;
+package org.libreflock.computronics.util;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import pl.asie.lib.util.MiscUtils;
+import org.libreflock.lib.util.MiscUtils;
 
 import java.security.MessageDigest;
 import java.util.LinkedHashMap;

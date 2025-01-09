@@ -9,8 +9,8 @@ import li.cil.oc.api.network.Message;
 import li.cil.oc.api.network.Node;
 import li.cil.oc.api.network.Visibility;
 import net.minecraft.nbt.NBTTagCompound;
-import pl.asie.computronics.util.OCUtils;
-import pl.asie.computronics.util.boom.SelfDestruct;
+import org.libreflock.computronics.util.OCUtils;
+import org.libreflock.computronics.util.boom.SelfDestruct;
 
 /**
  * @author Vexatos

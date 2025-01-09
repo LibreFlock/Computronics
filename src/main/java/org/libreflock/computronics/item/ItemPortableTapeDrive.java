@@ -12,12 +12,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.oc.manual.IItemWithDocumentation;
-import pl.asie.computronics.tape.PortableDriveManager;
-import pl.asie.computronics.tape.PortableTapeDrive;
-import pl.asie.computronics.tile.TapeDriveState.State;
-import pl.asie.computronics.util.StringUtil;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.oc.manual.IItemWithDocumentation;
+import org.libreflock.computronics.tape.PortableDriveManager;
+import org.libreflock.computronics.tape.PortableTapeDrive;
+import org.libreflock.computronics.tile.TapeDriveState.State;
+import org.libreflock.computronics.util.StringUtil;
 
 import java.util.List;
 import java.util.Locale;

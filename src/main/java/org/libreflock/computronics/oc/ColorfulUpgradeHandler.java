@@ -12,9 +12,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentTranslation;
 import org.lwjgl.opengl.GL11;
-import pl.asie.computronics.item.ItemOpenComputers;
-import pl.asie.computronics.oc.driver.RobotUpgradeColorful;
-import pl.asie.computronics.reference.Mods;
+import org.libreflock.computronics.item.ItemOpenComputers;
+import org.libreflock.computronics.oc.driver.RobotUpgradeColorful;
+import org.libreflock.computronics.reference.Mods;
 
 import java.util.Locale;
 

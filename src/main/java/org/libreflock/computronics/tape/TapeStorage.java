@@ -1,7 +1,7 @@
-package pl.asie.computronics.tape;
+package org.libreflock.computronics.tape;
 
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.api.tape.ITapeStorage;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.api.tape.ITapeStorage;
 
 import java.io.File;
 import java.io.FileInputStream;

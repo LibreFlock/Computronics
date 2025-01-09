@@ -6,12 +6,12 @@ import li.cil.oc.api.driver.EnvironmentProvider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.oc.driver.DriverMagicalMemory;
-import pl.asie.computronics.oc.manual.IItemWithDocumentation;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.OCUtils;
-import pl.asie.lib.item.ItemMultiple;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.oc.driver.DriverMagicalMemory;
+import org.libreflock.computronics.oc.manual.IItemWithDocumentation;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.OCUtils;
+import org.libreflock.lib.item.ItemMultiple;
 
 import java.util.List;
 

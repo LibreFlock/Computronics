@@ -1,8 +1,8 @@
-package pl.asie.computronics.util.sound;
+package org.libreflock.computronics.util.sound;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.nbt.NBTTagCompound;
-import pl.asie.computronics.reference.Config;
+import org.libreflock.computronics.reference.Config;
 
 import java.util.ArrayList;
 

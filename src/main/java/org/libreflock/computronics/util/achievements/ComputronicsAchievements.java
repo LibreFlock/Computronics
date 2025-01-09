@@ -1,4 +1,4 @@
-package pl.asie.computronics.util.achievements;
+package org.libreflock.computronics.util.achievements;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -20,10 +20,10 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.integration.railcraft.tile.TileLocomotiveRelay;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.reference.Mods;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.integration.railcraft.tile.TileLocomotiveRelay;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.reference.Mods;
 
 import java.util.HashMap;
 

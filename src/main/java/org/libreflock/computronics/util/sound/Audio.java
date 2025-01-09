@@ -1,4 +1,4 @@
-package pl.asie.computronics.util.sound;
+package org.libreflock.computronics.util.sound;
 
 import com.google.common.base.Throwables;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -12,8 +12,8 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.AL10;
 import org.lwjgl.openal.OpenALException;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.reference.Config;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.reference.Config;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;

@@ -1,4 +1,4 @@
-package pl.asie.computronics.tile;
+package org.libreflock.computronics.tile;
 
 //import java.nio.file.FileSystem;
 
@@ -19,22 +19,22 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.api.audio.AudioPacket;
-import pl.asie.computronics.api.audio.IAudioReceiver;
-import pl.asie.computronics.api.audio.IAudioSource;
-import pl.asie.computronics.api.tape.IItemTapeStorage;
-import pl.asie.computronics.audio.AudioUtils;
-import pl.asie.computronics.cc.ComputronicsFileMount;
-import pl.asie.computronics.network.PacketType;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.tile.TapeDriveState.State;
-import pl.asie.computronics.util.OCUtils;
-import pl.asie.lib.api.tile.IInventoryProvider;
-import pl.asie.lib.network.Packet;
-import pl.asie.lib.util.ColorUtils;
-import pl.asie.lib.util.internal.IColorable;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.api.audio.AudioPacket;
+import org.libreflock.computronics.api.audio.IAudioReceiver;
+import org.libreflock.computronics.api.audio.IAudioSource;
+import org.libreflock.computronics.api.tape.IItemTapeStorage;
+import org.libreflock.computronics.audio.AudioUtils;
+import org.libreflock.computronics.cc.ComputronicsFileMount;
+import org.libreflock.computronics.network.PacketType;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.tile.TapeDriveState.State;
+import org.libreflock.computronics.util.OCUtils;
+import org.libreflock.lib.api.tile.IInventoryProvider;
+import org.libreflock.lib.network.Packet;
+import org.libreflock.lib.util.ColorUtils;
+import org.libreflock.lib.util.internal.IColorable;
 
 import java.util.concurrent.ConcurrentHashMap;
 

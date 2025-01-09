@@ -4,11 +4,11 @@ import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import pl.asie.computronics.item.ItemTape;
-import pl.asie.computronics.tile.TapeDriveState.State;
-import pl.asie.computronics.util.StringUtil;
-import pl.asie.lib.block.ContainerInventory;
-import pl.asie.lib.gui.GuiSpecialContainer;
+import org.libreflock.computronics.item.ItemTape;
+import org.libreflock.computronics.tile.TapeDriveState.State;
+import org.libreflock.computronics.util.StringUtil;
+import org.libreflock.lib.block.ContainerInventory;
+import org.libreflock.lib.gui.GuiSpecialContainer;
 
 public class GuiTapePlayer extends GuiSpecialContainer<ContainerInventory> {
 

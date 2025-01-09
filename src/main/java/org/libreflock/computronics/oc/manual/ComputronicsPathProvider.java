@@ -11,7 +11,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import pl.asie.computronics.Computronics;
+import org.libreflock.computronics.Computronics;
 
 import java.util.ArrayList;
 import java.util.Collections;

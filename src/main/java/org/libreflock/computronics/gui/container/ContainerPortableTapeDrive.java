@@ -2,10 +2,10 @@ package org.libreflock.computronics.gui.container;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.tape.PortableTapeDrive;
-import pl.asie.lib.block.ContainerInventory;
-import pl.asie.lib.util.SlotTyped;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.tape.PortableTapeDrive;
+import org.libreflock.lib.block.ContainerInventory;
+import org.libreflock.lib.util.SlotTyped;
 
 /**
  * @author Vexatos

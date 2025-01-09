@@ -9,8 +9,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
-import pl.asie.computronics.block.BlockAudioCable;
-import pl.asie.computronics.tile.TileAudioCable;
+import org.libreflock.computronics.block.BlockAudioCable;
+import org.libreflock.computronics.tile.TileAudioCable;
 
 public class AudioCableRender implements ISimpleBlockRenderingHandler {
 

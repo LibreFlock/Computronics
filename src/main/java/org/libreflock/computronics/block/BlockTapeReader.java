@@ -9,10 +9,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.tile.TapeDriveState;
-import pl.asie.computronics.tile.TileTapeDrive;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.tile.TapeDriveState;
+import org.libreflock.computronics.tile.TileTapeDrive;
 
 public class BlockTapeReader extends BlockMachineSidedIcon {
 

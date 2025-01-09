@@ -1,4 +1,4 @@
-package pl.asie.computronics.util.cipher;
+package org.libreflock.computronics.util.cipher;
 
 import cpw.mods.fml.common.Optional;
 import dan200.computercraft.api.lua.ILuaContext;
@@ -9,8 +9,8 @@ import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.machine.Value;
 import net.minecraft.nbt.NBTTagCompound;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.reference.Mods;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.reference.Mods;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

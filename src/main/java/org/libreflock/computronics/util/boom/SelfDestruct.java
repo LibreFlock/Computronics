@@ -1,4 +1,4 @@
-package pl.asie.computronics.util.boom;
+package org.libreflock.computronics.util.boom;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -12,9 +12,9 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.network.PacketType;
-import pl.asie.lib.network.Packet;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.network.PacketType;
+import org.libreflock.lib.network.Packet;
 
 import java.io.IOException;
 

@@ -4,12 +4,12 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import pl.asie.computronics.gui.GuiCipherBlock;
-import pl.asie.computronics.gui.container.ContainerCipherBlock;
-import pl.asie.lib.block.ContainerBase;
-import pl.asie.lib.block.TileEntityBase;
-import pl.asie.lib.gui.GuiBase;
-import pl.asie.lib.gui.managed.LegacyGuiProvider;
+import org.libreflock.computronics.gui.GuiCipherBlock;
+import org.libreflock.computronics.gui.container.ContainerCipherBlock;
+import org.libreflock.lib.block.ContainerBase;
+import org.libreflock.lib.block.TileEntityBase;
+import org.libreflock.lib.gui.GuiBase;
+import org.libreflock.lib.gui.managed.LegacyGuiProvider;
 
 /**
  * @author Vexatos

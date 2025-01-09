@@ -1,12 +1,12 @@
-package pl.asie.computronics.tile;
+package org.libreflock.computronics.tile;
 
 import net.minecraft.world.World;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.api.audio.AudioPacket;
-import pl.asie.computronics.api.audio.AudioPacketDFPWM;
-import pl.asie.computronics.api.audio.IAudioSource;
-import pl.asie.computronics.api.tape.ITapeStorage;
-import pl.asie.computronics.audio.AudioUtils;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.api.audio.AudioPacket;
+import org.libreflock.computronics.api.audio.AudioPacketDFPWM;
+import org.libreflock.computronics.api.audio.IAudioSource;
+import org.libreflock.computronics.api.tape.ITapeStorage;
+import org.libreflock.computronics.audio.AudioUtils;
 
 import java.util.Arrays;
 

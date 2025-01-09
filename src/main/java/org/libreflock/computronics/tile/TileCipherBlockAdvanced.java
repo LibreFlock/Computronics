@@ -1,4 +1,4 @@
-package pl.asie.computronics.tile;
+package org.libreflock.computronics.tile;
 
 import com.google.common.base.Charsets;
 import cpw.mods.fml.common.Optional;
@@ -9,12 +9,12 @@ import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.Connector;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.OCUtils;
-import pl.asie.computronics.util.cipher.RSAValue;
-import pl.asie.computronics.util.cipher.ThreadLocals;
-import pl.asie.lib.util.Base64;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.OCUtils;
+import org.libreflock.computronics.util.cipher.RSAValue;
+import org.libreflock.computronics.util.cipher.ThreadLocals;
+import org.libreflock.lib.util.Base64;
 
 import javax.crypto.Cipher;
 import java.math.BigInteger;

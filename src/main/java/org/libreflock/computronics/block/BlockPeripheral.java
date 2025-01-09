@@ -8,17 +8,17 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.oc.block.IComputronicsEnvironmentBlock;
-import pl.asie.computronics.oc.manual.IBlockWithDocumentation;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.tile.TileEntityPeripheralBase;
-import pl.asie.lib.block.BlockBase;
-import pl.asie.lib.util.ColorUtils;
-import pl.asie.lib.util.ColorUtils.Color;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.oc.block.IComputronicsEnvironmentBlock;
+import org.libreflock.computronics.oc.manual.IBlockWithDocumentation;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.tile.TileEntityPeripheralBase;
+import org.libreflock.lib.block.BlockBase;
+import org.libreflock.lib.util.ColorUtils;
+import org.libreflock.lib.util.ColorUtils.Color;
 
 @Optional.InterfaceList({
-	@Optional.Interface(iface = "pl.asie.computronics.oc.block.IComputronicsEnvironmentBlock", modid = Mods.OpenComputers)
+	@Optional.Interface(iface = "org.libreflock.computronics.oc.block.IComputronicsEnvironmentBlock", modid = Mods.OpenComputers)
 })
 public abstract class BlockPeripheral extends BlockBase implements IComputronicsEnvironmentBlock, IBlockWithDocumentation {
 

@@ -6,9 +6,9 @@ import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.tile.TileIronNote;
-import pl.asie.computronics.util.NoteUtils;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.tile.TileIronNote;
+import org.libreflock.computronics.util.NoteUtils;
 import powercrystals.minefactoryreloaded.api.rednet.IRedNetInputNode;
 import powercrystals.minefactoryreloaded.api.rednet.connectivity.RedNetConnectionType;
 

@@ -1,4 +1,4 @@
-package pl.asie.computronics.tile;
+package org.libreflock.computronics.tile;
 
 import cpw.mods.fml.common.Optional;
 import dan200.computercraft.api.lua.ILuaContext;
@@ -18,10 +18,10 @@ import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-import pl.asie.computronics.block.BlockColorfulLamp;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.LampUtil;
-import pl.asie.computronics.util.OCUtils;
+import org.libreflock.computronics.block.BlockColorfulLamp;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.LampUtil;
+import org.libreflock.computronics.util.OCUtils;
 
 @Optional.InterfaceList({
 	@Optional.Interface(iface = "mods.immibis.redlogic.api.wiring.IBundledUpdatable", modid = Mods.RedLogic),

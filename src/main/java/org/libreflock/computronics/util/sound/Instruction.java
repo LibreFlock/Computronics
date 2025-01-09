@@ -1,17 +1,17 @@
-package pl.asie.computronics.util.sound;
+package org.libreflock.computronics.util.sound;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import pl.asie.computronics.util.sound.AudioUtil.AmplitudeModulation;
-import pl.asie.computronics.util.sound.AudioUtil.AudioProcess;
+import org.libreflock.computronics.util.sound.AudioUtil.AmplitudeModulation;
+import org.libreflock.computronics.util.sound.AudioUtil.AudioProcess;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-import static pl.asie.computronics.util.sound.AudioUtil.ADSR;
-import static pl.asie.computronics.util.sound.AudioUtil.FrequencyModulation;
-import static pl.asie.computronics.util.sound.AudioUtil.Gate;
-import static pl.asie.computronics.util.sound.AudioUtil.State;
+import static org.libreflock.computronics.util.sound.AudioUtil.ADSR;
+import static org.libreflock.computronics.util.sound.AudioUtil.FrequencyModulation;
+import static org.libreflock.computronics.util.sound.AudioUtil.Gate;
+import static org.libreflock.computronics.util.sound.AudioUtil.State;
 
 /**
  * @author Vexatos

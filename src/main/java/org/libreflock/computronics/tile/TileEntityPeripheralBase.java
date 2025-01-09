@@ -1,4 +1,4 @@
-package pl.asie.computronics.tile;
+package org.libreflock.computronics.tile;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.Optional;
@@ -16,14 +16,14 @@ import li.cil.oc.api.network.Visibility;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import pl.asie.computronics.api.multiperipheral.IMultiPeripheral;
-import pl.asie.computronics.audio.MachineSound;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.OCUtils;
-import pl.asie.computronics.util.internal.IComputronicsPeripheral;
-import pl.asie.lib.tile.TileMachine;
-import pl.asie.lib.util.ColorUtils;
-import pl.asie.lib.util.internal.IColorable;
+import org.libreflock.computronics.api.multiperipheral.IMultiPeripheral;
+import org.libreflock.computronics.audio.MachineSound;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.OCUtils;
+import org.libreflock.computronics.util.internal.IComputronicsPeripheral;
+import org.libreflock.lib.tile.TileMachine;
+import org.libreflock.lib.util.ColorUtils;
+import org.libreflock.lib.util.internal.IColorable;
 
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -38,7 +38,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 	@Optional.Interface(iface = "li.cil.oc.api.network.Environment", modid = Mods.OpenComputers),
 	@Optional.Interface(iface = "li.cil.oc.api.driver.DeviceInfo", modid = Mods.OpenComputers),
 	@Optional.Interface(iface = "li.cil.oc.api.network.BlacklistedPeripheral", modid = Mods.OpenComputers),
-	@Optional.Interface(iface = "pl.asie.computronics.api.multiperipheral.IMultiPeripheral", modid = Mods.ComputerCraft)
+	@Optional.Interface(iface = "org.libreflock.computronics.api.multiperipheral.IMultiPeripheral", modid = Mods.ComputerCraft)
 })
 public abstract class TileEntityPeripheralBase extends TileMachine implements Environment, DeviceInfo,
 	IMultiPeripheral, IComputronicsPeripheral, BlacklistedPeripheral, IColorable {

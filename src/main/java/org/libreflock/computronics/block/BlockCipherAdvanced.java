@@ -11,10 +11,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import pl.asie.computronics.item.block.IBlockWithSpecialText;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.tile.TileCipherBlockAdvanced;
-import pl.asie.computronics.util.StringUtil;
+import org.libreflock.computronics.item.block.IBlockWithSpecialText;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.tile.TileCipherBlockAdvanced;
+import org.libreflock.computronics.util.StringUtil;
 
 import java.util.List;
 

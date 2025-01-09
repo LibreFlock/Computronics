@@ -1,7 +1,7 @@
 package org.libreflock.computronics.gui;
 
-import pl.asie.lib.block.ContainerBase;
-import pl.asie.lib.gui.GuiBase;
+import org.libreflock.lib.block.ContainerBase;
+import org.libreflock.lib.gui.GuiBase;
 
 public class GuiOneSlot extends GuiBase {
 	public GuiOneSlot(ContainerBase container) {
