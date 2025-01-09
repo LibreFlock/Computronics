@@ -1,4 +1,4 @@
-package pl.asie.computronics.network;
+package org.libreflock.computronics.network;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetHandler;

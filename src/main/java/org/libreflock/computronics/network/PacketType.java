@@ -1,4 +1,4 @@
-package pl.asie.computronics.network;
+package org.libreflock.computronics.network;
 
 public enum PacketType {
 	AUDIO_DATA,
