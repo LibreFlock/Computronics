@@ -1,4 +1,4 @@
-package pl.asie.computronics.gui;
+package org.libreflock.computronics.gui;
 
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.inventory.Slot;

@@ -1,4 +1,4 @@
-package pl.asie.computronics.gui.container;
+package org.libreflock.computronics.gui.container;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

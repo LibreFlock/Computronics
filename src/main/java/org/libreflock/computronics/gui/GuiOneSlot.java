@@ -1,4 +1,4 @@
-package pl.asie.computronics.gui;
+package org.libreflock.computronics.gui;
 
 import pl.asie.lib.block.ContainerBase;
 import pl.asie.lib.gui.GuiBase;

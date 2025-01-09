@@ -1,4 +1,4 @@
-package pl.asie.computronics.gui.providers;
+package org.libreflock.computronics.gui.providers;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
