@@ -1,4 +1,4 @@
-package pl.asie.computronics.util.cipher;
+package org.libreflock.computronics.util.cipher;
 
 import javax.crypto.Cipher;
 import java.security.KeyFactory;

@@ -1,9 +1,9 @@
-package pl.asie.computronics.util.event;
+package org.libreflock.computronics.util.event;
 
 import com.google.common.collect.Queues;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.TickEvent.ServerTickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.ArrayDeque;
 import java.util.Queue;

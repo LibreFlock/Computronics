@@ -1,24 +1,26 @@
-package pl.asie.computronics.util.boom;
+package org.libreflock.computronics.util.boom;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+// import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.SoundEvents;
+// import net.minecraft.entity.player.EntityPlayer;
+// import net.minecraft.entity.player.EntityPlayerMP;
+// import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumParticleTypes;
+// import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
+// import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.network.PacketType;
-import pl.asie.lib.network.Packet;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.network.PacketType;
+import org.libreflock.asielib.network.Packet;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
@@ -42,7 +44,7 @@ public class SelfDestruct extends Explosion {
 	//Unfortunately I had to copy a lot of code for this one.
 	@Override
 	public void doExplosionB(boolean spawnParticles) {
-		Vec3d position = getPosition();
+		Vector3d position = getPosition();
 		final double
 			explosionX = position.x,
 			explosionY = position.y,
@@ -54,7 +56,7 @@ public class SelfDestruct extends Explosion {
 		this.world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, explosionX, explosionY, explosionZ, 1.0D, 0.0D, 0.0D);
 
 		for(BlockPos blockpos : this.getAffectedBlockPositions()) {
-			IBlockState state = this.world.getBlockState(blockpos);
+			BlockState state = this.world.getBlockState(blockpos);
 			Block block = state.getBlock();
 
 			if(spawnParticles) {

@@ -1,15 +1,15 @@
-package pl.asie.computronics.util.internal;
+package org.libreflock.computronics.util.internal;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 /**
  * @author Vexatos
  */
 public interface IItemWithColor {
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	int getColorFromItemstack(ItemStack stack, int tintIndex);
 
 }

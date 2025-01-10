@@ -1,10 +1,10 @@
-package pl.asie.computronics.util.internal;
+package org.libreflock.computronics.util.internal;
 
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.world.IWorldReader;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
@@ -13,6 +13,6 @@ import javax.annotation.Nullable;
  */
 public interface IBlockWithColor {
 
-	@SideOnly(Side.CLIENT)
-	int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex);
+	@OnlyIn(Dist.CLIENT)
+	int colorMultiplier(BlockState state, @Nullable IWorldReader worldIn, @Nullable BlockPos pos, int tintIndex);
 }

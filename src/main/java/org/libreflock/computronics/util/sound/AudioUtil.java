@@ -1,11 +1,16 @@
-package pl.asie.computronics.util.sound;
+package org.libreflock.computronics.util.sound;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.nbt.NBTTagCompound;
-import pl.asie.computronics.reference.Config;
+import net.minecraft.nbt.CompoundNBT;
+import org.libreflock.computronics.reference.Config;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+
+
+// NOTE: i change Config.SOUND_SAMPLE_RATE to Config.Common.SOUND_SAMPLE_RATE, but that may not be correct
+// Adjust if this is a mistake
+
 
 /**
  * @author Vexatos
@@ -24,7 +29,7 @@ public class AudioUtil {
 				if(state.freqMod != null && !state.isFreqMod && !state.isAmpMod) {
 					value = state.freqMod.getModifiedValue(process, state, value);
 				} else {
-					state.offset += state.frequencyInHz / Config.SOUND_SAMPLE_RATE;
+					state.offset += state.frequencyInHz / Config.Common.SOUND_SAMPLE_RATE; // is this right?
 				}
 				if(state.offset > 1) {
 					state.offset %= 1.0F;
@@ -83,7 +88,7 @@ public class AudioUtil {
 		public double getModifiedValue(AudioProcess process, State state, double value) {
 			State mstate = process.states.get(modulatorIndex);
 			double deviation = mstate.gate.getValue(process, mstate, true) * index;
-			state.offset += (state.frequencyInHz + deviation) / Config.SOUND_SAMPLE_RATE;
+			state.offset += (state.frequencyInHz + deviation) / Config.Common.SOUND_SAMPLE_RATE;
 			return value;
 		}
 	}
@@ -125,7 +130,7 @@ public class AudioUtil {
 			this.attenuation = Math.min(Math.max(attenuation, 0), 1);
 			this.releaseDuration = Math.max(releaseDuration, 0);
 
-			this.attackSpeed = 1000D / (this.attackDuration * Config.SOUND_SAMPLE_RATE);
+			this.attackSpeed = 1000D / (this.attackDuration * Config.Common.SOUND_SAMPLE_RATE);
 			if(this.attackDuration == 0) {
 				if(this.decayDuration == 0) {
 					this.initialPhase = this.phase = Phase.Sustain;
@@ -138,8 +143,8 @@ public class AudioUtil {
 				this.initialPhase = Phase.Attack;
 				this.initialProgress = this.progress = 0;
 			}
-			this.decaySpeed = this.decayDuration == 0 ? Double.POSITIVE_INFINITY : ((this.attenuation - 1D) * 1000D) / (this.decayDuration * Config.SOUND_SAMPLE_RATE);
-			this.releaseSpeed = this.releaseDuration == 0 ? Double.NEGATIVE_INFINITY : (-this.attenuation * 1000D) / (this.releaseDuration * Config.SOUND_SAMPLE_RATE);
+			this.decaySpeed = this.decayDuration == 0 ? Double.POSITIVE_INFINITY : ((this.attenuation - 1D) * 1000D) / (this.decayDuration * Config.Common.SOUND_SAMPLE_RATE);
+			this.releaseSpeed = this.releaseDuration == 0 ? Double.NEGATIVE_INFINITY : (-this.attenuation * 1000D) / (this.releaseDuration * Config.Common.SOUND_SAMPLE_RATE);
 		}
 
 		public double getModifiedValue(State state, double value) {
@@ -235,11 +240,11 @@ public class AudioUtil {
 
 		protected abstract double generate(State state);
 
-		public static Noise load(NBTTagCompound nbt) {
+		public static Noise load(CompoundNBT nbt) {
 			final Noise noise;
 			switch(nbt.getByte("t")) {
 				case 1:
-					noise = new LFSR(nbt.getInteger("v"), nbt.getInteger("m"));
+					noise = new LFSR(nbt.getInt("v"), nbt.getInt("m"));
 					break;
 				default:
 					noise = new WhiteNoise();
@@ -249,7 +254,7 @@ public class AudioUtil {
 			return noise;
 		}
 
-		protected abstract void save(NBTTagCompound nbt);
+		protected abstract void save(CompoundNBT nbt);
 
 	}
 
@@ -261,9 +266,9 @@ public class AudioUtil {
 		}
 
 		@Override
-		protected void save(NBTTagCompound nbt) {
-			nbt.setByte("t", (byte) 0);
-			nbt.setDouble("o", noiseOutput);
+		protected void save(CompoundNBT nbt) {
+			nbt.putByte("t", (byte) 0);
+			nbt.putDouble("o", noiseOutput);
 		}
 	}
 
@@ -289,11 +294,11 @@ public class AudioUtil {
 		}
 
 		@Override
-		protected void save(NBTTagCompound nbt) {
-			nbt.setByte("t", (byte) 1);
-			nbt.setDouble("o", noiseOutput);
-			nbt.setInteger("v", value);
-			nbt.setInteger("m", mask);
+		protected void save(CompoundNBT nbt) {
+			nbt.putByte("t", (byte) 1);
+			nbt.putDouble("o", noiseOutput);
+			nbt.putInt("v", value);
+			nbt.putInt("m", mask);
 		}
 	}
 
@@ -317,75 +322,75 @@ public class AudioUtil {
 			this.channelIndex = channelIndex;
 		}
 
-		public void load(NBTTagCompound nbt) {
-			if(nbt.hasKey("wavehz")) {
+		public void load(CompoundNBT nbt) {
+			if(nbt.contains("wavehz")) {
 				frequencyInHz = nbt.getFloat("wavehz");
 			}
-			if(nbt.hasKey("offset")) {
+			if(nbt.contains("offset")) {
 				offset = nbt.getFloat("offset");
 			}
-			if(nbt.hasKey("type")) {
-				this.generator = new Wave(AudioType.fromIndex(nbt.getInteger("type")));
+			if(nbt.contains("type")) {
+				this.generator = new Wave(AudioType.fromIndex(nbt.getInt("type")));
 			}
-			if(nbt.hasKey("noise")) {
-				this.generator = Noise.load(nbt.getCompoundTag("noise"));
+			if(nbt.contains("noise")) {
+				this.generator = Noise.load(nbt.getCompound("noise"));
 			}
-			if(nbt.hasKey("gate")) {
-				gate = Gate.fromIndex(nbt.getInteger("gate"));
+			if(nbt.contains("gate")) {
+				gate = Gate.fromIndex(nbt.getInt("gate"));
 			}
-			if(nbt.hasKey("fmodi") && nbt.hasKey("findex")) {
-				freqMod = new FrequencyModulation(nbt.getInteger("fmodi"), nbt.getFloat("findex"));
+			if(nbt.contains("fmodi") && nbt.contains("findex")) {
+				freqMod = new FrequencyModulation(nbt.getInt("fmodi"), nbt.getFloat("findex"));
 			}
-			if(nbt.hasKey("amodi")) {
-				ampMod = new AmplitudeModulation(nbt.getInteger("amodi"));
+			if(nbt.contains("amodi")) {
+				ampMod = new AmplitudeModulation(nbt.getInt("amodi"));
 			}
-			if(nbt.hasKey("a")) {
-				envelope = new ADSR(nbt.getInteger("a"), nbt.getInteger("d"), nbt.getFloat("s"), nbt.getInteger("r"));
-				envelope.phase = ADSR.Phase.fromIndex(nbt.getInteger("p"));
+			if(nbt.contains("a")) {
+				envelope = new ADSR(nbt.getInt("a"), nbt.getInt("d"), nbt.getFloat("s"), nbt.getInt("r"));
+				envelope.phase = ADSR.Phase.fromIndex(nbt.getInt("p"));
 				envelope.progress = nbt.getDouble("o");
 			}
-			if(nbt.hasKey("vol")) {
+			if(nbt.contains("vol")) {
 				volume = nbt.getFloat("vol");
 			}
 
-			if(nbt.hasKey("isfmod")) {
+			if(nbt.contains("isfmod")) {
 				isFreqMod = nbt.getBoolean("isfmod");
 			}
-			if(nbt.hasKey("isamod")) {
+			if(nbt.contains("isamod")) {
 				isAmpMod = nbt.getBoolean("isamod");
 			}
 		}
 
-		public void save(NBTTagCompound nbt) {
-			nbt.setFloat("wavehz", frequencyInHz);
-			nbt.setFloat("offset", offset);
+		public void save(CompoundNBT nbt) {
+			nbt.putFloat("wavehz", frequencyInHz);
+			nbt.putFloat("offset", offset);
 			if(generator instanceof Wave && ((Wave) generator).type != null) {
-				nbt.setInteger("type", ((Wave) generator).type.ordinal());
+				nbt.putInt("type", ((Wave) generator).type.ordinal());
 			}
 			if(generator instanceof Noise) {
-				NBTTagCompound data = new NBTTagCompound();
+				CompoundNBT data = new CompoundNBT();
 				((Noise) generator).save(data);
-				nbt.setTag("noise", data);
+				nbt.put("noise", data);
 			}
-			nbt.setInteger("gate", gate.ordinal());
+			nbt.putInt("gate", gate.ordinal());
 			if(freqMod != null) {
-				nbt.setInteger("fmodi", freqMod.modulatorIndex);
-				nbt.setFloat("findex", freqMod.index);
+				nbt.putInt("fmodi", freqMod.modulatorIndex);
+				nbt.putFloat("findex", freqMod.index);
 			}
 			if(ampMod != null) {
-				nbt.setInteger("amodi", ampMod.modulatorIndex);
+				nbt.putInt("amodi", ampMod.modulatorIndex);
 			}
 			if(envelope != null) {
-				nbt.setInteger("a", envelope.attackDuration);
-				nbt.setInteger("d", envelope.decayDuration);
-				nbt.setFloat("s", envelope.attenuation);
-				nbt.setInteger("r", envelope.releaseDuration);
-				nbt.setInteger("p", envelope.phase.ordinal());
-				nbt.setDouble("o", envelope.progress);
+				nbt.putInt("a", envelope.attackDuration);
+				nbt.putInt("d", envelope.decayDuration);
+				nbt.putFloat("s", envelope.attenuation);
+				nbt.putInt("r", envelope.releaseDuration);
+				nbt.putInt("p", envelope.phase.ordinal());
+				nbt.putDouble("o", envelope.progress);
 			}
-			nbt.setFloat("vol", volume);
-			nbt.setBoolean("isfmod", isFreqMod);
-			nbt.setBoolean("isamod", isAmpMod);
+			nbt.putFloat("vol", volume);
+			nbt.putBoolean("isfmod", isFreqMod);
+			nbt.putBoolean("isamod", isAmpMod);
 		}
 	}
 
@@ -403,24 +408,24 @@ public class AudioUtil {
 			this.states = ImmutableList.copyOf(states);
 		}
 
-		public void load(NBTTagCompound nbt) {
+		public void load(CompoundNBT nbt) {
 			for(int i = 0; i < states.size(); i++) {
-				if(nbt.hasKey("ch" + i)) {
-					states.get(i).load(nbt.getCompoundTag("ch" + i));
+				if(nbt.contains("ch" + i)) {
+					states.get(i).load(nbt.getCompound("ch" + i));
 				}
 			}
-			if(nbt.hasKey("delay")) {
-				delay = nbt.getInteger("delay");
+			if(nbt.contains("delay")) {
+				delay = nbt.getInt("delay");
 			}
 		}
 
-		public void save(NBTTagCompound nbt) {
+		public void save(CompoundNBT nbt) {
 			for(int i = 0; i < states.size(); i++) {
-				NBTTagCompound stateNBT = new NBTTagCompound();
-				nbt.setTag("ch" + i, stateNBT);
+				CompoundNBT stateNBT = new CompoundNBT();
+				nbt.put("ch" + i, stateNBT);
 				states.get(i).save(stateNBT);
 			}
-			nbt.setInteger("delay", delay);
+			nbt.putInt("delay", delay);
 		}
 	}
 }

@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.util.event;
+package org.libreflock.computronics.util.event;
 
 import mcp.MethodsReturnNonnullByDefault;
 

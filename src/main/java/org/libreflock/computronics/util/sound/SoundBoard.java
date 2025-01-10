@@ -1,25 +1,25 @@
-package pl.asie.computronics.util.sound;
+package org.libreflock.computronics.util.sound;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.api.audio.AudioPacketRegistry;
-import pl.asie.computronics.api.audio.IAudioSource;
-import pl.asie.computronics.audio.AudioUtils;
-import pl.asie.computronics.audio.SoundCardPacket;
-import pl.asie.computronics.audio.SoundCardPacketClientHandler;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.util.sound.AudioUtil.AudioProcess;
-import pl.asie.computronics.util.sound.Instruction.Delay;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.api.audio.AudioPacketRegistry;
+import org.libreflock.computronics.api.audio.IAudioSource;
+import org.libreflock.computronics.audio.AudioUtils;
+import org.libreflock.computronics.audio.SoundCardPacket;
+import org.libreflock.computronics.audio.SoundCardPacketClientHandler;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.util.sound.AudioUtil.AudioProcess;
+import org.libreflock.computronics.util.sound.Instruction.Delay;
 
 import java.util.ArrayDeque;
 import java.util.Collections;
@@ -35,7 +35,7 @@ import java.util.WeakHashMap;
 public class SoundBoard {
 
 	public SoundBoard(ISoundHost host) {
-		process = new AudioProcess(Config.SOUND_CARD_CHANNEL_COUNT);
+		process = new AudioProcess(Config.Common.SOUND_CARD_CHANNEL_COUNT);
 		this.host = host;
 		initBuffers();
 	}
@@ -58,7 +58,7 @@ public class SoundBoard {
 
 		static Set<SoundBoard> envs = Collections.newSetFromMap(new WeakHashMap<SoundBoard, Boolean>());
 
-		@SideOnly(Side.CLIENT)
+		@OnlyIn(Dist.CLIENT)
 		private static SoundCardPacketClientHandler getHandler() {
 			return (SoundCardPacketClientHandler) AudioPacketRegistry.INSTANCE.getClientHandler(AudioPacketRegistry.INSTANCE.getId(SoundCardPacket.class));
 		}
@@ -66,7 +66,7 @@ public class SoundBoard {
 		@SubscribeEvent
 		public void onChunkUnload(ChunkEvent.Unload evt) {
 			for(SoundBoard env : envs) {
-				Vec3d pos = env.host.position();
+				Vector3d pos = env.host.position();
 				if(env.host.world() == evt.getWorld() && evt.getChunk().isAtLocation(MathHelper.floor(pos.x) >> 4, MathHelper.floor(pos.z) >> 4)) {
 					getHandler().setProcess(env.clientAddress, null);
 				}
@@ -131,21 +131,21 @@ public class SoundBoard {
 		}
 	}
 
-	public void load(NBTTagCompound nbt) {
-		if(nbt.hasKey("process")) {
-			process.load(nbt.getCompoundTag("process"));
+	public void load(CompoundNBT nbt) {
+		if(nbt.contains("process")) {
+			process.load(nbt.getCompound("process"));
 		}
-		if(nbt.hasKey("node")) {
-			NBTTagCompound nodeNBT = nbt.getCompoundTag("node");
-			if(nodeNBT.hasKey("address")) {
+		if(nbt.contains("node")) {
+			CompoundNBT nodeNBT = nbt.getCompound("node");
+			if(nodeNBT.contains("address")) {
 				clientAddress = nodeNBT.getString("address");
 			}
 		}
-		if(nbt.hasKey("bbuffer")) {
+		if(nbt.contains("bbuffer")) {
 			if(buildBuffer != null) {
 				synchronized(buildBuffer) {
 					buildBuffer.clear();
-					buildBuffer.addAll(Instruction.fromNBT(nbt.getTagList("bbuffer", Constants.NBT.TAG_COMPOUND)));
+					buildBuffer.addAll(Instruction.fromNBT(nbt.getList("bbuffer", Constants.NBT.TAG_COMPOUND)));
 					buildDelay = 0;
 					for(Instruction inst : buildBuffer) {
 						if(inst instanceof Delay) {
@@ -155,11 +155,11 @@ public class SoundBoard {
 				}
 			}
 		}
-		if(nbt.hasKey("nbuffer")) {
+		if(nbt.contains("nbuffer")) {
 			if(nextBuffer != null) {
 				synchronized(nextBuffer) {
 					nextBuffer.clear();
-					nextBuffer.addAll(Instruction.fromNBT(nbt.getTagList("nbuffer", Constants.NBT.TAG_COMPOUND)));
+					nextBuffer.addAll(Instruction.fromNBT(nbt.getList("nbuffer", Constants.NBT.TAG_COMPOUND)));
 					nextDelay = 0;
 					for(Instruction inst : nextBuffer) {
 						if(inst instanceof Delay) {
@@ -169,30 +169,30 @@ public class SoundBoard {
 				}
 			}
 		}
-		if(nbt.hasKey("volume")) {
+		if(nbt.contains("volume")) {
 			soundVolume = nbt.getByte("volume");
 		}
 	}
 
-	public void save(NBTTagCompound nbt) {
-		NBTTagCompound processNBT = new NBTTagCompound();
-		nbt.setTag("process", processNBT);
+	public void save(CompoundNBT nbt) {
+		CompoundNBT processNBT = new CompoundNBT();
+		nbt.put("process", processNBT);
 		process.save(processNBT);
 		if(buildBuffer != null && !buildBuffer.isEmpty()) {
-			NBTTagList buildNBT = new NBTTagList();
+			ListNBT buildNBT = new ListNBT();
 			synchronized(buildBuffer) {
 				Instruction.toNBT(buildNBT, buildBuffer);
 			}
-			nbt.setTag("bbuffer", buildNBT);
+			nbt.put("bbuffer", buildNBT);
 		}
 		if(nextBuffer != null && !nextBuffer.isEmpty()) {
-			NBTTagList nextNBT = new NBTTagList();
+			ListNBT nextNBT = new ListNBT();
 			synchronized(nextBuffer) {
 				Instruction.toNBT(nextNBT, nextBuffer);
 			}
-			nbt.setTag("nbuffer", nextNBT);
+			nbt.put("nbuffer", nextNBT);
 		}
-		nbt.setByte("volume", (byte) soundVolume);
+		nbt.putByte("volume", (byte) soundVolume);
 	}
 
 	public void clearAndStop() {
@@ -216,7 +216,7 @@ public class SoundBoard {
 
 	public Object[] tryAdd(Instruction inst) {
 		synchronized(buildBuffer) {
-			if(buildBuffer.size() >= Config.SOUND_CARD_QUEUE_SIZE) {
+			if(buildBuffer.size() >= Config.Common.SOUND_CARD_QUEUE_SIZE) {
 				return new Object[] { false, "too many instructions" };
 			}
 			buildBuffer.add(inst);
@@ -260,10 +260,10 @@ public class SoundBoard {
 	}
 
 	public Object[] delay(int duration) {
-		if(duration < 0 || duration > Config.SOUND_CARD_MAX_DELAY) {
-			throw new IllegalArgumentException("invalid duration. must be between 0 and " + Config.SOUND_CARD_MAX_DELAY);
+		if(duration < 0 || duration > Config.Common.SOUND_CARD_MAX_DELAY) {
+			throw new IllegalArgumentException("invalid duration. must be between 0 and " + Config.Common.SOUND_CARD_MAX_DELAY);
 		}
-		if(buildDelay + duration > Config.SOUND_CARD_MAX_DELAY) {
+		if(buildDelay + duration > Config.Common.SOUND_CARD_MAX_DELAY) {
 			return new Object[] { false, "too many delays in queue" };
 		}
 		buildDelay += duration;
@@ -300,7 +300,7 @@ public class SoundBoard {
 				if(buildBuffer.size() == 0) {
 					return new Object[] { true };
 				}
-				if(!host.tryConsumeEnergy(Config.SOUND_CARD_ENERGY_COST * (buildDelay / 1000D))) {
+				if(!host.tryConsumeEnergy(Config.Common.SOUND_CARD_ENERGY_COST * (buildDelay / 1000D))) {
 					return new Object[] { false, "not enough energy" };
 				}
 				synchronized(nextBuffer) {
@@ -353,7 +353,7 @@ public class SoundBoard {
 
 		String address();
 
-		Vec3d position();
+		Vector3d position();
 
 		void sendMusicPacket(SoundCardPacket pkt);
 

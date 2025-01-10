@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.util.achievements;
+package org.libreflock.computronics.util.achievements;
 
 import mcp.MethodsReturnNonnullByDefault;
 

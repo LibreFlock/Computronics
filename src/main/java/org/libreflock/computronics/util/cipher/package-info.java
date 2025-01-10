@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.util.cipher;
+package org.libreflock.computronics.util.cipher;
 
 import mcp.MethodsReturnNonnullByDefault;
 
