@@ -15,7 +15,7 @@ import mods.railcraft.common.blocks.machine.wayobjects.boxes.TileBoxBase;
 import mods.railcraft.common.plugins.buildcraft.triggers.IAspectProvider;
 import mods.railcraft.common.util.network.RailcraftInputStream;
 import mods.railcraft.common.util.network.RailcraftOutputStream;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -89,14 +89,14 @@ public class TileDigitalReceiverBox extends TileDigitalBoxBase implements IRecei
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound data) {
+	public CompoundNBT writeToNBT(CompoundNBT data) {
 		data = super.writeToNBT(data);
 		this.receiver.writeToNBT(data);
 		return data;
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound data) {
+	public void readFromNBT(CompoundNBT data) {
 		super.readFromNBT(data);
 		this.receiver.readFromNBT(data);
 	}

@@ -2,7 +2,7 @@ package org.libreflock.asielib.tile;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -35,11 +35,11 @@ public class TileEntityBase extends TileEntity {
 	}
 
 	// Remote NBT data management
-	public void readFromRemoteNBT(NBTTagCompound tag) {
+	public void readFromRemoteNBT(CompoundNBT tag) {
 		// NO-OP
 	}
 
-	public NBTTagCompound writeToRemoteNBT(NBTTagCompound tag) {
+	public CompoundNBT writeToRemoteNBT(CompoundNBT tag) {
 		return tag;
 	}
 
@@ -50,18 +50,18 @@ public class TileEntityBase extends TileEntity {
 	}
 
 	@Override
-	public NBTTagCompound getUpdateTag() {
+	public CompoundNBT getUpdateTag() {
 		return this.writeToRemoteNBT(super.getUpdateTag());
 	}
 
 	@Override
-	public void handleUpdateTag(NBTTagCompound tag) {
+	public void handleUpdateTag(CompoundNBT tag) {
 		super.handleUpdateTag(tag);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-		NBTTagCompound tag = pkt.getNbtCompound();
+		CompoundNBT tag = pkt.getNbtCompound();
 		if(tag != null) {
 			this.readFromRemoteNBT(tag);
 		}
@@ -87,15 +87,15 @@ public class TileEntityBase extends TileEntity {
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound tag) {
+	public void readFromNBT(CompoundNBT tag) {
 		super.readFromNBT(tag);
-		this.oldRedstoneSignal = tag.getInteger("old_redstone");
+		this.oldRedstoneSignal = tag.getInt("old_redstone");
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+	public CompoundNBT writeToNBT(CompoundNBT tag) {
 		tag = super.writeToNBT(tag);
-		tag.setInteger("old_redstone", this.oldRedstoneSignal);
+		tag.putInt("old_redstone", this.oldRedstoneSignal);
 		return tag;
 	}
 

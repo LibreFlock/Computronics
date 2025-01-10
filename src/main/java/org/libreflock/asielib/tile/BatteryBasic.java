@@ -1,6 +1,6 @@
 package org.libreflock.asielib.tile;
 
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.energy.IEnergyStorage;
@@ -90,15 +90,15 @@ public class BatteryBasic implements IBattery {
 	private byte avgUsPtr = -1;
 
 	@Override
-	public void readFromNBT(NBTTagCompound tag) {
-		if(tag.hasKey("bb_energy")) {
+	public void readFromNBT(CompoundNBT tag) {
+		if(tag.contains("bb_energy")) {
 			energy = tag.getDouble("bb_energy");
 		}
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound tag) {
-		tag.setDouble("bb_energy", energy);
+	public void writeToNBT(CompoundNBT tag) {
+		tag.putDouble("bb_energy", energy);
 	}
 
 	@Override

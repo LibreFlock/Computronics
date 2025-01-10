@@ -1,6 +1,6 @@
 package org.libreflock.computronics.tile;
 
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -172,17 +172,17 @@ public class TileAudioCable extends TileEntityBase implements IAudioReceiver, IC
 	}
 
 	@Override
-	public void readFromRemoteNBT(NBTTagCompound nbt) {
+	public void readFromRemoteNBT(CompoundNBT nbt) {
 		super.readFromRemoteNBT(nbt);
 		int oldColor = this.overlayColor;
 		byte oldConnections = this.connectionMap;
-		if(nbt.hasKey("col")) {
-			overlayColor = nbt.getInteger("col");
+		if(nbt.contains("col")) {
+			overlayColor = nbt.getInt("col");
 		}
 		if(this.overlayColor < 0) {
 			this.overlayColor = getDefaultColor();
 		}
-		if(nbt.hasKey("con")) {
+		if(nbt.contains("con")) {
 			this.connectionMap = nbt.getByte("con");
 		}
 		if(oldColor != this.overlayColor || oldConnections != this.connectionMap) {
@@ -191,36 +191,36 @@ public class TileAudioCable extends TileEntityBase implements IAudioReceiver, IC
 	}
 
 	@Override
-	public NBTTagCompound writeToRemoteNBT(NBTTagCompound nbt) {
+	public CompoundNBT writeToRemoteNBT(CompoundNBT nbt) {
 		super.writeToRemoteNBT(nbt);
 		if(overlayColor != getDefaultColor()) {
-			nbt.setInteger("col", overlayColor);
+			nbt.putInt("col", overlayColor);
 		}
-		nbt.setByte("con", connectionMap);
+		nbt.putByte("con", connectionMap);
 		return nbt;
 	}
 
 	@Override
-	public void readFromNBT(final NBTTagCompound nbt) {
+	public void readFromNBT(final CompoundNBT nbt) {
 		super.readFromNBT(nbt);
-		if(nbt.hasKey("col")) {
-			overlayColor = nbt.getInteger("col");
+		if(nbt.contains("col")) {
+			overlayColor = nbt.getInt("col");
 		}
 		if(this.overlayColor < 0) {
 			this.overlayColor = getDefaultColor();
 		}
-		if(nbt.hasKey("con")) {
+		if(nbt.contains("con")) {
 			this.connectionMap = nbt.getByte("con");
 		}
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(final NBTTagCompound nbt) {
+	public CompoundNBT writeToNBT(final CompoundNBT nbt) {
 		super.writeToNBT(nbt);
 		if(overlayColor != getDefaultColor()) {
-			nbt.setInteger("col", overlayColor);
+			nbt.putInt("col", overlayColor);
 		}
-		nbt.setByte("con", connectionMap);
+		nbt.putByte("con", connectionMap);
 		return nbt;
 	}
 

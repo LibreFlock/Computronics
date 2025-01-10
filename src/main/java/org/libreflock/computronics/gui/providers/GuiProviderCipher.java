@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.gui.GuiCipherBlock;
 import org.libreflock.computronics.gui.container.ContainerCipherBlock;
 import org.libreflock.asielib.gui.GuiBase;

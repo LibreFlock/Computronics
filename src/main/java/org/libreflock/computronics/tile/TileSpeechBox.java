@@ -6,7 +6,7 @@ import dan200.computercraft.api.peripheral.IComputerAccess;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ITickable;
@@ -173,9 +173,9 @@ public class TileSpeechBox extends TileEntityPeripheralBase implements IAudioSou
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+	public CompoundNBT writeToNBT(CompoundNBT tag) {
 		super.writeToNBT(tag);
-		if(tag.hasKey("vo")) {
+		if(tag.contains("vo")) {
 			this.soundVolume = tag.getByte("vo");
 		} else {
 			this.soundVolume = 127;
@@ -184,10 +184,10 @@ public class TileSpeechBox extends TileEntityPeripheralBase implements IAudioSou
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound tag) {
+	public void readFromNBT(CompoundNBT tag) {
 		super.readFromNBT(tag);
 		if(this.soundVolume != 127) {
-			tag.setByte("vo", (byte) this.soundVolume);
+			tag.putByte("vo", (byte) this.soundVolume);
 		}
 	}
 

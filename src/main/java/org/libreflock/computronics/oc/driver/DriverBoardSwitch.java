@@ -8,7 +8,7 @@ import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.Visibility;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.EnumHand;
 import org.libreflock.computronics.reference.Config;
 import org.libreflock.computronics.util.OCUtils;
@@ -33,13 +33,13 @@ public class DriverBoardSwitch extends RackMountableWithComponentConnector {
 	}
 
 	@Override
-	public NBTTagCompound getData() {
-		NBTTagCompound tag = new NBTTagCompound();
+	public CompoundNBT getData() {
+		CompoundNBT tag = new CompoundNBT();
 		byte switchData = 0;
 		for(int i = 0; i < switches.length; i++) {
 			switchData |= (switches[i] ? 1 : 0) << i;
 		}
-		tag.setByte("s", switchData);
+		tag.putByte("s", switchData);
 		return tag;
 	}
 
@@ -135,9 +135,9 @@ public class DriverBoardSwitch extends RackMountableWithComponentConnector {
 	}
 
 	@Override
-	public void load(NBTTagCompound tag) {
+	public void load(CompoundNBT tag) {
 		super.load(tag);
-		if(tag.hasKey("s")) {
+		if(tag.contains("s")) {
 			byte switchData = tag.getByte("s");
 			for(int i = 0; i < switches.length; i++) {
 				switches[i] = ((switchData >> i) & 1) == 1;
@@ -146,13 +146,13 @@ public class DriverBoardSwitch extends RackMountableWithComponentConnector {
 	}
 
 	@Override
-	public void save(NBTTagCompound tag) {
+	public void save(CompoundNBT tag) {
 		super.save(tag);
 		byte switchData = 0;
 		for(int i = 0; i < switches.length; i++) {
 			switchData |= (switches[i] ? 1 : 0) << i;
 		}
-		tag.setByte("s", switchData);
+		tag.putByte("s", switchData);
 	}
 
 	@Override

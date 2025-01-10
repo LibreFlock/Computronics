@@ -7,9 +7,9 @@ import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.Visibility;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.NBTTagFloat;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -244,10 +244,10 @@ public class DriverCardNoise extends DriverCardSoundBase {
 	}
 
 	@Override
-	public void load(NBTTagCompound nbt) {
+	public void load(CompoundNBT nbt) {
 		super.load(nbt);
 		int[] iTypes = nbt.getIntArray("types");
-		NBTTagList frequencies = nbt.getTagList("freqs", Constants.NBT.TAG_FLOAT);
+		ListNBT frequencies = nbt.getTagList("freqs", Constants.NBT.TAG_FLOAT);
 		int[] durations = nbt.getIntArray("dur");
 		int[] delays = nbt.getIntArray("delays");
 		int size = min(iTypes.length, channels.length, frequencies.tagCount(), durations.length, delays.length);
@@ -271,10 +271,10 @@ public class DriverCardNoise extends DriverCardSoundBase {
 	}
 
 	@Override
-	public void save(NBTTagCompound nbt) {
+	public void save(CompoundNBT nbt) {
 		super.save(nbt);
 		int[] iTypes = new int[channels.length];
-		NBTTagList freqList = new NBTTagList();
+		ListNBT freqList = new ListNBT();
 		int[] durations = new int[channels.length];
 		int[] delays = new int[channels.length];
 		for(int i = 0; i < channels.length; i++) {
@@ -285,10 +285,10 @@ public class DriverCardNoise extends DriverCardSoundBase {
 				delays[i] = entry.initialDelay;
 			}
 		}
-		nbt.setIntArray("types", iTypes);
-		nbt.setTag("freqs", freqList);
-		nbt.setIntArray("dur", durations);
-		nbt.setIntArray("delays", delays);
+		nbt.putIntArray("types", iTypes);
+		nbt.put("freqs", freqList);
+		nbt.putIntArray("dur", durations);
+		nbt.putIntArray("delays", delays);
 	}
 
 	@Override

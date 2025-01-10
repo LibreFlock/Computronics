@@ -11,7 +11,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -36,16 +36,16 @@ public class InfoPeripheral extends ComputronicsInfoProvider {
 		IWailaConfigHandler config) {
 
 		if(Mods.isLoaded(Mods.OpenComputers) && ConfigValues.OCAddress.getValue(config)) {
-			NBTTagCompound nbt = accessor.getNBTData();
+			CompoundNBT nbt = accessor.getNBTData();
 			currenttip = getInfo_OC(nbt, currenttip);
 		}
 		return currenttip;
 	}
 
 	@Optional.Method(modid = Mods.OpenComputers)
-	private List<String> getInfo_OC(NBTTagCompound nbt, List<String> currenttip) {
-		NBTTagCompound node = nbt.getCompoundTag("oc:node");
-		if(node.hasKey("address")) {
+	private List<String> getInfo_OC(CompoundNBT nbt, List<String> currenttip) {
+		CompoundNBT node = nbt.getCompound("oc:node");
+		if(node.contains("address")) {
 			currenttip.add(StringUtil.localizeAndFormat("oc:gui.Analyzer.Address", node.getString("address")));
 		}
 		return currenttip;
@@ -53,7 +53,7 @@ public class InfoPeripheral extends ComputronicsInfoProvider {
 
 	@Override
 	@Optional.Method(modid = Mods.Waila)
-	public NBTTagCompound getNBTData(EntityPlayerMP player, @Nullable TileEntity te, NBTTagCompound tag, World world, BlockPos pos) {
+	public CompoundNBT getNBTData(EntityPlayerMP player, @Nullable TileEntity te, CompoundNBT tag, World world, BlockPos pos) {
 		if(te != null && te instanceof IComputronicsPeripheral) {
 			if(Mods.isLoaded(Mods.OpenComputers)) {
 				tag = getNBTData_OC(te, tag);
@@ -63,16 +63,16 @@ public class InfoPeripheral extends ComputronicsInfoProvider {
 	}
 
 	@Optional.Method(modid = Mods.OpenComputers)
-	public NBTTagCompound getNBTData_OC(@Nullable TileEntity te, NBTTagCompound tag) {
+	public CompoundNBT getNBTData_OC(@Nullable TileEntity te, CompoundNBT tag) {
 		if(!(te instanceof Environment)) {
 			return tag;
 		}
 		Environment tile = ((Environment) te);
 		Node node = tile.node();
 		if(node != null && node.host() == tile) {
-			final NBTTagCompound nodeNbt = new NBTTagCompound();
+			final CompoundNBT nodeNbt = new CompoundNBT();
 			node.save(nodeNbt);
-			tag.setTag("oc:node", nodeNbt);
+			tag.put("oc:node", nodeNbt);
 		}
 		return tag;
 	}
@@ -88,7 +88,7 @@ public class InfoPeripheral extends ComputronicsInfoProvider {
 	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
 		TileEntity tile = world.getTileEntity(data.getPos());
 		if(Mods.isLoaded(Mods.OpenComputers) && mode == ProbeMode.EXTENDED) {
-			for(String s : getInfo_OC(getNBTData_OC(tile, new NBTTagCompound()), new ArrayList<String>(1))) {
+			for(String s : getInfo_OC(getNBTData_OC(tile, new CompoundNBT()), new ArrayList<String>(1))) {
 				probeInfo.text(s);
 			}
 		}

@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.AL10;
 import org.libreflock.asielib.AsieLibMod;

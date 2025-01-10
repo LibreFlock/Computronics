@@ -7,7 +7,7 @@ import li.cil.oc.api.driver.item.Slot;
 import li.cil.oc.api.internal.Drone;
 import li.cil.oc.api.network.ManagedEnvironment;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.fml.common.Optional;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.oc.manual.IItemWithPrefix;
@@ -66,7 +66,7 @@ public class ItemDockingUpgrade extends ItemMultiple implements Item, Environmen
 	}
 
 	@Override
-	public NBTTagCompound dataTag(ItemStack stack) {
+	public CompoundNBT dataTag(ItemStack stack) {
 		return OCUtils.dataTag(stack);
 	}
 

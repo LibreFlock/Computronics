@@ -11,11 +11,11 @@ import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.block.BlockColorfulLamp;
 import org.libreflock.computronics.reference.Mods;
@@ -183,15 +183,15 @@ public class TileColorfulLamp extends TileEntityPeripheralBase implements IBundl
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound tag) {
+	public void readFromNBT(CompoundNBT tag) {
 		super.readFromNBT(tag);
-		if(tag.hasKey("clc")) {
+		if(tag.contains("clc")) {
 			color = tag.getShort("clc");
 		}
 		if(color < 0) {
 			color = 0;
 		}
-		/*if(tag.hasKey("binaryMode")) {
+		/*if(tag.contains("binaryMode")) {
 			this.binaryMode = tag.getBoolean("binaryMode");
 		}*/
 	}
@@ -215,25 +215,25 @@ public class TileColorfulLamp extends TileEntityPeripheralBase implements IBundl
 	}*/
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+	public CompoundNBT writeToNBT(CompoundNBT tag) {
 		super.writeToNBT(tag);
-		tag.setShort("clc", (short) (color & 32767));
-		//tag.setBoolean("binaryMode", this.binaryMode);
+		tag.putShort("clc", (short) (color & 32767));
+		//tag.putBoolean("binaryMode", this.binaryMode);
 		return tag;
 	}
 
 	@Override
-	public NBTTagCompound writeToRemoteNBT(NBTTagCompound tag) {
+	public CompoundNBT writeToRemoteNBT(CompoundNBT tag) {
 		super.writeToRemoteNBT(tag);
-		tag.setShort("clc", (short) (color & 32767));
+		tag.putShort("clc", (short) (color & 32767));
 		return tag;
 	}
 
 	@Override
-	public void readFromRemoteNBT(NBTTagCompound tag) {
+	public void readFromRemoteNBT(CompoundNBT tag) {
 		super.readFromRemoteNBT(tag);
 		int oldColor = this.color;
-		if(tag.hasKey("clc")) {
+		if(tag.contains("clc")) {
 			this.color = tag.getShort("clc");
 		}
 		if(this.color < 0) {

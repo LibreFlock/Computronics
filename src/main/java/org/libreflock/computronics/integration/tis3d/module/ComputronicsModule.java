@@ -4,7 +4,7 @@ import li.cil.tis3d.api.machine.Casing;
 import li.cil.tis3d.api.machine.Face;
 import li.cil.tis3d.api.module.traits.BlockChangeAware;
 import li.cil.tis3d.api.prefab.module.AbstractModule;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.BlockPos;
 
 /**
@@ -17,7 +17,7 @@ public class ComputronicsModule extends AbstractModule implements BlockChangeAwa
 	}
 
 	@Override
-	public void onData(NBTTagCompound nbt) {
+	public void onData(CompoundNBT nbt) {
 		super.onData(nbt);
 		this.readFromNBT(nbt);
 	}
@@ -26,7 +26,7 @@ public class ComputronicsModule extends AbstractModule implements BlockChangeAwa
 		if(!isVisible()) {
 			return;
 		}
-		NBTTagCompound nbt = new NBTTagCompound();
+		CompoundNBT nbt = new CompoundNBT();
 		this.writeToNBT(nbt);
 		this.getCasing().sendData(this.getFace(), nbt, (byte) 0);
 	}

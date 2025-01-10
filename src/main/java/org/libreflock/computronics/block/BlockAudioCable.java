@@ -17,7 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.item.block.IBlockWithDifferentColors;
 import org.libreflock.computronics.oc.manual.IBlockWithDocumentation;

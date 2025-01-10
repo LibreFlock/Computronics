@@ -3,7 +3,7 @@ package org.libreflock.asielib.integration.buildcraft;
 import buildcraft.api.blueprints.IBuilderContext;
 import buildcraft.api.blueprints.SchematicTile;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -62,7 +62,7 @@ public class SchematicBlockBase extends SchematicTile {
 			TileEntity tile = context.world().getTileEntity(pos);
 			if(tile != null && tile instanceof TileMachine) {
 				((TileMachine) tile).removeFromNBTForTransfer(tileNBT);
-				tileNBT = (NBTTagCompound) tileNBT.copy();
+				tileNBT = (CompoundNBT) tileNBT.copy();
 			}
 		}
 	}

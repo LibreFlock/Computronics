@@ -2,7 +2,7 @@ package org.libreflock.computronics.integration.railcraft.gui.widget;
 
 import mods.railcraft.client.gui.GuiContainerRailcraft;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.integration.railcraft.tile.TileTicketMachine;
 
 /**

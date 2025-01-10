@@ -4,7 +4,7 @@ import mods.railcraft.client.gui.GuiContainerRailcraft;
 import mods.railcraft.common.gui.tooltips.ToolTip;
 import mods.railcraft.common.gui.widgets.Widget;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class ButtonWidget extends Widget {
 

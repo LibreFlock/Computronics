@@ -15,7 +15,7 @@ public class SwarmBehavior extends AbstractBehavior {
 
 	protected EntitySwarm entity;
 	//protected int amplifier;
-	//protected NBTTagCompound entityTag;
+	//protected CompoundNBT entityTag;
 
 	protected SwarmBehavior(EntityPlayer player) {
 		super(player);
@@ -39,7 +39,7 @@ public class SwarmBehavior extends AbstractBehavior {
 				entity.setAggressive(true);
 				entity.setAttackTarget(player);
 			} else {
-				//entityTag = new NBTTagCompound();
+				//entityTag = new CompoundNBT();
 				//entity.writeToNBT(entityTag);
 				entity.setDead();
 				entity = null;
@@ -85,18 +85,18 @@ public class SwarmBehavior extends AbstractBehavior {
 		}
 	}
 
-	/*public void readFromNBT(NBTTagCompound tag) {
-		//entityTag = tag.getCompoundTag("computronics:swarm");
+	/*public void readFromNBT(CompoundNBT tag) {
+		//entityTag = tag.getCompound("computronics:swarm");
 		//if(entity != null) {
 			//entity.readFromNBT(entityTag);
 		//}
 	}
 
-	public void writeToNBT(NBTTagCompound tag) {
+	public void writeToNBT(CompoundNBT tag) {
 		//if(entity != null) {
-			//entityTag = new NBTTagCompound();
+			//entityTag = new CompoundNBT();
 			//entity.writeToNBT(entityTag);
 		//}
-		//tag.setTag("computronics:swarm", entityTag);
+		//tag.put("computronics:swarm", entityTag);
 	}*/
 }

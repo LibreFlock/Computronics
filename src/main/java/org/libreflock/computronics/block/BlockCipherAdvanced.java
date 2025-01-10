@@ -8,7 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.item.block.IBlockWithSpecialText;
 import org.libreflock.computronics.reference.Mods;
 import org.libreflock.computronics.tile.TileCipherBlockAdvanced;

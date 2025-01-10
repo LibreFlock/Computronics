@@ -13,7 +13,7 @@ import mods.railcraft.common.blocks.machine.IEnumMachine;
 import mods.railcraft.common.util.misc.Game;
 import mods.railcraft.common.util.network.RailcraftInputStream;
 import mods.railcraft.common.util.network.RailcraftOutputStream;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.Optional;
@@ -92,14 +92,14 @@ public class TileDigitalControllerBox extends TileDigitalBoxBase implements ICon
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound data) {
+	public CompoundNBT writeToNBT(CompoundNBT data) {
 		data = super.writeToNBT(data);
 		this.controller.writeToNBT(data);
 		return data;
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound data) {
+	public void readFromNBT(CompoundNBT data) {
 		super.readFromNBT(data);
 		this.controller.readFromNBT(data);
 	}

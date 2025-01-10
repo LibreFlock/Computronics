@@ -5,11 +5,11 @@ import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
@@ -18,7 +18,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.oc.manual.IItemWithDocumentation;
 import org.libreflock.computronics.reference.Mods;
@@ -65,9 +65,9 @@ public class ItemPortableTapeDrive extends Item implements IItemWithDocumentatio
 		@Override
 		public ModelResourceLocation getModelLocation(ItemStack stack) {
 			if(stack.hasTagCompound()) {
-				NBTTagCompound tag = stack.getTagCompound();
-				if(tag.hasKey("state") && tag.hasKey("inv") && tag.hasKey("tid")
-					&& !new ItemStack(tag.getCompoundTag("inv")).isEmpty()
+				CompoundNBT tag = stack.getTagCompound();
+				if(tag.contains("state") && tag.contains("inv") && tag.contains("tid")
+					&& !new ItemStack(tag.getCompound("inv")).isEmpty()
 					&& PortableDriveManager.INSTANCE.exists(tag.getString("tid"), true)) {
 					byte state = tag.getByte("state");
 					if(state >= 0 && state < MODEL_LOCATIONS.length) {
@@ -97,10 +97,10 @@ public class ItemPortableTapeDrive extends Item implements IItemWithDocumentatio
 	@OnlyIn(Dist.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World world, List<String> info, ITooltipFlag flag) {
 		if(stack.hasTagCompound()) {
-			NBTTagCompound tag = stack.getTagCompound();
-			if(tag.hasKey("state") && tag.hasKey("tid")
+			CompoundNBT tag = stack.getTagCompound();
+			if(tag.contains("state") && tag.contains("tid")
 				&& PortableDriveManager.INSTANCE.exists(tag.getString("tid"), true)) {
-				ItemStack tape = tag.hasKey("inv") ? new ItemStack(tag.getCompoundTag("inv")) : ItemStack.EMPTY;
+				ItemStack tape = tag.contains("inv") ? new ItemStack(tag.getCompound("inv")) : ItemStack.EMPTY;
 				if(!tape.isEmpty()) {
 					String label = Computronics.itemTape.getLabel(tape);
 					if(label.length() > 0) {
@@ -124,12 +124,12 @@ public class ItemPortableTapeDrive extends Item implements IItemWithDocumentatio
 	}
 
 	@Override
-	public boolean onEntityItemUpdate(EntityItem entity) {
+	public boolean onItemEntityUpdate(ItemEntity entity) {
 		PortableTapeDrive drive = PortableDriveManager.INSTANCE.getOrCreate(entity.getItem(), entity.world.isRemote);
 		drive.resetTime();
 		drive.updateCarrier(entity, entity.getItem());
 		drive.update();
-		return super.onEntityItemUpdate(entity);
+		return super.onItemEntityUpdate(entity);
 	}
 
 	@Override

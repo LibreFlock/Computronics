@@ -1,6 +1,6 @@
 package org.libreflock.asielib.util;
 
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -36,12 +36,12 @@ public class ItemUtils {
 		float ry = AsieLibMod.rand.nextFloat() * 0.8F + 0.1F;
 		float rz = AsieLibMod.rand.nextFloat() * 0.8F + 0.1F;
 
-		EntityItem entityItem = new EntityItem(world,
+		ItemEntity entityItem = new ItemEntity(world,
 			pos.getX() + rx, pos.getY() + ry, pos.getZ() + rz,
 			new ItemStack(item.getItem(), item.getCount(), item.getItemDamage()));
 
 		if(item.hasTagCompound()) {
-			entityItem.getItem().setTagCompound(item.getTagCompound().copy());
+			entityItem.getItem().putCompound(item.getTagCompound().copy());
 		}
 
 		float factor = 0.05F;

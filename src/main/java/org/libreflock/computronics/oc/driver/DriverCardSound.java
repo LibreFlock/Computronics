@@ -8,7 +8,7 @@ import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.Message;
 import li.cil.oc.api.network.Visibility;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.vector.Vector3d;
@@ -106,13 +106,13 @@ public class DriverCardSound extends ManagedEnvironmentWithComponentConnector im
 	}
 
 	@Override
-	public void load(NBTTagCompound nbt) {
+	public void load(CompoundNBT nbt) {
 		super.load(nbt);
 		board.load(nbt);
 	}
 
 	@Override
-	public void save(NBTTagCompound nbt) {
+	public void save(CompoundNBT nbt) {
 		super.save(nbt);
 		if(host.world().isRemote) {
 			board.save(nbt);

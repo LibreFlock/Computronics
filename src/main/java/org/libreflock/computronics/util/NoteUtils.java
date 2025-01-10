@@ -2,7 +2,7 @@ package org.libreflock.computronics.util;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
@@ -29,7 +29,7 @@ public class NoteUtils {
 		if(ev != null) {
 			world.playSound(null, (double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D, ev, SoundCategory.RECORDS, volume, f);
 		}
-		ParticleUtils.sendParticlePacket(EnumParticleTypes.NOTE, world, (double) xCoord + 0.5D, (double) yCoord + 1.2D, (double) zCoord + 0.5D, (double) note / 24.0D, 1.0D, 0.0D);
+		ParticleUtils.sendParticlePacket(ParticleTypes.NOTE, world, (double) xCoord + 0.5D, (double) yCoord + 1.2D, (double) zCoord + 0.5D, (double) note / 24.0D, 1.0D, 0.0D);
 	}
 
 	public static NoteTask playNote(World world, BlockPos pos, String instrument, int note, float volume) {

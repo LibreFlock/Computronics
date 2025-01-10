@@ -6,12 +6,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.item.ItemPortableTapeDrive;
 import org.libreflock.computronics.tile.TapeDriveState.State;
@@ -40,17 +40,17 @@ public final class PortableDriveManager {
 	}
 
 	public PortableTapeDrive getOrCreate(ItemStack stack, boolean client) {
-		NBTTagCompound tag = stack.getTagCompound();
+		CompoundNBT tag = stack.getTagCompound();
 		String id;
-		if(tag != null && tag.hasKey("tid")) {
+		if(tag != null && tag.contains("tid")) {
 			id = tag.getString("tid");
 		} else {
 			if(tag == null) {
-				tag = new NBTTagCompound();
-				stack.setTagCompound(tag);
+				tag = new CompoundNBT();
+				stack.putCompound(tag);
 			}
 			id = UUID.randomUUID().toString();
-			tag.setString("tid", id);
+			tag.putString("tid", id);
 		}
 		PortableTapeDrive drive = drives(client).get(id);
 		if(drive == null) {

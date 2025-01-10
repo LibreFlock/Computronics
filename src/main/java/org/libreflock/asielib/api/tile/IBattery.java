@@ -1,6 +1,6 @@
 package org.libreflock.asielib.api.tile;
 
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.energy.IEnergyStorage;
 
@@ -27,9 +27,9 @@ public interface IBattery {
 
 	public boolean canExtract(@Nullable Direction side, String type);
 
-	public void readFromNBT(NBTTagCompound tag);
+	public void readFromNBT(CompoundNBT tag);
 
-	public void writeToNBT(NBTTagCompound tag);
+	public void writeToNBT(CompoundNBT tag);
 
 	public void onTick();
 

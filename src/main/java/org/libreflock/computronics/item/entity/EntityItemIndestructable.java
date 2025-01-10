@@ -1,7 +1,7 @@
 package org.libreflock.computronics.item.entity;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -9,19 +9,19 @@ import net.minecraft.world.World;
 /**
  * @author Vexatos
  */
-public class EntityItemIndestructable extends EntityItem {
+public class ItemEntityIndestructable extends ItemEntity {
 
-	public EntityItemIndestructable(World world, double x, double y, double z) {
+	public ItemEntityIndestructable(World world, double x, double y, double z) {
 		super(world, x, y, z);
 		init();
 	}
 
-	public EntityItemIndestructable(World world, double x, double y, double z, ItemStack stack) {
+	public ItemEntityIndestructable(World world, double x, double y, double z, ItemStack stack) {
 		super(world, x, y, z, stack);
 		init();
 	}
 
-	public EntityItemIndestructable(World world) {
+	public ItemEntityIndestructable(World world) {
 		super(world);
 		init();
 	}

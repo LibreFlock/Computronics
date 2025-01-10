@@ -8,7 +8,7 @@ import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.Message;
 import li.cil.oc.api.network.Node;
 import li.cil.oc.api.network.Visibility;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import org.libreflock.computronics.util.OCUtils;
 import org.libreflock.computronics.util.boom.SelfDestruct;
 
@@ -84,21 +84,21 @@ public class DriverCardBoom extends ManagedEnvironmentWithComponentConnector {
 	}
 
 	@Override
-	public void load(NBTTagCompound nbt) {
+	public void load(CompoundNBT nbt) {
 		super.load(nbt);
 		if(nbt.getBoolean("ticking")) {
-			setTime(nbt.getInteger("time"));
+			setTime(nbt.getInt("time"));
 		}
 	}
 
 	@Override
-	public void save(NBTTagCompound nbt) {
+	public void save(CompoundNBT nbt) {
 		super.save(nbt);
 		if(this.time >= 0) {
-			nbt.setBoolean("ticking", true);
-			nbt.setInteger("time", this.time);
+			nbt.putBoolean("ticking", true);
+			nbt.putInt("time", this.time);
 		} else {
-			nbt.setBoolean("ticking", false);
+			nbt.putBoolean("ticking", false);
 		}
 	}
 

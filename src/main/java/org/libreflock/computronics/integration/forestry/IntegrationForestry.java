@@ -20,7 +20,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary.Type;
@@ -31,7 +31,7 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.integration.forestry.client.entity.ParticleSwarm;
 import org.libreflock.computronics.integration.forestry.entity.EntitySwarm;
@@ -137,12 +137,12 @@ public class IntegrationForestry {
 	}
 
 	private ItemStack undisassemblable(ItemStack stack) {
-		NBTTagCompound tag = stack.getTagCompound();
+		CompoundNBT tag = stack.getTagCompound();
 		if(tag == null) {
-			tag = new NBTTagCompound();
+			tag = new CompoundNBT();
 		}
-		tag.setBoolean("oc:undisassemblable", true);
-		stack.setTagCompound(tag);
+		tag.putBoolean("oc:undisassemblable", true);
+		stack.putCompound(tag);
 		return stack;
 	}
 

@@ -40,7 +40,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void handlePacket(MessageHandlerBase client, MessageHandlerBase server, Packet packet, INetHandler handler) {
 		try {
-			switch(EffectiveSide.get()) {
+			switch(EffectiveDist.get()) {
 				case CLIENT:
 					if(client != null) {
 						client.onMessage(packet, handler, Minecraft.getInstance().player);

@@ -6,7 +6,7 @@ import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.Visibility;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import org.libreflock.computronics.reference.Config;
 import org.libreflock.computronics.util.OCUtils;
 
@@ -46,7 +46,7 @@ public class DriverBoardCapacitor extends RackMountableWithComponentConnector {
 	}
 
 	@Override
-	public NBTTagCompound getData() {
+	public CompoundNBT getData() {
 		return null;
 	}
 }

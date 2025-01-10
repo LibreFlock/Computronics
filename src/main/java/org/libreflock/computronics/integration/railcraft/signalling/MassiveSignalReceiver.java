@@ -3,13 +3,13 @@ package org.libreflock.computronics.integration.railcraft.signalling;
 import mods.railcraft.api.signals.SignalAspect;
 import mods.railcraft.api.signals.SignalController;
 import mods.railcraft.api.signals.SignalReceiver;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.util.collect.SimpleInvertibleDualMap;
 
 import javax.annotation.Nonnull;
@@ -152,35 +152,35 @@ public class MassiveSignalReceiver extends SignalReceiver {
 	}
 
 	@Override
-	protected void saveNBT(NBTTagCompound data) {
+	protected void saveNBT(CompoundNBT data) {
 		super.saveNBT(data);
-		NBTTagList list = new NBTTagList();
+		ListNBT list = new ListNBT();
 
 		for(Map.Entry<BlockPos, SignalAspect> entry : this.aspects.entrySet()) {
-			NBTTagCompound tag = new NBTTagCompound();
+			CompoundNBT tag = new CompoundNBT();
 			BlockPos key = entry.getKey();
-			tag.setIntArray("coords", new int[] { key.getX(), key.getY(), key.getZ() });
-			tag.setByte("aspect", (byte) entry.getValue().ordinal());
+			tag.putIntArray("coords", new int[] { key.getX(), key.getY(), key.getZ() });
+			tag.putByte("aspect", (byte) entry.getValue().ordinal());
 			String s = signalNames.inverse().get(key);
 			if(s != null) {
-				tag.setString("name", s);
+				tag.putString("name", s);
 			}
 			list.appendTag(tag);
 		}
-		data.setTag("aspects", list);
+		data.put("aspects", list);
 	}
 
 	@Override
-	protected void loadNBT(NBTTagCompound data) {
+	protected void loadNBT(CompoundNBT data) {
 		super.loadNBT(data);
-		NBTTagList list = data.getTagList("aspects", Constants.NBT.TAG_COMPOUND);
+		ListNBT list = data.getTagList("aspects", Constants.NBT.TAG_COMPOUND);
 
 		for(byte entry = 0; entry < list.tagCount(); ++entry) {
-			NBTTagCompound tag = list.getCompoundTagAt(entry);
+			CompoundNBT tag = list.getCompoundAt(entry);
 			int[] c = tag.getIntArray("coords");
 			BlockPos coord = new BlockPos(c[0], c[1], c[2]);
 			this.aspects.put(coord, SignalAspect.fromOrdinal(tag.getByte("aspect")));
-			if(tag.hasKey("name")) {
+			if(tag.contains("name")) {
 				signalNames.put(tag.getString("name"), coord);
 			}
 		}

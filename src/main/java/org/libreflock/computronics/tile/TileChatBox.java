@@ -7,7 +7,7 @@ import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
@@ -229,26 +229,26 @@ public class TileChatBox extends TileEntityPeripheralBase implements IChatListen
 	}
 
 	@Override
-	public void readFromNBT(final NBTTagCompound nbt) {
+	public void readFromNBT(final CompoundNBT nbt) {
 		super.readFromNBT(nbt);
-		if(nbt.hasKey("d")) {
+		if(nbt.contains("d")) {
 			this.distance = nbt.getShort("d");
 		}
-		if(nbt.hasKey("hd")) {
+		if(nbt.contains("hd")) {
 			this.hasDistance = nbt.getBoolean("hd");
 		}
-		if(nbt.hasKey("n")) {
+		if(nbt.contains("n")) {
 			this.name = nbt.getString("n");
 		}
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(final NBTTagCompound nbt) {
+	public CompoundNBT writeToNBT(final CompoundNBT nbt) {
 		super.writeToNBT(nbt);
-		nbt.setShort("d", (short) this.distance);
-		nbt.setBoolean("hd", this.hasDistance);
+		nbt.putShort("d", (short) this.distance);
+		nbt.putBoolean("hd", this.hasDistance);
 		if(name.length() > 0) {
-			nbt.setString("n", this.name);
+			nbt.putString("n", this.name);
 		}
 		return nbt;
 	}

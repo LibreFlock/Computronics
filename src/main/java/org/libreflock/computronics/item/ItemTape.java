@@ -8,18 +8,18 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.api.tape.IItemTapeStorage;
 import org.libreflock.computronics.api.tape.ITapeStorage;
-import org.libreflock.computronics.item.entity.EntityItemIndestructable;
+import org.libreflock.computronics.item.entity.ItemEntityIndestructable;
 import org.libreflock.computronics.oc.manual.IItemWithDocumentation;
 import org.libreflock.computronics.reference.Mods;
 import org.libreflock.computronics.tape.TapeStorage;
@@ -89,7 +89,7 @@ public class ItemTape extends Item implements IItemTapeStorage, IMedia, IMediaPr
 
 	@Override
 	public String getLabel(ItemStack stack) {
-		return stack.hasTagCompound() && stack.getTagCompound().hasKey("label")
+		return stack.hasTagCompound() && stack.getTagCompound().contains("label")
 			? stack.getTagCompound().getString("label") : "";
 	}
 
@@ -98,7 +98,7 @@ public class ItemTape extends Item implements IItemTapeStorage, IMedia, IMediaPr
 		if(stack.isEmpty()) {
 			return false;
 		}
-		stack.getTagCompound().setString("label", label);
+		stack.getTagCompound().putString("label", label);
 		return true;
 	}
 
@@ -161,9 +161,9 @@ public class ItemTape extends Item implements IItemTapeStorage, IMedia, IMediaPr
 	public ITapeStorage getStorage(ItemStack stack) {
 		int size = getSize(stack);
 
-		if(stack.getTagCompound() != null && stack.getTagCompound().hasKey("storage")) {
+		if(stack.getTagCompound() != null && stack.getTagCompound().contains("storage")) {
 			// Exists, read NBT data if everything is alright
-			NBTTagCompound nbt = stack.getTagCompound();
+			CompoundNBT nbt = stack.getTagCompound();
 			String storageName = nbt.getString("storage");
 			if(Computronics.storage.exists(storageName)) {
 				return Computronics.storage.get(storageName, size, 0);
@@ -173,9 +173,9 @@ public class ItemTape extends Item implements IItemTapeStorage, IMedia, IMediaPr
 		// Doesn't exist, create new storage and write NBT data
 		TapeStorage storage = Computronics.storage.newStorage(size);
 		if(stack.getTagCompound() == null) {
-			stack.setTagCompound(new NBTTagCompound());
+			stack.putCompound(new CompoundNBT());
 		}
-		stack.getTagCompound().setString("storage", storage.getUniqueId());
+		stack.getTagCompound().putString("storage", storage.getUniqueId());
 		return storage;
 	}
 
@@ -195,7 +195,7 @@ public class ItemTape extends Item implements IItemTapeStorage, IMedia, IMediaPr
 	@Override
 	public Entity createEntity(World world, Entity location, ItemStack itemstack) {
 		if(itemstack.isEmpty() && itemstack.getItemDamage() == 9) {
-			EntityItemIndestructable newTapeEntity = new EntityItemIndestructable(
+			ItemEntityIndestructable newTapeEntity = new ItemEntityIndestructable(
 				world, location.posX, location.posY, location.posZ, itemstack);
 			newTapeEntity.setPickupDelay(40);
 			newTapeEntity.motionX = location.motionX;

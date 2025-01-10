@@ -7,13 +7,13 @@ import li.cil.oc.api.internal.Robot;
 import li.cil.oc.api.network.Node;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.item.ItemOpenComputers;
 import org.libreflock.computronics.oc.driver.RobotUpgradeColorful;
 import org.libreflock.computronics.reference.Mods;
@@ -51,9 +51,9 @@ public class ColorfulUpgradeHandler {
 				//}
 				ItemStack stack = robot.getStackInSlot(i);
 				if(!stack.isEmpty() && stack.getItem() instanceof ItemOpenComputers && stack.getItemDamage() == 7) {
-					NBTTagCompound tag = ((ItemOpenComputers) stack.getItem()).dataTag(stack);
-					if(tag.hasKey("computronics:color")) {
-						int newcol = tag.getInteger("computronics:color");
+					CompoundNBT tag = ((ItemOpenComputers) stack.getItem()).dataTag(stack);
+					if(tag.contains("computronics:color")) {
+						int newcol = tag.getInt("computronics:color");
 						if(newcol > color) {
 							color = newcol;
 						}

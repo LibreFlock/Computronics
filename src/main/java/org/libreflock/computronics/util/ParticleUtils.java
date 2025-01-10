@@ -1,6 +1,6 @@
 package org.libreflock.computronics.util;
 
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import org.libreflock.computronics.Computronics;
@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class ParticleUtils {
 
-	public static void sendParticlePacket(EnumParticleTypes particle, World world, double x, double y, double z, double vx, double vy, double vz) {
+	public static void sendParticlePacket(ParticleTypes particle, World world, double x, double y, double z, double vx, double vy, double vz) {
 		try {
 			Packet pkt = Computronics.packet.create(PacketType.PARTICLE_SPAWN.ordinal())
 				.writeFloat((float) x).writeFloat((float) y).writeFloat((float) z)
@@ -24,12 +24,12 @@ public class ParticleUtils {
 		}
 	}
 
-	private static Map<String, EnumParticleTypes> particleTypeMap = null;
+	private static Map<String, ParticleTypes> particleTypeMap = null;
 
-	private static Map<String, EnumParticleTypes> particleMap() {
+	private static Map<String, ParticleTypes> particleMap() {
 		if(particleTypeMap == null) {
-			particleTypeMap = new HashMap<String, EnumParticleTypes>();
-			for(EnumParticleTypes type : EnumParticleTypes.values()) {
+			particleTypeMap = new HashMap<String, ParticleTypes>();
+			for(ParticleTypes type : ParticleTypes.values()) {
 				particleTypeMap.put(type.getParticleName(), type);
 			}
 		}
@@ -40,7 +40,7 @@ public class ParticleUtils {
 		return particleMap().containsKey(name);
 	}
 
-	public static EnumParticleTypes getParticleType(String name) {
+	public static ParticleTypes getParticleType(String name) {
 		return particleMap().get(name);
 	}
 }

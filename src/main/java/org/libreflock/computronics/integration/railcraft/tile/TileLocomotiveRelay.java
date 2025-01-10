@@ -13,7 +13,7 @@ import mods.railcraft.common.items.ItemTicket;
 import mods.railcraft.common.items.ItemTicketGold;
 import mods.railcraft.common.plugins.forge.NBTPlugin;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.common.Optional;
 import org.libreflock.computronics.integration.railcraft.LocomotiveManager;
@@ -103,7 +103,7 @@ public class TileLocomotiveRelay extends TileEntityPeripheralBase implements ITi
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
+	public void readFromNBT(CompoundNBT nbt) {
 		super.readFromNBT(nbt);
 		this.isBound = nbt.getBoolean("bound");
 		if(isBound) {
@@ -112,33 +112,33 @@ public class TileLocomotiveRelay extends TileEntityPeripheralBase implements ITi
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+	public CompoundNBT writeToNBT(CompoundNBT nbt) {
 		nbt = super.writeToNBT(nbt);
 		if(isBound && this.uuid != null) {
 			NBTPlugin.writeUUID(nbt, "locomotive", this.uuid);
 		}
-		nbt.setBoolean("bound", isBound);
+		nbt.putBoolean("bound", isBound);
 		return nbt;
 	}
 
 	@Override
-	public void removeFromNBTForTransfer(NBTTagCompound data) {
+	public void removeFromNBTForTransfer(CompoundNBT data) {
 		super.removeFromNBTForTransfer(data);
 		data.removeTag("locomotive");
 		data.removeTag("bound");
 	}
 
 	@Override
-	public NBTTagCompound writeToRemoteNBT(NBTTagCompound nbt) {
+	public CompoundNBT writeToRemoteNBT(CompoundNBT nbt) {
 		nbt = super.writeToRemoteNBT(nbt);
-		nbt.setBoolean("bound", isBound);
+		nbt.putBoolean("bound", isBound);
 		return nbt;
 	}
 
 	@Override
-	public void readFromRemoteNBT(NBTTagCompound nbt) {
+	public void readFromRemoteNBT(CompoundNBT nbt) {
 		super.readFromRemoteNBT(nbt);
-		if(nbt.hasKey("bound")) {
+		if(nbt.contains("bound")) {
 			this.isBound = nbt.getBoolean("bound");
 		}
 	}

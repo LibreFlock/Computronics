@@ -9,7 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.Direction;
@@ -20,7 +20,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.integration.railcraft.tile.TileLocomotiveRelay;
 import org.libreflock.computronics.oc.manual.IItemWithPrefix;
@@ -56,15 +56,15 @@ public class ItemRelaySensor extends Item implements IItemWithPrefix {
 		TileEntity tile = world.getTileEntity(pos);
 		if(player.isSneaking() && tile instanceof TileLocomotiveRelay) {
 			if(!stack.hasTagCompound()) {
-				stack.setTagCompound(new NBTTagCompound());
+				stack.putCompound(new CompoundNBT());
 			}
 			if(stack.hasTagCompound()) {
-				NBTTagCompound data = stack.getTagCompound();
-				data.setInteger("relayX", pos.getX());
-				data.setInteger("relayY", pos.getY());
-				data.setInteger("relayZ", pos.getZ());
-				data.setBoolean("bound", true);
-				stack.setTagCompound(data);
+				CompoundNBT data = stack.getTagCompound();
+				data.putInt("relayX", pos.getX());
+				data.putInt("relayY", pos.getY());
+				data.putInt("relayZ", pos.getZ());
+				data.putBoolean("bound", true);
+				stack.putCompound(data);
 				player.swingArm(hand);
 				return EnumActionResult.SUCCESS;
 			}
@@ -76,11 +76,11 @@ public class ItemRelaySensor extends Item implements IItemWithPrefix {
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
 		if(player.isSneaking() && entity != null) {
 			if(stack.hasTagCompound() && stack.getTagCompound().getBoolean("bound") && !player.world.isRemote) {
-				NBTTagCompound data = stack.getTagCompound();
+				CompoundNBT data = stack.getTagCompound();
 				final BlockPos pos = new BlockPos(
-					data.getInteger("relayX"),
-					data.getInteger("relayY"),
-					data.getInteger("relayZ")
+					data.getInt("relayX"),
+					data.getInt("relayY"),
+					data.getInt("relayZ")
 				);
 				if(entity instanceof EntityLocomotiveElectric) {
 					if(!player.world.isBlockLoaded(pos)) {
@@ -122,10 +122,10 @@ public class ItemRelaySensor extends Item implements IItemWithPrefix {
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> text, ITooltipFlag flagIn) {
 		String descKey;
 		if(stack.hasTagCompound() && stack.getTagCompound().getBoolean("bound")) {
-			NBTTagCompound data = stack.getTagCompound();
-			int x = data.getInteger("relayX");
-			int y = data.getInteger("relayY");
-			int z = data.getInteger("relayZ");
+			CompoundNBT data = stack.getTagCompound();
+			int x = data.getInt("relayX");
+			int y = data.getInt("relayY");
+			int z = data.getInt("relayZ");
 			text.add(TextFormatting.AQUA + StringUtil.localizeAndFormat("tooltip.computronics.sensor.bound",
 				String.valueOf(x), String.valueOf(y), String.valueOf(z)));
 

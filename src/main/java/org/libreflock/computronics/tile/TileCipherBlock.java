@@ -12,7 +12,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.LockCode;
@@ -292,28 +292,28 @@ public class TileCipherBlock extends TileEntityPeripheralBase implements IBundle
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound tag) {
+	public void readFromNBT(CompoundNBT tag) {
 		super.readFromNBT(tag);
-		if(tag.hasKey("cb_l") && Config.CIPHER_CAN_LOCK) {
+		if(tag.contains("cb_l") && Config.CIPHER_CAN_LOCK) {
 			this.forceLocked = tag.getBoolean("cb_l");
 		}
 		this.code = LockCode.fromNBT(tag);
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+	public CompoundNBT writeToNBT(CompoundNBT tag) {
 		super.writeToNBT(tag);
 		if(this.code != null) {
 			this.code.toNBT(tag);
 		}
 		if(this.forceLocked) {
-			tag.setBoolean("cb_l", true);
+			tag.putBoolean("cb_l", true);
 		}
 		return tag;
 	}
 
 	@Override
-	public void removeFromNBTForTransfer(NBTTagCompound data) {
+	public void removeFromNBTForTransfer(CompoundNBT data) {
 		super.removeFromNBTForTransfer(data);
 		data.removeTag("cb_l");
 	}

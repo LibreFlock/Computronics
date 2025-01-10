@@ -1,7 +1,7 @@
 package org.libreflock.computronics.util;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -42,13 +42,13 @@ public class RadarUtils {
 		return entities;
 	}
 
-	public static Set<Map<String, Object>> getItems(World world, BlockPos pos, AxisAlignedBB bounds, Class<? extends EntityItem> eClass) {
+	public static Set<Map<String, Object>> getItems(World world, BlockPos pos, AxisAlignedBB bounds, Class<? extends ItemEntity> eClass) {
 		return getItems(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, bounds, eClass);
 	}
 
-	public static Set<Map<String, Object>> getItems(World world, double xCoord, double yCoord, double zCoord, AxisAlignedBB bounds, Class<? extends EntityItem> eClass) {
+	public static Set<Map<String, Object>> getItems(World world, double xCoord, double yCoord, double zCoord, AxisAlignedBB bounds, Class<? extends ItemEntity> eClass) {
 		Set<Map<String, Object>> entities = new HashSet<Map<String, Object>>();
-		for(EntityItem entity : world.getEntitiesWithinAABB(eClass, bounds)) {
+		for(ItemEntity entity : world.getEntitiesWithinAABB(eClass, bounds)) {
 			double dx = entity.posX - xCoord;
 			double dy = entity.posY - yCoord;
 			double dz = entity.posZ - zCoord;

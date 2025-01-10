@@ -8,8 +8,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.event.AnvilUpdateEvent;
@@ -104,13 +104,13 @@ public class EnchantmentTweak {
 			return false;
 		}
 
-		if(!stack.getTagCompound().hasKey("ench", 9)) {
+		if(!stack.getTagCompound().contains("ench", 9)) {
 			return false;
 		}
 
-		NBTTagList list = stack.getTagCompound().getTagList("ench", 10);
+		ListNBT list = stack.getTagCompound().getTagList("ench", 10);
 		for(int i = 0; i < list.tagCount(); i++) {
-			NBTTagCompound tag = list.getCompoundTagAt(i);
+			CompoundNBT tag = list.getCompoundAt(i);
 			if(tag.getShort("id") == Enchantment.getEnchantmentID(bane)) {
 				return true;
 			}
@@ -120,21 +120,21 @@ public class EnchantmentTweak {
 
 	private static boolean addBaneEnchantment(ItemStack stack, int level) {
 		if(stack.getTagCompound() == null) {
-			stack.setTagCompound(new NBTTagCompound());
+			stack.putCompound(new CompoundNBT());
 		}
 
-		if(!stack.getTagCompound().hasKey("ench", 9)) {
-			stack.getTagCompound().setTag("ench", new NBTTagList());
+		if(!stack.getTagCompound().contains("ench", 9)) {
+			stack.getTagCompound().put("ench", new ListNBT());
 		}
 
-		NBTTagList list = stack.getTagCompound().getTagList("ench", 10);
+		ListNBT list = stack.getTagCompound().getTagList("ench", 10);
 		for(int i = 0; i < list.tagCount(); i++) {
-			NBTTagCompound tag = list.getCompoundTagAt(i);
+			CompoundNBT tag = list.getCompoundAt(i);
 			if(tag.getShort("id") == Enchantment.getEnchantmentID(Enchantments.BANE_OF_ARTHROPODS) && tag.getShort("lvl") == (short) 5) {
 				list.removeTag(i);
-				NBTTagCompound data = new NBTTagCompound();
-				data.setShort("id", (short) Enchantment.getEnchantmentID(bane));
-				data.setShort("lvl", (short) ((byte) level));
+				CompoundNBT data = new CompoundNBT();
+				data.putShort("id", (short) Enchantment.getEnchantmentID(bane));
+				data.putShort("lvl", (short) ((byte) level));
 				list.appendTag(data);
 				return true;
 			}

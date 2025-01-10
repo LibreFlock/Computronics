@@ -9,7 +9,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -35,7 +35,7 @@ public class InfoLocomotiveRelay extends ComputronicsInfoProvider {
 			return currenttip;
 		}
 
-		NBTTagCompound nbt = accessor.getNBTData();
+		CompoundNBT nbt = accessor.getNBTData();
 		String boundKey = "tooltip.computronics.waila.relay." + (nbt.getBoolean("bound") ? "bound" : "notbound");
 		currenttip.add(StringUtil.localize(boundKey));
 		return currenttip;
@@ -43,10 +43,10 @@ public class InfoLocomotiveRelay extends ComputronicsInfoProvider {
 
 	@Override
 	@Optional.Method(modid = Mods.Waila)
-	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, BlockPos pos) {
+	public CompoundNBT getNBTData(EntityPlayerMP player, TileEntity te, CompoundNBT tag, World world, BlockPos pos) {
 		if(te instanceof TileLocomotiveRelay) {
 			TileLocomotiveRelay relay = (TileLocomotiveRelay) te;
-			tag.setBoolean("bound", relay.isBound());
+			tag.putBoolean("bound", relay.isBound());
 		}
 		return tag;
 	}

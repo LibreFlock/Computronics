@@ -19,12 +19,12 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.oc.IntegrationOpenComputers;
 import org.libreflock.computronics.oc.driver.DriverBoardBoom;
@@ -317,7 +317,7 @@ public class ItemOpenComputers extends ItemMultipleComputronics implements Drive
 
 	@Override
 	@Optional.Method(modid = Mods.OpenComputers)
-	public NBTTagCompound dataTag(ItemStack stack) {
+	public CompoundNBT dataTag(ItemStack stack) {
 		return OCUtils.dataTag(stack);
 	}
 
@@ -420,9 +420,9 @@ public class ItemOpenComputers extends ItemMultipleComputronics implements Drive
 		switch(stack.getItemDamage()) {
 			case 7: {
 				if(pass == 1) {
-					NBTTagCompound tag = dataTag(stack);
-					if(tag.hasKey("computronics:color")) {
-						int col = tag.getInteger("computronics:color");
+					CompoundNBT tag = dataTag(stack);
+					if(tag.contains("computronics:color")) {
+						int col = tag.getInt("computronics:color");
 						if(col >= 0) {
 							return col;
 						}

@@ -12,13 +12,13 @@ import li.cil.oc.api.network.SidedEnvironment;
 import li.cil.oc.api.network.Visibility;
 import mods.railcraft.common.blocks.machine.wayobjects.boxes.TileBoxBase;
 import net.minecraft.block.Block;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.api.multiperipheral.IMultiPeripheral;
 import org.libreflock.computronics.cc.ISidedPeripheral;
 import org.libreflock.computronics.reference.Mods;
@@ -82,7 +82,7 @@ public abstract class TileDigitalBoxBase extends TileBoxBase
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound data) {
+	public CompoundNBT writeToNBT(CompoundNBT data) {
 		data = super.writeToNBT(data);
 		if(Mods.isLoaded(Mods.OpenComputers)) {
 			writeToNBT_OC(data);
@@ -91,7 +91,7 @@ public abstract class TileDigitalBoxBase extends TileBoxBase
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound data) {
+	public void readFromNBT(CompoundNBT data) {
 		super.readFromNBT(data);
 		if(Mods.isLoaded(Mods.OpenComputers)) {
 			readFromNBT_OC(data);
@@ -201,18 +201,18 @@ public abstract class TileDigitalBoxBase extends TileBoxBase
 	}
 
 	@Optional.Method(modid = Mods.OpenComputers)
-	public void readFromNBT_OC(final NBTTagCompound nbt) {
+	public void readFromNBT_OC(final CompoundNBT nbt) {
 		if(node() != null && node().host() == this) {
-			node().load(nbt.getCompoundTag("oc:node"));
+			node().load(nbt.getCompound("oc:node"));
 		}
 	}
 
 	@Optional.Method(modid = Mods.OpenComputers)
-	public void writeToNBT_OC(final NBTTagCompound nbt) {
+	public void writeToNBT_OC(final CompoundNBT nbt) {
 		if(node() != null && node().host() == this) {
-			final NBTTagCompound nodeNbt = new NBTTagCompound();
+			final CompoundNBT nodeNbt = new CompoundNBT();
 			node().save(nodeNbt);
-			nbt.setTag("oc:node", nodeNbt);
+			nbt.put("oc:node", nodeNbt);
 		}
 	}
 

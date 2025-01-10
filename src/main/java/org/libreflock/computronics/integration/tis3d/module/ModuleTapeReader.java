@@ -8,11 +8,11 @@ import li.cil.tis3d.api.machine.Port;
 import li.cil.tis3d.api.util.RenderUtil;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.commons.lang3.StringUtils;
 import org.libreflock.computronics.tile.TapeDriveState.State;
 import org.libreflock.computronics.tile.TileTapeDrive;
@@ -54,10 +54,10 @@ public class ModuleTapeReader extends ComputronicsModule {
 
 		protected abstract void finishWriting(TileTapeDrive tile, Port writtenPort);
 
-		protected void save(NBTTagCompound nbt) {
+		protected void save(CompoundNBT nbt) {
 		}
 
-		protected void load(NBTTagCompound nbt) {
+		protected void load(CompoundNBT nbt) {
 		}
 	}
 
@@ -297,15 +297,15 @@ public class ModuleTapeReader extends ComputronicsModule {
 			}
 
 			@Override
-			protected void save(NBTTagCompound nbt) {
+			protected void save(CompoundNBT nbt) {
 				super.save(nbt);
-				nbt.setShort("bq", byteQueue);
+				nbt.putShort("bq", byteQueue);
 			}
 
 			@Override
-			protected void load(NBTTagCompound nbt) {
+			protected void load(CompoundNBT nbt) {
 				super.load(nbt);
-				if(nbt.hasKey("bq")) {
+				if(nbt.contains("bq")) {
 					byteQueue = nbt.getShort("bq");
 				}
 			}
@@ -367,15 +367,15 @@ public class ModuleTapeReader extends ComputronicsModule {
 			}
 
 			@Override
-			protected void save(NBTTagCompound nbt) {
+			protected void save(CompoundNBT nbt) {
 				super.save(nbt);
-				nbt.setShort("bq", byteQueue);
+				nbt.putShort("bq", byteQueue);
 			}
 
 			@Override
-			protected void load(NBTTagCompound nbt) {
+			protected void load(CompoundNBT nbt) {
 				super.load(nbt);
-				if(nbt.hasKey("bq")) {
+				if(nbt.contains("bq")) {
 					byteQueue = nbt.getShort("bq");
 				}
 			}
@@ -477,20 +477,20 @@ public class ModuleTapeReader extends ComputronicsModule {
 	// ---
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
+	public void readFromNBT(CompoundNBT nbt) {
 		super.readFromNBT(nbt);
-		if(nbt.hasKey("mode")) {
-			int modeTag = nbt.getInteger("mode");
+		if(nbt.contains("mode")) {
+			int modeTag = nbt.getInt("mode");
 			if(modeTag >= 0 && modeTag < Mode.VALUES.length) {
 				this.mode = Mode.VALUES[modeTag];
 			}
 		}
-		if(nbt.hasKey("cmdUID")) {
+		if(nbt.contains("cmdUID")) {
 			Command cmd = commandMap.get(nbt.getString("cmdUID"));
 			if(cmd != null) {
 				command = cmd;
-				if(nbt.hasKey("cmdTag")) {
-					NBTTagCompound cmdTag = nbt.getCompoundTag("cmdTag");
+				if(nbt.contains("cmdTag")) {
+					CompoundNBT cmdTag = nbt.getCompound("cmdTag");
 					command.load(cmdTag);
 				}
 			}
@@ -498,14 +498,14 @@ public class ModuleTapeReader extends ComputronicsModule {
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
+	public void writeToNBT(CompoundNBT nbt) {
 		super.writeToNBT(nbt);
-		nbt.setInteger("mode", mode.ordinal());
+		nbt.putInt("mode", mode.ordinal());
 		if(command != null) {
-			nbt.setString("cmdUID", command.getUID());
-			NBTTagCompound cmdTag = new NBTTagCompound();
+			nbt.putString("cmdUID", command.getUID());
+			CompoundNBT cmdTag = new CompoundNBT();
 			command.save(cmdTag);
-			nbt.setTag("cmdTag", cmdTag);
+			nbt.put("cmdTag", cmdTag);
 		}
 	}
 

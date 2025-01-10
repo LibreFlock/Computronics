@@ -11,7 +11,7 @@ import mods.railcraft.common.carts.EntityLocomotive;
 import mods.railcraft.common.carts.IRailcraftCartContainer;
 import mods.railcraft.common.carts.RailcraftCarts;
 import net.minecraft.entity.item.EntityMinecart;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.common.Optional;
@@ -76,28 +76,28 @@ public class TileDigitalDetector extends TileEntityPeripheralBase
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound data) {
+	public CompoundNBT writeToNBT(CompoundNBT data) {
 		data = super.writeToNBT(data);
-		data.setByte("direction", (byte) direction.ordinal());
+		data.putByte("direction", (byte) direction.ordinal());
 		return data;
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound data) {
+	public void readFromNBT(CompoundNBT data) {
 		super.readFromNBT(data);
-		direction = data.hasKey("direction") ? Direction.byIndex(data.getByte("direction")) : Direction.UP;
+		direction = data.contains("direction") ? Direction.byIndex(data.getByte("direction")) : Direction.UP;
 	}
 
 	@Override
-	public NBTTagCompound writeToRemoteNBT(NBTTagCompound tag) {
-		tag.setByte("direction", (byte) direction.ordinal());
+	public CompoundNBT writeToRemoteNBT(CompoundNBT tag) {
+		tag.putByte("direction", (byte) direction.ordinal());
 		return tag;
 	}
 
 	@Override
-	public void readFromRemoteNBT(NBTTagCompound tag) {
+	public void readFromRemoteNBT(CompoundNBT tag) {
 		Direction oldDir = this.direction;
-		direction = tag.hasKey("direction") ? Direction.byIndex(tag.getByte("direction")) : Direction.UP;
+		direction = tag.contains("direction") ? Direction.byIndex(tag.getByte("direction")) : Direction.UP;
 		if(oldDir != direction) {
 			notifyBlockUpdate();
 		}

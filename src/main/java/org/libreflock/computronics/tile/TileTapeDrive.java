@@ -13,7 +13,7 @@ import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.Node;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ITickable;
@@ -333,10 +333,10 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 	private void setLabel(String label) {
 		ItemStack stack = this.getStackInSlot(0);
 		if(!stack.isEmpty() && stack.getTagCompound() != null) {
-			if(label.length() == 0 && stack.getTagCompound().hasKey("label")) {
+			if(label.length() == 0 && stack.getTagCompound().contains("label")) {
 				stack.getTagCompound().removeTag("label");
 			} else if(label.length() > 0) {
-				stack.getTagCompound().setString("label", label);
+				stack.getTagCompound().putString("label", label);
 			}
 			storageName = label;
 		}
@@ -402,8 +402,8 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 
 			// Get possible label.
 			if(stack.getTagCompound() != null) {
-				NBTTagCompound tag = stack.getTagCompound();
-				storageName = tag.hasKey("label") ? tag.getString("label") : "";
+				CompoundNBT tag = stack.getTagCompound();
+				storageName = tag.contains("label") ? tag.getString("label") : "";
 			} else {
 				storageName = "";
 			}
@@ -460,15 +460,15 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound tag) {
+	public void readFromNBT(CompoundNBT tag) {
 		super.readFromNBT(tag);
-		if(tag.hasKey("state")) {
+		if(tag.contains("state")) {
 			this.state.setState(State.VALUES[tag.getByte("state")]);
 		}
-		if(tag.hasKey("sp")) {
+		if(tag.contains("sp")) {
 			this.state.packetSize = tag.getShort("sp");
 		}
-		if(tag.hasKey("vo")) {
+		if(tag.contains("vo")) {
 			this.state.soundVolume = tag.getByte("vo");
 		} else {
 			this.state.soundVolume = 127;
@@ -477,45 +477,45 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+	public CompoundNBT writeToNBT(CompoundNBT tag) {
 		super.writeToNBT(tag);
-		tag.setShort("sp", (short) this.state.packetSize);
-		tag.setByte("state", (byte) this.state.getState().ordinal());
+		tag.putShort("sp", (short) this.state.packetSize);
+		tag.putByte("state", (byte) this.state.getState().ordinal());
 		if(this.state.soundVolume != 127) {
-			tag.setByte("vo", (byte) this.state.soundVolume);
+			tag.putByte("vo", (byte) this.state.soundVolume);
 		}
 		return tag;
 	}
 
 	@Override
 	@Optional.Method(modid = Mods.OpenComputers)
-	public void readFromNBT_OC(NBTTagCompound tag) {
+	public void readFromNBT_OC(CompoundNBT tag) {
 		super.readFromNBT_OC(tag);
 	}
 
 	@Override
 	@Optional.Method(modid = Mods.OpenComputers)
-	public void writeToNBT_OC(NBTTagCompound tag) {
+	public void writeToNBT_OC(CompoundNBT tag) {
 		super.writeToNBT_OC(tag);
 	}
 
 	@Override
-	public NBTTagCompound writeToRemoteNBT(NBTTagCompound tag) {
+	public CompoundNBT writeToRemoteNBT(CompoundNBT tag) {
 		super.writeToRemoteNBT(tag);
-		tag.setByte("state", (byte) this.state.getState().ordinal());
+		tag.putByte("state", (byte) this.state.getState().ordinal());
 		return tag;
 	}
 
 	@Override
-	public void removeFromNBTForTransfer(NBTTagCompound data) {
+	public void removeFromNBTForTransfer(CompoundNBT data) {
 		super.removeFromNBTForTransfer(data);
 		data.removeTag("state");
 	}
 
 	@Override
-	public void readFromRemoteNBT(NBTTagCompound tag) {
+	public void readFromRemoteNBT(CompoundNBT tag) {
 		super.readFromRemoteNBT(tag);
-		if(tag.hasKey("state")) {
+		if(tag.contains("state")) {
 			this.state.setState(State.VALUES[tag.getByte("state")]);
 		}
 	}

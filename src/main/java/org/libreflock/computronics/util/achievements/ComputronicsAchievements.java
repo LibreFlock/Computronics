@@ -138,17 +138,17 @@ public class ComputronicsAchievements {
 			return;
 		}
 		EntityPlayer player = event.player;
-		EntityItem item = event.entityItem;
-		ItemStack stack = item.getEntityItem();
+		ItemEntity item = event.entityItem;
+		ItemStack stack = item.getItemEntity();
 
 		if(!stack.isEmpty() && Computronics.itemTape != null
 			&& stack.getItem() == Computronics.itemTape && stack.getItemDamage() == 9) {
 			if(!stack.hasTagCompound()) {
-				stack.setTagCompound(new NBTTagCompound());
+				stack.putCompound(new CompoundNBT());
 			}
-			NBTTagCompound data = stack.getTagCompound();
-			data.setString("computronics:dropplayer", player.getCommandSenderName());
-			stack.setTagCompound(data);
+			CompoundNBT data = stack.getTagCompound();
+			data.putString("computronics:dropplayer", player.getCommandSenderName());
+			stack.putCompound(data);
 		}
 	}* /
 
@@ -158,13 +158,13 @@ public class ComputronicsAchievements {
 			|| (event.entityItem.world != null && event.entityItem.world.isRemote)) {
 			return;
 		}
-		EntityItem item = event.entityItem;
-		ItemStack stack = item.getEntityItem();
+		ItemEntity item = event.entityItem;
+		ItemStack stack = item.getItemEntity();
 		if(!stack.isEmpty() && Computronics.itemTape != null
 			&& stack.getItem() == Computronics.itemTape && stack.getItemDamage() == 9) {
 			if(stack.hasTagCompound()) {
-				NBTTagCompound data = stack.getTagCompound();
-				if(data.hasKey("computronics:dropplayer")) {
+				CompoundNBT data = stack.getTagCompound();
+				if(data.contains("computronics:dropplayer")) {
 					String playername = data.getString("computronics:dropplayer");
 					if(playername != null && !playername.isEmpty()) {
 						for(EntityPlayer o : FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerList()) {
@@ -173,9 +173,9 @@ public class ComputronicsAchievements {
 								((EntityPlayer) o).addChatMessage(new ChatComponentText("Test"));
 								data.removeTag("computronics:dropplayer");
 								if(data.hasNoTags()) {
-									stack.setTagCompound(null);
+									stack.putCompound(null);
 								} else {
-									stack.setTagCompound(data);
+									stack.putCompound(data);
 								}
 							}
 						}
@@ -221,13 +221,13 @@ public class ComputronicsAchievements {
 				if(player.isSneaking() && stack.getItem() == Computronics.railcraft.relaySensor
 					&& stack.hasTagCompound()) {
 
-					NBTTagCompound data = stack.getTagCompound();
-					if(data != null && data.hasKey("bound") && data.getBoolean("bound")) {
+					CompoundNBT data = stack.getTagCompound();
+					if(data != null && data.contains("bound") && data.getBoolean("bound")) {
 
 						final BlockPos pos = new BlockPos(
-							data.getInteger("relayX"),
-							data.getInteger("relayY"),
-							data.getInteger("relayZ")
+							data.getInt("relayX"),
+							data.getInt("relayY"),
+							data.getInt("relayZ")
 						);
 						if(!player.world.isBlockLoaded(pos)) {
 							return;

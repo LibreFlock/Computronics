@@ -9,13 +9,13 @@ import li.cil.oc.api.network.Environment;
 import li.cil.oc.api.network.Message;
 import li.cil.oc.api.network.Node;
 import li.cil.oc.api.network.Visibility;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.api.multiperipheral.IMultiPeripheral;
 import org.libreflock.computronics.audio.MachineSound;
@@ -204,18 +204,18 @@ public abstract class TileEntityPeripheralBase extends TileMachine implements En
 	protected abstract OCUtils.Device deviceInfo();
 
 	@Optional.Method(modid = Mods.OpenComputers)
-	public void readFromNBT_OC(final NBTTagCompound nbt) {
+	public void readFromNBT_OC(final CompoundNBT nbt) {
 		if(node() != null && node().host() == this) {
-			node().load(nbt.getCompoundTag("oc:node"));
+			node().load(nbt.getCompound("oc:node"));
 		}
 	}
 
 	@Optional.Method(modid = Mods.OpenComputers)
-	public void writeToNBT_OC(final NBTTagCompound nbt) {
+	public void writeToNBT_OC(final CompoundNBT nbt) {
 		if(node() != null && node().host() == this) {
-			final NBTTagCompound nodeNbt = new NBTTagCompound();
+			final CompoundNBT nodeNbt = new CompoundNBT();
 			node().save(nodeNbt);
-			nbt.setTag("oc:node", nodeNbt);
+			nbt.put("oc:node", nodeNbt);
 		}
 	}
 
@@ -290,11 +290,11 @@ public abstract class TileEntityPeripheralBase extends TileMachine implements En
 	}
 
 	@Override
-	public void readFromRemoteNBT(NBTTagCompound nbt) {
+	public void readFromRemoteNBT(CompoundNBT nbt) {
 		super.readFromRemoteNBT(nbt);
 		int oldColor = this.overlayColor;
-		if(nbt.hasKey("computronics:color")) {
-			overlayColor = nbt.getInteger("computronics:color");
+		if(nbt.contains("computronics:color")) {
+			overlayColor = nbt.getInt("computronics:color");
 		}
 		if(this.overlayColor < 0) {
 			this.overlayColor = getDefaultColor();
@@ -305,19 +305,19 @@ public abstract class TileEntityPeripheralBase extends TileMachine implements En
 	}
 
 	@Override
-	public NBTTagCompound writeToRemoteNBT(NBTTagCompound nbt) {
+	public CompoundNBT writeToRemoteNBT(CompoundNBT nbt) {
 		nbt = super.writeToRemoteNBT(nbt);
 		if(overlayColor != getDefaultColor()) {
-			nbt.setInteger("computronics:color", overlayColor);
+			nbt.putInt("computronics:color", overlayColor);
 		}
 		return nbt;
 	}
 
 	@Override
-	public void readFromNBT(final NBTTagCompound nbt) {
+	public void readFromNBT(final CompoundNBT nbt) {
 		super.readFromNBT(nbt);
-		if(nbt.hasKey("computronics:color")) {
-			overlayColor = nbt.getInteger("computronics:color");
+		if(nbt.contains("computronics:color")) {
+			overlayColor = nbt.getInt("computronics:color");
 		}
 		if(this.overlayColor < 0) {
 			this.overlayColor = getDefaultColor();
@@ -328,10 +328,10 @@ public abstract class TileEntityPeripheralBase extends TileMachine implements En
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+	public CompoundNBT writeToNBT(CompoundNBT nbt) {
 		nbt = super.writeToNBT(nbt);
 		if(overlayColor != getDefaultColor()) {
-			nbt.setInteger("computronics:color", overlayColor);
+			nbt.putInt("computronics:color", overlayColor);
 		}
 		if(Mods.isLoaded(Mods.OpenComputers)) {
 			writeToNBT_OC(nbt);
@@ -340,7 +340,7 @@ public abstract class TileEntityPeripheralBase extends TileMachine implements En
 	}
 
 	@Override
-	public void removeFromNBTForTransfer(NBTTagCompound data) {
+	public void removeFromNBTForTransfer(CompoundNBT data) {
 		super.removeFromNBTForTransfer(data);
 		data.removeTag("oc:node");
 	}

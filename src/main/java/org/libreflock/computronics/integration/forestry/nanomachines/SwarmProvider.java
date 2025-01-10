@@ -13,7 +13,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.play.server.SPacketAnimation;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumHand;
@@ -40,14 +40,14 @@ public class SwarmProvider extends AbstractProvider {
 	}
 
 	@Override
-	protected Behavior readBehaviorFromNBT(EntityPlayer player, NBTTagCompound nbt) {
+	protected Behavior readBehaviorFromNBT(EntityPlayer player, CompoundNBT nbt) {
 		//SwarmBehavior behavior = new SwarmBehavior(player);
 		//behavior.readFromNBT(nbt);
 		return new SwarmBehavior(player);
 	}
 
 	@Override
-	protected void writeBehaviorToNBT(Behavior behavior, NBTTagCompound nbt) {
+	protected void writeBehaviorToNBT(Behavior behavior, CompoundNBT nbt) {
 		/*if(behavior instanceof SwarmBehavior) {
 			((SwarmBehavior) behavior).writeToNBT(nbt);
 		}*/

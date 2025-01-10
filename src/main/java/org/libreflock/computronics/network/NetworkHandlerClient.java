@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetHandler;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.particles.ParticleTypes;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.api.audio.AudioPacketClientHandler;
 import org.libreflock.computronics.api.audio.AudioPacketRegistry;
@@ -64,7 +64,7 @@ public class NetworkHandlerClient extends MessageHandlerBase {
 				double vy = packet.readFloat();
 				double vz = packet.readFloat();
 				int particle = packet.readInt();
-				Minecraft.getMinecraft().player.getEntityWorld().spawnParticle(EnumParticleTypes.getParticleFromId(particle), x, y, z, vx, vy, vz);
+				Minecraft.getMinecraft().player.getEntityWorld().spawnParticle(ParticleTypes.getParticleFromId(particle), x, y, z, vx, vy, vz);
 			}
 			break;
 			case COMPUTER_BEEP: {

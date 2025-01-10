@@ -2,7 +2,7 @@ package org.libreflock.computronics.oc.driver;
 
 import li.cil.oc.api.driver.DriverItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import org.libreflock.computronics.oc.IntegrationOpenComputers;
 import org.libreflock.computronics.util.OCUtils;
 
@@ -23,7 +23,7 @@ public abstract class DriverOCSpecialPart implements DriverItem {
 	}
 
 	@Override
-	public NBTTagCompound dataTag(ItemStack stack) {
+	public CompoundNBT dataTag(ItemStack stack) {
 		return OCUtils.dataTag(stack);
 	}
 }

@@ -147,25 +147,25 @@ public class RSAValue implements Value, ILuaObject {
 
 	@Override
 	@Optional.Method(modid = Mods.OpenComputers)
-	public void load(NBTTagCompound nbt) {
+	public void load(CompoundNBT nbt) {
 		if(nbt == null) {
-			nbt = new NBTTagCompound();
+			nbt = new CompoundNBT();
 		}
-		NBTTagCompound base = nbt.getCompoundTag("computronics:rsa");
+		CompoundNBT base = nbt.getCompound("computronics:rsa");
 		if(publicKey == null && privateKey == null) {
-			if(base.hasKey("public") && base.hasKey("private")) {
-				NBTTagCompound pbKey = base.getCompoundTag("public");
-				NBTTagCompound pvKey = base.getCompoundTag("private");
+			if(base.contains("public") && base.contains("private")) {
+				CompoundNBT pbKey = base.getCompound("public");
+				CompoundNBT pvKey = base.getCompound("private");
 				publicKey = new LinkedHashMap<Integer, String>();
 				privateKey = new LinkedHashMap<Integer, String>();
 				publicKey.put(1, pbKey.getString("1"));
 				publicKey.put(2, pbKey.getString("2"));
 				privateKey.put(1, pvKey.getString("1"));
 				privateKey.put(2, pvKey.getString("2"));
-			} else if(base.hasKey("bitLength")) {
-				this.startCalculation(base.getInteger("bitLength"));
-			} else if(base.hasKey("p") && base.hasKey("q")) {
-				this.startCalculation(base.getInteger("p"), base.getInteger("q"));
+			} else if(base.contains("bitLength")) {
+				this.startCalculation(base.getInt("bitLength"));
+			} else if(base.contains("p") && base.contains("q")) {
+				this.startCalculation(base.getInt("p"), base.getInt("q"));
 			} else {
 				this.startCalculation();
 			}
@@ -174,27 +174,27 @@ public class RSAValue implements Value, ILuaObject {
 
 	@Override
 	@Optional.Method(modid = Mods.OpenComputers)
-	public void save(NBTTagCompound nbt) {
+	public void save(CompoundNBT nbt) {
 		if(nbt == null) {
-			nbt = new NBTTagCompound();
+			nbt = new CompoundNBT();
 		}
-		NBTTagCompound base = nbt.getCompoundTag("computronics:rsa");
+		CompoundNBT base = nbt.getCompound("computronics:rsa");
 		if(publicKey != null && privateKey != null) {
-			NBTTagCompound pbKey = new NBTTagCompound();
-			NBTTagCompound pvKey = new NBTTagCompound();
-			pbKey.setString("1", publicKey.get(1));
-			pbKey.setString("2", publicKey.get(2));
-			pvKey.setString("1", privateKey.get(1));
-			pvKey.setString("2", privateKey.get(2));
-			base.setTag("public", pbKey);
-			base.setTag("private", pvKey);
+			CompoundNBT pbKey = new CompoundNBT();
+			CompoundNBT pvKey = new CompoundNBT();
+			pbKey.putString("1", publicKey.get(1));
+			pbKey.putString("2", publicKey.get(2));
+			pvKey.putString("1", privateKey.get(1));
+			pvKey.putString("2", privateKey.get(2));
+			base.put("public", pbKey);
+			base.put("private", pvKey);
 		} else if(bitLength > 0) {
-			base.setInteger("bitLength", bitLength);
+			base.putInt("bitLength", bitLength);
 		} else if(p > 0 && q > 0) {
-			base.setInteger("p", p);
-			base.setInteger("q", q);
+			base.putInt("p", p);
+			base.putInt("q", q);
 		}
-		nbt.setTag("computronics:rsa", base);
+		nbt.put("computronics:rsa", base);
 	}
 
 	@Override

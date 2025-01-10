@@ -11,7 +11,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -80,7 +80,7 @@ public class InfoComputronics implements IWailaDataProvider, IProbeInfoProvider 
 
 	@Override
 	@Optional.Method(modid = Mods.Waila)
-	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, BlockPos pos) {
+	public CompoundNBT getNBTData(EntityPlayerMP player, TileEntity te, CompoundNBT tag, World world, BlockPos pos) {
 		for(InfoProviders p : InfoProviders.VALUES) {
 			if(p.isInstance(te.getBlockType())) {
 				tag = p.getProvider().getNBTData(player, te, tag, world, pos);

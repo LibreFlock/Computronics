@@ -7,14 +7,14 @@ import li.cil.tis3d.api.machine.Pipe;
 import li.cil.tis3d.api.machine.Port;
 import li.cil.tis3d.api.util.RenderUtil;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.lwjgl.opengl.GL11;
 import org.libreflock.computronics.integration.tis3d.IntegrationTIS3D;
 import org.libreflock.computronics.reference.Mods;
@@ -70,9 +70,9 @@ public class ModuleBoom extends ComputronicsModule {
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
+	public void readFromNBT(CompoundNBT nbt) {
 		super.readFromNBT(nbt);
-		if(nbt.hasKey("steps")) {
+		if(nbt.contains("steps")) {
 			this.steps = nbt.getShort("steps");
 		} else {
 			this.steps = -1;
@@ -80,10 +80,10 @@ public class ModuleBoom extends ComputronicsModule {
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
+	public void writeToNBT(CompoundNBT nbt) {
 		super.writeToNBT(nbt);
 		if(this.steps >= 0) {
-			nbt.setShort("steps", this.steps);
+			nbt.putShort("steps", this.steps);
 		}
 	}
 

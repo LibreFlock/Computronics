@@ -11,10 +11,10 @@ import li.cil.oc.api.internal.Drone;
 import li.cil.oc.api.network.Connector;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Direction;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.world.World;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.util.ParticleUtils;
@@ -102,13 +102,13 @@ public class DroneStationPluggable extends PipePluggable implements IEnergyRecei
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound tag) {
-		//state = DroneStationState.VALUES[tag.getInteger("drone:state") % DroneStationState.VALUES.length];
+	public void readFromNBT(CompoundNBT tag) {
+		//state = DroneStationState.VALUES[tag.getInt("drone:state") % DroneStationState.VALUES.length];
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound tag) {
-		//tag.setInteger("drone:state", state.ordinal());
+	public void writeToNBT(CompoundNBT tag) {
+		//tag.putInt("drone:state", state.ordinal());
 	}
 
 	@Override
@@ -145,7 +145,7 @@ public class DroneStationPluggable extends PipePluggable implements IEnergyRecei
 						double dx = 0.45 * Math.sin(theta) * Math.cos(phi);
 						double dy = 0.45 * Math.sin(theta) * Math.sin(phi);
 						double dz = 0.45 * Math.cos(theta);
-						ParticleUtils.sendParticlePacket(EnumParticleTypes.VILLAGER_HAPPY, drone.world(), drone.xPosition() + dx, drone.yPosition() + dz, drone.zPosition() + dy, 0, 0, 0);
+						ParticleUtils.sendParticlePacket(ParticleTypes.VILLAGER_HAPPY, drone.world(), drone.xPosition() + dx, drone.yPosition() + dz, drone.zPosition() + dy, 0, 0, 0);
 					}
 					return (int) Math.ceil(EnergyConverter.convertEnergy(newPower - remainingPower, "OC", "RF"));
 				}

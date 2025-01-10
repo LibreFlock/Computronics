@@ -7,7 +7,7 @@ import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.Visibility;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import org.libreflock.computronics.reference.Config;
 import org.libreflock.computronics.util.OCUtils;
 
@@ -90,18 +90,18 @@ public class RobotUpgradeColorful extends ManagedEnvironmentWithComponentConnect
 	}
 
 	@Override
-	public void load(NBTTagCompound nbt) {
+	public void load(CompoundNBT nbt) {
 		super.load(nbt);
-		if(nbt.hasKey("computronics:color")) {
-			setColor(nbt.getInteger("computronics:color"));
+		if(nbt.contains("computronics:color")) {
+			setColor(nbt.getInt("computronics:color"));
 		}
 		this.needsUpdate = true;
 	}
 
 	@Override
-	public void save(NBTTagCompound nbt) {
+	public void save(CompoundNBT nbt) {
 		super.save(nbt);
-		nbt.setInteger("computronics:color", this.color);
+		nbt.putInt("computronics:color", this.color);
 	}
 
 	@Override

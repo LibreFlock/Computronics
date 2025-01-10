@@ -20,7 +20,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -38,7 +38,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDesert;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.integration.forestry.nanomachines.SwarmProvider;
 import org.libreflock.computronics.util.StringUtil;
@@ -485,18 +485,18 @@ public class EntitySwarm extends EntityFlyingCreature implements IBeeHousing {
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound tag) {
+	public void readEntityFromNBT(CompoundNBT tag) {
 		super.readEntityFromNBT(tag);
-		if(tag.hasKey("swarm:amplifier")) {
-			setAmplifier(tag.getInteger("swarm:amplifier"));
+		if(tag.contains("swarm:amplifier")) {
+			setAmplifier(tag.getInt("swarm:amplifier"));
 		}
 		beeLogic.readFromNBT(tag);
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound tag) {
+	public void writeEntityToNBT(CompoundNBT tag) {
 		super.writeEntityToNBT(tag);
-		tag.setInteger("swarm:amplifier", getAmplifier());
+		tag.putInt("swarm:amplifier", getAmplifier());
 		beeLogic.writeToNBT(tag);
 	}
 

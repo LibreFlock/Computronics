@@ -10,12 +10,12 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.reference.Config;
 import org.libreflock.computronics.util.OCUtils;
 import org.libreflock.asielib.integration.Integration;
@@ -204,13 +204,13 @@ public class DriverBoardLight extends RackMountableWithComponentConnector {
 	}
 
 	@Override
-	public NBTTagCompound getData() {
-		NBTTagCompound tag = new NBTTagCompound();
-		tag.setInteger("m", mode.index);
+	public CompoundNBT getData() {
+		CompoundNBT tag = new CompoundNBT();
+		tag.putInt("m", mode.index);
 		for(Light light : lights) {
-			tag.setBoolean("r_" + light.index, light.isActive);
+			tag.putBoolean("r_" + light.index, light.isActive);
 			if(light.isActive) {
-				tag.setInteger("c_" + light.index, light.color);
+				tag.putInt("c_" + light.index, light.color);
 			}
 		}
 		return tag;
@@ -311,29 +311,29 @@ public class DriverBoardLight extends RackMountableWithComponentConnector {
 	}
 
 	@Override
-	public void load(NBTTagCompound tag) {
+	public void load(CompoundNBT tag) {
 		super.load(tag);
-		if(tag.hasKey("m")) {
-			setMode(Mode.fromIndex(tag.getInteger("m")));
+		if(tag.contains("m")) {
+			setMode(Mode.fromIndex(tag.getInt("m")));
 			for(Light light : lights) {
-				if(tag.hasKey("r_" + light.index)) {
+				if(tag.contains("r_" + light.index)) {
 					setActive(light, tag.getBoolean("r_" + light.index));
 				}
-				if(tag.hasKey("c_" + light.index)) {
-					setColor(light, tag.getInteger("c_" + light.index));
+				if(tag.contains("c_" + light.index)) {
+					setColor(light, tag.getInt("c_" + light.index));
 				}
 			}
 		}
 	}
 
 	@Override
-	public void save(NBTTagCompound tag) {
+	public void save(CompoundNBT tag) {
 		super.save(tag);
-		tag.setInteger("m", mode.index);
+		tag.putInt("m", mode.index);
 		for(Light light : lights) {
-			tag.setBoolean("r_" + light.index, light.isActive);
+			tag.putBoolean("r_" + light.index, light.isActive);
 			if(light.isActive) {
-				tag.setInteger("c_" + light.index, light.color);
+				tag.putInt("c_" + light.index, light.color);
 			}
 		}
 	}

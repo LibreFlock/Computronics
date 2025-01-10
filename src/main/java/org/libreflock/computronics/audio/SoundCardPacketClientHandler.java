@@ -1,7 +1,7 @@
 package org.libreflock.computronics.audio;
 
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.api.audio.AudioPacketClientHandler;
 import org.libreflock.computronics.reference.Config;

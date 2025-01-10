@@ -9,7 +9,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -37,8 +37,8 @@ public class InfoTapeDrive extends ComputronicsInfoProvider {
 			return currenttip;
 		}
 
-		NBTTagCompound data = accessor.getNBTData();
-		ItemStack is = new ItemStack(data.getTagList("Inventory", 10).getCompoundTagAt(0));
+		CompoundNBT data = accessor.getNBTData();
+		ItemStack is = new ItemStack(data.getTagList("Inventory", 10).getCompoundAt(0));
 		if(!is.isEmpty() && is.getItem() instanceof IItemTapeStorage) {
 			String label = Computronics.itemTape.getLabel(is);
 			if(label.length() > 0 && ConfigValues.TapeName.getValue(config)) {
@@ -60,14 +60,14 @@ public class InfoTapeDrive extends ComputronicsInfoProvider {
 
 	@Override
 	@Optional.Method(modid = Mods.Waila)
-	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, BlockPos pos) {
+	public CompoundNBT getNBTData(EntityPlayerMP player, TileEntity te, CompoundNBT tag, World world, BlockPos pos) {
 		if(te instanceof TileTapeDrive) {
 			TileTapeDrive drive = (TileTapeDrive) te;
-			NBTTagCompound data = new NBTTagCompound();
+			CompoundNBT data = new CompoundNBT();
 			//I have to do this, for the inventory
 			drive.writeToNBT(data);
-			tag.setByte("state", data.getByte("state"));
-			tag.setTag("Inventory", data.getTagList("Inventory", 10));
+			tag.putByte("state", data.getByte("state"));
+			tag.put("Inventory", data.getTagList("Inventory", 10));
 		}
 		return tag;
 	}

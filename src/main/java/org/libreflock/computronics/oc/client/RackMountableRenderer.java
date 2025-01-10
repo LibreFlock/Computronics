@@ -60,13 +60,13 @@ public class RackMountableRenderer {
 				enableLight();
 				GlStateManager.enableBlend();
 				GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-				Mode mode = Mode.fromIndex(e.data.getInteger("m"));
+				Mode mode = Mode.fromIndex(e.data.getInt("m"));
 				if(mode == null) {
 					mode = Mode.Default;
 				}
 				for(int index = 1; index <= mode.lightcount; index++) {
 					if(e.data.getBoolean("r_" + index)) {
-						int color = e.data.getInteger("c_" + index);
+						int color = e.data.getInt("c_" + index);
 						if(color < 0) {
 							continue;
 						}
@@ -165,7 +165,7 @@ public class RackMountableRenderer {
 				if(e.data == null) {
 					return;
 				}
-				Mode mode = Mode.fromIndex(e.data.getInteger("m"));
+				Mode mode = Mode.fromIndex(e.data.getInt("m"));
 				if(mode == null) {
 					mode = Mode.Default;
 				}

@@ -7,10 +7,10 @@ import li.cil.tis3d.api.machine.Port;
 import li.cil.tis3d.api.util.RenderUtil;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 /**
  * @author Vexatos
@@ -46,17 +46,17 @@ public class ModuleColorful extends ComputronicsModule {
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
+	public void readFromNBT(CompoundNBT nbt) {
 		super.readFromNBT(nbt);
-		if(nbt.hasKey("c")) {
+		if(nbt.contains("c")) {
 			this.color = nbt.getShort("c");
 		}
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
+	public void writeToNBT(CompoundNBT nbt) {
 		super.writeToNBT(nbt);
-		nbt.setShort("c", this.color);
+		nbt.putShort("c", this.color);
 	}
 
 	private static final ResourceLocation LAMP_ICON = new ResourceLocation("computronics:textures/blocks/lamp_layer_0.png");

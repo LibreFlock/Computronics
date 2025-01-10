@@ -19,7 +19,7 @@ import li.cil.oc.api.prefab.AbstractManagedEnvironment;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.Direction;
@@ -228,30 +228,30 @@ public class DriverDockingUpgrade extends ManagedEnvironment implements DeviceIn
 	}
 
 	@Override
-	public void save(NBTTagCompound nbt) {
+	public void save(CompoundNBT nbt) {
 		super.save(nbt);
-		nbt.setBoolean("drone:docking", isDocking);
-		nbt.setBoolean("drone:docked", isDocked);
+		nbt.putBoolean("drone:docking", isDocking);
+		nbt.putBoolean("drone:docked", isDocked);
 		if((isDocked || isDocking) && pipe != null) {
-			nbt.setInteger("drone:dockX", pipe.x());
-			nbt.setInteger("drone:dockY", pipe.y());
-			nbt.setInteger("drone:dockZ", pipe.z());
-			nbt.setDouble("drone:targetX", targetVec.xCoord);
-			nbt.setDouble("drone:targetY", targetVec.yCoord);
-			nbt.setDouble("drone:targetZ", targetVec.zCoord);
+			nbt.putInt("drone:dockX", pipe.x());
+			nbt.putInt("drone:dockY", pipe.y());
+			nbt.putInt("drone:dockZ", pipe.z());
+			nbt.putDouble("drone:targetX", targetVec.xCoord);
+			nbt.putDouble("drone:targetY", targetVec.yCoord);
+			nbt.putDouble("drone:targetZ", targetVec.zCoord);
 		}
 	}
 
 	@Override
-	public void load(NBTTagCompound nbt) {
+	public void load(CompoundNBT nbt) {
 		super.load(nbt);
 		isDocking = nbt.getBoolean("drone:docking");
 		isDocked = nbt.getBoolean("drone:docked");
 		if((isDocked || isDocking)) {
 			pipepos = new BlockPos(
-				nbt.getInteger("drone:dockX"),
-				nbt.getInteger("drone:dockY"),
-				nbt.getInteger("drone:dockZ")
+				nbt.getInt("drone:dockX"),
+				nbt.getInt("drone:dockY"),
+				nbt.getInt("drone:dockZ")
 			);
 			targetVec = new Vec3(
 				nbt.getDouble("drone:targetX"),

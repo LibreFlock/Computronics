@@ -5,7 +5,7 @@ import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import li.cil.oc.api.network.Node;
 import li.cil.oc.api.network.SidedEnvironment;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.vector.Vector3d;
@@ -156,13 +156,13 @@ public class TileSoundBoard extends TileEntityPeripheralBase implements IAudioSo
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
+	public void readFromNBT(CompoundNBT nbt) {
 		super.readFromNBT(nbt);
 		board.load(nbt);
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+	public CompoundNBT writeToNBT(CompoundNBT nbt) {
 		nbt = super.writeToNBT(nbt);
 		board.save(nbt);
 		return nbt;

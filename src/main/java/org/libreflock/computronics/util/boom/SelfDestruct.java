@@ -10,7 +10,7 @@ import net.minecraft.entity.Entity;
 // import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
-// import net.minecraft.util.EnumParticleTypes;
+// import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -53,7 +53,7 @@ public class SelfDestruct extends Explosion {
 
 		this.world.playSound(null, explosionX, explosionY, explosionZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
 
-		this.world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, explosionX, explosionY, explosionZ, 1.0D, 0.0D, 0.0D);
+		this.world.spawnParticle(ParticleTypes.EXPLOSION_HUGE, explosionX, explosionY, explosionZ, 1.0D, 0.0D, 0.0D);
 
 		for(BlockPos blockpos : this.getAffectedBlockPositions()) {
 			BlockState state = this.world.getBlockState(blockpos);
@@ -75,8 +75,8 @@ public class SelfDestruct extends Explosion {
 				d3 = d3 * d7;
 				d4 = d4 * d7;
 				d5 = d5 * d7;
-				this.world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, (d0 + explosionX * 1.0D) / 2.0D, (d1 + explosionY * 1.0D) / 2.0D, (d2 + explosionZ * 1.0D) / 2.0D, d3, d4, d5);
-				this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, d3, d4, d5);
+				this.world.spawnParticle(ParticleTypes.EXPLOSION_NORMAL, (d0 + explosionX * 1.0D) / 2.0D, (d1 + explosionY * 1.0D) / 2.0D, (d2 + explosionZ * 1.0D) / 2.0D, d3, d4, d5);
+				this.world.spawnParticle(ParticleTypes.SMOKE_NORMAL, d0, d1, d2, d3, d4, d5);
 			}
 
 			if(state.getMaterial() != Material.AIR) {

@@ -1,7 +1,7 @@
 package org.libreflock.computronics.util;
-
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
@@ -108,10 +108,13 @@ public class Camera {
 		}
 
 		// shoot ray
-		float steps = Config.CAMERA_DISTANCE;
+		float steps = Config.COMMON.CAMERA_DISTANCE.get();
 		Vector3d origin = new Vector3d(xPos, yPos, zPos);
 		Vector3d target = new Vector3d(xPos + (xDirection * steps), yPos + (yDirection * steps), zPos + (zDirection * steps));
-		RayTraceResult mop = world.rayTraceBlocks(origin, target);
+
+		RayTraceContext context = new RayTraceContext(origin, target, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.NONE, null);
+
+		RayTraceResult mop = world.rayTrace(context);
 		if(mop != null) {
 			xPos = mop.hitVec.x;
 			yPos = mop.hitVec.y;

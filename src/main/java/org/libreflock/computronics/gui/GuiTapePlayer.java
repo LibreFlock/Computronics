@@ -134,7 +134,7 @@ public class GuiTapePlayer extends GuiBase<ContainerInventory> {
 		ItemStack stack = this.container.getInventory().get(0);
 		if(!stack.isEmpty() && stack.getItem() instanceof ItemTape) {
 			String label = StringUtil.localize("tooltip.computronics.tape.unnamed");
-			if(stack.getTagCompound() != null && stack.getTagCompound().hasKey("label")) {
+			if(stack.getTagCompound() != null && stack.getTagCompound().contains("label")) {
 				label = stack.getTagCompound().getString("label");
 			}
 			return label;

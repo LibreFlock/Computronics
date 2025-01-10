@@ -9,7 +9,7 @@ import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.Message;
 import li.cil.oc.api.network.Node;
 import li.cil.oc.api.network.Visibility;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.vector.Vector3d;
@@ -235,17 +235,17 @@ public class RobotUpgradeSpeech extends ManagedEnvironmentWithComponentConnector
 	}
 
 	@Override
-	public void load(NBTTagCompound tag) {
+	public void load(CompoundNBT tag) {
 		super.load(tag);
 		if(this.soundVolume != 127) {
-			tag.setByte("vo", (byte) this.soundVolume);
+			tag.putByte("vo", (byte) this.soundVolume);
 		}
 	}
 
 	@Override
-	public void save(NBTTagCompound tag) {
+	public void save(CompoundNBT tag) {
 		super.save(tag);
-		if(tag.hasKey("vo")) {
+		if(tag.contains("vo")) {
 			this.soundVolume = tag.getByte("vo");
 		} else {
 			this.soundVolume = 127;

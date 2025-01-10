@@ -9,7 +9,7 @@ import li.cil.oc.api.network.Connector;
 import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.Visibility;
 import li.cil.oc.api.prefab.AbstractManagedEnvironment;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.MathHelper;
 import org.libreflock.computronics.reference.Config;
 import org.libreflock.computronics.util.OCUtils;
@@ -43,7 +43,7 @@ public class DriverCardFX extends AbstractManagedEnvironment implements DeviceIn
 		if(name.length() > Short.MAX_VALUE) {
 			return new Object[] { false, "name too long" };
 		}
-		EnumParticleTypes particle = ParticleUtils.getParticleType(name);
+		ParticleTypes particle = ParticleUtils.getParticleType(name);
 		if(particle == null) {
 			return new Object[] { false, "invalid particle type" };
 		}

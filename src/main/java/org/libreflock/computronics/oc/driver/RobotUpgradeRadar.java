@@ -10,7 +10,7 @@ import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.Visibility;
 import li.cil.oc.api.prefab.AbstractManagedEnvironment;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import org.libreflock.computronics.reference.Config;
@@ -98,7 +98,7 @@ public class RobotUpgradeRadar extends AbstractManagedEnvironment implements Dev
 		int distance = getDistance(args);
 		if(((Connector) this.node()).tryChangeBuffer(0 - (Config.RADAR_ENERGY_COST_OC * distance * 2.0))) {
 			AxisAlignedBB bounds = getBounds(distance);
-			entities.addAll(RadarUtils.getItems(container.world(), container.xPosition(), container.yPosition(), container.zPosition(), bounds, EntityItem.class));
+			entities.addAll(RadarUtils.getItems(container.world(), container.xPosition(), container.yPosition(), container.zPosition(), bounds, ItemEntity.class));
 			context.pause(0.5);
 		}
 		return new Object[] { entities.toArray() };

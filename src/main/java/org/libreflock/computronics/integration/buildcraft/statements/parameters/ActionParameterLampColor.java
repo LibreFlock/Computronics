@@ -8,9 +8,9 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.integration.buildcraft.statements.StatementParameters;
 import org.libreflock.computronics.util.StringUtil;
 
@@ -95,11 +95,11 @@ public class ActionParameterLampColor extends ComputronicsParameter {
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound data) {
+	public void writeToNBT(CompoundNBT data) {
 		if(this.stack != null) {
-			data.setInteger("size", this.stack.stackSize);
+			data.putInt("size", this.stack.stackSize);
 		}
-		data.setInteger("color", color);
+		data.putInt("color", color);
 	}
 
 	@Override
@@ -108,9 +108,9 @@ public class ActionParameterLampColor extends ComputronicsParameter {
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound data) {
-		this.color = data.hasKey("color") ? data.getInteger("color") : 1;
-		this.stack = data.hasKey("size") ? new ItemStack(Items.dye, data.getInteger("size"), this.color) : null;
+	public void readFromNBT(CompoundNBT data) {
+		this.color = data.contains("color") ? data.getInt("color") : 1;
+		this.stack = data.contains("size") ? new ItemStack(Items.dye, data.getInt("size"), this.color) : null;
 	}
 
 	@Override

@@ -15,7 +15,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.api.audio.AudioPacketDFPWM;
 import org.libreflock.computronics.api.audio.AudioPacketRegistry;
 import org.libreflock.computronics.audio.AudioPacketClientHandlerDFPWM;

@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
+// import net.minecraftforge.fml.common.registry.EntityRegistry;
 import org.libreflock.computronics.api.audio.AudioPacketDFPWM;
 import org.libreflock.computronics.api.audio.AudioPacketRegistry;
 import org.libreflock.computronics.audio.SoundCardPacket;

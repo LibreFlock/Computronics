@@ -19,7 +19,7 @@ import mods.railcraft.common.items.RailcraftItems;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.common.Optional;
@@ -605,70 +605,70 @@ public class TileTicketMachine extends TileEntityPeripheralBase implements ITick
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound tag) {
+	public void readFromNBT(CompoundNBT tag) {
 		super.readFromNBT(tag);
 		String ownerName = "[Unknown]";
-		if(tag.hasKey("owner")) {
+		if(tag.contains("owner")) {
 			ownerName = tag.getString("owner");
 		}
 
 		UUID ownerUUID = null;
-		if(tag.hasKey("ownerId")) {
+		if(tag.contains("ownerId")) {
 			ownerUUID = UUID.fromString(tag.getString("ownerId"));
 		}
 
 		this.owner = new GameProfile(ownerUUID, ownerName);
 
-		if(tag.hasKey("locked")) {
+		if(tag.contains("locked")) {
 			isLocked = tag.getBoolean("locked");
 		}
-		if(tag.hasKey("selectionLocked")) {
+		if(tag.contains("selectionLocked")) {
 			isSelectionLocked = tag.getBoolean("selectionLocked");
 		}
-		if(tag.hasKey("printLocked")) {
+		if(tag.contains("printLocked")) {
 			isPrintLocked = tag.getBoolean("printLocked");
 		}
-		if(tag.hasKey("selectedslot")) {
-			selectedSlot = tag.getInteger("selectedslot");
+		if(tag.contains("selectedslot")) {
+			selectedSlot = tag.getInt("selectedslot");
 		}
-		if(tag.hasKey("progress")) {
-			progress = tag.getInteger("progress");
-			currentTicket = new ItemStack(tag.getCompoundTag("currentTicket"));
+		if(tag.contains("progress")) {
+			progress = tag.getInt("progress");
+			currentTicket = new ItemStack(tag.getCompound("currentTicket"));
 			if(currentTicket.isEmpty()) {
 				progress = 0;
 			}
 			isActive = tag.getBoolean("isActive");
-			ticketQueue = tag.getInteger("ticketQueue");
+			ticketQueue = tag.getInt("ticketQueue");
 		}
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+	public CompoundNBT writeToNBT(CompoundNBT tag) {
 		tag = super.writeToNBT(tag);
 		if(this.owner.getName() != null) {
-			tag.setString("owner", this.owner.getName());
+			tag.putString("owner", this.owner.getName());
 		}
 
 		if(this.owner.getId() != null) {
-			tag.setString("ownerId", this.owner.getId().toString());
+			tag.putString("ownerId", this.owner.getId().toString());
 		}
-		tag.setBoolean("locked", isLocked);
-		tag.setBoolean("selectionLocked", isSelectionLocked);
-		tag.setBoolean("printLocked", isPrintLocked);
-		tag.setInteger("selectedslot", selectedSlot);
-		tag.setInteger("progress", progress);
-		tag.setBoolean("isActive", isActive);
+		tag.putBoolean("locked", isLocked);
+		tag.putBoolean("selectionLocked", isSelectionLocked);
+		tag.putBoolean("printLocked", isPrintLocked);
+		tag.putInt("selectedslot", selectedSlot);
+		tag.putInt("progress", progress);
+		tag.putBoolean("isActive", isActive);
 		if(!currentTicket.isEmpty()) {
-			NBTTagCompound currentTicketTag = new NBTTagCompound();
+			CompoundNBT currentTicketTag = new CompoundNBT();
 			currentTicket.writeToNBT(currentTicketTag);
-			tag.setTag("currentTicket", currentTicketTag);
-			tag.setInteger("ticketQueue", this.ticketQueue);
+			tag.put("currentTicket", currentTicketTag);
+			tag.putInt("ticketQueue", this.ticketQueue);
 		}
 		return tag;
 	}
 
 	@Override
-	public void removeFromNBTForTransfer(NBTTagCompound data) {
+	public void removeFromNBTForTransfer(CompoundNBT data) {
 		super.removeFromNBTForTransfer(data);
 		data.removeTag("owner");
 		data.removeTag("ownerId");
@@ -683,53 +683,53 @@ public class TileTicketMachine extends TileEntityPeripheralBase implements ITick
 	}
 
 	@Override
-	public void readFromRemoteNBT(NBTTagCompound tag) {
+	public void readFromRemoteNBT(CompoundNBT tag) {
 		super.readFromRemoteNBT(tag);
 		String ownerName = "[Unknown]";
-		if(tag.hasKey("owner")) {
+		if(tag.contains("owner")) {
 			ownerName = tag.getString("owner");
 		}
 
 		UUID ownerUUID = null;
-		if(tag.hasKey("ownerId")) {
+		if(tag.contains("ownerId")) {
 			ownerUUID = UUID.fromString(tag.getString("ownerId"));
 		}
 
 		this.owner = new GameProfile(ownerUUID, ownerName);
-		if(tag.hasKey("locked")) {
+		if(tag.contains("locked")) {
 			isLocked = tag.getBoolean("locked");
 		}
-		if(tag.hasKey("selectionLocked")) {
+		if(tag.contains("selectionLocked")) {
 			isSelectionLocked = tag.getBoolean("selectionLocked");
 		}
-		if(tag.hasKey("printLocked")) {
+		if(tag.contains("printLocked")) {
 			isPrintLocked = tag.getBoolean("printLocked");
 		}
-		if(tag.hasKey("selectedslot")) {
-			selectedSlot = tag.getInteger("selectedslot");
+		if(tag.contains("selectedslot")) {
+			selectedSlot = tag.getInt("selectedslot");
 		}
-		if(tag.hasKey("progress")) {
-			progress = tag.getInteger("progress");
+		if(tag.contains("progress")) {
+			progress = tag.getInt("progress");
 			isActive = tag.getBoolean("isActive");
 		}
 	}
 
 	@Override
-	public NBTTagCompound writeToRemoteNBT(NBTTagCompound tag) {
+	public CompoundNBT writeToRemoteNBT(CompoundNBT tag) {
 		tag = super.writeToRemoteNBT(tag);
 		if(this.owner.getName() != null) {
-			tag.setString("owner", this.owner.getName());
+			tag.putString("owner", this.owner.getName());
 		}
 
 		if(this.owner.getId() != null) {
-			tag.setString("ownerId", this.owner.getId().toString());
+			tag.putString("ownerId", this.owner.getId().toString());
 		}
-		tag.setBoolean("locked", isLocked);
-		tag.setBoolean("selectionLocked", isSelectionLocked);
-		tag.setBoolean("printLocked", isPrintLocked);
-		tag.setInteger("selectedslot", selectedSlot);
-		tag.setInteger("progress", progress);
-		tag.setBoolean("isActive", isActive);
+		tag.putBoolean("locked", isLocked);
+		tag.putBoolean("selectionLocked", isSelectionLocked);
+		tag.putBoolean("printLocked", isPrintLocked);
+		tag.putInt("selectedslot", selectedSlot);
+		tag.putInt("progress", progress);
+		tag.putBoolean("isActive", isActive);
 		return tag;
 	}
 

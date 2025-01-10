@@ -3,8 +3,8 @@ package org.libreflock.asielib.tile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -505,17 +505,17 @@ public class TileMachine extends TileEntityBase implements
 
 	// NBT
 	@Override
-	public void readFromNBT(NBTTagCompound tagCompound) {
+	public void readFromNBT(CompoundNBT tagCompound) {
 		super.readFromNBT(tagCompound);
 		if(this.battery != null) {
 			this.battery.readFromNBT(tagCompound);
 		}
 		if(this.items != null) {
-			NBTTagList nbttaglist = tagCompound.getTagList("Inventory", 10);
+			ListNBT nbttaglist = tagCompound.getTagList("Inventory", 10);
 			this.items = new ItemStack[this.getSizeInventory()];
 
 			for(int i = 0; i < nbttaglist.tagCount(); ++i) {
-				NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+				CompoundNBT nbttagcompound1 = nbttaglist.getCompoundAt(i);
 				int j = nbttagcompound1.getByte("Slot") & 255;
 
 				if(j >= 0 && j < this.items.length) {
@@ -531,29 +531,29 @@ public class TileMachine extends TileEntityBase implements
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tagCompound) {
+	public CompoundNBT writeToNBT(CompoundNBT tagCompound) {
 		tagCompound = super.writeToNBT(tagCompound);
 		if(this.battery != null) {
 			this.battery.writeToNBT(tagCompound);
 		}
 		if(this.items != null) {
-			NBTTagList itemList = new NBTTagList();
+			ListNBT itemList = new ListNBT();
 			for(int i = 0; i < items.length; i++) {
 				ItemStack stack = items[i];
 				if(stack != null && !stack.isEmpty()) {
-					NBTTagCompound tag = new NBTTagCompound();
-					tag.setByte("Slot", (byte) i);
+					CompoundNBT tag = new CompoundNBT();
+					tag.putByte("Slot", (byte) i);
 					stack.writeToNBT(tag);
 					itemList.appendTag(tag);
 				}
 			}
-			tagCompound.setTag("Inventory", itemList);
+			tagCompound.put("Inventory", itemList);
 		}
 		return tagCompound;
 	}
 
 	// Remove NBT data for transfer with the BuildCraft Builder
-	public void removeFromNBTForTransfer(NBTTagCompound data) {
+	public void removeFromNBTForTransfer(CompoundNBT data) {
 		data.removeTag("Inventory");
 		data.removeTag("bb_energy");
 	}

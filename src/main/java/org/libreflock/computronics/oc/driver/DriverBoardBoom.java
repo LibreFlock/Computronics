@@ -9,7 +9,7 @@ import li.cil.oc.api.network.Node;
 import li.cil.oc.api.network.Visibility;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.EnumHand;
@@ -126,10 +126,10 @@ public class DriverBoardBoom extends DriverCardBoom implements RackMountable {
 	}
 
 	@Override
-	public NBTTagCompound getData() {
-		NBTTagCompound tag = new NBTTagCompound();
-		tag.setBoolean("t", this.time >= 0);
-		tag.setBoolean("r", this.isActive);
+	public CompoundNBT getData() {
+		CompoundNBT tag = new CompoundNBT();
+		tag.putBoolean("t", this.time >= 0);
+		tag.putBoolean("r", this.isActive);
 		return tag;
 	}
 
@@ -143,7 +143,7 @@ public class DriverBoardBoom extends DriverCardBoom implements RackMountable {
 	}
 
 	@Override
-	public void load(NBTTagCompound nbt) {
+	public void load(CompoundNBT nbt) {
 		super.load(nbt);
 		if(nbt.getBoolean("active")) {
 			setActive(nbt.getBoolean("active"));
@@ -151,9 +151,9 @@ public class DriverBoardBoom extends DriverCardBoom implements RackMountable {
 	}
 
 	@Override
-	public void save(NBTTagCompound nbt) {
+	public void save(CompoundNBT nbt) {
 		super.save(nbt);
-		nbt.setBoolean("active", this.isActive);
+		nbt.putBoolean("active", this.isActive);
 	}
 
 	@Override

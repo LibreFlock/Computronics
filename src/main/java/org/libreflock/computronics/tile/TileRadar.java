@@ -8,7 +8,7 @@ import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.Connector;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -118,7 +118,7 @@ public class TileRadar extends TileEntityPeripheralBase {
 		double energyNeeded = (Config.RADAR_ENERGY_COST_OC * distance * 2.0);
 		if(((Connector) node()).tryChangeBuffer(0 - energyNeeded)) {
 			AxisAlignedBB bounds = getBounds(distance);
-			entities.addAll(RadarUtils.getItems(world, getPos(), bounds, EntityItem.class));
+			entities.addAll(RadarUtils.getItems(world, getPos(), bounds, ItemEntity.class));
 			context.pause(0.5);
 		}
 		return new Object[] { TableUtils.convertSetToMap(entities) };

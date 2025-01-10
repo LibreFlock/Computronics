@@ -9,7 +9,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.integration.railcraft.gui.container.ContainerTicketMachine;
 import org.libreflock.computronics.integration.railcraft.tile.TileTicketMachine;
 import org.libreflock.asielib.gui.managed.GuiProviderBase;

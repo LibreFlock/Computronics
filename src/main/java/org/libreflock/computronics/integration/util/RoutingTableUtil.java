@@ -1,7 +1,7 @@
 package org.libreflock.computronics.integration.util;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 /**
  * @author Vexatos
@@ -9,7 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 public class RoutingTableUtil {
 	public static String getRoutingTableTitle(ItemStack stack) {
 		if(stack.hasTagCompound()) {
-			NBTTagCompound nbt = stack.getTagCompound();
+			CompoundNBT nbt = stack.getTagCompound();
 			String title = nbt.getString("title");
 			if(title != null) {
 				return title;
@@ -20,13 +20,13 @@ public class RoutingTableUtil {
 
 	public static boolean setRoutingTableTitle(ItemStack stack, String title) {
 		if(!stack.hasTagCompound()) {
-			stack.setTagCompound(new NBTTagCompound());
+			stack.putCompound(new CompoundNBT());
 		}
 		if(stack.hasTagCompound()) {
-			NBTTagCompound nbt = stack.getTagCompound();
+			CompoundNBT nbt = stack.getTagCompound();
 			if(title != null && !title.isEmpty()) {
-				nbt.setString("title", title);
-				stack.setTagCompound(nbt);
+				nbt.putString("title", title);
+				stack.putCompound(nbt);
 				return true;
 			}
 		}

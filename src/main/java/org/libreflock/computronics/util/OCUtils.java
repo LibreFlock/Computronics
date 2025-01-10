@@ -10,14 +10,14 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.asielib.util.ColorUtils;
 import org.libreflock.asielib.util.internal.IColorable;
 
@@ -34,17 +34,17 @@ import static org.libreflock.asielib.reference.Capabilities.COLORABLE_CAPABILITY
  */
 public class OCUtils {
 
-	public static NBTTagCompound dataTag(final ItemStack stack) {
+	public static CompoundNBT dataTag(final ItemStack stack) {
 		if(!stack.hasTagCompound()) {
-			stack.setTagCompound(new NBTTagCompound());
+			stack.putCompound(new CompoundNBT());
 		}
-		final NBTTagCompound nbt = stack.getTagCompound();
+		final CompoundNBT nbt = stack.getTagCompound();
 		// This is the suggested key under which to store item component data.
 		// You are free to change this as you please.
-		if(!nbt.hasKey("oc:data")) {
-			nbt.setTag("oc:data", new NBTTagCompound());
+		if(!nbt.contains("oc:data")) {
+			nbt.put("oc:data", new CompoundNBT());
 		}
-		return nbt.getCompoundTag("oc:data");
+		return nbt.getCompound("oc:data");
 	}
 
 	public static class Device {
@@ -123,11 +123,11 @@ public class OCUtils {
 				}
 			}
 		}
-		if(stack.hasTagCompound() && stack.getTagCompound().hasKey("oc:data")) {
-			NBTTagCompound data = stack.getTagCompound().getCompoundTag("oc:data");
-			if(data.hasKey("node") && data.getCompoundTag("node").hasKey("address")) {
+		if(stack.hasTagCompound() && stack.getTagCompound().contains("oc:data")) {
+			CompoundNBT data = stack.getTagCompound().getCompound("oc:data");
+			if(data.contains("node") && data.getCompound("node").contains("address")) {
 				tooltip.add(TextFormatting.DARK_GRAY
-					+ data.getCompoundTag("node").getString("address").substring(0, 13) + "..."
+					+ data.getCompound("node").getString("address").substring(0, 13) + "..."
 					+ TextFormatting.GRAY);
 			}
 		}

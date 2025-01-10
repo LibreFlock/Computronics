@@ -9,7 +9,7 @@ import li.cil.oc.api.machine.Context;
 import mods.railcraft.api.tracks.IOutfittedTrackTile;
 import mods.railcraft.common.blocks.tracks.outfitted.kits.TrackKitLocomotive;
 import mods.railcraft.common.carts.EntityLocomotive;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -30,18 +30,18 @@ public class DriverLocomotiveTrack {
 
 	private static Object[] setMode(TrackKitLocomotive tile, Object[] arguments) {
 		byte mode = ((Double) arguments[0]).byteValue();
-		NBTTagCompound data = new NBTTagCompound();
+		CompoundNBT data = new CompoundNBT();
 		tile.writeToNBT(data);
-		data.setByte("mode", (byte) Math.abs(mode - 2));
+		data.putByte("mode", (byte) Math.abs(mode - 2));
 		tile.readFromNBT(data);
 		tile.sendUpdateToClient();
 		return new Object[] { true };
 	}
 
 	private static Object[] getMode(TrackKitLocomotive tile) {
-		NBTTagCompound data = new NBTTagCompound();
+		CompoundNBT data = new CompoundNBT();
 		tile.writeToNBT(data);
-		return new Object[] { data.hasKey("mode") ? Math.abs(data.getByte("mode") % EntityLocomotive.LocoMode.VALUES.length - 2) : null };
+		return new Object[] { data.contains("mode") ? Math.abs(data.getByte("mode") % EntityLocomotive.LocoMode.VALUES.length - 2) : null };
 	}
 
 	private static Object[] modes() {

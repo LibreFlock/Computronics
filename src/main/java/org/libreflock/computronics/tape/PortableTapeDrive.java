@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -15,7 +15,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.api.audio.AudioPacket;
 import org.libreflock.computronics.api.audio.IAudioReceiver;
@@ -88,11 +88,11 @@ public class PortableTapeDrive implements IAudioSource {
 		}
 	}
 
-	public NBTTagCompound getTag() {
-		NBTTagCompound tag = self.getTagCompound();
+	public CompoundNBT getTag() {
+		CompoundNBT tag = self.getTagCompound();
 		if(tag == null) {
-			tag = new NBTTagCompound();
-			self.setTagCompound(tag);
+			tag = new CompoundNBT();
+			self.putCompound(tag);
 		}
 		return tag;
 	}
@@ -193,8 +193,8 @@ public class PortableTapeDrive implements IAudioSource {
 
 			// Get possible label.
 			if(stack.getTagCompound() != null) {
-				NBTTagCompound tag = stack.getTagCompound();
-				storageName = tag.hasKey("label") ? tag.getString("label") : "";
+				CompoundNBT tag = stack.getTagCompound();
+				storageName = tag.contains("label") ? tag.getString("label") : "";
 			} else {
 				storageName = "";
 			}
@@ -238,39 +238,39 @@ public class PortableTapeDrive implements IAudioSource {
 
 	protected int clientId = -1;
 
-	public void load(NBTTagCompound tag) {
-		if(tag.hasKey("inv")) {
-			this.inventory = new ItemStack(tag.getCompoundTag("inv"));
+	public void load(CompoundNBT tag) {
+		if(tag.contains("inv")) {
+			this.inventory = new ItemStack(tag.getCompound("inv"));
 		}
-		if(tag.hasKey("state")) {
+		if(tag.contains("state")) {
 			this.state.setState(TapeDriveState.State.VALUES[tag.getByte("state")]);
 		}
-		if(tag.hasKey("sp")) {
+		if(tag.contains("sp")) {
 			this.state.packetSize = tag.getShort("sp");
 		}
-		if(tag.hasKey("vo")) {
+		if(tag.contains("vo")) {
 			this.state.soundVolume = tag.getByte("vo");
 		} else {
 			this.state.soundVolume = 127;
 		}
-		if(tag.hasKey("cId")) {
-			this.clientId = tag.getInteger("cId");
+		if(tag.contains("cId")) {
+			this.clientId = tag.getInt("cId");
 		}
 		loadStorage();
 	}
 
-	public void save(NBTTagCompound tag) {
-		NBTTagCompound inv = new NBTTagCompound();
+	public void save(CompoundNBT tag) {
+		CompoundNBT inv = new CompoundNBT();
 		if(!inventory.isEmpty()) {
 			inventory.writeToNBT(inv);
 		}
-		tag.setTag("inv", inv);
-		tag.setShort("sp", (short) this.state.packetSize);
-		tag.setByte("state", (byte) this.state.getState().ordinal());
+		tag.put("inv", inv);
+		tag.putShort("sp", (short) this.state.packetSize);
+		tag.putByte("state", (byte) this.state.getState().ordinal());
 		if(this.state.soundVolume != 127) {
-			tag.setByte("vo", (byte) this.state.soundVolume);
+			tag.putByte("vo", (byte) this.state.soundVolume);
 		}
-		tag.setInteger("cId", clientId);
+		tag.putInt("cId", clientId);
 	}
 
 	private final IAudioReceiver internalSpeaker = new IAudioReceiver() {

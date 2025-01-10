@@ -1,7 +1,7 @@
 package org.libreflock.computronics.integration.tis3d.serial;
 
 import li.cil.tis3d.api.serial.SerialInterface;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 
 import javax.annotation.Nullable;
@@ -18,11 +18,11 @@ public abstract class TileSerialInterface<T extends TileEntity> implements Seria
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
+	public void writeToNBT(CompoundNBT nbt) {
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
+	public void readFromNBT(CompoundNBT nbt) {
 	}
 
 	@Override
