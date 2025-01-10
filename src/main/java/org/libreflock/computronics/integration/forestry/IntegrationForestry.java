@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.forestry;
+package org.libreflock.computronics.integration.forestry;
 
 import forestry.api.apiculture.BeeManager;
 import forestry.api.apiculture.EnumBeeChromosome;
@@ -32,14 +32,14 @@ import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.integration.forestry.client.entity.ParticleSwarm;
-import pl.asie.computronics.integration.forestry.entity.EntitySwarm;
-import pl.asie.computronics.integration.forestry.entity.RenderSwarm;
-import pl.asie.computronics.integration.forestry.nanomachines.SwarmProvider;
-import pl.asie.computronics.item.ItemMultipleComputronics;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.RecipeUtils;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.integration.forestry.client.entity.ParticleSwarm;
+import org.libreflock.computronics.integration.forestry.entity.EntitySwarm;
+import org.libreflock.computronics.integration.forestry.entity.RenderSwarm;
+import org.libreflock.computronics.integration.forestry.nanomachines.SwarmProvider;
+import org.libreflock.computronics.item.ItemMultipleComputronics;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.RecipeUtils;
 
 import java.util.HashMap;
 

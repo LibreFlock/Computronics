@@ -1,4 +1,4 @@
-package pl.asie.computronics.item;
+package org.libreflock.computronics.item;
 
 import dan200.computercraft.api.filesystem.IMount;
 import dan200.computercraft.api.media.IMedia;
@@ -16,16 +16,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.api.tape.IItemTapeStorage;
-import pl.asie.computronics.api.tape.ITapeStorage;
-import pl.asie.computronics.item.entity.EntityItemIndestructable;
-import pl.asie.computronics.oc.manual.IItemWithDocumentation;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.tape.TapeStorage;
-import pl.asie.computronics.util.StringUtil;
-import pl.asie.computronics.util.internal.IItemWithColor;
-import pl.asie.lib.util.color.ItemColorizer;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.api.tape.IItemTapeStorage;
+import org.libreflock.computronics.api.tape.ITapeStorage;
+import org.libreflock.computronics.item.entity.EntityItemIndestructable;
+import org.libreflock.computronics.oc.manual.IItemWithDocumentation;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.tape.TapeStorage;
+import org.libreflock.computronics.util.StringUtil;
+import org.libreflock.computronics.util.internal.IItemWithColor;
+import org.libreflock.asielib.util.color.ItemColorizer;
 
 import javax.annotation.Nullable;
 import java.util.List;

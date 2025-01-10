@@ -1,9 +1,9 @@
-package pl.asie.computronics.tape;
+package org.libreflock.computronics.tape;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import pl.asie.computronics.tile.TileTapeDrive;
+import org.libreflock.computronics.tile.TileTapeDrive;
 
 /**
  * @author Vexatos

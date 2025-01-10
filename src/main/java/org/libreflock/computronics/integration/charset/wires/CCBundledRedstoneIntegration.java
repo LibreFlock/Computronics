@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.charset.wires;
+package org.libreflock.computronics.integration.charset.wires;
 
 import dan200.computercraft.api.ComputerCraftAPI;
 import dan200.computercraft.api.redstone.IBundledRedstoneProvider;
@@ -15,10 +15,10 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import pl.asie.charset.api.wires.IBundledEmitter;
-import pl.asie.charset.api.wires.IBundledReceiver;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.reference.Mods;
+import org.libreflock.charset.api.wires.IBundledEmitter;
+import org.libreflock.charset.api.wires.IBundledReceiver;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.reference.Mods;
 
 /**
  * @author Vexatos

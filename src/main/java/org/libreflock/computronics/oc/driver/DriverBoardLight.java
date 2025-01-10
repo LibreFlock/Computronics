@@ -1,4 +1,4 @@
-package pl.asie.computronics.oc.driver;
+package org.libreflock.computronics.oc.driver;
 
 import li.cil.oc.api.Network;
 import li.cil.oc.api.internal.Rack;
@@ -16,13 +16,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.util.OCUtils;
-import pl.asie.lib.integration.Integration;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.util.OCUtils;
+import org.libreflock.asielib.integration.Integration;
 
 import javax.annotation.Nullable;
 
-import static pl.asie.lib.util.WorldUtils.notifyBlockUpdate;
+import static org.libreflock.asielib.util.WorldUtils.notifyBlockUpdate;
 
 /**
  * @author Vexatos

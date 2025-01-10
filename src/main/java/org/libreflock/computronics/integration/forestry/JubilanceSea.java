@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.forestry;
+package org.libreflock.computronics.integration.forestry;
 
 import forestry.api.apiculture.BeeManager;
 import forestry.api.apiculture.IAlleleBeeSpecies;

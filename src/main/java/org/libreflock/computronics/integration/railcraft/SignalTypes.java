@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.railcraft;
+package org.libreflock.computronics.integration.railcraft;
 
 import mods.railcraft.api.core.IVariantEnum;
 import mods.railcraft.common.blocks.IRailcraftBlock;
@@ -11,9 +11,9 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.integration.railcraft.tile.TileDigitalControllerBox;
-import pl.asie.computronics.integration.railcraft.tile.TileDigitalReceiverBox;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.integration.railcraft.tile.TileDigitalControllerBox;
+import org.libreflock.computronics.integration.railcraft.tile.TileDigitalReceiverBox;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

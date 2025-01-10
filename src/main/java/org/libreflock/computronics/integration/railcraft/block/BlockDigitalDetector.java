@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.railcraft.block;
+package org.libreflock.computronics.integration.railcraft.block;
 
 import li.cil.oc.api.network.Environment;
 import mods.railcraft.common.util.misc.MiscTools;
@@ -16,13 +16,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.block.BlockPeripheral;
-import pl.asie.computronics.integration.railcraft.tile.TileDigitalDetector;
-import pl.asie.computronics.oc.manual.IBlockWithPrefix;
-import pl.asie.computronics.reference.Mods;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.block.BlockPeripheral;
+import org.libreflock.computronics.integration.railcraft.tile.TileDigitalDetector;
+import org.libreflock.computronics.oc.manual.IBlockWithPrefix;
+import org.libreflock.computronics.reference.Mods;
 
-import static pl.asie.lib.util.WorldUtils.notifyBlockUpdate;
+import static org.libreflock.asielib.util.WorldUtils.notifyBlockUpdate;
 
 /**
  * @author CovertJaguar, Vexatos, marcin212, Kubuxu

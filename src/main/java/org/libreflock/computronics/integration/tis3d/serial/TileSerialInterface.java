@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.tis3d.serial;
+package org.libreflock.computronics.integration.tis3d.serial;
 
 import li.cil.tis3d.api.serial.SerialInterface;
 import net.minecraft.nbt.NBTTagCompound;

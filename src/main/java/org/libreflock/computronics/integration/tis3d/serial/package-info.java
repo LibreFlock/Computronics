@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.integration.tis3d.serial;
+package org.libreflock.computronics.integration.tis3d.serial;
 
 import mcp.MethodsReturnNonnullByDefault;
 

@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.forestry.client.entity;
+package org.libreflock.computronics.integration.forestry.client.entity;
 
 import forestry.apiculture.ModuleApiculture;
 import net.minecraft.client.particle.Particle;

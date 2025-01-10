@@ -1,4 +1,4 @@
-/*package pl.asie.computronics.util.achievements;
+/*package org.libreflock.computronics.util.achievements;
 
 //import net.minecraftforge.fml.common.FMLCommonHandler;
 
@@ -9,7 +9,7 @@ import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
-import pl.asie.computronics.Computronics;
+import org.libreflock.computronics.Computronics;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;

@@ -1,12 +1,12 @@
-package pl.asie.computronics.integration.charset.audio;
+package org.libreflock.computronics.integration.charset.audio;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import pl.asie.charset.api.audio.AudioPacket;
-import pl.asie.charset.api.audio.IAudioReceiver;
-import pl.asie.computronics.tile.TileAudioCable;
+import org.libreflock.charset.api.audio.AudioPacket;
+import org.libreflock.charset.api.audio.IAudioReceiver;
+import org.libreflock.computronics.tile.TileAudioCable;
 
 public class AudioReceiverCable implements IAudioReceiver {
 

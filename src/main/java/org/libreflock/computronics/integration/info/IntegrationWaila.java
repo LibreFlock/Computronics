@@ -1,9 +1,9 @@
-package pl.asie.computronics.integration.info;
+package org.libreflock.computronics.integration.info;
 
 import mcp.mobius.waila.api.IWailaRegistrar;
-import pl.asie.computronics.block.BlockPeripheral;
-import pl.asie.computronics.integration.railcraft.block.BlockDigitalSignalBox;
-import pl.asie.computronics.reference.Mods;
+import org.libreflock.computronics.block.BlockPeripheral;
+import org.libreflock.computronics.integration.railcraft.block.BlockDigitalSignalBox;
+import org.libreflock.computronics.reference.Mods;
 
 public class IntegrationWaila {
 

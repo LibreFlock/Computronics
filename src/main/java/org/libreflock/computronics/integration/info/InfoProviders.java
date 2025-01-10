@@ -1,16 +1,16 @@
-package pl.asie.computronics.integration.info;
+package org.libreflock.computronics.integration.info;
 
-import pl.asie.computronics.block.BlockColorfulLamp;
-import pl.asie.computronics.block.BlockPeripheral;
-import pl.asie.computronics.block.BlockTapeReader;
-import pl.asie.computronics.integration.info.providers.IComputronicsInfoProvider;
-import pl.asie.computronics.integration.info.providers.InfoColorfulLamp;
-import pl.asie.computronics.integration.info.providers.InfoLocomotiveRelay;
-import pl.asie.computronics.integration.info.providers.InfoPeripheral;
-import pl.asie.computronics.integration.info.providers.InfoTapeDrive;
-import pl.asie.computronics.integration.railcraft.block.BlockDigitalSignalBox;
-import pl.asie.computronics.integration.railcraft.block.BlockLocomotiveRelay;
-import pl.asie.computronics.reference.Mods;
+import org.libreflock.computronics.block.BlockColorfulLamp;
+import org.libreflock.computronics.block.BlockPeripheral;
+import org.libreflock.computronics.block.BlockTapeReader;
+import org.libreflock.computronics.integration.info.providers.IComputronicsInfoProvider;
+import org.libreflock.computronics.integration.info.providers.InfoColorfulLamp;
+import org.libreflock.computronics.integration.info.providers.InfoLocomotiveRelay;
+import org.libreflock.computronics.integration.info.providers.InfoPeripheral;
+import org.libreflock.computronics.integration.info.providers.InfoTapeDrive;
+import org.libreflock.computronics.integration.railcraft.block.BlockDigitalSignalBox;
+import org.libreflock.computronics.integration.railcraft.block.BlockLocomotiveRelay;
+import org.libreflock.computronics.reference.Mods;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

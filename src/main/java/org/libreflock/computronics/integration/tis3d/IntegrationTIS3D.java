@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.tis3d;
+package org.libreflock.computronics.integration.tis3d;
 
 import li.cil.tis3d.api.ModuleAPI;
 import li.cil.tis3d.api.SerialAPI;
@@ -6,15 +6,15 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.integration.flamingo.DriverFlamingo;
-import pl.asie.computronics.integration.tis3d.item.ItemModules;
-import pl.asie.computronics.integration.tis3d.manual.ComputronicsPathProvider;
-import pl.asie.computronics.integration.tis3d.module.ModuleBoom.BoomHandler;
-import pl.asie.computronics.reference.Compat;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.RecipeUtils;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.integration.flamingo.DriverFlamingo;
+import org.libreflock.computronics.integration.tis3d.item.ItemModules;
+import org.libreflock.computronics.integration.tis3d.manual.ComputronicsPathProvider;
+import org.libreflock.computronics.integration.tis3d.module.ModuleBoom.BoomHandler;
+import org.libreflock.computronics.reference.Compat;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.RecipeUtils;
 
 /**
  * @author Vexatos

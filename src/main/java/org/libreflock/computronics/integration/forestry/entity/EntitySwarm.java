@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.forestry.entity;
+package org.libreflock.computronics.integration.forestry.entity;
 
 import com.mojang.authlib.GameProfile;
 import forestry.api.apiculture.BeeManager;
@@ -39,9 +39,9 @@ import net.minecraft.world.biome.BiomeDesert;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.integration.forestry.nanomachines.SwarmProvider;
-import pl.asie.computronics.util.StringUtil;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.integration.forestry.nanomachines.SwarmProvider;
+import org.libreflock.computronics.util.StringUtil;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.buildcraft;
+package org.libreflock.computronics.integration.buildcraft;
 
 import buildcraft.api.tiles.IHeatable;
 import dan200.computercraft.api.lua.ILuaContext;
@@ -13,10 +13,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import pl.asie.computronics.api.multiperipheral.IMultiPeripheral;
-import pl.asie.computronics.integration.CCMultiPeripheral;
-import pl.asie.computronics.integration.ManagedEnvironmentOCTile;
-import pl.asie.computronics.reference.Names;
+import org.libreflock.computronics.api.multiperipheral.IMultiPeripheral;
+import org.libreflock.computronics.integration.CCMultiPeripheral;
+import org.libreflock.computronics.integration.ManagedEnvironmentOCTile;
+import org.libreflock.computronics.reference.Names;
 
 /**
  * @author Vexatos

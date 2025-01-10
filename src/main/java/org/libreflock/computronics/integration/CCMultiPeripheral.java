@@ -1,8 +1,8 @@
-package pl.asie.computronics.integration;
+package org.libreflock.computronics.integration;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import pl.asie.computronics.api.multiperipheral.ICombinedMultiPeripheral;
+import org.libreflock.computronics.api.multiperipheral.ICombinedMultiPeripheral;
 
 /**
  * @author Vexatos

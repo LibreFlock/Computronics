@@ -1,4 +1,4 @@
-package pl.asie.computronics.tile;
+package org.libreflock.computronics.tile;
 
 import com.elytradev.mirage.lighting.IColoredLight;
 import dan200.computercraft.api.lua.ILuaContext;
@@ -16,16 +16,16 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.block.BlockColorfulLamp;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.LampUtil;
-import pl.asie.computronics.util.OCUtils;
-import pl.asie.lib.api.tile.IBundledRedstoneProvider;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.block.BlockColorfulLamp;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.LampUtil;
+import org.libreflock.computronics.util.OCUtils;
+import org.libreflock.asielib.api.tile.IBundledRedstoneProvider;
 
 import javax.annotation.Nullable;
 
-import static pl.asie.computronics.block.BlockColorfulLamp.BRIGHTNESS;
+import static org.libreflock.computronics.block.BlockColorfulLamp.BRIGHTNESS;
 
 //import mods.immibis.redlogic.api.wiring.IBundledEmitter;
 //import mods.immibis.redlogic.api.wiring.IBundledUpdatable;

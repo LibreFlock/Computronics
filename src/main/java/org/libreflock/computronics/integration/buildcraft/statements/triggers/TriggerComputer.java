@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.buildcraft.statements.triggers;
+package org.libreflock.computronics.integration.buildcraft.statements.triggers;
 
 import buildcraft.api.statements.IStatementContainer;
 import buildcraft.api.statements.IStatementParameter;

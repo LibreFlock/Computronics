@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.buildcraft.pluggable;
+package org.libreflock.computronics.integration.buildcraft.pluggable;
 
 import li.cil.oc.api.driver.EnvironmentProvider;
 import li.cil.oc.api.driver.Item;
@@ -9,11 +9,11 @@ import li.cil.oc.api.network.ManagedEnvironment;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.oc.manual.IItemWithPrefix;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.OCUtils;
-import pl.asie.lib.item.ItemMultiple;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.oc.manual.IItemWithPrefix;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.OCUtils;
+import org.libreflock.asielib.item.ItemMultiple;
 
 /**
  * @author Vexatos

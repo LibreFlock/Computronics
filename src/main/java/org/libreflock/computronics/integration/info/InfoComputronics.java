@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.info;
+package org.libreflock.computronics.integration.info;
 
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
@@ -16,7 +16,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.reference.Mods;
+import org.libreflock.computronics.reference.Mods;
 
 import java.util.List;
 

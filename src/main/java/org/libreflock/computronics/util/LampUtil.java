@@ -1,4 +1,4 @@
-package pl.asie.computronics.util;
+package org.libreflock.computronics.util;
 
 /**
  * @author Vexatos

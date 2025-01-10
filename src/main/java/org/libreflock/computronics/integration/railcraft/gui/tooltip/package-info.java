@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.integration.railcraft.gui.tooltip;
+package org.libreflock.computronics.integration.railcraft.gui.tooltip;
 
 import mcp.MethodsReturnNonnullByDefault;
 

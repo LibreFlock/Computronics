@@ -1,9 +1,9 @@
-package pl.asie.computronics.integration.railcraft.gui.widget;
+package org.libreflock.computronics.integration.railcraft.gui.widget;
 
 import mods.railcraft.client.gui.GuiContainerRailcraft;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.integration.railcraft.tile.TileTicketMachine;
-import pl.asie.computronics.network.PacketType;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.integration.railcraft.tile.TileTicketMachine;
+import org.libreflock.computronics.network.PacketType;
 
 import java.io.IOException;
 

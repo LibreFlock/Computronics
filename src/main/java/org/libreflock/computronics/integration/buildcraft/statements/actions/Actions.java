@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.buildcraft.statements.actions;
+package org.libreflock.computronics.integration.buildcraft.statements.actions;
 
 import buildcraft.api.statements.IActionExternal;
 import buildcraft.api.statements.IStatement;
@@ -12,8 +12,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.computronics.tile.TapeDriveState.State;
-import pl.asie.computronics.util.StringUtil;
+import org.libreflock.computronics.tile.TapeDriveState.State;
+import org.libreflock.computronics.util.StringUtil;
 
 /**
  * @author Vexatos

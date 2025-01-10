@@ -1,4 +1,4 @@
-package pl.asie.computronics.oc.client;
+package org.libreflock.computronics.oc.client;
 
 import li.cil.oc.api.event.RackMountableRenderEvent;
 import net.minecraft.client.Minecraft;
@@ -14,9 +14,9 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.lwjgl.opengl.GL11;
-import pl.asie.computronics.item.ItemOpenComputers;
-import pl.asie.computronics.oc.driver.DriverBoardLight.Mode;
-import pl.asie.computronics.reference.Mods;
+import org.libreflock.computronics.item.ItemOpenComputers;
+import org.libreflock.computronics.oc.driver.DriverBoardLight.Mode;
+import org.libreflock.computronics.reference.Mods;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,7 +1,7 @@
-package pl.asie.computronics.item;
+package org.libreflock.computronics.item;
 
-import pl.asie.computronics.Computronics;
-import pl.asie.lib.item.ItemMultiple;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.asielib.item.ItemMultiple;
 
 /**
  * @author Vexatos

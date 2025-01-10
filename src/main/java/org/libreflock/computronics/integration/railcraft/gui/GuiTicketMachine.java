@@ -1,16 +1,16 @@
-package pl.asie.computronics.integration.railcraft.gui;
+package org.libreflock.computronics.integration.railcraft.gui;
 
 import mods.railcraft.client.gui.GuiContainerRailcraft;
 import mods.railcraft.common.gui.tooltips.ToolTip;
 import mods.railcraft.common.gui.widgets.Widget;
 import net.minecraft.entity.player.InventoryPlayer;
-import pl.asie.computronics.integration.railcraft.gui.container.ContainerTicketMachine;
-import pl.asie.computronics.integration.railcraft.gui.tooltip.ToolTips;
-import pl.asie.computronics.integration.railcraft.gui.widget.ButtonWidget;
-import pl.asie.computronics.integration.railcraft.gui.widget.LockButtonWidget;
-import pl.asie.computronics.integration.railcraft.gui.widget.PrintButtonWidget;
-import pl.asie.computronics.integration.railcraft.tile.TileTicketMachine;
-import pl.asie.computronics.util.StringUtil;
+import org.libreflock.computronics.integration.railcraft.gui.container.ContainerTicketMachine;
+import org.libreflock.computronics.integration.railcraft.gui.tooltip.ToolTips;
+import org.libreflock.computronics.integration.railcraft.gui.widget.ButtonWidget;
+import org.libreflock.computronics.integration.railcraft.gui.widget.LockButtonWidget;
+import org.libreflock.computronics.integration.railcraft.gui.widget.PrintButtonWidget;
+import org.libreflock.computronics.integration.railcraft.tile.TileTicketMachine;
+import org.libreflock.computronics.util.StringUtil;
 
 /**
  * @author CovertJaguar, Vexatos

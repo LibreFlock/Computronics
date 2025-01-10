@@ -4,11 +4,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.INetHandler;
 import net.minecraft.tileentity.TileEntity;
 import org.libreflock.computronics.Computronics;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.tape.PortableDriveManager;
-import pl.asie.computronics.tape.PortableTapeDrive;
-import pl.asie.computronics.tile.TapeDriveState.State;
-import pl.asie.computronics.tile.TileTapeDrive;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.tape.PortableDriveManager;
+import org.libreflock.computronics.tape.PortableTapeDrive;
+import org.libreflock.computronics.tile.TapeDriveState.State;
+import org.libreflock.computronics.tile.TileTapeDrive;
 import org.libreflock.asielib.network.MessageHandlerBase;
 import org.libreflock.asielib.network.Packet;
 

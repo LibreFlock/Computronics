@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.integration.railcraft;
+package org.libreflock.computronics.integration.railcraft;
 
 import mcp.MethodsReturnNonnullByDefault;
 

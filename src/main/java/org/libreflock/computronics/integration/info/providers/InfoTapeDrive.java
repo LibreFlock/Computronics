@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.info.providers;
+package org.libreflock.computronics.integration.info.providers;
 
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
@@ -15,13 +15,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.api.tape.IItemTapeStorage;
-import pl.asie.computronics.integration.info.ConfigValues;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.tile.TapeDriveState;
-import pl.asie.computronics.tile.TileTapeDrive;
-import pl.asie.computronics.util.StringUtil;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.api.tape.IItemTapeStorage;
+import org.libreflock.computronics.integration.info.ConfigValues;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.tile.TapeDriveState;
+import org.libreflock.computronics.tile.TileTapeDrive;
+import org.libreflock.computronics.util.StringUtil;
 
 import java.util.List;
 import java.util.Locale;

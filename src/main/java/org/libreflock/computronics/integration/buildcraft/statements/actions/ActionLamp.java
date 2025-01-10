@@ -1,12 +1,12 @@
-package pl.asie.computronics.integration.buildcraft.statements.actions;
+package org.libreflock.computronics.integration.buildcraft.statements.actions;
 
 import buildcraft.api.statements.IStatementContainer;
 import buildcraft.api.statements.IStatementParameter;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import pl.asie.computronics.integration.buildcraft.statements.parameters.ActionParameterLampColor;
-import pl.asie.computronics.tile.TileColorfulLamp;
+import org.libreflock.computronics.integration.buildcraft.statements.parameters.ActionParameterLampColor;
+import org.libreflock.computronics.tile.TileColorfulLamp;
 
 /**
  * @author Vexatos

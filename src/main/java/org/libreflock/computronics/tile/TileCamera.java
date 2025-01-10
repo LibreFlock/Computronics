@@ -1,4 +1,4 @@
-package pl.asie.computronics.tile;
+package org.libreflock.computronics.tile;
 
 import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.lua.ILuaTask;
@@ -11,11 +11,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.Camera;
-import pl.asie.computronics.util.OCUtils;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.Camera;
+import org.libreflock.computronics.util.OCUtils;
 
 import javax.annotation.Nullable;
 

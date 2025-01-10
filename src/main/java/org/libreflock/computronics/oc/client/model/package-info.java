@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.oc.client.model;
+package org.libreflock.computronics.oc.client.model;
 
 import mcp.MethodsReturnNonnullByDefault;
 

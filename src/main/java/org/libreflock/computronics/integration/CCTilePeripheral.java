@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration;
+package org.libreflock.computronics.integration;
 
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
@@ -8,7 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.reference.Mods;
+import org.libreflock.computronics.reference.Mods;
 
 /**
  * @author Vexatos

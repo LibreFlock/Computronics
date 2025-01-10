@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.integration.storagedrawers;
+package org.libreflock.computronics.integration.storagedrawers;
 
 import mcp.MethodsReturnNonnullByDefault;
 

@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.tis3d.module;
+package org.libreflock.computronics.integration.tis3d.module;
 
 import li.cil.tis3d.api.FontRendererAPI;
 import li.cil.tis3d.api.machine.Casing;
@@ -16,9 +16,9 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
-import pl.asie.computronics.integration.tis3d.IntegrationTIS3D;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.boom.SelfDestruct;
+import org.libreflock.computronics.integration.tis3d.IntegrationTIS3D;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.boom.SelfDestruct;
 
 import java.util.ArrayList;
 import java.util.List;

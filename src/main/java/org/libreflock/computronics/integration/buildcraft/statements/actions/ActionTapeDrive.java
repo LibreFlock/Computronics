@@ -1,13 +1,13 @@
-package pl.asie.computronics.integration.buildcraft.statements.actions;
+package org.libreflock.computronics.integration.buildcraft.statements.actions;
 
 import buildcraft.api.statements.IStatementContainer;
 import buildcraft.api.statements.IStatementParameter;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import pl.asie.computronics.api.tape.IItemTapeStorage;
-import pl.asie.computronics.tile.TapeDriveState;
-import pl.asie.computronics.tile.TileTapeDrive;
+import org.libreflock.computronics.api.tape.IItemTapeStorage;
+import org.libreflock.computronics.tile.TapeDriveState;
+import org.libreflock.computronics.tile.TileTapeDrive;
 
 /**
  * @author Vexatos

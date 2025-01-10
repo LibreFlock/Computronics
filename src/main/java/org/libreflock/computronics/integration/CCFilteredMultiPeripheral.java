@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration;
+package org.libreflock.computronics.integration;
 
 import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.lua.LuaException;

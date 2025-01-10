@@ -1,9 +1,9 @@
-package pl.asie.computronics.integration.buildcraft.statements;
+package org.libreflock.computronics.integration.buildcraft.statements;
 
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import pl.asie.computronics.integration.buildcraft.statements.actions.Actions;
-import pl.asie.computronics.integration.buildcraft.statements.triggers.Triggers;
+import org.libreflock.computronics.integration.buildcraft.statements.actions.Actions;
+import org.libreflock.computronics.integration.buildcraft.statements.triggers.Triggers;
 
 /**
  * @author Vexatos

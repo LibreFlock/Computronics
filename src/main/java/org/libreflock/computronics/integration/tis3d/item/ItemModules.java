@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.tis3d.item;
+package org.libreflock.computronics.integration.tis3d.item;
 
 import li.cil.tis3d.api.machine.Casing;
 import li.cil.tis3d.api.machine.Face;
@@ -9,16 +9,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.integration.tis3d.IntegrationTIS3D;
-import pl.asie.computronics.integration.tis3d.manual.IModuleWithDocumentation;
-import pl.asie.computronics.integration.tis3d.module.ModuleBoom;
-import pl.asie.computronics.integration.tis3d.module.ModuleColorful;
-import pl.asie.computronics.integration.tis3d.module.ModuleTapeReader;
-import pl.asie.computronics.item.ItemMultipleComputronics;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.internal.IItemWithColor;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.integration.tis3d.IntegrationTIS3D;
+import org.libreflock.computronics.integration.tis3d.manual.IModuleWithDocumentation;
+import org.libreflock.computronics.integration.tis3d.module.ModuleBoom;
+import org.libreflock.computronics.integration.tis3d.module.ModuleColorful;
+import org.libreflock.computronics.integration.tis3d.module.ModuleTapeReader;
+import org.libreflock.computronics.item.ItemMultipleComputronics;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.internal.IItemWithColor;
 
 import java.awt.*;
 

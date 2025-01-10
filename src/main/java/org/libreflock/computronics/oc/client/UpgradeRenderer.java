@@ -1,4 +1,4 @@
-package pl.asie.computronics.oc.client;
+package org.libreflock.computronics.oc.client;
 
 import li.cil.oc.api.driver.item.UpgradeRenderer.MountPointName;
 import li.cil.oc.api.event.RobotRenderEvent;
@@ -21,10 +21,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
-import pl.asie.computronics.item.ItemOpenComputers;
-import pl.asie.computronics.oc.client.model.ModelRadar;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.internal.Triple;
+import org.libreflock.computronics.item.ItemOpenComputers;
+import org.libreflock.computronics.oc.client.model.ModelRadar;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.internal.Triple;
 
 import java.util.Arrays;
 import java.util.HashMap;

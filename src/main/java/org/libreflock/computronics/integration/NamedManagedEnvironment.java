@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration;
+package org.libreflock.computronics.integration;
 
 import li.cil.oc.api.Network;
 import li.cil.oc.api.driver.NamedBlock;

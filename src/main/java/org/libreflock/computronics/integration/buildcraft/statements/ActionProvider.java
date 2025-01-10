@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.buildcraft.statements;
+package org.libreflock.computronics.integration.buildcraft.statements;
 
 import buildcraft.api.statements.IActionExternal;
 import buildcraft.api.statements.IActionInternal;
@@ -8,10 +8,10 @@ import buildcraft.api.statements.StatementManager;
 import li.cil.oc.api.internal.Case;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import pl.asie.computronics.integration.buildcraft.statements.actions.Actions;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.tile.TileColorfulLamp;
-import pl.asie.computronics.tile.TileTapeDrive;
+import org.libreflock.computronics.integration.buildcraft.statements.actions.Actions;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.tile.TileColorfulLamp;
+import org.libreflock.computronics.tile.TileTapeDrive;
 
 import java.util.Collection;
 import java.util.LinkedList;

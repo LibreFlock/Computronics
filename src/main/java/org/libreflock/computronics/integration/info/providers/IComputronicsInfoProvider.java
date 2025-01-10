@@ -1,9 +1,9 @@
-package pl.asie.computronics.integration.info.providers;
+package org.libreflock.computronics.integration.info.providers;
 
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcp.mobius.waila.api.IWailaDataProvider;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.reference.Mods;
+import org.libreflock.computronics.reference.Mods;
 
 /**
  * @author Vexatos

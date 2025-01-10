@@ -1,10 +1,10 @@
-package pl.asie.computronics.integration.buildcraft;
+package org.libreflock.computronics.integration.buildcraft;
 
 import buildcraft.api.blueprints.BuilderAPI;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.lib.block.BlockBase;
-import pl.asie.lib.integration.buildcraft.SchematicBlockBase;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.asielib.block.BlockBase;
+import org.libreflock.asielib.integration.buildcraft.SchematicBlockBase;
 
 import java.util.ArrayList;
 

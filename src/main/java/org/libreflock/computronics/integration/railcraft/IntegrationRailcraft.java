@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.railcraft;
+package org.libreflock.computronics.integration.railcraft;
 
 import mods.railcraft.api.core.IVariantEnum;
 import mods.railcraft.client.render.tesr.TESRSignalBox;
@@ -20,20 +20,20 @@ import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.integration.railcraft.block.BlockDigitalDetector;
-import pl.asie.computronics.integration.railcraft.block.BlockDigitalSignalBox;
-import pl.asie.computronics.integration.railcraft.block.BlockLocomotiveRelay;
-import pl.asie.computronics.integration.railcraft.block.BlockTicketMachine;
-import pl.asie.computronics.integration.railcraft.gui.GuiProviderTicketMachine;
-import pl.asie.computronics.integration.railcraft.item.ItemRelaySensor;
-import pl.asie.computronics.integration.railcraft.tile.TileDigitalControllerBox;
-import pl.asie.computronics.integration.railcraft.tile.TileDigitalDetector;
-import pl.asie.computronics.integration.railcraft.tile.TileDigitalReceiverBox;
-import pl.asie.computronics.integration.railcraft.tile.TileLocomotiveRelay;
-import pl.asie.computronics.integration.railcraft.tile.TileTicketMachine;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.lib.network.Packet;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.integration.railcraft.block.BlockDigitalDetector;
+import org.libreflock.computronics.integration.railcraft.block.BlockDigitalSignalBox;
+import org.libreflock.computronics.integration.railcraft.block.BlockLocomotiveRelay;
+import org.libreflock.computronics.integration.railcraft.block.BlockTicketMachine;
+import org.libreflock.computronics.integration.railcraft.gui.GuiProviderTicketMachine;
+import org.libreflock.computronics.integration.railcraft.item.ItemRelaySensor;
+import org.libreflock.computronics.integration.railcraft.tile.TileDigitalControllerBox;
+import org.libreflock.computronics.integration.railcraft.tile.TileDigitalDetector;
+import org.libreflock.computronics.integration.railcraft.tile.TileDigitalReceiverBox;
+import org.libreflock.computronics.integration.railcraft.tile.TileLocomotiveRelay;
+import org.libreflock.computronics.integration.railcraft.tile.TileTicketMachine;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.asielib.network.Packet;
 
 import java.io.IOException;
 

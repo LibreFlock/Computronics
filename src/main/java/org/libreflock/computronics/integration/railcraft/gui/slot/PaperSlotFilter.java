@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.railcraft.gui.slot;
+package org.libreflock.computronics.integration.railcraft.gui.slot;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;

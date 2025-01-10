@@ -1,4 +1,4 @@
-package pl.asie.computronics.util;
+package org.libreflock.computronics.util;
 
 import li.cil.oc.api.Driver;
 import li.cil.oc.api.driver.DeviceInfo.DeviceAttribute;
@@ -18,8 +18,8 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.lib.util.ColorUtils;
-import pl.asie.lib.util.internal.IColorable;
+import org.libreflock.asielib.util.ColorUtils;
+import org.libreflock.asielib.util.internal.IColorable;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static pl.asie.lib.reference.Capabilities.COLORABLE_CAPABILITY;
+import static org.libreflock.asielib.reference.Capabilities.COLORABLE_CAPABILITY;
 
 /**
  * @author Vexatos

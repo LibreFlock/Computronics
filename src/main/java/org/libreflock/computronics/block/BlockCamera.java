@@ -1,4 +1,4 @@
-package pl.asie.computronics.block;
+package org.libreflock.computronics.block;
 
 import li.cil.oc.api.network.Environment;
 import net.minecraft.block.state.IBlockState;
@@ -8,10 +8,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.tile.TileCamera;
-import pl.asie.lib.tile.TileEntityBase;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.tile.TileCamera;
+import org.libreflock.asielib.tile.TileEntityBase;
 
 public class BlockCamera extends BlockPeripheral {
 

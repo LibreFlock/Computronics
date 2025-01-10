@@ -1,4 +1,4 @@
-package pl.asie.computronics.oc;
+package org.libreflock.computronics.oc;
 
 import li.cil.oc.api.event.RobotAnalyzeEvent;
 import li.cil.oc.api.event.RobotRenderEvent;
@@ -14,9 +14,9 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.computronics.item.ItemOpenComputers;
-import pl.asie.computronics.oc.driver.RobotUpgradeColorful;
-import pl.asie.computronics.reference.Mods;
+import org.libreflock.computronics.item.ItemOpenComputers;
+import org.libreflock.computronics.oc.driver.RobotUpgradeColorful;
+import org.libreflock.computronics.reference.Mods;
 
 import java.util.Locale;
 

@@ -1,4 +1,4 @@
-package pl.asie.computronics.oc.manual;
+package org.libreflock.computronics.oc.manual;
 
 import li.cil.oc.api.Manual;
 import li.cil.oc.api.manual.PathProvider;
@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import pl.asie.computronics.Computronics;
+import org.libreflock.computronics.Computronics;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,4 +1,4 @@
-package pl.asie.computronics.tile;
+package org.libreflock.computronics.tile;
 
 //import java.nio.file.FileSystem;
 
@@ -22,28 +22,28 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.api.audio.AudioPacket;
-import pl.asie.computronics.api.audio.IAudioReceiver;
-import pl.asie.computronics.api.audio.IAudioSource;
-import pl.asie.computronics.api.tape.IItemTapeStorage;
-import pl.asie.computronics.audio.AudioUtils;
-import pl.asie.computronics.cc.ComputronicsFileMount;
-import pl.asie.computronics.integration.charset.audio.IntegrationCharsetAudio;
-import pl.asie.computronics.network.PacketType;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.reference.Sounds;
-import pl.asie.computronics.tile.TapeDriveState.State;
-import pl.asie.computronics.util.ColorUtils;
-import pl.asie.computronics.util.OCUtils;
-import pl.asie.lib.network.Packet;
-import pl.asie.lib.util.internal.IColorable;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.api.audio.AudioPacket;
+import org.libreflock.computronics.api.audio.IAudioReceiver;
+import org.libreflock.computronics.api.audio.IAudioSource;
+import org.libreflock.computronics.api.tape.IItemTapeStorage;
+import org.libreflock.computronics.audio.AudioUtils;
+import org.libreflock.computronics.cc.ComputronicsFileMount;
+import org.libreflock.computronics.integration.charset.audio.IntegrationCharsetAudio;
+import org.libreflock.computronics.network.PacketType;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.reference.Sounds;
+import org.libreflock.computronics.tile.TapeDriveState.State;
+import org.libreflock.computronics.util.ColorUtils;
+import org.libreflock.computronics.util.OCUtils;
+import org.libreflock.asielib.network.Packet;
+import org.libreflock.asielib.util.internal.IColorable;
 
 import javax.annotation.Nullable;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static pl.asie.computronics.reference.Capabilities.AUDIO_RECEIVER_CAPABILITY;
+import static org.libreflock.computronics.reference.Capabilities.AUDIO_RECEIVER_CAPABILITY;
 
 public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSource, ITickable {
 

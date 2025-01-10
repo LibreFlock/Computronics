@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.integration.charset;
+package org.libreflock.computronics.integration.charset;
 
 import mcp.MethodsReturnNonnullByDefault;
 

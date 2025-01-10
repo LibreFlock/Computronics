@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.integration.forestry;
+package org.libreflock.computronics.integration.forestry;
 
 import mcp.MethodsReturnNonnullByDefault;
 

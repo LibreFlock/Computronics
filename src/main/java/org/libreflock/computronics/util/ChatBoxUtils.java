@@ -1,4 +1,4 @@
-package pl.asie.computronics.util;
+package org.libreflock.computronics.util;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
@@ -7,7 +7,7 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import pl.asie.computronics.reference.Config;
+import org.libreflock.computronics.reference.Config;
 
 public class ChatBoxUtils {
 

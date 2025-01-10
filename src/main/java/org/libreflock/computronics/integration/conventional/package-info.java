@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.integration.conventional;
+package org.libreflock.computronics.integration.conventional;
 
 import mcp.MethodsReturnNonnullByDefault;
 

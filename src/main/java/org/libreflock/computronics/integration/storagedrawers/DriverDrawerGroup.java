@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.storagedrawers;
+package org.libreflock.computronics.integration.storagedrawers;
 
 import com.jaquadro.minecraft.storagedrawers.api.storage.IDrawerGroup;
 import dan200.computercraft.api.lua.ILuaContext;
@@ -12,10 +12,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import pl.asie.computronics.integration.CCMultiPeripheral;
-import pl.asie.computronics.integration.DriverSpecificTileEntity;
-import pl.asie.computronics.integration.NamedManagedEnvironment;
-import pl.asie.computronics.reference.Names;
+import org.libreflock.computronics.integration.CCMultiPeripheral;
+import org.libreflock.computronics.integration.DriverSpecificTileEntity;
+import org.libreflock.computronics.integration.NamedManagedEnvironment;
+import org.libreflock.computronics.reference.Names;
 
 /**
  * @author Vexatos

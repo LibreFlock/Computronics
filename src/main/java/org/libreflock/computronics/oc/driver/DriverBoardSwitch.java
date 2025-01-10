@@ -1,4 +1,4 @@
-package pl.asie.computronics.oc.driver;
+package org.libreflock.computronics.oc.driver;
 
 import li.cil.oc.api.Network;
 import li.cil.oc.api.internal.Rack;
@@ -10,8 +10,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.util.OCUtils;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.util.OCUtils;
 
 import javax.annotation.Nullable;
 

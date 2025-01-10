@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.railcraft.gui.slot;
+package org.libreflock.computronics.integration.railcraft.gui.slot;
 
 import mods.railcraft.common.gui.slots.SlotSecure;
 import net.minecraft.inventory.IInventory;

@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.railcraft.gui;
+package org.libreflock.computronics.integration.railcraft.gui;
 
 import mods.railcraft.common.plugins.forge.PlayerPlugin;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -10,9 +10,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.computronics.integration.railcraft.gui.container.ContainerTicketMachine;
-import pl.asie.computronics.integration.railcraft.tile.TileTicketMachine;
-import pl.asie.lib.gui.managed.GuiProviderBase;
+import org.libreflock.computronics.integration.railcraft.gui.container.ContainerTicketMachine;
+import org.libreflock.computronics.integration.railcraft.tile.TileTicketMachine;
+import org.libreflock.asielib.gui.managed.GuiProviderBase;
 
 import javax.annotation.Nullable;
 

@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.integration.railcraft.gui.slot;
+package org.libreflock.computronics.integration.railcraft.gui.slot;
 
 import mcp.MethodsReturnNonnullByDefault;
 

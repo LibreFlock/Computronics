@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.integration.railcraft.signalling;
+package org.libreflock.computronics.integration.railcraft.signalling;
 
 import mcp.MethodsReturnNonnullByDefault;
 

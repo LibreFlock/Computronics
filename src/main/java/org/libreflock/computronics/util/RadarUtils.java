@@ -1,4 +1,4 @@
-package pl.asie.computronics.util;
+package org.libreflock.computronics.util;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import pl.asie.computronics.reference.Config;
+import org.libreflock.computronics.reference.Config;
 
 import java.util.HashMap;
 import java.util.HashSet;

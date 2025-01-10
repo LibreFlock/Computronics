@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.railcraft;
+package org.libreflock.computronics.integration.railcraft;
 
 import com.google.common.collect.MapMaker;
 import mods.railcraft.api.charge.IBatteryCart;
@@ -14,7 +14,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.minecart.MinecartUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import pl.asie.computronics.Computronics;
+import org.libreflock.computronics.Computronics;
 
 import javax.annotation.Nullable;
 import java.util.Map;

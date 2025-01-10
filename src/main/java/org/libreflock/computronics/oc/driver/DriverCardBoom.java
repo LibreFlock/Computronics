@@ -1,4 +1,4 @@
-package pl.asie.computronics.oc.driver;
+package org.libreflock.computronics.oc.driver;
 
 import li.cil.oc.api.Network;
 import li.cil.oc.api.machine.Arguments;
@@ -9,8 +9,8 @@ import li.cil.oc.api.network.Message;
 import li.cil.oc.api.network.Node;
 import li.cil.oc.api.network.Visibility;
 import net.minecraft.nbt.NBTTagCompound;
-import pl.asie.computronics.util.OCUtils;
-import pl.asie.computronics.util.boom.SelfDestruct;
+import org.libreflock.computronics.util.OCUtils;
+import org.libreflock.computronics.util.boom.SelfDestruct;
 
 /**
  * @author Vexatos

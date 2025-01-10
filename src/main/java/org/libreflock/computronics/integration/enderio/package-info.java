@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.integration.enderio;
+package org.libreflock.computronics.integration.enderio;
 
 import mcp.MethodsReturnNonnullByDefault;
 

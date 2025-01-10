@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.tis3d.manual;
+package org.libreflock.computronics.integration.tis3d.manual;
 
 import li.cil.tis3d.api.ManualAPI;
 import li.cil.tis3d.api.manual.PathProvider;
@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import pl.asie.computronics.integration.tis3d.IntegrationTIS3D;
+import org.libreflock.computronics.integration.tis3d.IntegrationTIS3D;
 
 /**
  * @author Vexatos

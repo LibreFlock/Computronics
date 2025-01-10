@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.tis3d.manual;
+package org.libreflock.computronics.integration.tis3d.manual;
 
 import net.minecraft.item.ItemStack;
 

@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.charset.audio;
+package org.libreflock.computronics.integration.charset.audio;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -11,17 +11,17 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import pl.asie.charset.api.audio.AudioAPI;
-import pl.asie.charset.api.audio.AudioData;
-import pl.asie.charset.api.audio.AudioSink;
-import pl.asie.charset.api.audio.IAudioReceiver;
-import pl.asie.charset.api.audio.IAudioSource;
-import pl.asie.computronics.api.audio.AudioPacket;
-import pl.asie.computronics.api.audio.AudioPacketDFPWM;
-import pl.asie.computronics.tile.TileAudioCable;
-import pl.asie.computronics.tile.TileSpeaker;
-import pl.asie.computronics.tile.TileSpeechBox;
-import pl.asie.computronics.tile.TileTapeDrive;
+import org.libreflock.charset.api.audio.AudioAPI;
+import org.libreflock.charset.api.audio.AudioData;
+import org.libreflock.charset.api.audio.AudioSink;
+import org.libreflock.charset.api.audio.IAudioReceiver;
+import org.libreflock.charset.api.audio.IAudioSource;
+import org.libreflock.computronics.api.audio.AudioPacket;
+import org.libreflock.computronics.api.audio.AudioPacketDFPWM;
+import org.libreflock.computronics.tile.TileAudioCable;
+import org.libreflock.computronics.tile.TileSpeaker;
+import org.libreflock.computronics.tile.TileSpeechBox;
+import org.libreflock.computronics.tile.TileTapeDrive;
 
 import javax.annotation.Nullable;
 
@@ -127,7 +127,7 @@ public class IntegrationCharsetAudio {
 
 	public static int send(IBlockAccess world, BlockPos pos, AudioPacket packet, float volume, boolean ignoreComputronicsAPICheck) {
 		AudioData dataNew;
-		pl.asie.charset.api.audio.AudioPacket packetNew;
+		org.libreflock.charset.api.audio.AudioPacket packetNew;
 
 		if(packet instanceof AudioPacketDFPWM) {
 			int time = ((AudioPacketDFPWM) packet).data.length * 8000 / ((AudioPacketDFPWM) packet).frequency;
@@ -136,12 +136,12 @@ public class IntegrationCharsetAudio {
 			dataNew = new AudioDataDummy(packet);
 		}
 
-		packetNew = new pl.asie.charset.api.audio.AudioPacket(dataNew, volume);
+		packetNew = new org.libreflock.charset.api.audio.AudioPacket(dataNew, volume);
 		for(EnumFacing facing : EnumFacing.VALUES) {
 			BlockPos posO = pos.offset(facing);
 			TileEntity tile = world.getTileEntity(posO);
 			if(tile != null && tile.hasCapability(RECEIVER_CAPABILITY, facing.getOpposite())) {
-				if(!ignoreComputronicsAPICheck && tile instanceof pl.asie.computronics.api.audio.IAudioReceiver) {
+				if(!ignoreComputronicsAPICheck && tile instanceof org.libreflock.computronics.api.audio.IAudioReceiver) {
 					continue;
 				}
 				tile.getCapability(RECEIVER_CAPABILITY, facing.getOpposite()).receive(packetNew);

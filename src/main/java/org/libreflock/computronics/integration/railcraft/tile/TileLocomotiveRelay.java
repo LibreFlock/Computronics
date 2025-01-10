@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.railcraft.tile;
+package org.libreflock.computronics.integration.railcraft.tile;
 
 import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.lua.LuaException;
@@ -16,11 +16,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.integration.railcraft.LocomotiveManager;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.tile.TileEntityPeripheralBase;
-import pl.asie.computronics.util.OCUtils;
+import org.libreflock.computronics.integration.railcraft.LocomotiveManager;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.tile.TileEntityPeripheralBase;
+import org.libreflock.computronics.util.OCUtils;
 
 import javax.annotation.Nullable;
 import java.lang.ref.WeakReference;

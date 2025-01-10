@@ -1,11 +1,11 @@
-package pl.asie.computronics.gui.container;
+package org.libreflock.computronics.gui.container;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
-import pl.asie.computronics.Computronics;
-import pl.asie.lib.gui.container.ContainerBase;
-import pl.asie.lib.tile.TileEntityBase;
-import pl.asie.lib.util.SlotTyped;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.asielib.gui.container.ContainerBase;
+import org.libreflock.asielib.tile.TileEntityBase;
+import org.libreflock.asielib.util.SlotTyped;
 
 public class ContainerTapeReader extends ContainerBase {
 

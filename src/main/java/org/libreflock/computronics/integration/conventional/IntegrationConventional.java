@@ -1,9 +1,9 @@
-package pl.asie.computronics.integration.conventional;
+package org.libreflock.computronics.integration.conventional;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.reference.Mods;
+import org.libreflock.computronics.reference.Mods;
 import vexatos.conventional.event.PermissionEvent;
 
 /**

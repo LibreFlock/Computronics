@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.tile;
+package org.libreflock.computronics.tile;
 
 import mcp.MethodsReturnNonnullByDefault;
 

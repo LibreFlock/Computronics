@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.buildcraft.statements.parameters;
+package org.libreflock.computronics.integration.buildcraft.statements.parameters;
 
 import buildcraft.api.statements.IStatement;
 import buildcraft.api.statements.IStatementContainer;
@@ -11,8 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.computronics.integration.buildcraft.statements.StatementParameters;
-import pl.asie.computronics.util.StringUtil;
+import org.libreflock.computronics.integration.buildcraft.statements.StatementParameters;
+import org.libreflock.computronics.util.StringUtil;
 
 /**
  * @author Vexatos

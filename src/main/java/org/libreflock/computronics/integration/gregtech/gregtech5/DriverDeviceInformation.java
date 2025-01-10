@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.gregtech.gregtech5;
+package org.libreflock.computronics.integration.gregtech.gregtech5;
 
 import gregtech.api.interfaces.tileentity.IGregTechDeviceInformation;
 import li.cil.oc.api.machine.Arguments;
@@ -9,7 +9,7 @@ import li.cil.oc.api.prefab.DriverSidedTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import pl.asie.computronics.integration.ManagedEnvironmentOCTile;
+import org.libreflock.computronics.integration.ManagedEnvironmentOCTile;
 
 public class DriverDeviceInformation extends DriverSidedTileEntity {
 

@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.gui.providers;
+package org.libreflock.computronics.gui.providers;
 
 import mcp.MethodsReturnNonnullByDefault;
 

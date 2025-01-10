@@ -1,4 +1,4 @@
-package pl.asie.computronics.tile;
+package org.libreflock.computronics.tile;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -6,20 +6,20 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import pl.asie.computronics.api.audio.AudioPacket;
-import pl.asie.computronics.api.audio.IAudioConnection;
-import pl.asie.computronics.api.audio.IAudioReceiver;
-import pl.asie.computronics.audio.AudioUtils;
-import pl.asie.computronics.reference.Capabilities;
-import pl.asie.computronics.util.ColorUtils;
-import pl.asie.lib.tile.TileEntityBase;
-import pl.asie.lib.util.internal.IColorable;
+import org.libreflock.computronics.api.audio.AudioPacket;
+import org.libreflock.computronics.api.audio.IAudioConnection;
+import org.libreflock.computronics.api.audio.IAudioReceiver;
+import org.libreflock.computronics.audio.AudioUtils;
+import org.libreflock.computronics.reference.Capabilities;
+import org.libreflock.computronics.util.ColorUtils;
+import org.libreflock.asielib.tile.TileEntityBase;
+import org.libreflock.asielib.util.internal.IColorable;
 
 import javax.annotation.Nullable;
 import java.util.HashSet;
 
-import static pl.asie.computronics.reference.Capabilities.AUDIO_RECEIVER_CAPABILITY;
-import static pl.asie.computronics.reference.Capabilities.AUDIO_SOURCE_CAPABILITY;
+import static org.libreflock.computronics.reference.Capabilities.AUDIO_RECEIVER_CAPABILITY;
+import static org.libreflock.computronics.reference.Capabilities.AUDIO_SOURCE_CAPABILITY;
 
 public class TileAudioCable extends TileEntityBase implements IAudioReceiver, IColorable {
 

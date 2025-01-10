@@ -1,4 +1,4 @@
-package pl.asie.computronics.tape;
+package org.libreflock.computronics.tape;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -12,10 +12,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.item.ItemPortableTapeDrive;
-import pl.asie.computronics.tile.TapeDriveState.State;
-import pl.asie.lib.audio.StreamingAudioPlayer;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.item.ItemPortableTapeDrive;
+import org.libreflock.computronics.tile.TapeDriveState.State;
+import org.libreflock.asielib.audio.StreamingAudioPlayer;
 
 import javax.annotation.Nullable;
 import java.util.Iterator;

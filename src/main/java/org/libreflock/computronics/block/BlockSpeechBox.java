@@ -1,10 +1,10 @@
-package pl.asie.computronics.block;
+package org.libreflock.computronics.block;
 
 import li.cil.oc.api.network.Environment;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import pl.asie.computronics.tile.TileSpeechBox;
+import org.libreflock.computronics.tile.TileSpeechBox;
 
 /**
  * @author Vexatos

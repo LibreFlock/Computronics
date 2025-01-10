@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.buildcraft.pluggable;
+package org.libreflock.computronics.integration.buildcraft.pluggable;
 
 import buildcraft.api.transport.IPipeTile;
 import buildcraft.api.transport.pluggable.PipePluggable;
@@ -25,8 +25,8 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import pl.asie.computronics.integration.buildcraft.pluggable.DroneStationPluggable.DroneStationState;
-import pl.asie.computronics.util.OCUtils;
+import org.libreflock.computronics.integration.buildcraft.pluggable.DroneStationPluggable.DroneStationState;
+import org.libreflock.computronics.util.OCUtils;
 
 import java.util.Map;
 

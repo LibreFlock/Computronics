@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.cofh;
+package org.libreflock.computronics.integration.cofh;
 
 import cofh.api.energy.IEnergyHandler;
 import cofh.api.energy.IEnergyProvider;
@@ -10,8 +10,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import pl.asie.computronics.integration.CCMultiPeripheral;
-import pl.asie.computronics.reference.Names;
+import org.libreflock.computronics.integration.CCMultiPeripheral;
+import org.libreflock.computronics.reference.Names;
 
 /**
  * @author Vexatos

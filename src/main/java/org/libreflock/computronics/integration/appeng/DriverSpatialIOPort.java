@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.appeng;
+package org.libreflock.computronics.integration.appeng;
 
 import appeng.api.config.Actionable;
 import appeng.api.config.PowerMultiplier;
@@ -24,11 +24,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import pl.asie.computronics.api.multiperipheral.IMultiPeripheral;
-import pl.asie.computronics.integration.CCMultiPeripheral;
-import pl.asie.computronics.integration.ManagedEnvironmentOCTile;
-import pl.asie.computronics.integration.util.SpatialIOUtil;
-import pl.asie.computronics.reference.Names;
+import org.libreflock.computronics.api.multiperipheral.IMultiPeripheral;
+import org.libreflock.computronics.integration.CCMultiPeripheral;
+import org.libreflock.computronics.integration.ManagedEnvironmentOCTile;
+import org.libreflock.computronics.integration.util.SpatialIOUtil;
+import org.libreflock.computronics.reference.Names;
 
 import java.util.HashMap;
 

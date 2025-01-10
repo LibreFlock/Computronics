@@ -1,4 +1,4 @@
-package pl.asie.computronics.util.sound;
+package org.libreflock.computronics.util.sound;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -13,8 +13,8 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.AL10;
 import org.lwjgl.openal.OpenALException;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.reference.Config;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.reference.Config;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;

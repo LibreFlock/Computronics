@@ -1,4 +1,4 @@
-/*package pl.asie.computronics.integration.tis3d.module;
+/*package org.libreflock.computronics.integration.tis3d.module;
 
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;

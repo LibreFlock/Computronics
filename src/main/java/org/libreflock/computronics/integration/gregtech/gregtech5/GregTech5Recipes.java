@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.gregtech.gregtech5;
+package org.libreflock.computronics.integration.gregtech.gregtech5;
 
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -13,12 +13,12 @@ import mods.railcraft.common.items.ItemRail;
 import mods.railcraft.common.items.RailcraftItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.integration.ModRecipes;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.RecipeUtils;
-import pl.asie.lib.util.color.RecipeColorizer;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.integration.ModRecipes;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.RecipeUtils;
+import org.libreflock.asielib.util.color.RecipeColorizer;
 
 /**
  * @author Vexatos

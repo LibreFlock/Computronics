@@ -1,4 +1,4 @@
-package pl.asie.computronics.oc.driver;
+package org.libreflock.computronics.oc.driver;
 
 import li.cil.oc.api.Network;
 import li.cil.oc.api.driver.DeviceInfo;
@@ -13,9 +13,9 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.util.OCUtils;
-import pl.asie.computronics.util.RadarUtils;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.util.OCUtils;
+import org.libreflock.computronics.util.RadarUtils;
 
 import java.util.ArrayList;
 import java.util.List;

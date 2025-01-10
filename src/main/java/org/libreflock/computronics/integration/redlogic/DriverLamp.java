@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.redlogic;
+package org.libreflock.computronics.integration.redlogic;
 
 import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.lua.LuaException;
@@ -15,9 +15,9 @@ import net.minecraft.block.Block;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import pl.asie.computronics.api.multiperipheral.IMultiPeripheral;
-import pl.asie.computronics.integration.CCMultiPeripheral;
-import pl.asie.computronics.reference.Names;
+import org.libreflock.computronics.api.multiperipheral.IMultiPeripheral;
+import org.libreflock.computronics.integration.CCMultiPeripheral;
+import org.libreflock.computronics.reference.Names;
 
 public class DriverLamp {
 

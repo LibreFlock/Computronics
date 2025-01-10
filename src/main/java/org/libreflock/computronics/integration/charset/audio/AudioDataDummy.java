@@ -1,17 +1,17 @@
-package pl.asie.computronics.integration.charset.audio;
+package org.libreflock.computronics.integration.charset.audio;
 
 import io.netty.buffer.ByteBuf;
-import pl.asie.charset.api.audio.AudioData;
-import pl.asie.charset.api.audio.AudioPacket;
-import pl.asie.charset.api.audio.AudioSink;
+import org.libreflock.charset.api.audio.AudioData;
+import org.libreflock.charset.api.audio.AudioPacket;
+import org.libreflock.charset.api.audio.AudioSink;
 
 import javax.annotation.Nullable;
 
 public class AudioDataDummy extends AudioData {
 
-	private final pl.asie.computronics.api.audio.AudioPacket wrapped;
+	private final org.libreflock.computronics.api.audio.AudioPacket wrapped;
 
-	public AudioDataDummy(@Nullable pl.asie.computronics.api.audio.AudioPacket wrapped) {
+	public AudioDataDummy(@Nullable org.libreflock.computronics.api.audio.AudioPacket wrapped) {
 		this.wrapped = wrapped;
 	}
 

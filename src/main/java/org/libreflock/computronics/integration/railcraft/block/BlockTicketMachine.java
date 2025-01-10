@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.railcraft.block;
+package org.libreflock.computronics.integration.railcraft.block;
 
 import li.cil.oc.api.network.Environment;
 import mods.railcraft.api.charge.Charge;
@@ -10,10 +10,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.block.BlockPeripheral;
-import pl.asie.computronics.integration.railcraft.tile.TileTicketMachine;
-import pl.asie.computronics.oc.manual.IBlockWithPrefix;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.block.BlockPeripheral;
+import org.libreflock.computronics.integration.railcraft.tile.TileTicketMachine;
+import org.libreflock.computronics.oc.manual.IBlockWithPrefix;
 
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.forestry.nanomachines;
+package org.libreflock.computronics.integration.forestry.nanomachines;
 
 import li.cil.oc.api.Nanomachines;
 import li.cil.oc.api.nanomachines.Controller;
@@ -6,7 +6,7 @@ import li.cil.oc.api.nanomachines.DisableReason;
 import li.cil.oc.api.prefab.AbstractBehavior;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import pl.asie.computronics.integration.forestry.entity.EntitySwarm;
+import org.libreflock.computronics.integration.forestry.entity.EntitySwarm;
 
 /**
  * @author Vexatos

@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.mfr;
+package org.libreflock.computronics.integration.mfr;
 
 import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.lua.LuaException;
@@ -6,9 +6,9 @@ import dan200.computercraft.api.peripheral.IComputerAccess;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import pl.asie.computronics.api.multiperipheral.IMultiPeripheral;
-import pl.asie.computronics.integration.CCMultiPeripheral;
-import pl.asie.computronics.reference.Names;
+import org.libreflock.computronics.api.multiperipheral.IMultiPeripheral;
+import org.libreflock.computronics.integration.CCMultiPeripheral;
+import org.libreflock.computronics.reference.Names;
 import powercrystals.minefactoryreloaded.api.IDeepStorageUnit;
 
 public class DriverDeepStorageUnit {

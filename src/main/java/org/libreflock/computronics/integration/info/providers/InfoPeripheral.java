@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.info.providers;
+package org.libreflock.computronics.integration.info.providers;
 
 import li.cil.oc.api.network.Environment;
 import li.cil.oc.api.network.Node;
@@ -16,10 +16,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.integration.info.ConfigValues;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.StringUtil;
-import pl.asie.computronics.util.internal.IComputronicsPeripheral;
+import org.libreflock.computronics.integration.info.ConfigValues;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.StringUtil;
+import org.libreflock.computronics.util.internal.IComputronicsPeripheral;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

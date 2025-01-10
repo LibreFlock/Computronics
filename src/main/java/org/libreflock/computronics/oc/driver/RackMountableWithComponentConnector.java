@@ -1,4 +1,4 @@
-package pl.asie.computronics.oc.driver;
+package org.libreflock.computronics.oc.driver;
 
 import li.cil.oc.api.component.RackBusConnectable;
 import li.cil.oc.api.component.RackMountable;

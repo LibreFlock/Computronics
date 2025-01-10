@@ -1,4 +1,4 @@
-package pl.asie.computronics.client;
+package org.libreflock.computronics.client;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -9,8 +9,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fml.client.registry.ISimpleBlockRenderingHandler;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import org.lwjgl.opengl.GL11;
-import pl.asie.computronics.block.BlockAudioCable;
-import pl.asie.computronics.tile.TileAudioCable;
+import org.libreflock.computronics.block.BlockAudioCable;
+import org.libreflock.computronics.tile.TileAudioCable;
 
 public class AudioCableRender implements ISimpleBlockRenderingHandler {
 

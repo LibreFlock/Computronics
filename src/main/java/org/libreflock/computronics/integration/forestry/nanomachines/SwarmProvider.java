@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.forestry.nanomachines;
+package org.libreflock.computronics.integration.forestry.nanomachines;
 
 import forestry.api.apiculture.BeeManager;
 import forestry.api.apiculture.EnumBeeType;
@@ -24,8 +24,8 @@ import net.minecraftforge.event.entity.minecart.MinecartInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import pl.asie.computronics.integration.forestry.IntegrationForestry;
-import pl.asie.lib.util.RayTracer;
+import org.libreflock.computronics.integration.forestry.IntegrationForestry;
+import org.libreflock.asielib.util.RayTracer;
 
 import javax.annotation.Nullable;
 import java.util.Collections;

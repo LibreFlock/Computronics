@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration;
+package org.libreflock.computronics.integration;
 
 import mods.railcraft.common.blocks.RailcraftBlocks;
 import mods.railcraft.common.blocks.detector.EnumDetector;
@@ -14,13 +14,13 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.integration.railcraft.SignalTypes;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.RecipeUtils;
-import pl.asie.lib.util.color.RecipeColorizer;
-import pl.asie.lib.util.color.RecipeDecolorizer;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.integration.railcraft.SignalTypes;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.RecipeUtils;
+import org.libreflock.asielib.util.color.RecipeColorizer;
+import org.libreflock.asielib.util.color.RecipeDecolorizer;
 
 /**
  * @author Vexatos

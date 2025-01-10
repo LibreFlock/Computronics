@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.tape;
+package org.libreflock.computronics.tape;
 
 import mcp.MethodsReturnNonnullByDefault;
 

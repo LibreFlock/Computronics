@@ -1,4 +1,4 @@
-/*package pl.asie.computronics.integration.buildcraft;
+/*package org.libreflock.computronics.integration.buildcraft;
 
 /**
  * @author Vexatos

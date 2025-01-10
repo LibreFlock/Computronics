@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.forestry.entity;
+package org.libreflock.computronics.integration.forestry.entity;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.MoverType;

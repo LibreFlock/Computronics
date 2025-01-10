@@ -1,11 +1,11 @@
-package pl.asie.computronics.item.block;
+package org.libreflock.computronics.item.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.computronics.util.internal.IItemWithColor;
+import org.libreflock.computronics.util.internal.IItemWithColor;
 
 public class ComputronicsItemBlock extends ItemBlock implements IItemWithColor {
 

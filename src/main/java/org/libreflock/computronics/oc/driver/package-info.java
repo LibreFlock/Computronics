@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.oc.driver;
+package org.libreflock.computronics.oc.driver;
 
 import mcp.MethodsReturnNonnullByDefault;
 

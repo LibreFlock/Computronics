@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.integration.flamingo;
+package org.libreflock.computronics.integration.flamingo;
 
 import mcp.MethodsReturnNonnullByDefault;
 

@@ -1,4 +1,4 @@
-package pl.asie.computronics.oc.driver;
+package org.libreflock.computronics.oc.driver;
 
 import li.cil.oc.api.Network;
 import li.cil.oc.api.machine.Arguments;
@@ -13,14 +13,14 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.network.PacketType;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.util.OCUtils;
-import pl.asie.computronics.util.sound.Audio;
-import pl.asie.computronics.util.sound.AudioType;
-import pl.asie.computronics.util.sound.Channel;
-import pl.asie.lib.network.Packet;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.network.PacketType;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.util.OCUtils;
+import org.libreflock.computronics.util.sound.Audio;
+import org.libreflock.computronics.util.sound.AudioType;
+import org.libreflock.computronics.util.sound.Channel;
+import org.libreflock.asielib.network.Packet;
 
 import java.io.IOException;
 import java.util.HashMap;

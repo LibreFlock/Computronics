@@ -1,4 +1,4 @@
-package pl.asie.computronics.oc.driver;
+package org.libreflock.computronics.oc.driver;
 
 import li.cil.oc.api.Network;
 import li.cil.oc.api.internal.Rotatable;
@@ -16,34 +16,34 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.api.audio.AudioPacket;
-import pl.asie.computronics.api.audio.IAudioReceiver;
-import pl.asie.computronics.api.audio.IAudioSource;
-import pl.asie.computronics.audio.AudioUtils;
-import pl.asie.computronics.audio.SoundCardPacket;
-import pl.asie.computronics.integration.charset.audio.IntegrationCharsetAudio;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.ColorUtils;
-import pl.asie.computronics.util.OCUtils;
-import pl.asie.computronics.util.sound.Instruction.Close;
-import pl.asie.computronics.util.sound.Instruction.Open;
-import pl.asie.computronics.util.sound.Instruction.ResetAM;
-import pl.asie.computronics.util.sound.Instruction.ResetEnvelope;
-import pl.asie.computronics.util.sound.Instruction.ResetFM;
-import pl.asie.computronics.util.sound.Instruction.SetADSR;
-import pl.asie.computronics.util.sound.Instruction.SetAM;
-import pl.asie.computronics.util.sound.Instruction.SetFM;
-import pl.asie.computronics.util.sound.Instruction.SetFrequency;
-import pl.asie.computronics.util.sound.Instruction.SetLFSR;
-import pl.asie.computronics.util.sound.Instruction.SetVolume;
-import pl.asie.computronics.util.sound.SoundBoard;
-import pl.asie.lib.util.internal.IColorable;
+import org.libreflock.computronics.api.audio.AudioPacket;
+import org.libreflock.computronics.api.audio.IAudioReceiver;
+import org.libreflock.computronics.api.audio.IAudioSource;
+import org.libreflock.computronics.audio.AudioUtils;
+import org.libreflock.computronics.audio.SoundCardPacket;
+import org.libreflock.computronics.integration.charset.audio.IntegrationCharsetAudio;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.ColorUtils;
+import org.libreflock.computronics.util.OCUtils;
+import org.libreflock.computronics.util.sound.Instruction.Close;
+import org.libreflock.computronics.util.sound.Instruction.Open;
+import org.libreflock.computronics.util.sound.Instruction.ResetAM;
+import org.libreflock.computronics.util.sound.Instruction.ResetEnvelope;
+import org.libreflock.computronics.util.sound.Instruction.ResetFM;
+import org.libreflock.computronics.util.sound.Instruction.SetADSR;
+import org.libreflock.computronics.util.sound.Instruction.SetAM;
+import org.libreflock.computronics.util.sound.Instruction.SetFM;
+import org.libreflock.computronics.util.sound.Instruction.SetFrequency;
+import org.libreflock.computronics.util.sound.Instruction.SetLFSR;
+import org.libreflock.computronics.util.sound.Instruction.SetVolume;
+import org.libreflock.computronics.util.sound.SoundBoard;
+import org.libreflock.asielib.util.internal.IColorable;
 
 import javax.annotation.Nullable;
 
-import static pl.asie.computronics.reference.Capabilities.AUDIO_RECEIVER_CAPABILITY;
-import static pl.asie.computronics.reference.Capabilities.AUDIO_SOURCE_CAPABILITY;
+import static org.libreflock.computronics.reference.Capabilities.AUDIO_RECEIVER_CAPABILITY;
+import static org.libreflock.computronics.reference.Capabilities.AUDIO_SOURCE_CAPABILITY;
 
 /**
  * @author Vexatos, gamax92
@@ -302,10 +302,10 @@ public class DriverCardSound extends ManagedEnvironmentWithComponentConnector im
 		if(Mods.API.hasAPI(Mods.API.CharsetAudio)) {
 			if(capability == IntegrationCharsetAudio.SOURCE_CAPABILITY && facing != null && connectsAudio(facing)) {
 				if(charsetAudioSource == null) {
-					charsetAudioSource = new pl.asie.charset.api.audio.IAudioSource() {
+					charsetAudioSource = new org.libreflock.charset.api.audio.IAudioSource() {
 					};
 				}
-				return IntegrationCharsetAudio.SOURCE_CAPABILITY.cast((pl.asie.charset.api.audio.IAudioSource) charsetAudioSource);
+				return IntegrationCharsetAudio.SOURCE_CAPABILITY.cast((org.libreflock.charset.api.audio.IAudioSource) charsetAudioSource);
 			}
 		}
 		if(capability == AUDIO_SOURCE_CAPABILITY && facing != null && connectsAudio(facing)) {

@@ -1,8 +1,8 @@
-package pl.asie.computronics.integration.charset.audio;
+package org.libreflock.computronics.integration.charset.audio;
 
 import io.netty.buffer.ByteBuf;
-import pl.asie.charset.api.audio.IAudioDataPCM;
-import pl.asie.lib.audio.DFPWM;
+import org.libreflock.charset.api.audio.IAudioDataPCM;
+import org.libreflock.asielib.audio.DFPWM;
 
 public class AudioDataDFPWM extends AudioDataDummy implements IAudioDataPCM {
 
@@ -15,7 +15,7 @@ public class AudioDataDFPWM extends AudioDataDummy implements IAudioDataPCM {
 		super(null);
 	}
 
-	public AudioDataDFPWM(pl.asie.computronics.api.audio.AudioPacket wrapped, byte[] data, int time) {
+	public AudioDataDFPWM(org.libreflock.computronics.api.audio.AudioPacket wrapped, byte[] data, int time) {
 		super(wrapped);
 		this.data = data;
 		this.time = time;

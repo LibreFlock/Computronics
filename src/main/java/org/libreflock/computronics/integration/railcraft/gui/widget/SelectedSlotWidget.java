@@ -1,10 +1,10 @@
-package pl.asie.computronics.integration.railcraft.gui.widget;
+package org.libreflock.computronics.integration.railcraft.gui.widget;
 
 import mods.railcraft.client.gui.GuiContainerRailcraft;
 import mods.railcraft.common.gui.widgets.Widget;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.computronics.integration.railcraft.tile.TileTicketMachine;
+import org.libreflock.computronics.integration.railcraft.tile.TileTicketMachine;
 
 /**
  * @author Vexatos

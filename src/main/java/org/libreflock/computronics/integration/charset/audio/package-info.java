@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.integration.charset.audio;
+package org.libreflock.computronics.integration.charset.audio;
 
 import mcp.MethodsReturnNonnullByDefault;
 

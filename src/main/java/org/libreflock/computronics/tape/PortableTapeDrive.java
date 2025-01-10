@@ -1,4 +1,4 @@
-package pl.asie.computronics.tape;
+package org.libreflock.computronics.tape;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,18 +16,18 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.api.audio.AudioPacket;
-import pl.asie.computronics.api.audio.IAudioReceiver;
-import pl.asie.computronics.api.audio.IAudioSource;
-import pl.asie.computronics.api.tape.IItemTapeStorage;
-import pl.asie.computronics.audio.MachineSound;
-import pl.asie.computronics.network.PacketType;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.reference.Sounds;
-import pl.asie.computronics.tile.TapeDriveState;
-import pl.asie.lib.network.Packet;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.api.audio.AudioPacket;
+import org.libreflock.computronics.api.audio.IAudioReceiver;
+import org.libreflock.computronics.api.audio.IAudioSource;
+import org.libreflock.computronics.api.tape.IItemTapeStorage;
+import org.libreflock.computronics.audio.MachineSound;
+import org.libreflock.computronics.network.PacketType;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.reference.Sounds;
+import org.libreflock.computronics.tile.TapeDriveState;
+import org.libreflock.asielib.network.Packet;
 
 import javax.annotation.Nullable;
 

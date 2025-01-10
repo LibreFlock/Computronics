@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.buildcraft.pluggable;
+package org.libreflock.computronics.integration.buildcraft.pluggable;
 
 import buildcraft.api.core.render.ITextureStates;
 import buildcraft.api.transport.IPipe;
@@ -21,7 +21,7 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.lwjgl.opengl.GL11;
-import pl.asie.computronics.integration.buildcraft.pluggable.DroneStationRenderer.TextureHandler.Textures;
+import org.libreflock.computronics.integration.buildcraft.pluggable.DroneStationRenderer.TextureHandler.Textures;
 
 /**
  * @author Vexatos

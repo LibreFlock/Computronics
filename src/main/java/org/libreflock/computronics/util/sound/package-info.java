@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.util.sound;
+package org.libreflock.computronics.util.sound;
 
 import mcp.MethodsReturnNonnullByDefault;
 

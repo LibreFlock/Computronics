@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.railcraft.signalling;
+package org.libreflock.computronics.integration.railcraft.signalling;
 
 import com.google.common.collect.Sets;
 import mods.railcraft.api.signals.SignalAspect;
@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.computronics.util.collect.SimpleInvertibleDualMap;
+import org.libreflock.computronics.util.collect.SimpleInvertibleDualMap;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

@@ -1,6 +1,6 @@
-package pl.asie.computronics.integration.charset.audio;
+package org.libreflock.computronics.integration.charset.audio;
 
-import pl.asie.charset.api.audio.IAudioSource;
+import org.libreflock.charset.api.audio.IAudioSource;
 
 /**
  * @author Vexatos

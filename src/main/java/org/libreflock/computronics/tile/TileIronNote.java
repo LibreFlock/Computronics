@@ -1,4 +1,4 @@
-package pl.asie.computronics.tile;
+package org.libreflock.computronics.tile;
 
 import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.lua.LuaException;
@@ -9,10 +9,10 @@ import li.cil.oc.api.machine.Context;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.NoteUtils;
-import pl.asie.computronics.util.OCUtils;
-import pl.asie.lib.api.tile.IBundledRedstoneProvider;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.NoteUtils;
+import org.libreflock.computronics.util.OCUtils;
+import org.libreflock.asielib.api.tile.IBundledRedstoneProvider;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

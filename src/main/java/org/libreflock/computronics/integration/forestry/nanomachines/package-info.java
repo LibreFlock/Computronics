@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.integration.forestry.nanomachines;
+package org.libreflock.computronics.integration.forestry.nanomachines;
 
 import mcp.MethodsReturnNonnullByDefault;
 

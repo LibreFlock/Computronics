@@ -1,4 +1,4 @@
-package pl.asie.computronics.tile;
+package org.libreflock.computronics.tile;
 
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
@@ -16,21 +16,21 @@ import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.api.multiperipheral.IMultiPeripheral;
-import pl.asie.computronics.audio.MachineSound;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.OCUtils;
-import pl.asie.computronics.util.internal.IComputronicsPeripheral;
-import pl.asie.lib.tile.TileMachine;
-import pl.asie.lib.util.ColorUtils;
-import pl.asie.lib.util.internal.IColorable;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.api.multiperipheral.IMultiPeripheral;
+import org.libreflock.computronics.audio.MachineSound;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.OCUtils;
+import org.libreflock.computronics.util.internal.IComputronicsPeripheral;
+import org.libreflock.asielib.tile.TileMachine;
+import org.libreflock.asielib.util.ColorUtils;
+import org.libreflock.asielib.util.internal.IColorable;
 
 import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-//import pl.asie.computronics.api.multiperipheral.IMultiPeripheral;
+//import org.libreflock.computronics.api.multiperipheral.IMultiPeripheral;
 
 // #######################################################
 //
@@ -42,7 +42,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 	@Optional.Interface(iface = "li.cil.oc.api.network.Environment", modid = Mods.OpenComputers),
 	@Optional.Interface(iface = "li.cil.oc.api.driver.DeviceInfo", modid = Mods.OpenComputers),
 	@Optional.Interface(iface = "li.cil.oc.api.network.BlacklistedPeripheral", modid = Mods.OpenComputers),
-	@Optional.Interface(iface = "pl.asie.computronics.api.multiperipheral.IMultiPeripheral", modid = Mods.ComputerCraft)
+	@Optional.Interface(iface = "org.libreflock.computronics.api.multiperipheral.IMultiPeripheral", modid = Mods.ComputerCraft)
 })
 public abstract class TileEntityPeripheralBase extends TileMachine implements Environment, DeviceInfo,
 	IMultiPeripheral, IComputronicsPeripheral, BlacklistedPeripheral, IColorable {

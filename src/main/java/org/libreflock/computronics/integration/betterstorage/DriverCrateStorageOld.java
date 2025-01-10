@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.betterstorage;
+package org.libreflock.computronics.integration.betterstorage;
 
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
@@ -9,7 +9,7 @@ import net.mcft.copy.betterstorage.api.ICrateStorage;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import pl.asie.computronics.integration.ManagedEnvironmentOCTile;
+import org.libreflock.computronics.integration.ManagedEnvironmentOCTile;
 
 import java.util.List;
 

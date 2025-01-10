@@ -1,9 +1,9 @@
-package pl.asie.computronics.integration.info;
+package org.libreflock.computronics.integration.info;
 
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaRegistrar;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.reference.Mods;
+import org.libreflock.computronics.reference.Mods;
 
 /**
  * @author Vexatos

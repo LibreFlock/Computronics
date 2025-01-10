@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.railcraft.block;
+package org.libreflock.computronics.integration.railcraft.block;
 
 import li.cil.oc.api.network.Environment;
 import mods.railcraft.common.blocks.BlockMeta;
@@ -10,17 +10,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.integration.railcraft.SignalTypes;
-import pl.asie.computronics.oc.block.IComputronicsEnvironmentBlock;
-import pl.asie.computronics.oc.manual.IBlockWithPrefix;
-import pl.asie.computronics.reference.Mods;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.integration.railcraft.SignalTypes;
+import org.libreflock.computronics.oc.block.IComputronicsEnvironmentBlock;
+import org.libreflock.computronics.oc.manual.IBlockWithPrefix;
+import org.libreflock.computronics.reference.Mods;
 
 /**
  * @author CovertJaguar, Vexatos
  */
 @Optional.InterfaceList({
-	@Optional.Interface(iface = "pl.asie.computronics.oc.block.IComputronicsEnvironmentBlock", modid = Mods.OpenComputers)
+	@Optional.Interface(iface = "org.libreflock.computronics.oc.block.IComputronicsEnvironmentBlock", modid = Mods.OpenComputers)
 })
 @BlockMeta.Variant(SignalTypes.class)
 public class BlockDigitalSignalBox extends BlockMachineSignalBox<SignalTypes> implements IComputronicsEnvironmentBlock, IBlockWithPrefix {

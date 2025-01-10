@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.util;
+package org.libreflock.computronics.integration.util;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

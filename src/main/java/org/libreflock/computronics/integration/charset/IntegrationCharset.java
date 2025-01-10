@@ -1,8 +1,8 @@
-package pl.asie.computronics.integration.charset;
+package org.libreflock.computronics.integration.charset;
 
-import pl.asie.computronics.integration.charset.audio.IntegrationCharsetAudio;
-import pl.asie.computronics.integration.charset.wires.IntegrationCharsetWires;
-import pl.asie.computronics.reference.Mods;
+import org.libreflock.computronics.integration.charset.audio.IntegrationCharsetAudio;
+import org.libreflock.computronics.integration.charset.wires.IntegrationCharsetWires;
+import org.libreflock.computronics.reference.Mods;
 
 /**
  * @author Vexatos

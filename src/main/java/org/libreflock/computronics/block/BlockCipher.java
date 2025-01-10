@@ -1,4 +1,4 @@
-package pl.asie.computronics.block;
+package org.libreflock.computronics.block;
 
 import li.cil.oc.api.network.Environment;
 import net.minecraft.block.Block;
@@ -11,10 +11,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.tile.TileCipherBlock;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.tile.TileCipherBlock;
 //import powercrystals.minefactoryreloaded.api.rednet.IRedNetOmniNode;
 //import powercrystals.minefactoryreloaded.api.rednet.connectivity.RedNetConnectionType;
 

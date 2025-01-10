@@ -1,4 +1,4 @@
-package pl.asie.computronics.tile;
+package org.libreflock.computronics.tile;
 
 import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.lua.LuaException;
@@ -13,25 +13,25 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.api.audio.AudioPacket;
-import pl.asie.computronics.api.audio.AudioPacketDFPWM;
-import pl.asie.computronics.api.audio.IAudioReceiver;
-import pl.asie.computronics.api.audio.IAudioSource;
-import pl.asie.computronics.audio.AudioUtils;
-import pl.asie.computronics.audio.tts.TextToSpeech.ICanSpeak;
-import pl.asie.computronics.integration.charset.audio.IntegrationCharsetAudio;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.OCUtils;
-import pl.asie.lib.util.internal.IColorable;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.api.audio.AudioPacket;
+import org.libreflock.computronics.api.audio.AudioPacketDFPWM;
+import org.libreflock.computronics.api.audio.IAudioReceiver;
+import org.libreflock.computronics.api.audio.IAudioSource;
+import org.libreflock.computronics.audio.AudioUtils;
+import org.libreflock.computronics.audio.tts.TextToSpeech.ICanSpeak;
+import org.libreflock.computronics.integration.charset.audio.IntegrationCharsetAudio;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.OCUtils;
+import org.libreflock.asielib.util.internal.IColorable;
 
 import javax.annotation.Nullable;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Arrays;
 
-import static pl.asie.computronics.reference.Capabilities.AUDIO_RECEIVER_CAPABILITY;
+import static org.libreflock.computronics.reference.Capabilities.AUDIO_RECEIVER_CAPABILITY;
 
 /**
  * @author Vexatos
@@ -106,9 +106,9 @@ public class TileSpeechBox extends TileEntityPeripheralBase implements IAudioSou
 				for(EnumFacing dir : EnumFacing.VALUES) {
 					TileEntity tile = world.getTileEntity(getPos().offset(dir));
 					if(tile != null && tile.hasCapability(AUDIO_RECEIVER_CAPABILITY, dir.getOpposite())) {
-						IColorable targetCol = pl.asie.computronics.util.ColorUtils.getColorable(tile, dir.getOpposite());
+						IColorable targetCol = org.libreflock.computronics.util.ColorUtils.getColorable(tile, dir.getOpposite());
 						if(targetCol != null && targetCol.canBeColored()
-							&& !pl.asie.computronics.util.ColorUtils.isSameOrDefault(this, targetCol)) {
+							&& !org.libreflock.computronics.util.ColorUtils.isSameOrDefault(this, targetCol)) {
 							continue;
 						}
 						tile.getCapability(AUDIO_RECEIVER_CAPABILITY, dir.getOpposite()).receivePacket(pkt, dir.getOpposite());

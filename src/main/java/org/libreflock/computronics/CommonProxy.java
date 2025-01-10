@@ -1,17 +1,17 @@
-package pl.asie.computronics;
+package org.libreflock.computronics;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
-import pl.asie.computronics.api.audio.AudioPacketDFPWM;
-import pl.asie.computronics.api.audio.AudioPacketRegistry;
-import pl.asie.computronics.audio.SoundCardPacket;
-import pl.asie.computronics.item.entity.EntityItemIndestructable;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.reference.Sounds;
-import pl.asie.lib.network.Packet;
+import org.libreflock.computronics.api.audio.AudioPacketDFPWM;
+import org.libreflock.computronics.api.audio.AudioPacketRegistry;
+import org.libreflock.computronics.audio.SoundCardPacket;
+import org.libreflock.computronics.item.entity.EntityItemIndestructable;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.reference.Sounds;
+import org.libreflock.asielib.network.Packet;
 
 import java.io.IOException;
 

@@ -1,10 +1,10 @@
-package pl.asie.computronics.integration.info.providers;
+package org.libreflock.computronics.integration.info.providers;
 
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.reference.Mods;
+import org.libreflock.computronics.reference.Mods;
 
 import javax.annotation.Nullable;
 import java.util.List;

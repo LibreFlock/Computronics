@@ -1,4 +1,4 @@
-package pl.asie.computronics.tape;
+package org.libreflock.computronics.tape;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -9,12 +9,12 @@ import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.integration.conventional.IntegrationConventional;
-import pl.asie.computronics.item.ItemPortableTapeDrive;
-import pl.asie.computronics.network.PacketType;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.tile.TapeDriveState.State;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.integration.conventional.IntegrationConventional;
+import org.libreflock.computronics.item.ItemPortableTapeDrive;
+import org.libreflock.computronics.network.PacketType;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.tile.TapeDriveState.State;
 
 /**
  * @author Vexatos

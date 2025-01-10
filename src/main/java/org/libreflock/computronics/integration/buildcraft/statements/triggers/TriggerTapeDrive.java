@@ -1,11 +1,11 @@
-package pl.asie.computronics.integration.buildcraft.statements.triggers;
+package org.libreflock.computronics.integration.buildcraft.statements.triggers;
 
 import buildcraft.api.statements.IStatementContainer;
 import buildcraft.api.statements.IStatementParameter;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import pl.asie.computronics.tile.TapeDriveState.State;
-import pl.asie.computronics.tile.TileTapeDrive;
+import org.libreflock.computronics.tile.TapeDriveState.State;
+import org.libreflock.computronics.tile.TileTapeDrive;
 
 /**
  * @author Vexatos

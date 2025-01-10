@@ -1,7 +1,7 @@
-package pl.asie.computronics.gui;
+package org.libreflock.computronics.gui;
 
-import pl.asie.lib.gui.GuiBase;
-import pl.asie.lib.gui.container.ContainerBase;
+import org.libreflock.asielib.gui.GuiBase;
+import org.libreflock.asielib.gui.container.ContainerBase;
 
 public class GuiCipherBlock extends GuiBase {
 

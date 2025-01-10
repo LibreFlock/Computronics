@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.buildcraft.pluggable;
+package org.libreflock.computronics.integration.buildcraft.pluggable;
 
 import buildcraft.api.transport.IPipeTile;
 import buildcraft.api.transport.pluggable.IPipePluggableStaticRenderer;
@@ -16,9 +16,9 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.util.ParticleUtils;
-import pl.asie.lib.util.EnergyConverter;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.util.ParticleUtils;
+import org.libreflock.asielib.util.EnergyConverter;
 
 /**
  * @author Vexatos

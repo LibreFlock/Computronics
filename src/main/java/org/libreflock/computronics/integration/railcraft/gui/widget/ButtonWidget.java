@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.railcraft.gui.widget;
+package org.libreflock.computronics.integration.railcraft.gui.widget;
 
 import mods.railcraft.client.gui.GuiContainerRailcraft;
 import mods.railcraft.common.gui.tooltips.ToolTip;

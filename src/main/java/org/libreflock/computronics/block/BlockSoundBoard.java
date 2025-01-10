@@ -1,4 +1,4 @@
-package pl.asie.computronics.block;
+package org.libreflock.computronics.block;
 
 import li.cil.oc.api.network.Environment;
 import net.minecraft.block.Block;
@@ -12,8 +12,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import pl.asie.computronics.oc.manual.IBlockWithPrefix;
-import pl.asie.computronics.tile.TileSoundBoard;
+import org.libreflock.computronics.oc.manual.IBlockWithPrefix;
+import org.libreflock.computronics.tile.TileSoundBoard;
 
 /**
  * @author Vexatos

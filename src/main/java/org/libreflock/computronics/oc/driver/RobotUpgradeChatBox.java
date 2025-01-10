@@ -1,4 +1,4 @@
-package pl.asie.computronics.oc.driver;
+package org.libreflock.computronics.oc.driver;
 
 import li.cil.oc.api.Network;
 import li.cil.oc.api.driver.DeviceInfo;
@@ -11,12 +11,12 @@ import li.cil.oc.api.network.Visibility;
 import li.cil.oc.api.prefab.AbstractManagedEnvironment;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.api.chat.ChatAPI;
-import pl.asie.computronics.api.chat.IChatListener;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.ChatBoxUtils;
-import pl.asie.computronics.util.OCUtils;
+import org.libreflock.computronics.api.chat.ChatAPI;
+import org.libreflock.computronics.api.chat.IChatListener;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.ChatBoxUtils;
+import org.libreflock.computronics.util.OCUtils;
 
 import java.util.Map;
 

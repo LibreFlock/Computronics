@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.railcraft.tile;
+package org.libreflock.computronics.integration.railcraft.tile;
 
 import com.mojang.authlib.GameProfile;
 import dan200.computercraft.api.lua.ILuaContext;
@@ -15,11 +15,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.common.Optional;
-import pl.asie.computronics.cc.ISidedPeripheral;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.reference.Names;
-import pl.asie.computronics.tile.TileEntityPeripheralBase;
-import pl.asie.computronics.util.OCUtils;
+import org.libreflock.computronics.cc.ISidedPeripheral;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.reference.Names;
+import org.libreflock.computronics.tile.TileEntityPeripheralBase;
+import org.libreflock.computronics.util.OCUtils;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

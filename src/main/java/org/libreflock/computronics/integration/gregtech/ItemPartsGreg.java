@@ -1,12 +1,12 @@
-package pl.asie.computronics.integration.gregtech;
+package org.libreflock.computronics.integration.gregtech;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.lib.item.ItemMultiple;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.asielib.item.ItemMultiple;
 
 /**
  * @author Vexatos

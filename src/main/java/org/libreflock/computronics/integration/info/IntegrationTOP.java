@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.info;
+package org.libreflock.computronics.integration.info;
 
 import com.google.common.base.Function;
 import mcjty.theoneprobe.api.ITheOneProbe;

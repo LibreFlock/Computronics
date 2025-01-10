@@ -4,7 +4,7 @@
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package pl.asie.computronics.oc.manual;
+package org.libreflock.computronics.oc.manual;
 
 import mcp.MethodsReturnNonnullByDefault;
 

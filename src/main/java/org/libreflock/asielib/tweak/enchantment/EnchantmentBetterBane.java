@@ -6,7 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import pl.asie.computronics.util.StringUtil;
+import org.libreflock.computronics.util.StringUtil;
 
 /**
  * @author Vexatos

@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.mekanism;
+package org.libreflock.computronics.integration.mekanism;
 
 import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.lua.LuaException;
@@ -12,9 +12,9 @@ import mekanism.api.energy.IStrictEnergyStorage;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import pl.asie.computronics.integration.CCMultiPeripheral;
-import pl.asie.computronics.integration.ManagedEnvironmentOCTile;
-import pl.asie.computronics.reference.Names;
+import org.libreflock.computronics.integration.CCMultiPeripheral;
+import org.libreflock.computronics.integration.ManagedEnvironmentOCTile;
+import org.libreflock.computronics.reference.Names;
 
 /**
  * @author Vexatos

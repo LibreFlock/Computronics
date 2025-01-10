@@ -1,11 +1,11 @@
-package pl.asie.computronics.util;
+package org.libreflock.computronics.util;
 
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import pl.asie.computronics.Computronics;
-import pl.asie.computronics.network.PacketType;
-import pl.asie.lib.network.Packet;
+import org.libreflock.computronics.Computronics;
+import org.libreflock.computronics.network.PacketType;
+import org.libreflock.asielib.network.Packet;
 
 import java.util.HashMap;
 import java.util.Map;

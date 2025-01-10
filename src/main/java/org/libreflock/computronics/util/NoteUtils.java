@@ -1,4 +1,4 @@
-package pl.asie.computronics.util;
+package org.libreflock.computronics.util;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

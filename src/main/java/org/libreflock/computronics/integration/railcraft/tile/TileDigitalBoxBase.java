@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.railcraft.tile;
+package org.libreflock.computronics.integration.railcraft.tile;
 
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
@@ -19,11 +19,11 @@ import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pl.asie.computronics.api.multiperipheral.IMultiPeripheral;
-import pl.asie.computronics.cc.ISidedPeripheral;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.util.OCUtils;
-import pl.asie.computronics.util.internal.IComputronicsPeripheral;
+import org.libreflock.computronics.api.multiperipheral.IMultiPeripheral;
+import org.libreflock.computronics.cc.ISidedPeripheral;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.util.OCUtils;
+import org.libreflock.computronics.util.internal.IComputronicsPeripheral;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -37,7 +37,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 	@Optional.Interface(iface = "li.cil.oc.api.network.SidedEnvironment", modid = Mods.OpenComputers),
 	@Optional.Interface(iface = "li.cil.oc.api.driver.DeviceInfo", modid = Mods.OpenComputers),
 	@Optional.Interface(iface = "li.cil.oc.api.network.BlacklistedPeripheral", modid = Mods.OpenComputers),
-	@Optional.Interface(iface = "pl.asie.computronics.api.multiperipheral.IMultiPeripheral", modid = Mods.ComputerCraft)
+	@Optional.Interface(iface = "org.libreflock.computronics.api.multiperipheral.IMultiPeripheral", modid = Mods.ComputerCraft)
 })
 public abstract class TileDigitalBoxBase extends TileBoxBase
 	implements Environment, SidedEnvironment, DeviceInfo, IMultiPeripheral, IComputronicsPeripheral,

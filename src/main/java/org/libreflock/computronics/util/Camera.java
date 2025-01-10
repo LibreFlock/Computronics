@@ -1,11 +1,11 @@
-package pl.asie.computronics.util;
+package org.libreflock.computronics.util;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import pl.asie.computronics.reference.Config;
+import org.libreflock.computronics.reference.Config;
 
 public class Camera {
 

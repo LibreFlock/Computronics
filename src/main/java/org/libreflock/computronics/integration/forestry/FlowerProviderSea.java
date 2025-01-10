@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.forestry;
+package org.libreflock.computronics.integration.forestry;
 
 import forestry.api.genetics.ICheckPollinatable;
 import forestry.api.genetics.IFlowerAcceptableRule;
@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.IFluidBlock;
-import pl.asie.computronics.util.StringUtil;
+import org.libreflock.computronics.util.StringUtil;
 
 import java.util.Arrays;
 import java.util.List;

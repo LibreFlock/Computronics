@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.buildcraft.statements;
+package org.libreflock.computronics.integration.buildcraft.statements;
 
 import buildcraft.api.statements.IStatementContainer;
 import buildcraft.api.statements.ITriggerExternal;
@@ -8,9 +8,9 @@ import buildcraft.api.statements.StatementManager;
 import li.cil.oc.api.internal.Case;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import pl.asie.computronics.integration.buildcraft.statements.triggers.Triggers;
-import pl.asie.computronics.reference.Mods;
-import pl.asie.computronics.tile.TileTapeDrive;
+import org.libreflock.computronics.integration.buildcraft.statements.triggers.Triggers;
+import org.libreflock.computronics.reference.Mods;
+import org.libreflock.computronics.tile.TileTapeDrive;
 
 import java.util.Collection;
 import java.util.LinkedList;

@@ -1,15 +1,15 @@
-package pl.asie.computronics.gui;
+package org.libreflock.computronics.gui;
 
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import pl.asie.computronics.item.ItemTape;
-import pl.asie.computronics.tile.TapeDriveState.State;
-import pl.asie.computronics.util.StringUtil;
-import pl.asie.lib.gui.GuiBase;
-import pl.asie.lib.gui.container.ContainerInventory;
+import org.libreflock.computronics.item.ItemTape;
+import org.libreflock.computronics.tile.TapeDriveState.State;
+import org.libreflock.computronics.util.StringUtil;
+import org.libreflock.asielib.gui.GuiBase;
+import org.libreflock.asielib.gui.container.ContainerInventory;
 
 import javax.annotation.Nullable;
 import java.io.IOException;

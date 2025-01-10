@@ -1,4 +1,4 @@
-package pl.asie.computronics.integration.tis3d.module;
+package org.libreflock.computronics.integration.tis3d.module;
 
 import li.cil.tis3d.api.FontRendererAPI;
 import li.cil.tis3d.api.machine.Casing;
@@ -14,8 +14,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.StringUtils;
-import pl.asie.computronics.tile.TapeDriveState.State;
-import pl.asie.computronics.tile.TileTapeDrive;
+import org.libreflock.computronics.tile.TapeDriveState.State;
+import org.libreflock.computronics.tile.TileTapeDrive;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;

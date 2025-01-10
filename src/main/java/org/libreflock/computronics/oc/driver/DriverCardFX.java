@@ -1,4 +1,4 @@
-package pl.asie.computronics.oc.driver;
+package org.libreflock.computronics.oc.driver;
 
 import li.cil.oc.api.Network;
 import li.cil.oc.api.driver.DeviceInfo;
@@ -11,9 +11,9 @@ import li.cil.oc.api.network.Visibility;
 import li.cil.oc.api.prefab.AbstractManagedEnvironment;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.MathHelper;
-import pl.asie.computronics.reference.Config;
-import pl.asie.computronics.util.OCUtils;
-import pl.asie.computronics.util.ParticleUtils;
+import org.libreflock.computronics.reference.Config;
+import org.libreflock.computronics.util.OCUtils;
+import org.libreflock.computronics.util.ParticleUtils;
 
 import java.util.Map;
 import java.util.Random;
