@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
@@ -63,7 +63,7 @@ public class ModuleColorful extends ComputronicsModule {
 	//private static final ResourceLocation front = new ResourceLocation("computronics:textures/blocks/lamp_layer_1.png");
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void render(boolean enabled, float partialTicks) {
 		if(!enabled) {
 			return;

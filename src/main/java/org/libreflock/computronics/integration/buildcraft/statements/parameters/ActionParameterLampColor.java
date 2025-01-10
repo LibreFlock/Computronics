@@ -9,7 +9,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.integration.buildcraft.statements.StatementParameters;
 import org.libreflock.computronics.util.StringUtil;
@@ -37,7 +37,7 @@ public class ActionParameterLampColor extends ComputronicsParameter {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public TextureAtlasSprite getIcon() {
 		return null;
 	}

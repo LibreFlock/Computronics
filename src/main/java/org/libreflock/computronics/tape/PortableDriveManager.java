@@ -8,9 +8,9 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.item.ItemPortableTapeDrive;
@@ -108,7 +108,7 @@ public final class PortableDriveManager {
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public void onClientTick(TickEvent.ClientTickEvent event) {
 		if(event.phase != TickEvent.Phase.END) {

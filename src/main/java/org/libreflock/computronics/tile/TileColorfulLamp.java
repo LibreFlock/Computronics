@@ -14,7 +14,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.common.Optional;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.block.BlockColorfulLamp;
@@ -117,7 +117,7 @@ public class TileColorfulLamp extends TileEntityPeripheralBase implements IBundl
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	@Optional.Method(modid = Mods.Albedo)
 	public Light provideLight() {
 		return Light.builder()
@@ -129,7 +129,7 @@ public class TileColorfulLamp extends TileEntityPeripheralBase implements IBundl
 
 	@Nullable
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	@Optional.Method(modid = Mods.Mirage)
 	public com.elytradev.mirage.lighting.Light getColoredLight() {
 		return com.elytradev.mirage.lighting.Light.builder()

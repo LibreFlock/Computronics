@@ -14,7 +14,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.Optional;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.api.multiperipheral.IMultiPeripheral;
@@ -347,7 +347,7 @@ public abstract class TileEntityPeripheralBase extends TileMachine implements En
 
 	// Sound related, thanks to EnderIO code for this!
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private MachineSound sound;
 
 	private ResourceLocation soundRes;
@@ -386,7 +386,7 @@ public abstract class TileEntityPeripheralBase extends TileMachine implements En
 		return true;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private void updateSound() {
 		if(hasSound()) {
 			if(shouldPlaySound() && !isInvalid()) {

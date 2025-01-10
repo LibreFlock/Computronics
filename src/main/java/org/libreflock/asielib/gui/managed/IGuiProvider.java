@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
@@ -16,7 +16,7 @@ import javax.annotation.Nullable;
 public interface IGuiProvider {
 
 	@Nullable
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public GuiContainer makeGui(int ID, EntityPlayer player, World world, int x, int y, int z);
 
 	@Nullable

@@ -16,7 +16,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.asielib.util.ColorUtils;
 import org.libreflock.asielib.util.internal.IColorable;
@@ -99,7 +99,7 @@ public class OCUtils {
 	private static final int maxWidth = 220;
 
 	//Mostly stolen from Sangar
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void addTooltip(ItemStack stack, List<String> tooltip, ITooltipFlag flag) {
 		{
 			FontRenderer font = Minecraft.getMinecraft().fontRenderer;

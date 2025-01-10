@@ -14,7 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.reference.Config;
 import org.libreflock.computronics.util.OCUtils;
@@ -151,7 +151,7 @@ public class DriverBoardLight extends RackMountableWithComponentConnector {
 
 		public final int index;
 		public final int lightcount;
-		@SideOnly(Side.CLIENT)
+		@OnlyIn(Dist.CLIENT)
 		public TextureAtlasSprite background;
 		public final ResourceLocation foreground;
 		public final String backgroundPath;
@@ -184,7 +184,7 @@ public class DriverBoardLight extends RackMountableWithComponentConnector {
 			return lights;
 		}
 
-		@SideOnly(Side.CLIENT)
+		@OnlyIn(Dist.CLIENT)
 		public void registerIcons(TextureMap map) {
 			background = map.registerSprite(new ResourceLocation(backgroundPath));
 		}

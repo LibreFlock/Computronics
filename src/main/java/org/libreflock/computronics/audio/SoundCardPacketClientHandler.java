@@ -1,6 +1,6 @@
 package org.libreflock.computronics.audio;
 
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.api.audio.AudioPacketClientHandler;
@@ -37,7 +37,7 @@ import java.util.Queue;
 /**
  * @author gamax92
  */
-@SideOnly(Side.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class SoundCardPacketClientHandler extends AudioPacketClientHandler {
 
 	private Map<String, AudioProcess> processMap = new HashMap<String, AudioProcess>();

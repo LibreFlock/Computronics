@@ -140,7 +140,7 @@ public class BlockColorfulLamp extends BlockPeripheral /*implements IRedNetInput
 		return true;
 	}
 /*@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public int getRenderType() {
 		return LampRender.id();
 	}*/

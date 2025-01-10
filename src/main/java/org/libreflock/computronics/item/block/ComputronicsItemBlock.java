@@ -3,7 +3,7 @@ package org.libreflock.computronics.item.block;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.util.internal.IItemWithColor;
 
@@ -38,7 +38,7 @@ public class ComputronicsItemBlock extends ItemBlock implements IItemWithColor {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public int getColorFromItemstack(ItemStack stack, int pass) {
 		if(this.coloredBlock != null) {
 			return this.coloredBlock.getColorFromItemstack(stack, pass);

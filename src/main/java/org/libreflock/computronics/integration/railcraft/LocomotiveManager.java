@@ -13,7 +13,7 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.minecart.MinecartUpdateEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.libreflock.computronics.Computronics;
 
 import javax.annotation.Nullable;

@@ -17,8 +17,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 import org.libreflock.computronics.item.ItemOpenComputers;
@@ -36,7 +36,7 @@ import java.util.Set;
  * Stolen with permission.
  * @author Sangar, Vexatos
  */
-@SideOnly(Side.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class UpgradeRenderer {
 
 	private final ResourceLocation

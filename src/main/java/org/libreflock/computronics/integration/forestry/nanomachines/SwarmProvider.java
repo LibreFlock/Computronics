@@ -23,7 +23,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.event.entity.minecart.MinecartInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.libreflock.computronics.integration.forestry.IntegrationForestry;
 import org.libreflock.asielib.util.RayTracer;
 

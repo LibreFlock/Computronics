@@ -88,7 +88,7 @@ public class IntegrationTIS3D {
 /*
 	public static class TextureLoader {
 
-		@SideOnly(Side.CLIENT)
+		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		public void textureHook(TextureStitchEvent.Pre event) {
 			if(event.map.getTextureType() == 0) {
@@ -102,7 +102,7 @@ public class IntegrationTIS3D {
 			CASING("tis3d/casingModule"),
 			TAPE_READER_OFF("tape_drive_front");
 
-			@SideOnly(Side.CLIENT)
+			@OnlyIn(Dist.CLIENT)
 			private IIcon icon;
 			private final String location;
 			public static final Textures[] VALUES = values();
@@ -115,7 +115,7 @@ public class IntegrationTIS3D {
 				return icon;
 			}
 
-			@SideOnly(Side.CLIENT)
+			@OnlyIn(Dist.CLIENT)
 			public void registerSprite(IIconRegister iconRegister) {
 				this.icon = iconRegister.registerSprite("computronics:" + location);
 			}

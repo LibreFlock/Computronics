@@ -11,8 +11,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.item.ItemOpenComputers;
 import org.libreflock.computronics.oc.driver.RobotUpgradeColorful;
@@ -36,7 +36,7 @@ public class ColorfulUpgradeHandler {
 			+ String.format("%06x", color).toUpperCase(Locale.ENGLISH)), false);
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent(priority = EventPriority.LOW)
 	@Optional.Method(modid = Mods.OpenComputers)
 	public void onRobotRender(RobotRenderEvent e) {

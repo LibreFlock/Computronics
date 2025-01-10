@@ -16,7 +16,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.item.block.IBlockWithDifferentColors;
@@ -70,7 +70,7 @@ public class BlockAudioCable extends BlockBase implements IBlockWithDocumentatio
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public int colorMultiplier(IBlockState state, @Nullable IBlockAccess world, @Nullable BlockPos pos, int renderPass) {
 		if(world != null && pos != null) {
 			TileEntity tile = world.getTileEntity(pos);
@@ -189,7 +189,7 @@ public class BlockAudioCable extends BlockBase implements IBlockWithDocumentatio
 	// End of collision box magic
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
 	}
@@ -280,7 +280,7 @@ public class BlockAudioCable extends BlockBase implements IBlockWithDocumentatio
 
 	@Override
 	@Deprecated
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess worldIn, BlockPos pos, EnumFacing side) {
 		return (connectionMask & (1 << side.ordinal())) != 0;
 	}

@@ -17,7 +17,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.oc.manual.IItemWithDocumentation;
@@ -47,7 +47,7 @@ public class ItemPortableTapeDrive extends Item implements IItemWithDocumentatio
 		this.setNoRepair();
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static class MeshDefinition implements ItemMeshDefinition {
 
 		private static final ModelResourceLocation[] MODEL_LOCATIONS;
@@ -94,7 +94,7 @@ public class ItemPortableTapeDrive extends Item implements IItemWithDocumentatio
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World world, List<String> info, ITooltipFlag flag) {
 		if(stack.hasTagCompound()) {
 			NBTTagCompound tag = stack.getTagCompound();

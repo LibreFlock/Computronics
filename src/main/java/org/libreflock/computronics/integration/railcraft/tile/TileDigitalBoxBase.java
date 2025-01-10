@@ -17,7 +17,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.common.Optional;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.api.multiperipheral.IMultiPeripheral;
 import org.libreflock.computronics.cc.ISidedPeripheral;
@@ -179,7 +179,7 @@ public abstract class TileDigitalBoxBase extends TileBoxBase
 
 	@Override
 	@Optional.Method(modid = Mods.OpenComputers)
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public boolean canConnect(EnumFacing forgeDirection) {
 		return forgeDirection == EnumFacing.DOWN || forgeDirection == EnumFacing.UP;
 	}

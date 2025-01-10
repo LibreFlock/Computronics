@@ -23,14 +23,14 @@ public class ItemPartsGreg extends ItemMultiple {
 	private IIcon reelChromoxide_GT6;
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void registerIcons(IIconRegister r) {
 		super.registerIcons(r);
 		reelChromoxide_GT6 = r.registerIcon("computronics:reelChromoxide_GT6");
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public IIcon getIconFromDamage(int meta) {
 		switch(meta) {
 			case 0: {

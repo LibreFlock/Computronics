@@ -14,7 +14,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.api.audio.AudioPacket;
@@ -126,7 +126,7 @@ public class PortableTapeDrive implements IAudioSource {
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private MachineSound sound;
 
 	private ResourceLocation soundRes = new ResourceLocation(Mods.Computronics, "tape_rewind");
@@ -143,7 +143,7 @@ public class PortableTapeDrive implements IAudioSource {
 		return true;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	protected void updateSound() {
 		if(shouldPlaySound()) {
 			if(sound == null) {

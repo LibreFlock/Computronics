@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.oc.block.IComputronicsEnvironmentBlock;
@@ -59,7 +59,7 @@ public abstract class BlockPeripheral extends BlockBase implements IComputronics
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public int colorMultiplier(IBlockState state, IBlockAccess world, BlockPos pos, int renderPass) {
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile instanceof IColorable && ((IColorable) tile).canBeColored()) {

@@ -1,7 +1,7 @@
 package org.libreflock.computronics.integration.railcraft.gui.widget;
 
 import mods.railcraft.client.gui.GuiContainerRailcraft;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.integration.railcraft.tile.TileTicketMachine;
 
@@ -38,13 +38,13 @@ public class LockButtonWidget extends ButtonWidget {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public boolean mouseClicked(int mouseX, int mouseY, int mouseButton) {
 		return this.accessible && super.mouseClicked(mouseX, mouseY, mouseButton);
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void handleMouseRelease(int mouseX, int mouseY, int eventType) {
 		if(this.accessible) {
 			super.handleMouseRelease(mouseX, mouseY, eventType);
@@ -52,7 +52,7 @@ public class LockButtonWidget extends ButtonWidget {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void handleMouseMove(int mouseX, int mouseY, int mouseButton, long time) {
 		if(this.accessible) {
 			super.handleMouseMove(mouseX, mouseY, mouseButton, time);

@@ -8,7 +8,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.gui.GuiTapePlayer;
@@ -27,7 +27,7 @@ import org.libreflock.asielib.network.Packet;
 public class GuiProviderTapeDrive extends GuiProviderBase {
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public GuiContainer makeGui(int guiID, EntityPlayer entityPlayer, World world, int x, int y, int z) {
 		TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
 		if(tileEntity instanceof TileTapeDrive) {

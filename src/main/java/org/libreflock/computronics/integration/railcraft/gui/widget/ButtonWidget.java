@@ -3,7 +3,7 @@ package org.libreflock.computronics.integration.railcraft.gui.widget;
 import mods.railcraft.client.gui.GuiContainerRailcraft;
 import mods.railcraft.common.gui.tooltips.ToolTip;
 import mods.railcraft.common.gui.widgets.Widget;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ButtonWidget extends Widget {
@@ -22,7 +22,7 @@ public class ButtonWidget extends Widget {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public boolean mouseClicked(int mouseX, int mouseY, int mouseButton) {
 		this.pressed = true;
 		this.buttonPressed = mouseButton;
@@ -30,7 +30,7 @@ public class ButtonWidget extends Widget {
 		return true;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void handleMouseRelease(int mouseX, int mouseY, int eventType) {
 		if(this.pressed) {
 			this.pressed = false;
@@ -39,7 +39,7 @@ public class ButtonWidget extends Widget {
 
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void handleMouseMove(int mouseX, int mouseY, int mouseButton, long time) {
 		if(this.pressed && !this.isMouseOver(mouseX, mouseY)) {
 			this.pressed = false;
@@ -48,11 +48,11 @@ public class ButtonWidget extends Widget {
 
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void onPress(int mouseButton) {
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void onRelease(int mouseButton) {
 	}
 
@@ -63,7 +63,7 @@ public class ButtonWidget extends Widget {
 		return this.toolTip;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void setToolTip(ToolTip toolTip) {
 		this.toolTip = toolTip;
 	}

@@ -23,7 +23,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.oc.IntegrationOpenComputers;
@@ -322,7 +322,7 @@ public class ItemOpenComputers extends ItemMultipleComputronics implements Drive
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void getSubItems(CreativeTabs tabs, NonNullList<ItemStack> list) {
 		if(!this.isInCreativeTab(tabs)) {
 			return;
@@ -377,7 +377,7 @@ public class ItemOpenComputers extends ItemMultipleComputronics implements Drive
 	//private IIcon colorfulUpgradeCanvasIcon, colorfulUpgradeTopIcon;
 
 	/*@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void registerIcons(IIconRegister r) {
 		super.registerIcons(r);
 		colorfulUpgradeCanvasIcon = r.registerSprite("computronics:robot_upgrade_colorful_canvas");
@@ -395,7 +395,7 @@ public class ItemOpenComputers extends ItemMultipleComputronics implements Drive
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public IIcon getIconFromDamageForRenderPass(int meta, int pass) {
 		switch(meta) {
 			case 7: {
@@ -415,7 +415,7 @@ public class ItemOpenComputers extends ItemMultipleComputronics implements Drive
 	}*/
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public int getColorFromItemstack(ItemStack stack, int pass) {
 		switch(stack.getItemDamage()) {
 			case 7: {
@@ -443,7 +443,7 @@ public class ItemOpenComputers extends ItemMultipleComputronics implements Drive
 
 	//Mostly stolen from Sangar
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 		OCUtils.addTooltip(stack, tooltip, flag);
 	}

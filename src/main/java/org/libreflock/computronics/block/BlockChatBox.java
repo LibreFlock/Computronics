@@ -15,7 +15,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.item.block.IBlockWithDifferentColors;
@@ -48,7 +48,7 @@ public class BlockChatBox extends BlockPeripheral implements IBlockWithSpecialTe
 
 	// Cheaters never win! ~ jaquadro
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public int colorMultiplier(IBlockState state, IBlockAccess world, BlockPos pos, int renderPass) {
 		return state.getValue(CREATIVE) ? getRenderColor(state) : super.colorMultiplier(state, world, pos, renderPass);
 	}
@@ -124,7 +124,7 @@ public class BlockChatBox extends BlockPeripheral implements IBlockWithSpecialTe
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World world, List<String> list, ITooltipFlag flag) {
 		if(stack.getItemDamage() >= 8) {
 			list.add(TextFormatting.GRAY + StringUtil.localize("tooltip.computronics.chatBox.creative"));

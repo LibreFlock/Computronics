@@ -8,7 +8,7 @@ import marytts.exceptions.SynthesisException;
 import marytts.server.Mary;
 import marytts.util.data.audio.AudioPlayer;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 import org.apache.commons.lang3.StringUtils;

@@ -30,7 +30,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.integration.forestry.client.entity.ParticleSwarm;
@@ -146,7 +146,7 @@ public class IntegrationForestry {
 		return stack;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	@Optional.Method(modid = Mods.OpenComputers)
 	public void registerOCEntityRenderers() {
 		RenderingRegistry.registerEntityRenderingHandler(EntitySwarm.class, new RenderSwarm.Factory());
@@ -181,7 +181,7 @@ public class IntegrationForestry {
 		return alleles;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void spawnSwarmParticle(World worldObj, double xPos, double yPos, double zPos, int color) {
 		ParticleSwarm entity = new ParticleSwarm(worldObj, xPos, yPos, zPos, color);
 		Minecraft.getMinecraft().effectRenderer.addEffect(entity);

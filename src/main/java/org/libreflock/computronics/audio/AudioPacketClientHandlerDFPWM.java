@@ -1,6 +1,6 @@
 package org.libreflock.computronics.audio;
 
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.api.audio.AudioPacketClientHandler;
@@ -9,7 +9,7 @@ import org.libreflock.lib.network.Packet;
 
 import java.io.IOException;
 
-@SideOnly(Side.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class AudioPacketClientHandlerDFPWM extends AudioPacketClientHandler {
 
 	@Override

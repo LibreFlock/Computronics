@@ -19,18 +19,20 @@ def get_filepaths(directory):
     return file_paths  # Self-explanatory.
 
 for file in get_filepaths("src"):
-	if not file.endswith(".java"):
-		continue
+    if not file.endswith(".java"):
+        continue
 
-	file = "/home/coderlol/code/Computronics/" + file
-	print(file)
-	with open(file, "r") as f:
-		data = f.read()
-	#print(data)
-	with open(file, "w") as f:
-		data = data.replace("pl.asie.lib", "org.libreflock.asielib")
-		data = data.replace("pl.asie", "org.libreflock")
-		f.write(data)
+    file = "/home/coderlol/code/Computronics/" + file
+    print(file)
+    with open(file, "r") as f:
+        data = f.read()
+        #print(data)
+    with open(file, "w") as f:
+        # data = data.replace("pl.asie.lib", "org.libreflock.asielib")
+        # data = data.replace("pl.asie", "org.libreflock")
+
+        data = data.replace("import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;", "import net.minecraftforge.eventbus.api.SubscribeEvent;")
+        f.write(data)
 
 
 print("fixed hopefully")

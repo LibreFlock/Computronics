@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.StringUtils;
 import org.libreflock.computronics.tile.TapeDriveState.State;
@@ -520,7 +520,7 @@ public class ModuleTapeReader extends ComputronicsModule {
 	private static final ResourceLocation ON_ICON = new ResourceLocation("computronics:textures/blocks/tis3d/module_tape_reader_on.png");
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void render(boolean enabled, float partialTicks) {
 
 		RenderUtil.bindTexture(BACK_ICON);

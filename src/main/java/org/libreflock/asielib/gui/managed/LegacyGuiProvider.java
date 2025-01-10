@@ -6,7 +6,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.asielib.gui.GuiBase;
 import org.libreflock.asielib.gui.container.ContainerBase;
@@ -19,14 +19,14 @@ import javax.annotation.Nullable;
  */
 public abstract class LegacyGuiProvider extends GuiProviderBase {
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	protected abstract GuiBase makeGuiBase(int guiID, EntityPlayer entityPlayer, World world, BlockPos pos, TileEntityBase tile);
 
 	protected abstract ContainerBase makeContainerBase(int guiID, EntityPlayer entityPlayer, World world, BlockPos pos, TileEntityBase tile);
 
 	@Nullable
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public GuiContainer makeGui(int guiID, EntityPlayer entityPlayer, World world, int x, int y, int z) {
 		final BlockPos pos = new BlockPos(x, y, z);
 		TileEntity tile = world.getTileEntity(pos);

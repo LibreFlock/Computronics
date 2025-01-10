@@ -8,7 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.integration.railcraft.gui.container.ContainerTicketMachine;
 import org.libreflock.computronics.integration.railcraft.tile.TileTicketMachine;
@@ -39,7 +39,7 @@ public class GuiProviderTicketMachine extends GuiProviderBase {
 
 	@Nullable
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public GuiContainer makeGui(int guiID, EntityPlayer player, World world, int x, int y, int z) {
 		TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
 		if(tile instanceof TileTicketMachine) {

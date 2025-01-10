@@ -19,7 +19,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.integration.railcraft.tile.TileLocomotiveRelay;
@@ -149,7 +149,7 @@ public class ItemRelaySensor extends Item implements IItemWithPrefix {
 		return "railcraft/";
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static class MeshDefinition implements ItemMeshDefinition {
 
 		private final ModelResourceLocation icon_off = new ModelResourceLocation(Mods.Computronics + ":relay_sensor_off", "inventory");

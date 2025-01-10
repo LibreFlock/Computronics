@@ -7,7 +7,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.gui.GuiTapePlayer;
@@ -28,7 +28,7 @@ import org.libreflock.asielib.network.Packet;
 public class GuiProviderPortableTapeDrive extends GuiProviderBase {
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public GuiContainer makeGui(int ID, EntityPlayer player, final World world, int x, int y, int z) {
 		ItemStack stack = player.getHeldItemMainhand();
 		if(!stack.isEmpty() && stack.getItem() instanceof ItemPortableTapeDrive) {

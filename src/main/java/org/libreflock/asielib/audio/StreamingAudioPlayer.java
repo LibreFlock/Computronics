@@ -3,7 +3,7 @@ package org.libreflock.asielib.audio;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.AL10;
@@ -76,7 +76,7 @@ public class StreamingAudioPlayer extends DFPWM {
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private double getDistance(double x, double y, double z) {
 		Vec3d pos = Minecraft.getMinecraft().player.getPositionVector();
 		return pos.distanceTo(new Vec3d(x, y, z));
@@ -103,12 +103,12 @@ public class StreamingAudioPlayer extends DFPWM {
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void play(String id, float x, float y, float z) {
 		play(id, x, y, z, 0.0f);
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void play(String id, float x, float y, float z, float rolloff) {
 		FloatBuffer sourcePos = (FloatBuffer) (BufferUtils.createFloatBuffer(3).put(new float[] { x, y, z }).rewind());
 		FloatBuffer sourceVel = (FloatBuffer) (BufferUtils.createFloatBuffer(3).put(new float[] { 0.0f, 0.0f, 0.0f }).rewind());

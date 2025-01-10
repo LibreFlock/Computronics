@@ -14,7 +14,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.api.tape.IItemTapeStorage;
@@ -103,7 +103,7 @@ public class ItemTape extends Item implements IItemTapeStorage, IMedia, IMediaPr
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World world, List<String> text, ITooltipFlag flag) {
 		int size = getSize(stack);
 		int len = (int) Math.floor(size / L_MINUTE);
@@ -134,7 +134,7 @@ public class ItemTape extends Item implements IItemTapeStorage, IMedia, IMediaPr
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void getSubItems(CreativeTabs tabs, NonNullList<ItemStack> list) {
 		if(!this.isInCreativeTab(tabs)) {
 			return;
@@ -229,13 +229,13 @@ public class ItemTape extends Item implements IItemTapeStorage, IMedia, IMediaPr
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public int getColorFromItemstack(ItemStack stack, int pass) {
 		return pass == 0 ? 0xFFFFFFFF : (ItemColorizer.hasColor(stack) ? ItemColorizer.getColor(stack) : 0xFFFFFFFF);
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public boolean hasEffect(ItemStack stack) {
 		return stack.getItemDamage() == 8 || super.hasEffect(stack);
 	}

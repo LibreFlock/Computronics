@@ -2,7 +2,7 @@ package org.libreflock.asielib;
 
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.libreflock.asielib.util.ChatUtils;
 import org.libreflock.asielib.util.ColorUtils;
 

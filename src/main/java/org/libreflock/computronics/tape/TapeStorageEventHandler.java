@@ -2,7 +2,7 @@ package org.libreflock.computronics.tape;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.libreflock.computronics.tile.TileTapeDrive;
 
 /**

@@ -10,7 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.tile.TapeDriveState.State;
 import org.libreflock.computronics.util.StringUtil;
@@ -31,7 +31,7 @@ public enum Actions implements IActionExternal {
 	public static final Actions[] VALUES = values();
 	private String tag;
 	private IComputronicsAction action;
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private TextureAtlasSprite icon;
 
 	private int minParams = 0, maxParams = 0;
@@ -64,12 +64,12 @@ public enum Actions implements IActionExternal {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public TextureAtlasSprite getGuiSprite() {
 		return this.icon;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void stitchTextures(TextureStitchEvent.Pre event) {
 		this.icon = event.map.registerSprite(new ResourceLocation("computronics", "items/buildcraft/actions/action." + this.tag));
 	}

@@ -14,7 +14,7 @@ import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.integration.railcraft.gui.slot.PaperSlotFilter;
 import org.libreflock.computronics.integration.railcraft.gui.slot.SlotSecureInput;
@@ -145,7 +145,7 @@ public class ContainerTicketMachine extends RailcraftContainer {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void updateProgressBar(int id, int value) {
 		super.updateProgressBar(id, value);
 		switch(id) {

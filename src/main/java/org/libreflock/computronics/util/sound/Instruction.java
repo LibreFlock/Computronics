@@ -4,11 +4,9 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import org.libreflock.computronics.util.sound.AudioUtil.AmplitudeModulation;
 import org.libreflock.computronics.util.sound.AudioUtil.AudioProcess;
-
 import javax.annotation.Nullable;
 import java.util.ArrayDeque;
 import java.util.Queue;
-
 import static org.libreflock.computronics.util.sound.AudioUtil.ADSR;
 import static org.libreflock.computronics.util.sound.AudioUtil.FrequencyModulation;
 import static org.libreflock.computronics.util.sound.AudioUtil.Gate;

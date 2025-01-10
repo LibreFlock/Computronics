@@ -7,7 +7,7 @@ import li.cil.tis3d.api.module.ModuleProvider;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.integration.tis3d.IntegrationTIS3D;
@@ -37,7 +37,7 @@ public class ItemModules extends ItemMultipleComputronics implements ModuleProvi
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void getSubItems(CreativeTabs tabs, NonNullList<ItemStack> list) {
 		if(!this.isInCreativeTab(tabs)) {
 			return;
@@ -59,7 +59,7 @@ public class ItemModules extends ItemMultipleComputronics implements ModuleProvi
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public int getColorFromItemstack(ItemStack stack, int pass) {
 		switch(stack.getItemDamage()) {
 			case 0: {
