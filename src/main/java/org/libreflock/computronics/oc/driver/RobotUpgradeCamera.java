@@ -10,7 +10,7 @@ import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.Visibility;
 import li.cil.oc.api.prefab.AbstractManagedEnvironment;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.MathHelper;
 import org.libreflock.computronics.util.Camera;
 import org.libreflock.computronics.util.OCUtils;
@@ -29,12 +29,12 @@ public class RobotUpgradeCamera extends AbstractManagedEnvironment implements De
 	private final Camera camera = new Camera();
 	private static final int CALL_LIMIT = 15;
 
-	private EnumFacing getFacingDirection() {
+	private Direction getFacingDirection() {
 		if(entity instanceof Rotatable) {
 			return ((Rotatable) entity).facing();
 		} else {
 			int l = MathHelper.floor((double) (entity.world().getClosestPlayer(entity.xPosition(), entity.yPosition(), entity.zPosition(), 1.0D, false).rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-			return EnumFacing.byHorizontalIndex(l);
+			return Direction.byHorizontalIndex(l);
 		}
 	}
 
@@ -64,7 +64,7 @@ public class RobotUpgradeCamera extends AbstractManagedEnvironment implements De
 			y = (float) args.checkDouble(1);
 		}
 		camera.ray(entity.world(), entity.xPosition(), entity.yPosition(), entity.zPosition(),
-			EnumFacing.UP, x, y, entity instanceof TileEntity);
+			Direction.UP, x, y, entity instanceof TileEntity);
 		return new Object[] { camera.getDistance() };
 	}
 
@@ -79,7 +79,7 @@ public class RobotUpgradeCamera extends AbstractManagedEnvironment implements De
 			y = (float) args.checkDouble(1);
 		}
 		camera.ray(entity.world(), entity.xPosition(), entity.yPosition(), entity.zPosition(),
-			EnumFacing.DOWN, x, y, entity instanceof TileEntity);
+			Direction.DOWN, x, y, entity instanceof TileEntity);
 		return new Object[] { camera.getDistance() };
 	}
 

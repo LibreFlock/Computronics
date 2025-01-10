@@ -2,7 +2,7 @@ package org.libreflock.asielib.audio;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.BufferUtils;
@@ -78,8 +78,8 @@ public class StreamingAudioPlayer extends DFPWM {
 
 	@OnlyIn(Dist.CLIENT)
 	private double getDistance(double x, double y, double z) {
-		Vec3d pos = Minecraft.getMinecraft().player.getPositionVector();
-		return pos.distanceTo(new Vec3d(x, y, z));
+		Vector3d pos = Minecraft.getMinecraft().player.getPositionVector();
+		return pos.distanceTo(new Vector3d(x, y, z));
 	}
 
 	public void push(byte[] data) {

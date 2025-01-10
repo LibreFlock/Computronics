@@ -8,7 +8,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import org.libreflock.asielib.reference.Mods;*/
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 
 import java.util.List;
 
@@ -22,5 +22,5 @@ import java.util.List;
 })*/
 public interface IInformationProvider /*extends ITileInfo, IGregTechDeviceInformation*/ {
 
-	void getInformation(EntityPlayer player, EnumFacing side, List<String> info, boolean debug);
+	void getInformation(EntityPlayer player, Direction side, List<String> info, boolean debug);
 }

@@ -1,9 +1,9 @@
 package org.libreflock.computronics.util;
 
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import org.libreflock.computronics.reference.Config;
 
@@ -18,11 +18,11 @@ public class Camera {
 		// not initialized
 	}
 
-	public boolean ray(World worldObj, int xCoord, int yCoord, int zCoord, EnumFacing dir, float x, float y) {
+	public boolean ray(World worldObj, int xCoord, int yCoord, int zCoord, Direction dir, float x, float y) {
 		return ray(worldObj, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, dir, x, y, true);
 	}
 
-	public boolean ray(World worldObj, double xCoord, double yCoord, double zCoord, EnumFacing dir, float x, float y, boolean doBlockOffset) {
+	public boolean ray(World worldObj, double xCoord, double yCoord, double zCoord, Direction dir, float x, float y, boolean doBlockOffset) {
 		hit = null;
 		if(x < -1.0F || x > 1.0F || y < -1.0F || y > 1.0F) {
 			return false;
@@ -109,8 +109,8 @@ public class Camera {
 
 		// shoot ray
 		float steps = Config.CAMERA_DISTANCE;
-		Vec3d origin = new Vec3d(xPos, yPos, zPos);
-		Vec3d target = new Vec3d(xPos + (xDirection * steps), yPos + (yDirection * steps), zPos + (zDirection * steps));
+		Vector3d origin = new Vector3d(xPos, yPos, zPos);
+		Vector3d target = new Vector3d(xPos + (xDirection * steps), yPos + (yDirection * steps), zPos + (zDirection * steps));
 		RayTraceResult mop = world.rayTraceBlocks(origin, target);
 		if(mop != null) {
 			xPos = mop.hitVec.x;

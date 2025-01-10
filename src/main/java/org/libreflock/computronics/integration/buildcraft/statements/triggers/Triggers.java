@@ -6,7 +6,7 @@ import buildcraft.api.statements.ITriggerExternal;
 import buildcraft.api.statements.StatementManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.api.distmarker.Dist;
@@ -43,7 +43,7 @@ public enum Triggers implements ITriggerExternal {
 	}
 
 	@Override
-	public boolean isTriggerActive(TileEntity tile, EnumFacing side, IStatementContainer container, IStatementParameter[] statements) {
+	public boolean isTriggerActive(TileEntity tile, Direction side, IStatementContainer container, IStatementParameter[] statements) {
 		return trigger.isTriggerActive(tile, side, container, statements);
 	}
 

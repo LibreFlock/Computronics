@@ -14,7 +14,7 @@ import mods.railcraft.common.util.misc.Game;
 import mods.railcraft.common.util.network.RailcraftInputStream;
 import mods.railcraft.common.util.network.RailcraftOutputStream;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.Optional;
 import org.libreflock.computronics.integration.railcraft.SignalTypes;
@@ -77,12 +77,12 @@ public class TileDigitalControllerBox extends TileDigitalBoxBase implements ICon
 	}
 
 	@Override
-	public boolean isConnected(EnumFacing side) {
+	public boolean isConnected(Direction side) {
 		return false;
 	}
 
 	@Override
-	public SignalAspect getBoxSignalAspect(EnumFacing side) {
+	public SignalAspect getBoxSignalAspect(Direction side) {
 		return this.controller.getVisualAspect();
 	}
 

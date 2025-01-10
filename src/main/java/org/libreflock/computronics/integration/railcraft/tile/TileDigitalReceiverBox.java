@@ -17,7 +17,7 @@ import mods.railcraft.common.util.network.RailcraftInputStream;
 import mods.railcraft.common.util.network.RailcraftOutputStream;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.Optional;
 import org.libreflock.computronics.integration.railcraft.SignalTypes;
@@ -115,7 +115,7 @@ public class TileDigitalReceiverBox extends TileDigitalBoxBase implements IRecei
 	}
 
 	@Override
-	public SignalAspect getBoxSignalAspect(EnumFacing side) {
+	public SignalAspect getBoxSignalAspect(Direction side) {
 		return this.receiver.getVisualAspect();
 	}
 
@@ -135,7 +135,7 @@ public class TileDigitalReceiverBox extends TileDigitalBoxBase implements IRecei
 	}
 
 	@Override
-	public boolean isConnected(EnumFacing side) {
+	public boolean isConnected(Direction side) {
 		TileEntity tile = this.tileCache.getTileOnSide(side);
 		return tile instanceof TileBoxBase && ((TileBoxBase) tile).canReceiveAspect();
 	}

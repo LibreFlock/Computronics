@@ -7,7 +7,7 @@ import buildcraft.api.statements.IStatementParameter;
 import buildcraft.api.statements.StatementManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.api.distmarker.Dist;
@@ -54,7 +54,7 @@ public enum Actions implements IActionExternal {
 	}
 
 	@Override
-	public void actionActivate(TileEntity tile, EnumFacing side, IStatementContainer container, IStatementParameter[] parameters) {
+	public void actionActivate(TileEntity tile, Direction side, IStatementContainer container, IStatementParameter[] parameters) {
 		this.action.actionActivate(tile, side, container, parameters);
 	}
 

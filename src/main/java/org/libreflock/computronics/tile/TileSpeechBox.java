@@ -8,9 +8,9 @@ import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 import org.libreflock.computronics.Computronics;
@@ -44,7 +44,7 @@ public class TileSpeechBox extends TileEntityPeripheralBase implements IAudioSou
 
 	private final IAudioReceiver internalSpeaker = new IAudioReceiver() {
 		@Override
-		public boolean connectsAudio(EnumFacing side) {
+		public boolean connectsAudio(Direction side) {
 			return true;
 		}
 
@@ -54,8 +54,8 @@ public class TileSpeechBox extends TileEntityPeripheralBase implements IAudioSou
 		}
 
 		@Override
-		public Vec3d getSoundPos() {
-			return new Vec3d(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D);
+		public Vector3d getSoundPos() {
+			return new Vector3d(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D);
 		}
 
 		@Override
@@ -64,7 +64,7 @@ public class TileSpeechBox extends TileEntityPeripheralBase implements IAudioSou
 		}
 
 		@Override
-		public void receivePacket(AudioPacket packet, @Nullable EnumFacing direction) {
+		public void receivePacket(AudioPacket packet, @Nullable Direction direction) {
 			packet.addReceiver(this);
 		}
 
@@ -103,7 +103,7 @@ public class TileSpeechBox extends TileEntityPeripheralBase implements IAudioSou
 			}
 
 			if(!sent) {
-				for(EnumFacing dir : EnumFacing.VALUES) {
+				for(Direction dir : Direction.VALUES) {
 					TileEntity tile = world.getTileEntity(getPos().offset(dir));
 					if(tile != null && tile.hasCapability(AUDIO_RECEIVER_CAPABILITY, dir.getOpposite())) {
 						IColorable targetCol = org.libreflock.computronics.util.ColorUtils.getColorable(tile, dir.getOpposite());
@@ -321,7 +321,7 @@ public class TileSpeechBox extends TileEntityPeripheralBase implements IAudioSou
 	}
 
 	@Override
-	public boolean connectsAudio(EnumFacing side) {
+	public boolean connectsAudio(Direction side) {
 		return world.getBlockState(getPos()).getValue(Computronics.speechBox.rotation.FACING) != side;
 	}
 }

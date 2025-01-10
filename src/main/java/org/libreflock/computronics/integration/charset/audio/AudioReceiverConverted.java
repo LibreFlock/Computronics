@@ -1,7 +1,7 @@
 package org.libreflock.computronics.integration.charset.audio;
 
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import org.libreflock.charset.api.audio.AudioSink;
 import org.libreflock.computronics.api.audio.AudioPacket;
@@ -27,7 +27,7 @@ public class AudioReceiverConverted implements IAudioReceiver {
 	}
 
 	@Override
-	public Vec3d getSoundPos() {
+	public Vector3d getSoundPos() {
 		return sink.getPos();
 	}
 
@@ -37,7 +37,7 @@ public class AudioReceiverConverted implements IAudioReceiver {
 	}
 
 	@Override
-	public void receivePacket(AudioPacket packet, @Nullable EnumFacing side) {
+	public void receivePacket(AudioPacket packet, @Nullable Direction side) {
 
 	}
 
@@ -47,7 +47,7 @@ public class AudioReceiverConverted implements IAudioReceiver {
 	}
 
 	@Override
-	public boolean connectsAudio(EnumFacing side) {
+	public boolean connectsAudio(Direction side) {
 		return false;
 	}
 }

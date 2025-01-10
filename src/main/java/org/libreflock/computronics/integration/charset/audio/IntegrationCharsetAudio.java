@@ -1,7 +1,7 @@
 package org.libreflock.computronics.integration.charset.audio;
 
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -53,13 +53,13 @@ public class IntegrationCharsetAudio {
 				private final AudioSink sink = new AudioSinkSpeaker((TileSpeaker) event.getObject());
 
 				@Override
-				public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+				public boolean hasCapability(Capability<?> capability, @Nullable Direction facing) {
 					return capability == RECEIVER_CAPABILITY && facing != null;
 				}
 
 				@Nullable
 				@Override
-				public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+				public <T> T getCapability(Capability<T> capability, @Nullable Direction facing) {
 					return capability == RECEIVER_CAPABILITY ? RECEIVER_CAPABILITY.<T>cast(sink) : null;
 				}
 			});
@@ -70,13 +70,13 @@ public class IntegrationCharsetAudio {
 				private final AudioReceiverCable[] RECEIVERS = new AudioReceiverCable[6];
 
 				@Override
-				public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+				public boolean hasCapability(Capability<?> capability, @Nullable Direction facing) {
 					return capability == RECEIVER_CAPABILITY && facing != null;
 				}
 
 				@Nullable
 				@Override
-				public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+				public <T> T getCapability(Capability<T> capability, @Nullable Direction facing) {
 					if(capability == RECEIVER_CAPABILITY && facing != null) {
 						if(RECEIVERS[facing.ordinal()] == null) {
 							RECEIVERS[facing.ordinal()] = new AudioReceiverCable(cable, facing);
@@ -94,13 +94,13 @@ public class IntegrationCharsetAudio {
 				private final AudioSourceDummy source = new AudioSourceDummy();
 
 				@Override
-				public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+				public boolean hasCapability(Capability<?> capability, @Nullable Direction facing) {
 					return capability == SOURCE_CAPABILITY && facing != null;
 				}
 
 				@Nullable
 				@Override
-				public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+				public <T> T getCapability(Capability<T> capability, @Nullable Direction facing) {
 					return capability == SOURCE_CAPABILITY ? SOURCE_CAPABILITY.<T>cast(source) : null;
 				}
 			});
@@ -111,13 +111,13 @@ public class IntegrationCharsetAudio {
 				private final AudioSourceDummy source = new AudioSourceDummy();
 
 				@Override
-				public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+				public boolean hasCapability(Capability<?> capability, @Nullable Direction facing) {
 					return capability == SOURCE_CAPABILITY && facing != null;
 				}
 
 				@Nullable
 				@Override
-				public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+				public <T> T getCapability(Capability<T> capability, @Nullable Direction facing) {
 					return capability == SOURCE_CAPABILITY ? SOURCE_CAPABILITY.<T>cast(source) : null;
 				}
 			});
@@ -137,7 +137,7 @@ public class IntegrationCharsetAudio {
 		}
 
 		packetNew = new org.libreflock.charset.api.audio.AudioPacket(dataNew, volume);
-		for(EnumFacing facing : EnumFacing.VALUES) {
+		for(Direction facing : Direction.VALUES) {
 			BlockPos posO = pos.offset(facing);
 			TileEntity tile = world.getTileEntity(posO);
 			if(tile != null && tile.hasCapability(RECEIVER_CAPABILITY, facing.getOpposite())) {
@@ -156,7 +156,7 @@ public class IntegrationCharsetAudio {
 		}
 	}
 
-	public static boolean connects(@Nullable TileEntity tile, EnumFacing dir) {
+	public static boolean connects(@Nullable TileEntity tile, Direction dir) {
 		return tile != null && (tile.hasCapability(SOURCE_CAPABILITY, dir)
 			|| tile.hasCapability(RECEIVER_CAPABILITY, dir));
 	}

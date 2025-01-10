@@ -11,8 +11,8 @@ import li.cil.oc.api.network.Node;
 import li.cil.oc.api.network.Visibility;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -56,7 +56,7 @@ public class RobotUpgradeSpeech extends ManagedEnvironmentWithComponentConnector
 
 	private final IAudioReceiver internalSpeaker = new IAudioReceiver() {
 		@Override
-		public boolean connectsAudio(EnumFacing side) {
+		public boolean connectsAudio(Direction side) {
 			return true;
 		}
 
@@ -66,7 +66,7 @@ public class RobotUpgradeSpeech extends ManagedEnvironmentWithComponentConnector
 		}
 
 		@Override
-		public Vec3d getSoundPos() {
+		public Vector3d getSoundPos() {
 			return getPos();
 		}
 
@@ -76,7 +76,7 @@ public class RobotUpgradeSpeech extends ManagedEnvironmentWithComponentConnector
 		}
 
 		@Override
-		public void receivePacket(AudioPacket packet, @Nullable EnumFacing direction) {
+		public void receivePacket(AudioPacket packet, @Nullable Direction direction) {
 			packet.addReceiver(this);
 		}
 
@@ -87,8 +87,8 @@ public class RobotUpgradeSpeech extends ManagedEnvironmentWithComponentConnector
 
 	};
 
-	protected Vec3d getPos() {
-		return new Vec3d(host.xPosition(), host.yPosition(), host.zPosition());
+	protected Vector3d getPos() {
+		return new Vector3d(host.xPosition(), host.yPosition(), host.zPosition());
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class RobotUpgradeSpeech extends ManagedEnvironmentWithComponentConnector
 			}
 			if(!sent) {
 				if(host instanceof TileEntity) {
-					for(EnumFacing dir : EnumFacing.VALUES) {
+					for(Direction dir : Direction.VALUES) {
 						TileEntity tile = host.world().getTileEntity(((TileEntity) host).getPos().offset(dir));
 						if(tile != null) {
 							if(tile.hasCapability(AUDIO_RECEIVER_CAPABILITY, dir.getOpposite())) {
@@ -306,7 +306,7 @@ public class RobotUpgradeSpeech extends ManagedEnvironmentWithComponentConnector
 	}
 
 	@Override
-	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+	public boolean hasCapability(Capability<?> capability, @Nullable Direction facing) {
 		facing = host instanceof Rotatable ? ((Rotatable) host).toGlobal(facing) : facing;
 		if(Mods.API.hasAPI(Mods.API.CharsetAudio)) {
 			if(capability == IntegrationCharsetAudio.SOURCE_CAPABILITY && facing != null && connectsAudio(facing)) {
@@ -320,7 +320,7 @@ public class RobotUpgradeSpeech extends ManagedEnvironmentWithComponentConnector
 
 	@Nullable
 	@Override
-	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+	public <T> T getCapability(Capability<T> capability, @Nullable Direction facing) {
 		facing = host instanceof Rotatable ? ((Rotatable) host).toGlobal(facing) : facing;
 		if(Mods.API.hasAPI(Mods.API.CharsetAudio)) {
 			if(capability == IntegrationCharsetAudio.SOURCE_CAPABILITY && facing != null && connectsAudio(facing)) {
@@ -338,7 +338,7 @@ public class RobotUpgradeSpeech extends ManagedEnvironmentWithComponentConnector
 	}
 
 	@Override
-	public boolean connectsAudio(EnumFacing side) {
+	public boolean connectsAudio(Direction side) {
 		if(host instanceof TileEntity) {
 			IColorable hostCol = ColorUtils.getColorable((TileEntity) host, side);
 			IColorable targetCol = ColorUtils.getColorable(host.world().getTileEntity(((TileEntity) host).getPos().offset(side)), side.getOpposite());

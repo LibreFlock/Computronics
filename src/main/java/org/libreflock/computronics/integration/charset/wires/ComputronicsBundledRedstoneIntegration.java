@@ -1,7 +1,7 @@
 package org.libreflock.computronics.integration.charset.wires;
 
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
@@ -38,21 +38,21 @@ public class ComputronicsBundledRedstoneIntegration {
 		IntegrationCharsetWires.bundledRedstone.register();
 	}
 
-	public static boolean isEmitter(ICapabilityProvider tile, EnumFacing side) {
+	public static boolean isEmitter(ICapabilityProvider tile, Direction side) {
 		return tile.hasCapability(CHARSET_EMITTER, side);
 	}
 
-	public static boolean isReceiver(ICapabilityProvider tile, EnumFacing side) {
+	public static boolean isReceiver(ICapabilityProvider tile, Direction side) {
 		return tile.hasCapability(CHARSET_RECEIVER, side);
 	}
 
 	@Optional.Method(modid = Mods.API.CharsetWires)
-	public static IBundledEmitter getEmitter(ICapabilityProvider tile, EnumFacing side) {
+	public static IBundledEmitter getEmitter(ICapabilityProvider tile, Direction side) {
 		return tile.getCapability(CHARSET_EMITTER, side);
 	}
 
 	@Optional.Method(modid = Mods.API.CharsetWires)
-	public static IBundledReceiver getReceiver(ICapabilityProvider tile, EnumFacing side) {
+	public static IBundledReceiver getReceiver(ICapabilityProvider tile, Direction side) {
 		return tile.getCapability(CHARSET_RECEIVER, side);
 	}
 
@@ -76,11 +76,11 @@ public class ComputronicsBundledRedstoneIntegration {
 
 	public static class TileCache {
 
-		protected final EnumFacing side;
+		protected final Direction side;
 		protected final TileEntity tile;
 		protected final IBundledRedstoneProvider br;
 
-		protected TileCache(TileEntity tile, @Nullable EnumFacing side) {
+		protected TileCache(TileEntity tile, @Nullable Direction side) {
 			this.tile = tile;
 			this.br = (IBundledRedstoneProvider) tile;
 			this.side = side;
@@ -89,7 +89,7 @@ public class ComputronicsBundledRedstoneIntegration {
 
 	public static class ComputronicsBundledEmitter extends TileCache implements IBundledEmitter {
 
-		protected ComputronicsBundledEmitter(TileEntity tile, @Nullable EnumFacing side) {
+		protected ComputronicsBundledEmitter(TileEntity tile, @Nullable Direction side) {
 			super(tile, side);
 		}
 
@@ -101,7 +101,7 @@ public class ComputronicsBundledRedstoneIntegration {
 
 	public static class ComputronicsBundledReceiver extends TileCache implements IBundledReceiver {
 
-		protected ComputronicsBundledReceiver(TileEntity tile, EnumFacing side) {
+		protected ComputronicsBundledReceiver(TileEntity tile, Direction side) {
 			super(tile, side);
 		}
 
@@ -127,14 +127,14 @@ public class ComputronicsBundledRedstoneIntegration {
 		}
 
 		@Override
-		public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+		public boolean hasCapability(Capability<?> capability, @Nullable Direction facing) {
 			return capability == CHARSET_EMITTER && br.canBundledConnectToOutput(facing)
 				|| capability == CHARSET_RECEIVER && facing != null && br.canBundledConnectToInput(facing);
 		}
 
 		@Nullable
 		@Override
-		public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+		public <T> T getCapability(Capability<T> capability, @Nullable Direction facing) {
 			if(capability == CHARSET_EMITTER && br.canBundledConnectToOutput(facing)) {
 				return CHARSET_EMITTER.cast(getEmitter(facing));
 			} else if(capability == CHARSET_RECEIVER && facing != null && br.canBundledConnectToInput(facing)) {
@@ -143,7 +143,7 @@ public class ComputronicsBundledRedstoneIntegration {
 			return null;
 		}
 
-		private ComputronicsBundledEmitter getEmitter(@Nullable EnumFacing facing) {
+		private ComputronicsBundledEmitter getEmitter(@Nullable Direction facing) {
 			if(facing == null) {
 				if(EMITTERS[6] == null) {
 					EMITTERS[6] = new ComputronicsBundledEmitter(tile, null);
@@ -156,7 +156,7 @@ public class ComputronicsBundledRedstoneIntegration {
 			return EMITTERS[facing.ordinal()];
 		}
 
-		private ComputronicsBundledReceiver getReceiver(EnumFacing facing) {
+		private ComputronicsBundledReceiver getReceiver(Direction facing) {
 			if(RECEIVERS[facing.ordinal()] == null) {
 				RECEIVERS[facing.ordinal()] = new ComputronicsBundledReceiver(tile, facing);
 			}

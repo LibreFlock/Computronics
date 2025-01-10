@@ -7,7 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -40,7 +40,7 @@ public abstract class BlockPeripheral extends BlockBase implements IComputronics
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, Direction side, float hitX, float hitY, float hitZ) {
 		TileEntity tile = world.getTileEntity(pos);
 		ItemStack heldItem = player.getHeldItem(hand);
 		if(tile instanceof TileEntityPeripheralBase && ((TileEntityPeripheralBase) tile).canBeColored() && !heldItem.isEmpty()) {
@@ -69,7 +69,7 @@ public abstract class BlockPeripheral extends BlockBase implements IComputronics
 	}
 
 	@Override
-	public boolean recolorBlock(World world, BlockPos pos, EnumFacing side, EnumDyeColor color) {
+	public boolean recolorBlock(World world, BlockPos pos, Direction side, EnumDyeColor color) {
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile instanceof IColorable && ((IColorable) tile).canBeColored()) {
 			((IColorable) tile).setColor(ColorUtils.fromColor(color).color);
@@ -120,7 +120,7 @@ public abstract class BlockPeripheral extends BlockBase implements IComputronics
 	}
 
 	@Override
-	public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
+	public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, Direction face) {
 		return true;
 	}
 

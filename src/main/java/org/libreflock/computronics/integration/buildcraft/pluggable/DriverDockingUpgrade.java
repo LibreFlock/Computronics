@@ -22,7 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import org.libreflock.computronics.integration.buildcraft.pluggable.DroneStationPluggable.DroneStationState;
@@ -40,7 +40,7 @@ public class DriverDockingUpgrade extends ManagedEnvironment implements DeviceIn
 	protected boolean isDocking = false;
 	protected boolean isDocked = false;
 	protected IPipeTile pipe;
-	protected final EnumFacing side = EnumFacing.UP;
+	protected final Direction side = Direction.UP;
 	private BlockPos pipepos;
 
 	private Vec3 targetVec = new Vec3(0, 0, 0);
@@ -109,7 +109,7 @@ public class DriverDockingUpgrade extends ManagedEnvironment implements DeviceIn
 	}
 
 	//Re-implemented from BuildCraft to respect pluggables
-	private int injectItem(TileGenericPipe pipe, ItemStack stack, boolean doAdd, EnumFacing from, EnumDyeColor color) {
+	private int injectItem(TileGenericPipe pipe, ItemStack stack, boolean doAdd, Direction from, EnumDyeColor color) {
 		if(!pipe.pipe.inputOpen(from)) {
 			return 0;
 		} else if(BlockGenericPipe.isValid(pipe.pipe) && pipe.pipe.transport instanceof PipeTransportItems && pipe.getPipePluggable(from) != null) {
@@ -194,7 +194,7 @@ public class DriverDockingUpgrade extends ManagedEnvironment implements DeviceIn
 		return new Object[] { true };
 	}
 
-	private DroneStationPluggable tryGetStation(World world, BlockPos pos, EnumFacing side) {
+	private DroneStationPluggable tryGetStation(World world, BlockPos pos, Direction side) {
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile != null && tile instanceof IPipeTile) {
 			PipePluggable pluggable = ((IPipeTile) tile).getPipePluggable(side);

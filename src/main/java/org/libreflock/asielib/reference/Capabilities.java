@@ -3,7 +3,7 @@ package org.libreflock.asielib.reference;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
@@ -38,13 +38,13 @@ public class Capabilities {
 		if(tile instanceof IColorable) {
 			e.addCapability(COLORABLE_KEY, new ICapabilityProvider() {
 				@Override
-				public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+				public boolean hasCapability(Capability<?> capability, @Nullable Direction facing) {
 					return capability == COLORABLE_CAPABILITY;
 				}
 
 				@Nullable
 				@Override
-				public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+				public <T> T getCapability(Capability<T> capability, @Nullable Direction facing) {
 					return hasCapability(capability, facing) ? COLORABLE_CAPABILITY.<T>cast(((IColorable) tile)) : null;
 				}
 			});
@@ -54,12 +54,12 @@ public class Capabilities {
 	private static class ColorableStorage implements Capability.IStorage<IColorable> {
 
 		@Override
-		public NBTBase writeNBT(Capability<IColorable> capability, IColorable instance, EnumFacing side) {
+		public NBTBase writeNBT(Capability<IColorable> capability, IColorable instance, Direction side) {
 			return new NBTTagInt(instance.getColor());
 		}
 
 		@Override
-		public void readNBT(Capability<IColorable> capability, IColorable instance, EnumFacing side, NBTBase nbt) {
+		public void readNBT(Capability<IColorable> capability, IColorable instance, Direction side, NBTBase nbt) {
 			if(nbt instanceof NBTTagInt) {
 				instance.setColor(((NBTTagInt) nbt).getInt());
 			}

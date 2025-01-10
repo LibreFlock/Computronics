@@ -6,10 +6,10 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -37,7 +37,7 @@ import javax.annotation.Nullable;
 public class PortableTapeDrive implements IAudioSource {
 
 	protected World world;
-	protected Vec3d pos;
+	protected Vector3d pos;
 	protected Entity carrier;
 	protected ItemStack self;
 	protected int time = 0;
@@ -275,7 +275,7 @@ public class PortableTapeDrive implements IAudioSource {
 
 	private final IAudioReceiver internalSpeaker = new IAudioReceiver() {
 		@Override
-		public boolean connectsAudio(EnumFacing side) {
+		public boolean connectsAudio(Direction side) {
 			return false;
 		}
 
@@ -285,7 +285,7 @@ public class PortableTapeDrive implements IAudioSource {
 		}
 
 		@Override
-		public Vec3d getSoundPos() {
+		public Vector3d getSoundPos() {
 			return pos;
 		}
 
@@ -295,7 +295,7 @@ public class PortableTapeDrive implements IAudioSource {
 		}
 
 		@Override
-		public void receivePacket(AudioPacket packet, @Nullable EnumFacing direction) {
+		public void receivePacket(AudioPacket packet, @Nullable Direction direction) {
 			packet.addReceiver(this);
 		}
 
@@ -320,7 +320,7 @@ public class PortableTapeDrive implements IAudioSource {
 	}
 
 	@Override
-	public boolean connectsAudio(EnumFacing side) {
+	public boolean connectsAudio(Direction side) {
 		return true;
 	}
 

@@ -7,7 +7,7 @@ import buildcraft.api.statements.IStatementContainer;
 import buildcraft.api.statements.StatementManager;
 import li.cil.oc.api.internal.Case;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import org.libreflock.computronics.integration.buildcraft.statements.actions.Actions;
 import org.libreflock.computronics.reference.Mods;
 import org.libreflock.computronics.tile.TileColorfulLamp;
@@ -32,7 +32,7 @@ public class ActionProvider implements IActionProvider {
 	}
 
 	@Override
-	public Collection<IActionExternal> getExternalActions(EnumFacing side, TileEntity tile) {
+	public Collection<IActionExternal> getExternalActions(Direction side, TileEntity tile) {
 		LinkedList<IActionExternal> actions = new LinkedList<IActionExternal>();
 		if(tile != null) {
 			if(Mods.isLoaded(Mods.OpenComputers) && tile instanceof Case) {

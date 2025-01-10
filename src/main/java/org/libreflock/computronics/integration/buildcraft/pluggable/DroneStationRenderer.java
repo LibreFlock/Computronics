@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
@@ -31,7 +31,7 @@ public class DroneStationRenderer implements IPipePluggableStaticRenderer {
 	private float zFightOffset = 1 / 4096.0F;
 
 	private void droneStationPartRender(RenderBlocks renderblocks,
-		EnumFacing side, ITextureStates blockStateMachine, int x, int y, int z,
+		Direction side, ITextureStates blockStateMachine, int x, int y, int z,
 		float xStart, float xEnd, float yStart, float yEnd, float zStart,
 		float zEnd) {
 

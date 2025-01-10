@@ -9,7 +9,7 @@ import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.libreflock.computronics.integration.CCMultiPeripheral;
@@ -180,7 +180,7 @@ public class DriverCapacitorBank {
 		}
 
 		@Override
-		public InternalManagedEnvironment createEnvironment(World world, BlockPos pos, EnumFacing side, TileCapBank tile) {
+		public InternalManagedEnvironment createEnvironment(World world, BlockPos pos, Direction side, TileCapBank tile) {
 			return new InternalManagedEnvironment(tile);
 		}
 	}
@@ -200,7 +200,7 @@ public class DriverCapacitorBank {
 		}
 
 		@Override
-		public CCMultiPeripheral getPeripheral(World world, BlockPos pos, EnumFacing side) {
+		public CCMultiPeripheral getPeripheral(World world, BlockPos pos, Direction side) {
 			TileEntity te = world.getTileEntity(pos);
 			if(te != null && te instanceof TileCapBank) {
 				return new CCDriver((TileCapBank) te, world, pos);

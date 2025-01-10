@@ -8,7 +8,7 @@ import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -36,7 +36,7 @@ public class TileChatBox extends TileEntityPeripheralBase implements IChatListen
 	}
 
 	@Override
-	public int requestCurrentRedstoneValue(EnumFacing side) {
+	public int requestCurrentRedstoneValue(Direction side) {
 		return (ticksUntilOff > 0) ? 15 : 0;
 	}
 

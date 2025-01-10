@@ -5,7 +5,7 @@ import buildcraft.api.blueprints.SchematicTile;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import org.libreflock.asielib.block.BlockBase;
 import org.libreflock.asielib.tile.TileMachine;
@@ -30,7 +30,7 @@ public class SchematicBlockBase extends SchematicTile {
 							break;
 						}
 						default: {
-							EnumFacing face = this.state.getValue(block.rotation.FACING);
+							Direction face = this.state.getValue(block.rotation.FACING);
 							if(face != null) {
 								this.state = this.state.withProperty(block.rotation.FACING, face.rotateY());
 							}
@@ -40,7 +40,7 @@ public class SchematicBlockBase extends SchematicTile {
 					break;
 				}
 				case FOUR: {
-					EnumFacing face = this.state.getValue(block.rotation.FACING);
+					Direction face = this.state.getValue(block.rotation.FACING);
 					if(face != null) {
 						this.state = this.state.withProperty(block.rotation.FACING, face.rotateY());
 					}

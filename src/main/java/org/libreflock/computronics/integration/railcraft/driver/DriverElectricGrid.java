@@ -13,7 +13,7 @@ import mods.railcraft.api.charge.IBattery;
 import mods.railcraft.common.util.charge.BatteryBlock;
 import mods.railcraft.common.util.charge.ChargeManager;
 import mods.railcraft.common.util.charge.ChargeNetwork;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -174,13 +174,13 @@ public class DriverElectricGrid {
 		}
 
 		@Override
-		public boolean worksWith(World world, BlockPos pos, EnumFacing side) {
+		public boolean worksWith(World world, BlockPos pos, Direction side) {
 			Charge.IAccess access = ChargeManager.DISTRIBUTION.network(world).access(pos);
 			return access instanceof ChargeNetwork.ChargeNode && ((ChargeNetwork.ChargeNode) access).isValid();
 		}
 
 		@Override
-		public ManagedEnvironment createEnvironment(World world, BlockPos pos, EnumFacing side) {
+		public ManagedEnvironment createEnvironment(World world, BlockPos pos, Direction side) {
 			return new InternalManagedEnvironment(world.provider.getDimension(), pos);
 		}
 	}
@@ -205,7 +205,7 @@ public class DriverElectricGrid {
 		}
 
 		@Override
-		public IMultiPeripheral getPeripheral(World world, BlockPos pos, EnumFacing side) {
+		public IMultiPeripheral getPeripheral(World world, BlockPos pos, Direction side) {
 			Charge.IAccess access = ChargeManager.DISTRIBUTION.network(world).access(pos);
 			if(access instanceof ChargeNetwork.ChargeNode && ((ChargeNetwork.ChargeNode) access).isValid()) {
 				return new CCDriver(world, pos);

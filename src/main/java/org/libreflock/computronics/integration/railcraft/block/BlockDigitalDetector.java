@@ -10,7 +10,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -29,7 +29,7 @@ import static org.libreflock.asielib.util.WorldUtils.notifyBlockUpdate;
  */
 public class BlockDigitalDetector extends BlockPeripheral implements IBlockWithPrefix {
 
-	public static final PropertyEnum<EnumFacing> FRONT = PropertyEnum.create("front", EnumFacing.class);
+	public static final PropertyEnum<Direction> FRONT = PropertyEnum.create("front", Direction.class);
 
 	public BlockDigitalDetector() {
 		super("digital_detector", Rotation.NONE);
@@ -61,7 +61,7 @@ public class BlockDigitalDetector extends BlockPeripheral implements IBlockWithP
 
 	@Override
 	@Deprecated
-	public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+	public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, Direction side) {
 		return true;
 	}
 
@@ -80,12 +80,12 @@ public class BlockDigitalDetector extends BlockPeripheral implements IBlockWithP
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, Direction side, float hitX, float hitY, float hitZ) {
 		return false;
 	}
 
 	@Override
-	public boolean rotateBlock(World world, BlockPos pos, EnumFacing axis) {
+	public boolean rotateBlock(World world, BlockPos pos, Direction axis) {
 		TileEntity tile = world.getTileEntity(pos);
 		if((tile instanceof TileDigitalDetector)) {
 			TileDigitalDetector detector = (TileDigitalDetector) tile;
@@ -101,8 +101,8 @@ public class BlockDigitalDetector extends BlockPeripheral implements IBlockWithP
 	}
 
 	@Override
-	public EnumFacing[] getValidRotations(World world, BlockPos pos) {
-		return EnumFacing.VALUES;
+	public Direction[] getValidRotations(World world, BlockPos pos) {
+		return Direction.VALUES;
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public class BlockDigitalDetector extends BlockPeripheral implements IBlockWithP
 		if(world.isRemote) {
 			return;
 		}
-		for(EnumFacing side : EnumFacing.VALUES) {
+		for(Direction side : Direction.VALUES) {
 			world.notifyNeighborsOfStateChange(pos.offset(side), state.getBlock(), false);
 		}
 	}
@@ -123,13 +123,13 @@ public class BlockDigitalDetector extends BlockPeripheral implements IBlockWithP
 		if(world.isRemote) {
 			return;
 		}
-		for(EnumFacing side : EnumFacing.VALUES) {
+		for(Direction side : Direction.VALUES) {
 			world.notifyNeighborsOfStateChange(pos.offset(side), state.getBlock(), false);
 		}
 	}
 
 	@Override
-	public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing sid) {
+	public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, Direction sid) {
 		return false;
 	}
 

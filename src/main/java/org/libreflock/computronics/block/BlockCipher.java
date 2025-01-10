@@ -5,7 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -35,7 +35,7 @@ public class BlockCipher extends BlockPeripheral /*implements IRedNetOmniNode*/ 
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, Direction side, float hitX, float hitY, float hitZ) {
 		boolean isLocked = false;
 		if(!world.isRemote && Config.CIPHER_CAN_LOCK) {
 			TileEntity tile = world.getTileEntity(pos);
@@ -66,7 +66,7 @@ public class BlockCipher extends BlockPeripheral /*implements IRedNetOmniNode*/ 
 	/*@Override
 	@Optional.Method(modid = Mods.MFR)
 	public void onInputsChanged(World world, int x, int y, int z,
-			EnumFacing side, int[] inputValues) {
+			Direction side, int[] inputValues) {
 		((TileCipherBlock)world.getTileEntity(x, y, z)).updateRedNet(inputValues);
 		
 	}

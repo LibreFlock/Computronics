@@ -13,7 +13,7 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.LockCode;
 import net.minecraftforge.fml.common.Optional;
@@ -251,11 +251,11 @@ public class TileCipherBlock extends TileEntityPeripheralBase implements IBundle
 		}
 	}*/
 
-	protected EnumFacing getBundledInputSide() {
+	protected Direction getBundledInputSide() {
 		return world.getBlockState(getPos()).getValue(Computronics.cipher.rotation.FACING).rotateY();
 	}
 
-	protected EnumFacing getBundledOutputSide() {
+	protected Direction getBundledOutputSide() {
 		return world.getBlockState(getPos()).getValue(Computronics.cipher.rotation.FACING).rotateYCCW();
 	}
 
@@ -319,18 +319,18 @@ public class TileCipherBlock extends TileEntityPeripheralBase implements IBundle
 	}
 
 	@Override
-	public boolean canBundledConnectToInput(@Nullable EnumFacing side) {
+	public boolean canBundledConnectToInput(@Nullable Direction side) {
 		return world != null && side == getBundledInputSide();
 	}
 
 	@Override
-	public boolean canBundledConnectToOutput(@Nullable EnumFacing side) {
+	public boolean canBundledConnectToOutput(@Nullable Direction side) {
 		return world != null && side == getBundledOutputSide();
 	}
 
 	@Nullable
 	@Override
-	public byte[] getBundledOutput(@Nullable EnumFacing side) {
+	public byte[] getBundledOutput(@Nullable Direction side) {
 		if(side == getBundledOutputSide()) {
 			return getBundledOutput();
 		} else {
@@ -339,7 +339,7 @@ public class TileCipherBlock extends TileEntityPeripheralBase implements IBundle
 	}
 
 	@Override
-	public void onBundledInputChange(@Nullable EnumFacing side, @Nullable byte[] data) {
+	public void onBundledInputChange(@Nullable Direction side, @Nullable byte[] data) {
 		if(data != null && side == getBundledInputSide()) {
 			bundledXORData = 0;
 			for(int i = 0; i < 16; i++) {
@@ -368,17 +368,17 @@ public class TileCipherBlock extends TileEntityPeripheralBase implements IBundle
 	}
 
 	@Override
-	public boolean canInsertItem(int slot, ItemStack item, EnumFacing side) {
+	public boolean canInsertItem(int slot, ItemStack item, Direction side) {
 		return !isLocked() && slot == side.ordinal();
 	}
 
 	@Override
-	public boolean canExtractItem(int slot, ItemStack item, EnumFacing side) {
+	public boolean canExtractItem(int slot, ItemStack item, Direction side) {
 		return !isLocked() && slot == side.ordinal();
 	}
 
 	@Override
-	public int[] getSlotsForFace(EnumFacing side) {
+	public int[] getSlotsForFace(Direction side) {
 		if(isLocked()) {
 			return new int[] {};
 		} else {

@@ -470,7 +470,7 @@ public class ModuleTapeReader extends ComputronicsModule {
 
 	@Nullable
 	public TileTapeDrive getTapeDrive() {
-		TileEntity tile = getCasing().getCasingWorld().getTileEntity(getCasing().getPosition().offset(Face.toEnumFacing(getFace())));
+		TileEntity tile = getCasing().getCasingWorld().getTileEntity(getCasing().getPosition().offset(Face.toDirection(getFace())));
 		return tile instanceof TileTapeDrive ? (TileTapeDrive) tile : null;
 	}
 

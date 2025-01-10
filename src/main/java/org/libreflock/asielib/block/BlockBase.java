@@ -13,7 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -40,8 +40,8 @@ public abstract class BlockBase extends Block /*implements
 	public static final PropertyBool BUNDLED = PropertyBool.create("bundled");
 
 	public enum Rotation {
-		NONE(PropertyDirection.create("facing", Collections.singleton(EnumFacing.NORTH))),
-		FOUR(PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL)),
+		NONE(PropertyDirection.create("facing", Collections.singleton(Direction.NORTH))),
+		FOUR(PropertyDirection.create("facing", Direction.Plane.HORIZONTAL)),
 		SIX(PropertyDirection.create("facing"));
 
 		public final PropertyDirection FACING;
@@ -71,7 +71,7 @@ public abstract class BlockBase extends Block /*implements
 	protected IBlockState createDefaultState() {
 		IBlockState state = this.blockState.getBaseState();
 		if(rotation != Rotation.NONE) {
-			state = state.withProperty(rotation.FACING, EnumFacing.NORTH);
+			state = state.withProperty(rotation.FACING, Direction.NORTH);
 		}
 		return state;
 	}
@@ -117,9 +117,9 @@ public abstract class BlockBase extends Block /*implements
 		IBlockState state = this.getDefaultState();
 		switch(rotation) {
 			case FOUR:
-				return state.withProperty(rotation.FACING, EnumFacing.byHorizontalIndex(meta));
+				return state.withProperty(rotation.FACING, Direction.byHorizontalIndex(meta));
 			case SIX:
-				return state.withProperty(rotation.FACING, EnumFacing.byIndex(meta));
+				return state.withProperty(rotation.FACING, Direction.byIndex(meta));
 		}
 		return state;
 	}
@@ -137,7 +137,7 @@ public abstract class BlockBase extends Block /*implements
 
 	// Handler: Redstone
 
-	public boolean emitsRedstone(IBlockAccess world, BlockPos pos, EnumFacing side) {
+	public boolean emitsRedstone(IBlockAccess world, BlockPos pos, Direction side) {
 		return false;
 	}
 
@@ -179,13 +179,13 @@ public abstract class BlockBase extends Block /*implements
 	}
 
 	@Override
-	public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+	public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, Direction side) {
 		return (emitsRedstone(world, pos, side) || receivesRedstone(world, pos));
 	}
 
 	@Override
 	@Deprecated
-	public int getWeakPower(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+	public int getWeakPower(IBlockState state, IBlockAccess world, BlockPos pos, Direction side) {
 		if(!emitsRedstone(world, pos, side)) {
 			return 0;
 		}
@@ -219,20 +219,20 @@ public abstract class BlockBase extends Block /*implements
 		return MiscUtils.getAbsoluteSide(side, frontSide);
 	}*/
 
-	public EnumFacing getFacingDirection(World world, BlockPos pos) {
+	public Direction getFacingDirection(World world, BlockPos pos) {
 		return world.getBlockState(pos).getValue(rotation.FACING);
 	}
 
-	public EnumFacing getFacingDirection(IBlockState state) {
+	public Direction getFacingDirection(IBlockState state) {
 		return state.getValue(rotation.FACING);
 	}
 
 	/*private void setDefaultRotation(World world, BlockPos pos, IBlockState state) {
 		if(!world.isRemote && this.rotation != Rotation.NONE) {
-			Block block = world.getBlockState(pos.offset(EnumFacing.NORTH)).getBlock();
-			Block block1 = world.getBlockState(pos.offset(EnumFacing.SOUTH)).getBlock();
-			Block block2 = world.getBlockState(pos.offset(EnumFacing.WEST)).getBlock();
-			Block block3 = world.getBlockState(pos.offset(EnumFacing.EAST)).getBlock();
+			Block block = world.getBlockState(pos.offset(Direction.NORTH)).getBlock();
+			Block block1 = world.getBlockState(pos.offset(Direction.SOUTH)).getBlock();
+			Block block2 = world.getBlockState(pos.offset(Direction.WEST)).getBlock();
+			Block block3 = world.getBlockState(pos.offset(Direction.EAST)).getBlock();
 			//int m = world.getBlockMetadata(x, y, z);
 			byte b0 = 3;
 
@@ -249,8 +249,8 @@ public abstract class BlockBase extends Block /*implements
 			}
 
 			if(this.rotation == Rotation.SIX && pos.getY() > 0 && pos.getY() < 255) {
-				Block block4 = world.getBlockState(pos.offset(EnumFacing.DOWN)).getBlock();
-				Block block5 = world.getBlockState(pos.offset(EnumFacing.UP)).getBlock();
+				Block block4 = world.getBlockState(pos.offset(Direction.DOWN)).getBlock();
+				Block block5 = world.getBlockState(pos.offset(Direction.UP)).getBlock();
 
 				if(block4.isFullBlock() && !block5.isFullBlock()) {
 					b0 = 1;
@@ -270,7 +270,7 @@ public abstract class BlockBase extends Block /*implements
 	//private static final int[] ROT_TRANSFORM4 = { 2, 5, 3, 4 };
 
 	@Nullable
-	private EnumFacing determineRotation(World world, BlockPos pos, EntityLivingBase entity) {
+	private Direction determineRotation(World world, BlockPos pos, EntityLivingBase entity) {
 		if(this.rotation == Rotation.NONE) {
 			return null;
 		}
@@ -280,10 +280,10 @@ public abstract class BlockBase extends Block /*implements
 				double d0 = entity.posY + entity.getEyeHeight();
 
 				if(d0 - (double) pos.getY() > 2.0D) {
-					return EnumFacing.UP;
+					return Direction.UP;
 				}
 				if((double) pos.getY() - d0 > 0.0D) {
-					return EnumFacing.DOWN;
+					return Direction.DOWN;
 				}
 			}
 		}
@@ -303,7 +303,7 @@ public abstract class BlockBase extends Block /*implements
 			//world.setBlockMetadataWithNotify(x, y, z, (m & (~3)) | (rot - 2), 2);
 		}* /
 		if(this.rotation != Rotation.NONE) {
-			EnumFacing rot = determineRotation(world, pos, entity, stack);
+			Direction rot = determineRotation(world, pos, entity, stack);
 			state = state.withProperty(rotation.FACING, rot);
 			world.setBlockState(pos, state);
 		}
@@ -311,9 +311,9 @@ public abstract class BlockBase extends Block /*implements
 
 	@Deprecated
 	@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+	public IBlockState getStateForPlacement(World world, BlockPos pos, Direction side, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
 		if(this.rotation != Rotation.NONE) {
-			EnumFacing rot = determineRotation(world, pos, placer);
+			Direction rot = determineRotation(world, pos, placer);
 			return getDefaultState().withProperty(rotation.FACING, rot);
 		}
 		return super.getStateForPlacement(world, pos, side, hitX, hitY, hitZ, meta, placer, hand);
@@ -331,7 +331,7 @@ public abstract class BlockBase extends Block /*implements
 		return parent;
 	}
 
-	public boolean hasGui(World world, BlockPos pos, EntityPlayer player, EnumFacing side) {
+	public boolean hasGui(World world, BlockPos pos, EntityPlayer player, Direction side) {
 		if(guiProvider != null) {
 			this.gui = guiProvider.getGuiID();
 		}
@@ -339,7 +339,7 @@ public abstract class BlockBase extends Block /*implements
 	}
 
 	@Nullable
-	public IGuiProvider getGuiProvider(World world, BlockPos pos, EntityPlayer player, EnumFacing side) {
+	public IGuiProvider getGuiProvider(World world, BlockPos pos, EntityPlayer player, Direction side) {
 		return guiProvider;
 	}
 
@@ -348,18 +348,18 @@ public abstract class BlockBase extends Block /*implements
 		this.gui = guiProvider.getGuiID();
 	}
 
-	protected boolean rotate(World world, BlockPos pos, EntityPlayer player, EnumFacing side) {
+	protected boolean rotate(World world, BlockPos pos, EntityPlayer player, Direction side) {
 		return !player.isSneaking() && rotateBlock(world, pos, side);
 	}
 
 	@Override
-	public boolean rotateBlock(World world, BlockPos pos, EnumFacing side) {
+	public boolean rotateBlock(World world, BlockPos pos, Direction side) {
 		if(rotation == Rotation.NONE) {
 			return false;
 		}
 		IBlockState state = world.getBlockState(pos);
 
-		EnumFacing f = state.getValue(rotation.FACING);
+		Direction f = state.getValue(rotation.FACING);
 		if(side == f && isValidFacing(world, pos, f.getOpposite())) {
 			world.setBlockState(pos, state.withProperty(rotation.FACING, f.getOpposite()), 3);
 			return true;
@@ -373,15 +373,15 @@ public abstract class BlockBase extends Block /*implements
 		return false;
 	}
 
-	protected boolean isValidFacing(World world, BlockPos pos, EnumFacing f) {
+	protected boolean isValidFacing(World world, BlockPos pos, Direction f) {
 		return rotation.FACING.getAllowedValues().contains(f);
 	}
 
-	protected boolean onToolUsed(World world, BlockPos pos, EntityPlayer player, EnumFacing side) {
+	protected boolean onToolUsed(World world, BlockPos pos, EntityPlayer player, Direction side) {
 		return false;
 	}
 
-	protected boolean useTool(World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing side) {
+	protected boolean useTool(World world, BlockPos pos, EntityPlayer player, EnumHand hand, Direction side) {
 		ItemStack held = player.inventory.getCurrentItem();
 		if(!held.isEmpty() && Integration.isTool(held, player, hand, pos) && this.rotation != null) {
 			boolean wrenched = Integration.useTool(held, player, hand, pos);
@@ -390,12 +390,12 @@ public abstract class BlockBase extends Block /*implements
 		return false;
 	}
 
-	protected boolean canUseTool(World world, BlockPos pos, EntityPlayer player, EnumFacing side) {
+	protected boolean canUseTool(World world, BlockPos pos, EntityPlayer player, Direction side) {
 		return this.rotation != Rotation.NONE;
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, Direction side, float hitX, float hitY, float hitZ) {
 		if(!world.isRemote) {
 			if(!this.canUseTool(world, pos, player, side) || !this.useTool(world, pos, player, hand, side)) {
 				IGuiProvider guiProvider = getGuiProvider(world, pos, player, side);
@@ -413,11 +413,11 @@ public abstract class BlockBase extends Block /*implements
 		return true;
 	}
 
-	protected boolean onOpenGui(World world, BlockPos pos, EntityPlayer player, EnumFacing side) {
+	protected boolean onOpenGui(World world, BlockPos pos, EntityPlayer player, Direction side) {
 		return true;
 	}
 
-	protected void onOpenGuiDenied(World world, BlockPos pos, EntityPlayer player, EnumFacing side) {
+	protected void onOpenGuiDenied(World world, BlockPos pos, EntityPlayer player, Direction side) {
 	}
 
 	/*// Simple textures

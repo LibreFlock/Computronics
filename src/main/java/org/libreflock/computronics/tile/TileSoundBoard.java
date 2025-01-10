@@ -6,9 +6,9 @@ import dan200.computercraft.api.peripheral.IComputerAccess;
 import li.cil.oc.api.network.Node;
 import li.cil.oc.api.network.SidedEnvironment;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 import org.libreflock.computronics.Computronics;
@@ -60,7 +60,7 @@ public class TileSoundBoard extends TileEntityPeripheralBase implements IAudioSo
 
 	@Override
 	@Optional.Method(modid = Mods.ComputerCraft)
-	public boolean canConnectPeripheralOnSide(EnumFacing side) {
+	public boolean canConnectPeripheralOnSide(Direction side) {
 		return side == world.getBlockState(getPos()).getValue(Computronics.computercraft.soundBoard.rotation.FACING);
 	}
 
@@ -191,13 +191,13 @@ public class TileSoundBoard extends TileEntityPeripheralBase implements IAudioSo
 	@Nullable
 	@Override
 	@Optional.Method(modid = Mods.OpenComputers)
-	public Node sidedNode(EnumFacing side) {
+	public Node sidedNode(Direction side) {
 		return null;
 	}
 
 	@Override
 	@Optional.Method(modid = Mods.OpenComputers)
-	public boolean canConnect(EnumFacing side) {
+	public boolean canConnect(Direction side) {
 		return false;
 	}
 
@@ -208,7 +208,7 @@ public class TileSoundBoard extends TileEntityPeripheralBase implements IAudioSo
 
 	private final IAudioReceiver internalSpeaker = new IAudioReceiver() {
 		@Override
-		public boolean connectsAudio(EnumFacing side) {
+		public boolean connectsAudio(Direction side) {
 			return true;
 		}
 
@@ -218,8 +218,8 @@ public class TileSoundBoard extends TileEntityPeripheralBase implements IAudioSo
 		}
 
 		@Override
-		public Vec3d getSoundPos() {
-			return new Vec3d(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D);
+		public Vector3d getSoundPos() {
+			return new Vector3d(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D);
 		}
 
 		@Override
@@ -228,7 +228,7 @@ public class TileSoundBoard extends TileEntityPeripheralBase implements IAudioSo
 		}
 
 		@Override
-		public void receivePacket(AudioPacket packet, @Nullable EnumFacing direction) {
+		public void receivePacket(AudioPacket packet, @Nullable Direction direction) {
 			packet.addReceiver(this);
 		}
 
@@ -260,8 +260,8 @@ public class TileSoundBoard extends TileEntityPeripheralBase implements IAudioSo
 		return getWorld();
 	}
 
-	public Vec3d position() {
-		return new Vec3d(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D);
+	public Vector3d position() {
+		return new Vector3d(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D);
 	}
 
 	@Override
@@ -275,7 +275,7 @@ public class TileSoundBoard extends TileEntityPeripheralBase implements IAudioSo
 	}
 
 	@Override
-	public boolean connectsAudio(EnumFacing side) {
+	public boolean connectsAudio(Direction side) {
 		return false;
 	}
 }

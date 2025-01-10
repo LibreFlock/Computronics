@@ -4,7 +4,7 @@ import dan200.computercraft.api.ComputerCraftAPI;
 import dan200.computercraft.api.redstone.IBundledRedstoneProvider;
 import dan200.computercraft.shared.computer.blocks.IComputerTile;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -65,7 +65,7 @@ public class CCBundledRedstoneIntegration implements IBundledRedstoneProvider {
 
 	@Override
 	@Optional.Method(modid = Mods.ComputerCraft)
-	public int getBundledRedstoneOutput(World world, BlockPos pos, EnumFacing side) {
+	public int getBundledRedstoneOutput(World world, BlockPos pos, Direction side) {
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile != null && tile.hasCapability(CHARSET_EMITTER, side)) {
 			IBundledEmitter emitter = tile.getCapability(CHARSET_EMITTER, side);
@@ -85,10 +85,10 @@ public class CCBundledRedstoneIntegration implements IBundledRedstoneProvider {
 
 	public static class TileCache {
 
-		protected final EnumFacing side;
+		protected final Direction side;
 		protected final TileEntity tile;
 
-		protected TileCache(TileEntity tile, EnumFacing side) {
+		protected TileCache(TileEntity tile, Direction side) {
 			this.tile = tile;
 			this.side = side;
 		}
@@ -96,7 +96,7 @@ public class CCBundledRedstoneIntegration implements IBundledRedstoneProvider {
 
 	public static class CCBundledEmitter extends TileCache implements IBundledEmitter {
 
-		protected CCBundledEmitter(TileEntity tile, EnumFacing side) {
+		protected CCBundledEmitter(TileEntity tile, Direction side) {
 			super(tile, side);
 		}
 
@@ -116,7 +116,7 @@ public class CCBundledRedstoneIntegration implements IBundledRedstoneProvider {
 
 	public static class CCBundledReceiver extends TileCache implements IBundledReceiver {
 
-		protected CCBundledReceiver(TileEntity tile, EnumFacing side) {
+		protected CCBundledReceiver(TileEntity tile, Direction side) {
 			super(tile, side);
 		}
 
@@ -137,7 +137,7 @@ public class CCBundledRedstoneIntegration implements IBundledRedstoneProvider {
 		}
 
 		@Override
-		public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+		public boolean hasCapability(Capability<?> capability, Direction facing) {
 			return capability != null &&
 				(capability == CHARSET_EMITTER ||
 					capability == CHARSET_RECEIVER);
@@ -145,7 +145,7 @@ public class CCBundledRedstoneIntegration implements IBundledRedstoneProvider {
 
 		@Override
 		@SuppressWarnings("unchecked")
-		public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+		public <T> T getCapability(Capability<T> capability, Direction facing) {
 			if(capability == null) {
 				return null;
 			}
@@ -157,14 +157,14 @@ public class CCBundledRedstoneIntegration implements IBundledRedstoneProvider {
 			return null;
 		}
 
-		private CCBundledEmitter getEmitter(EnumFacing facing) {
+		private CCBundledEmitter getEmitter(Direction facing) {
 			if(EMITTERS[facing.ordinal()] == null) {
 				EMITTERS[facing.ordinal()] = new CCBundledEmitter(tile, facing);
 			}
 			return EMITTERS[facing.ordinal()];
 		}
 
-		private CCBundledReceiver getReceiver(EnumFacing facing) {
+		private CCBundledReceiver getReceiver(Direction facing) {
 			if(RECEIVERS[facing.ordinal()] == null) {
 				RECEIVERS[facing.ordinal()] = new CCBundledReceiver(tile, facing);
 			}

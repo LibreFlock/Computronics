@@ -14,7 +14,7 @@ import mods.railcraft.common.blocks.machine.wayobjects.boxes.TileBoxBase;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.api.distmarker.Dist;
@@ -77,8 +77,8 @@ public abstract class TileDigitalBoxBase extends TileBoxBase
 	}
 
 	@Override
-	public boolean isSideSolid(EnumFacing side) {
-		return side == EnumFacing.UP;
+	public boolean isSideSolid(Direction side) {
+		return side == Direction.UP;
 	}
 
 	@Override
@@ -173,15 +173,15 @@ public abstract class TileDigitalBoxBase extends TileBoxBase
 	@Nullable
 	@Override
 	@Optional.Method(modid = Mods.OpenComputers)
-	public Node sidedNode(EnumFacing forgeDirection) {
-		return forgeDirection == EnumFacing.DOWN || forgeDirection == EnumFacing.UP ? node() : null;
+	public Node sidedNode(Direction forgeDirection) {
+		return forgeDirection == Direction.DOWN || forgeDirection == Direction.UP ? node() : null;
 	}
 
 	@Override
 	@Optional.Method(modid = Mods.OpenComputers)
 	@OnlyIn(Dist.CLIENT)
-	public boolean canConnect(EnumFacing forgeDirection) {
-		return forgeDirection == EnumFacing.DOWN || forgeDirection == EnumFacing.UP;
+	public boolean canConnect(Direction forgeDirection) {
+		return forgeDirection == Direction.DOWN || forgeDirection == Direction.UP;
 	}
 
 	@Override
@@ -272,7 +272,7 @@ public abstract class TileDigitalBoxBase extends TileBoxBase
 	}
 
 	@Override
-	public boolean canConnectPeripheralOnSide(EnumFacing side) {
-		return side == EnumFacing.DOWN || side == EnumFacing.UP;
+	public boolean canConnectPeripheralOnSide(Direction side) {
+		return side == Direction.DOWN || side == Direction.UP;
 	}
 }

@@ -2,9 +2,9 @@ package org.libreflock.computronics.tile;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import org.libreflock.computronics.api.audio.AudioPacket;
 import org.libreflock.computronics.api.audio.IAudioConnection;
@@ -34,7 +34,7 @@ public class TileAudioCable extends TileEntityBase implements IAudioReceiver, IC
 	public void updateConnections() {
 		final byte oldConnections = connectionMap;
 		connectionMap = 0;
-		for(EnumFacing dir : EnumFacing.VALUES) {
+		for(Direction dir : Direction.VALUES) {
 			if(!connectsInternal(dir)) {
 				continue;
 			}
@@ -77,12 +77,12 @@ public class TileAudioCable extends TileEntityBase implements IAudioReceiver, IC
 		}
 	}
 
-	protected boolean connectsInternal(EnumFacing dir) {
+	protected boolean connectsInternal(Direction dir) {
 		return ImmibisMicroblocks_isSideOpen(dir.ordinal());
 	}
 
 	@Override
-	public boolean connectsAudio(EnumFacing dir) {
+	public boolean connectsAudio(Direction dir) {
 		if(!initialConnect) {
 			updateConnections();
 			initialConnect = true;
@@ -105,12 +105,12 @@ public class TileAudioCable extends TileEntityBase implements IAudioReceiver, IC
 	}
 
 	@Override
-	public void receivePacket(AudioPacket packet, @Nullable EnumFacing side) {
+	public void receivePacket(AudioPacket packet, @Nullable Direction side) {
 		if(!receivePacketID(packet.id)) {
 			return;
 		}
 
-		for(EnumFacing dir : EnumFacing.VALUES) {
+		for(Direction dir : Direction.VALUES) {
 			if(dir == side || !connectsAudio(dir)) {
 				continue;
 			}
@@ -138,8 +138,8 @@ public class TileAudioCable extends TileEntityBase implements IAudioReceiver, IC
 	}
 
 	@Override
-	public Vec3d getSoundPos() {
-		return Vec3d.ZERO;
+	public Vector3d getSoundPos() {
+		return Vector3d.ZERO;
 	}
 
 	@Override

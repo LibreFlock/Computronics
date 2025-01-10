@@ -1,7 +1,7 @@
 package org.libreflock.asielib.tile;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.energy.IEnergyStorage;
 import org.libreflock.asielib.AsieLibMod;
@@ -28,7 +28,7 @@ public class BatteryBasic implements IBattery {
 	}
 
 	@Override
-	public double insert(@Nullable EnumFacing side, double maximum, boolean simulate) {
+	public double insert(@Nullable Direction side, double maximum, boolean simulate) {
 		if(maximum > maxInsert) {
 			maximum = maxInsert;
 		}
@@ -46,7 +46,7 @@ public class BatteryBasic implements IBattery {
 	}
 
 	@Override
-	public double extract(@Nullable EnumFacing side, double maximum, boolean simulate) {
+	public double extract(@Nullable Direction side, double maximum, boolean simulate) {
 		double amount = Math.min(energy, Math.min(maximum, maxExtract));
 		if(!simulate) {
 			energy -= amount;
@@ -75,12 +75,12 @@ public class BatteryBasic implements IBattery {
 	}
 
 	@Override
-	public boolean canInsert(@Nullable EnumFacing side, String type) {
+	public boolean canInsert(@Nullable Direction side, String type) {
 		return (maxInsert > 0.0);
 	}
 
 	@Override
-	public boolean canExtract(@Nullable EnumFacing side, String type) {
+	public boolean canExtract(@Nullable Direction side, String type) {
 		return (maxExtract > 0.0);
 	}
 
@@ -135,7 +135,7 @@ public class BatteryBasic implements IBattery {
 
 	@Override
 	@Nullable
-	public IEnergyStorage getStorage(EnumFacing side) {
+	public IEnergyStorage getStorage(Direction side) {
 		return energyStorage;
 	}
 

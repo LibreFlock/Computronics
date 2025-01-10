@@ -9,7 +9,7 @@ import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.tis3d.api.serial.SerialInterface;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.libreflock.computronics.integration.CCMultiPeripheral;
@@ -58,7 +58,7 @@ public class DriverFlamingo {
 		}
 
 		@Override
-		public InternalManagedEnvironment createEnvironment(World world, BlockPos pos, EnumFacing side, TileEntityFlamingo tile) {
+		public InternalManagedEnvironment createEnvironment(World world, BlockPos pos, Direction side, TileEntityFlamingo tile) {
 			return new InternalManagedEnvironment(tile);
 		}
 	}
@@ -78,7 +78,7 @@ public class DriverFlamingo {
 		}
 
 		@Override
-		public CCMultiPeripheral getPeripheral(World world, BlockPos pos, EnumFacing side) {
+		public CCMultiPeripheral getPeripheral(World world, BlockPos pos, Direction side) {
 			TileEntity te = world.getTileEntity(pos);
 			if(te != null && te instanceof TileEntityFlamingo) {
 				return new CCDriver((TileEntityFlamingo) te, world, pos);
@@ -139,12 +139,12 @@ public class DriverFlamingo {
 		}
 
 		@Override
-		public SerialInterface interfaceFor(World world, BlockPos pos, EnumFacing side, TileEntityFlamingo tile) {
+		public SerialInterface interfaceFor(World world, BlockPos pos, Direction side, TileEntityFlamingo tile) {
 			return new InternalSerialInterface(tile);
 		}
 
 		@Override
-		protected boolean isStillValid(World world, BlockPos pos, EnumFacing side, SerialInterface serialInterface, TileEntity tile) {
+		protected boolean isStillValid(World world, BlockPos pos, Direction side, SerialInterface serialInterface, TileEntity tile) {
 			return tile instanceof TileEntityFlamingo
 				&& serialInterface instanceof InternalSerialInterface
 				&& ((InternalSerialInterface) serialInterface).isTileEqual(tile);

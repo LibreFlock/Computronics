@@ -30,7 +30,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -162,7 +162,7 @@ public class EntitySwarm extends EntityFlyingCreature implements IBeeHousing {
 			}
 		} else if(player != null && (player.getDistanceSq(this) < 100 || this.canEntityBeSeen(player))) {
 			if(player.isActiveItemStackBlocking()) {
-				Vec3d look = player.getLookVec();
+				Vector3d look = player.getLookVec();
 				moveTo(player.posX + look.x, player.posY + look.y, player.posZ + look.z,
 					player.width / 2f, ((player.height / 2f) + player.getEyeHeight()) / 2f, 0.3f, 1f, 0.5f);
 			} else {
@@ -172,23 +172,23 @@ public class EntitySwarm extends EntityFlyingCreature implements IBeeHousing {
 	}
 
 	private double circle(EntityLivingBase target, float yOffset, float modifier, float xFuzzy, float radius) {
-		final Vec3d direction;
+		final Vector3d direction;
 		{
-			Vec3d pos = getPositionVector();
+			Vector3d pos = getPositionVector();
 			double y = pos.y;
 			pos = pos.subtract(0, pos.y, 0);
-			Vec3d targetPos = target.getPositionVector();
+			Vector3d targetPos = target.getPositionVector();
 			y = targetPos.y + yOffset - y;
 			if(y != 0.0D) {
 				y /= Math.abs(y);
 			}
 			targetPos = targetPos.subtract(0, targetPos.y, 0);
-			Vec3d between = pos.subtract(targetPos);
+			Vector3d between = pos.subtract(targetPos);
 			if(between.x <= 0.02 && between.y <= 0.02) {
 				between = between.add(1, 0, 0);
 			}
-			Vec3d betweenX = between.scale(1D / Math.abs(between.x));
-			Vec3d targetRadius = betweenX.scale(radius / betweenX.length()).add(new Vec3d(0, 1, 0).crossProduct(between).normalize());
+			Vector3d betweenX = between.scale(1D / Math.abs(between.x));
+			Vector3d targetRadius = betweenX.scale(radius / betweenX.length()).add(new Vector3d(0, 1, 0).crossProduct(between).normalize());
 			direction = targetRadius.subtract(between).add(0, y, 0).normalize();
 		}
 
@@ -219,7 +219,7 @@ public class EntitySwarm extends EntityFlyingCreature implements IBeeHousing {
 		double deltaY = (y + yOffset) - (posY + (height / 4f));
 		double deltaZ = (z + xzOffset) - (posZ + (width / 4f));
 		double res = deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ;
-		Vec3d vec3 = new Vec3d(deltaX, deltaY, deltaZ);
+		Vector3d vec3 = new Vector3d(deltaX, deltaY, deltaZ);
 		//double res = vec3.dotProduct(vec3);
 		vec3 = vec3.normalize();
 		modifier /= 10f;
@@ -600,8 +600,8 @@ public class EntitySwarm extends EntityFlyingCreature implements IBeeHousing {
 	}
 
 	@Override
-	public Vec3d getBeeFXCoordinates() {
-		return new Vec3d(posX, posY + 0.25, posZ);
+	public Vector3d getBeeFXCoordinates() {
+		return new Vector3d(posX, posY + 0.25, posZ);
 	}
 
 	@Override

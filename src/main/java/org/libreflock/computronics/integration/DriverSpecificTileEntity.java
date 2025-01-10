@@ -3,7 +3,7 @@ package org.libreflock.computronics.integration;
 import li.cil.oc.api.driver.DriverBlock;
 import li.cil.oc.api.network.ManagedEnvironment;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -21,18 +21,18 @@ public abstract class DriverSpecificTileEntity<T> implements DriverBlock {
 	}
 
 	@Override
-	public boolean worksWith(World world, BlockPos pos, EnumFacing side) {
+	public boolean worksWith(World world, BlockPos pos, Direction side) {
 		final TileEntity tile = world.getTileEntity(pos);
 		return tileClass.isInstance(tile);
 	}
 
 	@Nullable
 	@Override
-	public final ManagedEnvironment createEnvironment(World world, BlockPos pos, EnumFacing side) {
+	public final ManagedEnvironment createEnvironment(World world, BlockPos pos, Direction side) {
 		final TileEntity tile = world.getTileEntity(pos);
 		return tileClass.isInstance(tile) ? createEnvironment(world, pos, side, tileClass.cast(tile)) : null;
 	}
 
 	@Nullable
-	protected abstract NamedManagedEnvironment<T> createEnvironment(World world, BlockPos pos, EnumFacing side, T tile);
+	protected abstract NamedManagedEnvironment<T> createEnvironment(World world, BlockPos pos, Direction side, T tile);
 }

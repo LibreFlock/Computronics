@@ -12,7 +12,7 @@ import mods.railcraft.common.carts.IRailcraftCartContainer;
 import mods.railcraft.common.carts.RailcraftCarts;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.common.Optional;
 import org.libreflock.computronics.cc.ISidedPeripheral;
@@ -35,12 +35,12 @@ import java.util.Locale;
 public class TileDigitalDetector extends TileEntityPeripheralBase
 	implements SidedEnvironment, ISidedPeripheral, ITickable {
 
-	public EnumFacing direction;
+	public Direction direction;
 	private List<EntityMinecart> currentCarts = new ArrayList<EntityMinecart>();
 
 	public TileDigitalDetector() {
 		super(Names.Railcraft_DigitalDetector);
-		this.direction = EnumFacing.UP;
+		this.direction = Direction.UP;
 	}
 
 	@Override
@@ -85,7 +85,7 @@ public class TileDigitalDetector extends TileEntityPeripheralBase
 	@Override
 	public void readFromNBT(NBTTagCompound data) {
 		super.readFromNBT(data);
-		direction = data.hasKey("direction") ? EnumFacing.byIndex(data.getByte("direction")) : EnumFacing.UP;
+		direction = data.hasKey("direction") ? Direction.byIndex(data.getByte("direction")) : Direction.UP;
 	}
 
 	@Override
@@ -96,8 +96,8 @@ public class TileDigitalDetector extends TileEntityPeripheralBase
 
 	@Override
 	public void readFromRemoteNBT(NBTTagCompound tag) {
-		EnumFacing oldDir = this.direction;
-		direction = tag.hasKey("direction") ? EnumFacing.byIndex(tag.getByte("direction")) : EnumFacing.UP;
+		Direction oldDir = this.direction;
+		direction = tag.hasKey("direction") ? Direction.byIndex(tag.getByte("direction")) : Direction.UP;
 		if(oldDir != direction) {
 			notifyBlockUpdate();
 		}
@@ -159,13 +159,13 @@ public class TileDigitalDetector extends TileEntityPeripheralBase
 	@Nullable
 	@Override
 	@Optional.Method(modid = Mods.OpenComputers)
-	public Node sidedNode(EnumFacing side) {
+	public Node sidedNode(Direction side) {
 		return side == this.direction ? node() : null;
 	}
 
 	@Override
 	@Optional.Method(modid = Mods.OpenComputers)
-	public boolean canConnect(EnumFacing side) {
+	public boolean canConnect(Direction side) {
 		return side == this.direction;
 	}
 
@@ -183,7 +183,7 @@ public class TileDigitalDetector extends TileEntityPeripheralBase
 	}
 
 	@Override
-	public boolean canConnectPeripheralOnSide(EnumFacing side) {
+	public boolean canConnectPeripheralOnSide(Direction side) {
 		return side == this.direction;
 	}
 }

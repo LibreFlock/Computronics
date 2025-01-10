@@ -5,7 +5,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -22,7 +22,7 @@ import javax.annotation.Nullable;
 public class GuiProviderTicketMachine extends GuiProviderBase {
 
 	@Override
-	public boolean canOpen(World world, int x, int y, int z, EntityPlayer player, EnumFacing side) {
+	public boolean canOpen(World world, int x, int y, int z, EntityPlayer player, Direction side) {
 		if(!super.canOpen(world, x, y, z, player, side)) {
 			return false;
 		}

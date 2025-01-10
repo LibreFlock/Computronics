@@ -3,7 +3,7 @@ package org.libreflock.computronics.block;
 import li.cil.oc.api.network.Environment;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -26,7 +26,7 @@ public class BlockCamera extends BlockPeripheral {
 	}
 
 	@Override
-	public boolean emitsRedstone(IBlockAccess world, BlockPos pos, EnumFacing side) {
+	public boolean emitsRedstone(IBlockAccess world, BlockPos pos, Direction side) {
 		return Config.REDSTONE_REFRESH;
 	}
 

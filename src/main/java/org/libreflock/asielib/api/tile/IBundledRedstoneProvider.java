@@ -7,7 +7,7 @@ import mods.immibis.redlogic.api.wiring.IConnectable;
 import mrtjp.projectred.api.IBundledTile;
 import org.libreflock.asielib.reference.Mods;*/
 
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 
 import javax.annotation.Nullable;
 
@@ -19,12 +19,12 @@ import javax.annotation.Nullable;
 })*/
 public interface IBundledRedstoneProvider /*extends IBundledEmitter, IBundledUpdatable, IConnectable, IBundledTile*/ {
 
-	public boolean canBundledConnectToInput(@Nullable EnumFacing side);
+	public boolean canBundledConnectToInput(@Nullable Direction side);
 
-	public boolean canBundledConnectToOutput(@Nullable EnumFacing side);
+	public boolean canBundledConnectToOutput(@Nullable Direction side);
 
 	@Nullable
-	public byte[] getBundledOutput(@Nullable EnumFacing side);
+	public byte[] getBundledOutput(@Nullable Direction side);
 
-	public void onBundledInputChange(@Nullable EnumFacing side, @Nullable byte[] data);
+	public void onBundledInputChange(@Nullable Direction side, @Nullable byte[] data);
 }

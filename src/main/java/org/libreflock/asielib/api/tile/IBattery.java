@@ -1,7 +1,7 @@
 package org.libreflock.asielib.api.tile;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraftforge.energy.IEnergyStorage;
 
 import javax.annotation.Nullable;
@@ -11,9 +11,9 @@ import javax.annotation.Nullable;
  */
 public interface IBattery {
 
-	public double insert(@Nullable EnumFacing side, double maximum, boolean simulate);
+	public double insert(@Nullable Direction side, double maximum, boolean simulate);
 
-	public double extract(@Nullable EnumFacing side, double maximum, boolean simulate);
+	public double extract(@Nullable Direction side, double maximum, boolean simulate);
 
 	public double getEnergyStored();
 
@@ -23,9 +23,9 @@ public interface IBattery {
 
 	public double getMaxEnergyExtracted();
 
-	public boolean canInsert(@Nullable EnumFacing side, String type);
+	public boolean canInsert(@Nullable Direction side, String type);
 
-	public boolean canExtract(@Nullable EnumFacing side, String type);
+	public boolean canExtract(@Nullable Direction side, String type);
 
 	public void readFromNBT(NBTTagCompound tag);
 
@@ -38,5 +38,5 @@ public interface IBattery {
 	public double getMaxEnergyUsage();
 
 	@Nullable
-	IEnergyStorage getStorage(EnumFacing side);
+	IEnergyStorage getStorage(Direction side);
 }

@@ -11,7 +11,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
@@ -153,7 +153,7 @@ public class OCUtils {
 	public static Capability<Colored> COLORED_CAPABILITY;
 
 	@Nullable
-	public static IColorable getColorable(@Nullable ICapabilityProvider provider, EnumFacing side) {
+	public static IColorable getColorable(@Nullable ICapabilityProvider provider, Direction side) {
 		if(provider != null && provider.hasCapability(COLORABLE_CAPABILITY, side)) {
 			return provider.getCapability(COLORABLE_CAPABILITY, side);
 		}

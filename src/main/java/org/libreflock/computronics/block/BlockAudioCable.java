@@ -10,7 +10,7 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -47,7 +47,7 @@ public class BlockAudioCable extends BlockBase implements IBlockWithDocumentatio
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, Direction side, float hitX, float hitY, float hitZ) {
 		TileEntity tile = world.getTileEntity(pos);
 		ItemStack heldItem = player.getHeldItem(hand);
 		if(tile instanceof TileAudioCable && !heldItem.isEmpty()) {
@@ -82,7 +82,7 @@ public class BlockAudioCable extends BlockBase implements IBlockWithDocumentatio
 	}
 
 	@Override
-	public boolean recolorBlock(World world, BlockPos pos, EnumFacing side, EnumDyeColor color) {
+	public boolean recolorBlock(World world, BlockPos pos, Direction side, EnumDyeColor color) {
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile instanceof IColorable && ((IColorable) tile).canBeColored()) {
 			((IColorable) tile).setColor(ColorUtils.fromColor(color).color);
@@ -145,7 +145,7 @@ public class BlockAudioCable extends BlockBase implements IBlockWithDocumentatio
 		int result = 0;
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile instanceof TileAudioCable) {
-			for(EnumFacing side : EnumFacing.VALUES) {
+			for(Direction side : Direction.VALUES) {
 				if(((TileAudioCable) tile).connectsAudio(side)) {
 					result |= 1 << side.ordinal();
 				}
@@ -221,12 +221,12 @@ public class BlockAudioCable extends BlockBase implements IBlockWithDocumentatio
 		if(t instanceof TileAudioCable) {
 			TileAudioCable tile = ((TileAudioCable) t);
 			return state
-				.withProperty(DOWN, tile.connectsAudio(EnumFacing.DOWN))
-				.withProperty(UP, tile.connectsAudio(EnumFacing.UP))
-				.withProperty(NORTH, tile.connectsAudio(EnumFacing.NORTH))
-				.withProperty(SOUTH, tile.connectsAudio(EnumFacing.SOUTH))
-				.withProperty(WEST, tile.connectsAudio(EnumFacing.WEST))
-				.withProperty(EAST, tile.connectsAudio(EnumFacing.EAST));
+				.withProperty(DOWN, tile.connectsAudio(Direction.DOWN))
+				.withProperty(UP, tile.connectsAudio(Direction.UP))
+				.withProperty(NORTH, tile.connectsAudio(Direction.NORTH))
+				.withProperty(SOUTH, tile.connectsAudio(Direction.SOUTH))
+				.withProperty(WEST, tile.connectsAudio(Direction.WEST))
+				.withProperty(EAST, tile.connectsAudio(Direction.EAST));
 		} else {
 			return state;
 		}
@@ -256,7 +256,7 @@ public class BlockAudioCable extends BlockBase implements IBlockWithDocumentatio
 
 	@Override
 	@Deprecated
-	public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+	public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, Direction side) {
 		return false;
 	}
 
@@ -281,7 +281,7 @@ public class BlockAudioCable extends BlockBase implements IBlockWithDocumentatio
 	@Override
 	@Deprecated
 	@OnlyIn(Dist.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess worldIn, BlockPos pos, EnumFacing side) {
+	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess worldIn, BlockPos pos, Direction side) {
 		return (connectionMask & (1 << side.ordinal())) != 0;
 	}
 

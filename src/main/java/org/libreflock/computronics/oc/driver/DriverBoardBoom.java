@@ -11,10 +11,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -92,15 +92,15 @@ public class DriverBoardBoom extends DriverCardBoom implements RackMountable {
 		final Queue<Rack> toSearch = new ArrayDeque<Rack>();
 		toSearch.add(container);
 		racks.add(container);
-		final Vec3d origin = new Vec3d(container.xPosition(), container.yPosition(), container.zPosition());
+		final Vector3d origin = new Vector3d(container.xPosition(), container.yPosition(), container.zPosition());
 		Rack cur;
 		while((cur = toSearch.poll()) != null) {
 			final World world = cur.world();
 			final BlockPos currentPos = new BlockPos(cur.xPosition(), cur.yPosition(), cur.zPosition());
-			for(EnumFacing dir : EnumFacing.VALUES) {
+			for(Direction dir : Direction.VALUES) {
 				final BlockPos pos = currentPos.offset(dir);
 
-				if(origin.squareDistanceTo(new Vec3d(pos)) <= 256 &&
+				if(origin.squareDistanceTo(new Vector3d(pos)) <= 256 &&
 					world.isBlockLoaded(pos)) {
 					TileEntity tile = world.getTileEntity(pos);
 					if(tile instanceof Rack && racks.add((Rack) tile)) {

@@ -1,6 +1,6 @@
 package org.libreflock.computronics.util;
 
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.libreflock.computronics.reference.Mods;
 import org.libreflock.asielib.util.internal.IColorable;
@@ -15,7 +15,7 @@ import static org.libreflock.asielib.reference.Capabilities.COLORABLE_CAPABILITY
 public class ColorUtils extends org.libreflock.asielib.util.ColorUtils {
 
 	@Nullable
-	public static IColorable getColorable(@Nullable ICapabilityProvider provider, EnumFacing side) {
+	public static IColorable getColorable(@Nullable ICapabilityProvider provider, Direction side) {
 		if(Mods.isLoaded(Mods.OpenComputers)) {
 			return OCUtils.getColorable(provider, side);
 		}

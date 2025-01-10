@@ -10,7 +10,7 @@ import mods.railcraft.api.tracks.IOutfittedTrackTile;
 import mods.railcraft.api.tracks.ITrackKitPowered;
 import mods.railcraft.common.util.misc.ISecureObject;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.libreflock.computronics.api.multiperipheral.IMultiPeripheral;
@@ -58,7 +58,7 @@ public class DriverPoweredTrack {
 
 		@Nullable
 		@Override
-		protected NamedManagedEnvironment<ITrackKitPowered> createEnvironment(World world, BlockPos pos, EnumFacing side, ITrackKitPowered tile) {
+		protected NamedManagedEnvironment<ITrackKitPowered> createEnvironment(World world, BlockPos pos, Direction side, ITrackKitPowered tile) {
 			return new InternalManagedEnvironment(tile);
 		}
 	}
@@ -78,7 +78,7 @@ public class DriverPoweredTrack {
 		}
 
 		@Override
-		public IMultiPeripheral getPeripheral(World world, BlockPos pos, EnumFacing side) {
+		public IMultiPeripheral getPeripheral(World world, BlockPos pos, Direction side) {
 			TileEntity te = world.getTileEntity(pos);
 			if(te != null && te instanceof IOutfittedTrackTile && ((IOutfittedTrackTile) te).getTrackKitInstance() instanceof ITrackKitPowered) {
 				return new CCDriver((ITrackKitPowered) ((IOutfittedTrackTile) te).getTrackKitInstance(), world, pos);

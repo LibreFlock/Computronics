@@ -13,7 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import org.libreflock.computronics.Computronics;
@@ -52,7 +52,7 @@ public class DroneStationPluggable extends PipePluggable implements IEnergyRecei
 		return state;
 	}
 
-	public boolean isConnected(Drone drone, EnumFacing side) {
+	public boolean isConnected(Drone drone, Direction side) {
 		return this.drone == drone;
 	}
 
@@ -62,12 +62,12 @@ public class DroneStationPluggable extends PipePluggable implements IEnergyRecei
 	}
 
 	@Override
-	public boolean isBlocking(IPipeTile pipe, EnumFacing direction) {
+	public boolean isBlocking(IPipeTile pipe, Direction direction) {
 		return true;
 	}
 
 	@Override
-	public void update(IPipeTile pipe, EnumFacing direction) {
+	public void update(IPipeTile pipe, Direction direction) {
 		super.update(pipe, direction);
 		if(getState() == DroneStationState.Used && drone == null) {
 			state = DroneStationState.Available;
@@ -80,7 +80,7 @@ public class DroneStationPluggable extends PipePluggable implements IEnergyRecei
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public AxisAlignedBB getBoundingBox(EnumFacing side) {
+	public AxisAlignedBB getBoundingBox(Direction side) {
 		float[][] bounds = new float[3][2];
 		// X START - END
 		bounds[0][0] = 0.25F;
@@ -122,7 +122,7 @@ public class DroneStationPluggable extends PipePluggable implements IEnergyRecei
 	}
 
 	@Override
-	public int receiveEnergy(EnumFacing from, int maxReceive, boolean simulate) {
+	public int receiveEnergy(Direction from, int maxReceive, boolean simulate) {
 		if(drone == null || state == DroneStationState.Available || drone.world() == null) {
 			return 0;
 		}
@@ -155,17 +155,17 @@ public class DroneStationPluggable extends PipePluggable implements IEnergyRecei
 	}
 
 	@Override
-	public int getEnergyStored(EnumFacing from) {
+	public int getEnergyStored(Direction from) {
 		return 0;
 	}
 
 	@Override
-	public int getMaxEnergyStored(EnumFacing from) {
+	public int getMaxEnergyStored(Direction from) {
 		return 0;
 	}
 
 	@Override
-	public boolean canConnectEnergy(EnumFacing from) {
+	public boolean canConnectEnergy(Direction from) {
 		return true;
 	}
 }

@@ -7,7 +7,7 @@ import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.libreflock.computronics.integration.CCMultiPeripheral;
@@ -33,7 +33,7 @@ public class DriverEnergyHandler {
 		}
 
 		@Override
-		public CCMultiPeripheral getPeripheral(World world, BlockPos pos, EnumFacing side) {
+		public CCMultiPeripheral getPeripheral(World world, BlockPos pos, Direction side) {
 			TileEntity te = world.getTileEntity(pos);
 			if(te != null && te instanceof IEnergyProvider && !(te instanceof IEnergyReceiver)) {
 				return new CCDriver((IEnergyProvider) te, world, pos);
@@ -53,11 +53,11 @@ public class DriverEnergyHandler {
 			}
 			switch(method) {
 				case 0: {
-					final EnumFacing side = arguments.length > 0 ? EnumFacing.getFront((Integer) arguments[0]) : null;
+					final Direction side = arguments.length > 0 ? Direction.getFront((Integer) arguments[0]) : null;
 					return new Object[] { tile.getEnergyStored(side) };
 				}
 				case 1: {
-					final EnumFacing side = arguments.length > 0 ? EnumFacing.getFront((Integer) arguments[0]) : null;
+					final Direction side = arguments.length > 0 ? Direction.getFront((Integer) arguments[0]) : null;
 					return new Object[] { tile.getMaxEnergyStored(side) };
 				}
 			}

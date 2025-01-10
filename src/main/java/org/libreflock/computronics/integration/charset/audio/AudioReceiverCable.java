@@ -1,7 +1,7 @@
 package org.libreflock.computronics.integration.charset.audio;
 
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.libreflock.charset.api.audio.AudioPacket;
@@ -11,9 +11,9 @@ import org.libreflock.computronics.tile.TileAudioCable;
 public class AudioReceiverCable implements IAudioReceiver {
 
 	private final TileAudioCable cable;
-	private final EnumFacing side;
+	private final Direction side;
 
-	public AudioReceiverCable(TileAudioCable cable, EnumFacing side) {
+	public AudioReceiverCable(TileAudioCable cable, Direction side) {
 		this.cable = cable;
 		this.side = side;
 	}
@@ -27,7 +27,7 @@ public class AudioReceiverCable implements IAudioReceiver {
 		World worldObj = cable.getWorld();
 		boolean sent = false;
 
-		for(EnumFacing dir : EnumFacing.VALUES) {
+		for(Direction dir : Direction.VALUES) {
 			if(dir == side || !cable.connectsAudio(dir)) {
 				continue;
 			}

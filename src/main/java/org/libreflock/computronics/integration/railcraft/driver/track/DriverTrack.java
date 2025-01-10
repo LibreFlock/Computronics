@@ -5,7 +5,7 @@ import li.cil.oc.api.network.ManagedEnvironment;
 import mods.railcraft.api.tracks.IOutfittedTrackTile;
 import mods.railcraft.api.tracks.ITrackKitInstance;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.libreflock.computronics.integration.NamedManagedEnvironment;
@@ -24,7 +24,7 @@ public abstract class DriverTrack<T extends ITrackKitInstance> implements Driver
 	}
 
 	@Override
-	public boolean worksWith(World world, BlockPos pos, EnumFacing side) {
+	public boolean worksWith(World world, BlockPos pos, Direction side) {
 		TileEntity tileEntity = world.getTileEntity(pos);
 		return (tileEntity != null) && tileEntity instanceof IOutfittedTrackTile
 			&& tileClass.isInstance(((IOutfittedTrackTile) tileEntity).getTrackKitInstance());
@@ -32,11 +32,11 @@ public abstract class DriverTrack<T extends ITrackKitInstance> implements Driver
 
 	@Nullable
 	@Override
-	public ManagedEnvironment createEnvironment(World world, BlockPos pos, EnumFacing side) {
+	public ManagedEnvironment createEnvironment(World world, BlockPos pos, Direction side) {
 		IOutfittedTrackTile tile = ((IOutfittedTrackTile) world.getTileEntity(pos));
 		return tile != null ? createEnvironment(world, pos, side, tileClass.cast(tile.getTrackKitInstance())) : null;
 	}
 
 	@Nullable
-	protected abstract NamedManagedEnvironment<T> createEnvironment(World world, BlockPos pos, EnumFacing side, T tile);
+	protected abstract NamedManagedEnvironment<T> createEnvironment(World world, BlockPos pos, Direction side, T tile);
 }

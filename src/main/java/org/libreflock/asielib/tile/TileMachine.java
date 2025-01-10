@@ -5,7 +5,7 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.Capability;
@@ -324,7 +324,7 @@ public class TileMachine extends TileEntityBase implements
 	}
 
 	@Override
-	public int[] getSlotsForFace(EnumFacing side) {
+	public int[] getSlotsForFace(Direction side) {
 		if(this.items == null) {
 			return new int[0];
 		}
@@ -336,18 +336,18 @@ public class TileMachine extends TileEntityBase implements
 	}
 
 	@Override
-	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
+	public boolean canInsertItem(int index, ItemStack itemStackIn, Direction direction) {
 		return true;
 	}
 
 	@Override
-	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
+	public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
 		return true;
 	}
 
 	// Energy (RF)
 
-	public boolean canConnectEnergy(EnumFacing from) {
+	public boolean canConnectEnergy(Direction from) {
 		if(this.battery != null) {
 			return this.battery.canInsert(from, "RF");
 		} else {
@@ -355,7 +355,7 @@ public class TileMachine extends TileEntityBase implements
 		}
 	}
 
-	public int receiveEnergy(EnumFacing from, int maxReceive,
+	public int receiveEnergy(Direction from, int maxReceive,
 		boolean simulate) {
 		if(this.battery != null && this.battery.canInsert(from, "RF")) {
 			return (int) Math.floor(this.battery.insert(from, maxReceive, simulate));
@@ -364,7 +364,7 @@ public class TileMachine extends TileEntityBase implements
 		}
 	}
 
-	public int extractEnergy(@Nullable EnumFacing from, int maxExtract,
+	public int extractEnergy(@Nullable Direction from, int maxExtract,
 		boolean simulate) {
 		if(this.battery != null && this.battery.canExtract(from, "RF")) {
 			return (int) Math.floor(this.battery.extract(from, maxExtract, simulate));
@@ -373,7 +373,7 @@ public class TileMachine extends TileEntityBase implements
 		}
 	}
 
-	public int getEnergyStored(@Nullable EnumFacing from) {
+	public int getEnergyStored(@Nullable Direction from) {
 		if(this.battery != null) {
 			return (int) Math.floor(this.battery.getEnergyStored());
 		} else {
@@ -381,7 +381,7 @@ public class TileMachine extends TileEntityBase implements
 		}
 	}
 
-	public int getMaxEnergyStored(@Nullable EnumFacing from) {
+	public int getMaxEnergyStored(@Nullable Direction from) {
 		if(this.battery != null) {
 			return (int) Math.floor(this.battery.getMaxEnergyStored());
 		} else {
@@ -410,7 +410,7 @@ public class TileMachine extends TileEntityBase implements
 	}
 
 	@Optional.Method(modid = Mods.IC2)
-	public boolean acceptsEnergyFrom(IEnergyEmitter emitter, EnumFacing direction) {
+	public boolean acceptsEnergyFrom(IEnergyEmitter emitter, Direction direction) {
 		if(this.battery != null) {
 			return this.battery.canInsert(direction, "EU");
 		} else {
@@ -419,7 +419,7 @@ public class TileMachine extends TileEntityBase implements
 	}
 
 	@Optional.Method(modid = Mods.IC2)
-	public double injectEnergy(EnumFacing directionFrom, double amount,
+	public double injectEnergy(Direction directionFrom, double amount,
 		double voltage) {
 		if(this.battery != null) {
 			double amountRF = EnergyConverter.convertEnergy(amount, "EU", "RF");
@@ -559,7 +559,7 @@ public class TileMachine extends TileEntityBase implements
 	}
 
 	@Override
-	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+	public boolean hasCapability(Capability<?> capability, Direction facing) {
 		if(battery != null && capability == CapabilityEnergy.ENERGY && battery.getStorage(facing) != null) {
 			return true;
 		}
@@ -567,7 +567,7 @@ public class TileMachine extends TileEntityBase implements
 	}
 
 	@Override
-	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+	public <T> T getCapability(Capability<T> capability, Direction facing) {
 		if(battery != null && capability == CapabilityEnergy.ENERGY && battery.getStorage(facing) != null) {
 			return CapabilityEnergy.ENERGY.cast(battery.getStorage(facing));
 		}

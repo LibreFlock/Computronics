@@ -2,7 +2,7 @@ package org.libreflock.computronics.audio;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.api.audio.AudioPacketRegistry;
 import org.libreflock.computronics.network.PacketType;
@@ -38,7 +38,7 @@ public final class AudioUtils {
 		return positionId(MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z));
 	}
 
-	public static String positionId(Vec3d pos) {
+	public static String positionId(Vector3d pos) {
 		return positionId(pos.x, pos.y, pos.z);
 	}
 }

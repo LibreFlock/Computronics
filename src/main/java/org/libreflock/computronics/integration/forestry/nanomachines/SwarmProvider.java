@@ -19,7 +19,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.event.entity.minecart.MinecartInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
@@ -78,7 +78,7 @@ public class SwarmProvider extends AbstractProvider {
 					swingItem(player, hand, stack, e);
 				}
 			} else if(player.capabilities != null && player.capabilities.isCreativeMode) {
-				Vec3d pos = player.getPositionVector().add(player.getLookVec());
+				Vector3d pos = player.getPositionVector().add(player.getLookVec());
 				behavior.spawnNewEntity(pos.x, pos.y + 2f, pos.z,
 					BeeManager.beeRoot.getMemberStack(BeeManager.beeRoot.templateAsIndividual(BeeManager.beeRoot.getDefaultTemplate()), EnumBeeType.QUEEN));
 				swingItem(player, hand, stack, e);

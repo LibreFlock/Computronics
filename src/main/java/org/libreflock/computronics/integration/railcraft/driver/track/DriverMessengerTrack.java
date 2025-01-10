@@ -9,7 +9,7 @@ import li.cil.oc.api.machine.Context;
 import mods.railcraft.api.tracks.IOutfittedTrackTile;
 import mods.railcraft.common.blocks.tracks.outfitted.kits.TrackKitMessenger;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
@@ -62,7 +62,7 @@ public class DriverMessengerTrack {
 
 		@Nullable
 		@Override
-		protected NamedManagedEnvironment<TrackKitMessenger> createEnvironment(World world, BlockPos pos, EnumFacing side, TrackKitMessenger tile) {
+		protected NamedManagedEnvironment<TrackKitMessenger> createEnvironment(World world, BlockPos pos, Direction side, TrackKitMessenger tile) {
 			return new InternalManagedEnvironment(tile);
 		}
 	}
@@ -82,7 +82,7 @@ public class DriverMessengerTrack {
 		}
 
 		@Override
-		public IMultiPeripheral getPeripheral(World world, BlockPos pos, EnumFacing side) {
+		public IMultiPeripheral getPeripheral(World world, BlockPos pos, Direction side) {
 			TileEntity te = world.getTileEntity(pos);
 			if(te != null && te instanceof IOutfittedTrackTile && ((IOutfittedTrackTile) te).getTrackKitInstance() instanceof TrackKitMessenger) {
 				return new CCDriver((TrackKitMessenger) ((IOutfittedTrackTile) te).getTrackKitInstance(), world, pos);

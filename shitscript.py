@@ -31,7 +31,8 @@ for file in get_filepaths("src"):
         # data = data.replace("pl.asie.lib", "org.libreflock.asielib")
         # data = data.replace("pl.asie", "org.libreflock")
 
-        data = data.replace("import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;", "import net.minecraftforge.eventbus.api.SubscribeEvent;")
+        data = data.replace("net.minecraft.util.math.Vec3d", "net.minecraft.util.math.vector.Vector3d")
+        data = data.replace("Vec3d", "Vector3d")
         f.write(data)
 
 

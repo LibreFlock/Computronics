@@ -8,7 +8,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -98,7 +98,7 @@ public class BlockChatBox extends BlockPeripheral implements IBlockWithSpecialTe
 	}
 
 	@Override
-	public boolean emitsRedstone(IBlockAccess world, BlockPos pos, EnumFacing side) {
+	public boolean emitsRedstone(IBlockAccess world, BlockPos pos, Direction side) {
 		return Config.REDSTONE_REFRESH;
 	}
 

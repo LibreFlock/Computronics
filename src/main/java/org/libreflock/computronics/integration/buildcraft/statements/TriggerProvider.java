@@ -7,7 +7,7 @@ import buildcraft.api.statements.ITriggerProvider;
 import buildcraft.api.statements.StatementManager;
 import li.cil.oc.api.internal.Case;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import org.libreflock.computronics.integration.buildcraft.statements.triggers.Triggers;
 import org.libreflock.computronics.reference.Mods;
 import org.libreflock.computronics.tile.TileTapeDrive;
@@ -31,7 +31,7 @@ public class TriggerProvider implements ITriggerProvider {
 	}
 
 	@Override
-	public Collection<ITriggerExternal> getExternalTriggers(EnumFacing side, TileEntity tile) {
+	public Collection<ITriggerExternal> getExternalTriggers(Direction side, TileEntity tile) {
 		LinkedList<ITriggerExternal> triggers = new LinkedList<ITriggerExternal>();
 		if(tile != null) {
 			if(Mods.isLoaded(Mods.OpenComputers) && tile instanceof Case) {

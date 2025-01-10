@@ -1,7 +1,7 @@
 package org.libreflock.computronics.api.audio;
 
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.network.PacketType;
@@ -51,7 +51,7 @@ public abstract class AudioPacket {
 		}
 
 		int mdSq = receiver.getSoundDistance() * receiver.getSoundDistance();
-		final Vec3d pos = receiver.getSoundPos();
+		final Vector3d pos = receiver.getSoundPos();
 		double distSq = (pos.x - playerMP.posX) * (pos.x - playerMP.posX);
 		distSq += (pos.y - playerMP.posY) * (pos.y - playerMP.posY);
 		distSq += (pos.z - playerMP.posZ) * (pos.z - playerMP.posZ);
@@ -84,7 +84,7 @@ public abstract class AudioPacket {
 
 					for(IAudioReceiver receiver : receivers) {
 						pkt.writeInt(receiver.getSoundWorld() != null ? receiver.getSoundWorld().provider.getDimension() : 0);
-						final Vec3d pos = receiver.getSoundPos();
+						final Vector3d pos = receiver.getSoundPos();
 						pkt.writeFloat((float) pos.x).writeFloat((float) pos.y).writeFloat((float) pos.z)
 							.writeShort((short) receiver.getSoundDistance()).writeByte(volume).writeString(receiver.getID());
 					}

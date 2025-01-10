@@ -3,7 +3,7 @@ package org.libreflock.computronics.integration.buildcraft.statements.triggers;
 import buildcraft.api.statements.IStatementContainer;
 import buildcraft.api.statements.IStatementParameter;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import org.libreflock.computronics.tile.TapeDriveState.State;
 import org.libreflock.computronics.tile.TileTapeDrive;
 
@@ -19,7 +19,7 @@ public class TriggerTapeDrive implements IComputronicsTrigger {
 	}
 
 	@Override
-	public boolean isTriggerActive(TileEntity tile, EnumFacing side, IStatementContainer container, IStatementParameter[] statements) {
+	public boolean isTriggerActive(TileEntity tile, Direction side, IStatementContainer container, IStatementParameter[] statements) {
 		return tile != null && tile instanceof TileTapeDrive
 			&& ((TileTapeDrive) tile).getEnumState() == state;
 	}

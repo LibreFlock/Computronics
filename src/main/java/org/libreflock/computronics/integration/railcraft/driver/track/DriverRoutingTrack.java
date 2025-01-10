@@ -12,7 +12,7 @@ import mods.railcraft.common.blocks.tracks.outfitted.kits.TrackKitRouting;
 import mods.railcraft.common.items.ItemTicketGold;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.libreflock.computronics.api.multiperipheral.IMultiPeripheral;
@@ -98,7 +98,7 @@ public class DriverRoutingTrack {
 
 		@Nullable
 		@Override
-		protected NamedManagedEnvironment<TrackKitRouting> createEnvironment(World world, BlockPos pos, EnumFacing side, TrackKitRouting tile) {
+		protected NamedManagedEnvironment<TrackKitRouting> createEnvironment(World world, BlockPos pos, Direction side, TrackKitRouting tile) {
 			return new InternalManagedEnvironment(tile);
 		}
 	}
@@ -113,7 +113,7 @@ public class DriverRoutingTrack {
 		}
 
 		@Override
-		public IMultiPeripheral getPeripheral(World world, BlockPos pos, EnumFacing side) {
+		public IMultiPeripheral getPeripheral(World world, BlockPos pos, Direction side) {
 			TileEntity te = world.getTileEntity(pos);
 			if(te != null && te instanceof IOutfittedTrackTile && ((IOutfittedTrackTile) te).getTrackKitInstance() instanceof TrackKitRouting) {
 				return new CCDriver((TrackKitRouting) ((IOutfittedTrackTile) te).getTrackKitInstance(), world, pos);

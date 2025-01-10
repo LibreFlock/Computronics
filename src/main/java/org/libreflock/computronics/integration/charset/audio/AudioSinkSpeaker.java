@@ -3,7 +3,7 @@ package org.libreflock.computronics.integration.charset.audio;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import org.libreflock.charset.api.audio.AudioSink;
 import org.libreflock.computronics.tile.TileSpeaker;
@@ -27,8 +27,8 @@ public class AudioSinkSpeaker extends AudioSink {
 	}
 
 	@Override
-	public Vec3d getPos() {
-		return new Vec3d(speaker.getPos());
+	public Vector3d getPos() {
+		return new Vector3d(speaker.getPos());
 	}
 
 	@Override

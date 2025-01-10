@@ -20,7 +20,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.common.Optional;
 import org.libreflock.computronics.Computronics;
@@ -749,19 +749,19 @@ public class TileTicketMachine extends TileEntityPeripheralBase implements ITick
 	}
 
 	@Override
-	public boolean canInsertItem(int slot, ItemStack item, EnumFacing side) {
+	public boolean canInsertItem(int slot, ItemStack item, Direction side) {
 		return slot == paperSlot;
 	}
 
 	@Override
-	public boolean canExtractItem(int slot, ItemStack item, EnumFacing side) {
+	public boolean canExtractItem(int slot, ItemStack item, Direction side) {
 		return slot == ticketSlot;
 	}
 
 	private static final int[] ACCESSIBLE_SLOTS = new int[] { paperSlot, ticketSlot };
 
 	@Override
-	public int[] getSlotsForFace(EnumFacing side) {
+	public int[] getSlotsForFace(Direction side) {
 		return ACCESSIBLE_SLOTS.clone();
 	}
 }

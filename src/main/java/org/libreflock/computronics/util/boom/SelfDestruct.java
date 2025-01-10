@@ -15,7 +15,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
-// import net.minecraft.util.math.Vec3d;
+// import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import org.libreflock.computronics.Computronics;
@@ -142,7 +142,7 @@ public class SelfDestruct extends Explosion {
 							}
 						}
 
-						Vec3d motion = explosion.getPlayerKnockbackMap().get(entityplayer);
+						Vector3d motion = explosion.getPlayerKnockbackMap().get(entityplayer);
 						float motionX = 0;
 						float motionY = 0;
 						float motionZ = 0;

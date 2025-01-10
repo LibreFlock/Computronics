@@ -11,7 +11,7 @@ import mods.railcraft.common.blocks.detector.TileDetector;
 import mods.railcraft.common.blocks.detector.types.DetectorRouting;
 import mods.railcraft.common.items.ItemRoutingTable;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.libreflock.computronics.api.multiperipheral.IMultiPeripheral;
@@ -142,14 +142,14 @@ public class DriverRoutingDetector {
 		}
 
 		@Override
-		public boolean worksWith(World world, BlockPos pos, EnumFacing side) {
+		public boolean worksWith(World world, BlockPos pos, Direction side) {
 			TileEntity tileEntity = world.getTileEntity(pos);
 			return (tileEntity != null) && tileEntity instanceof TileDetector
 				&& ((TileDetector) tileEntity).getDetector().getType() == EnumDetector.ROUTING;
 		}
 
 		@Override
-		public NamedManagedEnvironment<TileDetector> createEnvironment(World world, BlockPos pos, EnumFacing side, TileDetector tile) {
+		public NamedManagedEnvironment<TileDetector> createEnvironment(World world, BlockPos pos, Direction side, TileDetector tile) {
 			return new InternalManagedEnvironment(tile);
 		}
 	}
@@ -164,7 +164,7 @@ public class DriverRoutingDetector {
 		}
 
 		@Override
-		public IMultiPeripheral getPeripheral(World world, BlockPos pos, EnumFacing side) {
+		public IMultiPeripheral getPeripheral(World world, BlockPos pos, Direction side) {
 			TileEntity te = world.getTileEntity(pos);
 			if(te != null && te instanceof TileDetector && ((TileDetector) te).getDetector().getType() == EnumDetector.ROUTING) {
 				return new CCDriver((TileDetector) te, world, pos);

@@ -10,7 +10,7 @@ import mods.railcraft.api.tracks.IOutfittedTrackTile;
 import mods.railcraft.common.blocks.tracks.outfitted.kits.TrackKitLauncher;
 import mods.railcraft.common.core.RailcraftConfig;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.libreflock.computronics.api.multiperipheral.IMultiPeripheral;
@@ -65,7 +65,7 @@ public class DriverLauncherTrack {
 
 		@Nullable
 		@Override
-		protected NamedManagedEnvironment<TrackKitLauncher> createEnvironment(World world, BlockPos pos, EnumFacing side, TrackKitLauncher tile) {
+		protected NamedManagedEnvironment<TrackKitLauncher> createEnvironment(World world, BlockPos pos, Direction side, TrackKitLauncher tile) {
 			return new InternalManagedEnvironment(tile);
 		}
 	}
@@ -80,7 +80,7 @@ public class DriverLauncherTrack {
 		}
 
 		@Override
-		public IMultiPeripheral getPeripheral(World world, BlockPos pos, EnumFacing side) {
+		public IMultiPeripheral getPeripheral(World world, BlockPos pos, Direction side) {
 			TileEntity te = world.getTileEntity(pos);
 			if(te != null && te instanceof IOutfittedTrackTile && ((IOutfittedTrackTile) te).getTrackKitInstance() instanceof TrackKitLauncher) {
 				return new CCDriver((TrackKitLauncher) ((IOutfittedTrackTile) te).getTrackKitInstance(), world, pos);

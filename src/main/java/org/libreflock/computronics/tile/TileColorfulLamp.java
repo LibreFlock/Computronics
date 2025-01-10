@@ -12,7 +12,7 @@ import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -260,22 +260,22 @@ public class TileColorfulLamp extends TileEntityPeripheralBase implements IBundl
 	}
 
 	@Override
-	public boolean canBundledConnectToInput(@Nullable EnumFacing side) {
+	public boolean canBundledConnectToInput(@Nullable Direction side) {
 		return true;
 	}
 
 	@Override
-	public boolean canBundledConnectToOutput(@Nullable EnumFacing side) {
+	public boolean canBundledConnectToOutput(@Nullable Direction side) {
 		return false;
 	}
 
 	@Override
-	public byte[] getBundledOutput(@Nullable EnumFacing side) {
+	public byte[] getBundledOutput(@Nullable Direction side) {
 		return new byte[16];
 	}
 
 	@Override
-	public void onBundledInputChange(@Nullable EnumFacing side, @Nullable byte[] data) {
+	public void onBundledInputChange(@Nullable Direction side, @Nullable byte[] data) {
 		parseBundledInput(data);
 	}
 

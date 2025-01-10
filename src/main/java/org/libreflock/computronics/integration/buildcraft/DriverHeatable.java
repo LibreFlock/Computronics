@@ -10,7 +10,7 @@ import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.ManagedEnvironment;
 import li.cil.oc.api.prefab.DriverSidedTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.libreflock.computronics.api.multiperipheral.IMultiPeripheral;
@@ -58,7 +58,7 @@ public class DriverHeatable {
 		}
 
 		@Override
-		public ManagedEnvironment createEnvironment(World world, BlockPos pos, EnumFacing side) {
+		public ManagedEnvironment createEnvironment(World world, BlockPos pos, Direction side) {
 			return new InternalManagedEnvironment((IHeatable) world.getTileEntity(pos));
 		}
 	}
@@ -73,7 +73,7 @@ public class DriverHeatable {
 		}
 
 		@Override
-		public IMultiPeripheral getPeripheral(World world, BlockPos pos, EnumFacing side) {
+		public IMultiPeripheral getPeripheral(World world, BlockPos pos, Direction side) {
 			TileEntity te = world.getTileEntity(pos);
 			if(te != null && te instanceof IHeatable) {
 				return new CCDriver((IHeatable) te, world, pos);
