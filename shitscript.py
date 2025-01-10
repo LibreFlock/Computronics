@@ -18,7 +18,7 @@ def get_filepaths(directory):
 
     return file_paths  # Self-explanatory.
 
-for file in get_filepaths("src"):
+for file in get_filepaths("src/main/java/org/libreflock"):
     if not file.endswith(".java"):
         continue
 
