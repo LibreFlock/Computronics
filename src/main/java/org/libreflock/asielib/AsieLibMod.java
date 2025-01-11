@@ -116,7 +116,7 @@ public class AsieLibMod extends AsieLibAPI {
 	@SuppressWarnings("unchecked")
 	public void processIMC(InterModProcessEvent event) {
 		ImmutableList<InterModComms.IMCMessage> messages = event.getIMCStream().map(m->m.getMessageSupplier().get()).
-				collect(Collectors.toList());
+				collect(Collectors.toList()); // htf do i do this
 		for(FMLInterModComms.IMCMessage message : messages) {
 			if(message.key.equalsIgnoreCase("addtoolprovider") && message.isStringMessage()) {
 				try {
