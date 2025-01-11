@@ -53,12 +53,12 @@ import java.awt.*;
 import java.util.List;
 import java.util.Set;
 
-@Optional.InterfaceList({
+/*@Optional.InterfaceList({
 	@Optional.Interface(iface = "li.cil.oc.api.driver.DriverItem", modid = Mods.OpenComputers),
 	@Optional.Interface(iface = "li.cil.oc.api.driver.EnvironmentProvider", modid = Mods.OpenComputers),
 	@Optional.Interface(iface = "li.cil.oc.api.driver.item.HostAware", modid = Mods.OpenComputers),
 	@Optional.Interface(iface = "li.cil.oc.api.driver.item.UpgradeRenderer", modid = Mods.OpenComputers)
-})
+})*/
 public class ItemOpenComputers extends ItemMultipleComputronics implements DriverItem, EnvironmentProvider, HostAware, UpgradeRenderer, IItemWithDocumentation, IItemWithColor {
 
 	public ItemOpenComputers() {
@@ -83,13 +83,13 @@ public class ItemOpenComputers extends ItemMultipleComputronics implements Drive
 	}
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	//@Optional.Method(modid = Mods.OpenComputers)
 	public boolean worksWith(ItemStack stack) {
 		return stack.getItem().equals(this);
 	}
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	//@Optional.Method(modid = Mods.OpenComputers)
 	public boolean worksWith(ItemStack stack, Class<? extends EnvironmentHost> host) {
 		boolean works = worksWith(stack);
 		works = works && !Adapter.class.isAssignableFrom(host);
@@ -327,49 +327,49 @@ public class ItemOpenComputers extends ItemMultipleComputronics implements Drive
 		if(!this.isInCreativeTab(tabs)) {
 			return;
 		}
-		if(Config.OC_UPGRADE_CAMERA) {
+		if(Config.COMMON.OC_UPGRADE_CAMERA.get()) {
 			list.add(new ItemStack(this, 1, 0));
 		}
-		if(Config.OC_UPGRADE_CHATBOX) {
+		if(Config.COMMON.OC_UPGRADE_CHATBOX.get()) {
 			list.add(new ItemStack(this, 1, 1));
 		}
-		if(Config.OC_UPGRADE_RADAR) {
+		if(Config.COMMON.OC_UPGRADE_RADAR.get()) {
 			list.add(new ItemStack(this, 1, 2));
 		}
-		if(Config.OC_CARD_FX) {
+		if(Config.COMMON.OC_CARD_FX.get()) {
 			list.add(new ItemStack(this, 1, 3));
 		}
-		if(Config.OC_CARD_SPOOF) {
+		if(Config.COMMON.OC_CARD_SPOOF.get()) {
 			list.add(new ItemStack(this, 1, 4));
 		}
-		if(Config.OC_CARD_BEEP) {
+		if(Config.COMMON.OC_CARD_BEEP.get()) {
 			list.add(new ItemStack(this, 1, 5));
 		}
-		if(Config.OC_CARD_BOOM) {
+		if(Config.COMMON.OC_CARD_BOOM.get()) {
 			list.add(new ItemStack(this, 1, 6));
 		}
-		if(Config.OC_UPGRADE_COLORFUL) {
+		if(Config.COMMON.OC_UPGRADE_COLORFUL.get()) {
 			list.add(new ItemStack(this, 1, 7));
 		}
-		if(Config.OC_CARD_NOISE) {
+		if(Config.COMMON.OC_CARD_NOISE.get()) {
 			list.add(new ItemStack(this, 1, 8));
 		}
-		if(Config.OC_CARD_SOUND) {
+		if(Config.COMMON.OC_CARD_SOUND.get()) {
 			list.add(new ItemStack(this, 1, 9));
 		}
-		if(Config.OC_BOARD_LIGHT) {
+		if(Config.COMMON.OC_BOARD_LIGHT.get()) {
 			list.add(new ItemStack(this, 1, 10));
 		}
-		if(Config.OC_BOARD_BOOM) {
+		if(Config.COMMON.OC_BOARD_BOOM.get()) {
 			list.add(new ItemStack(this, 1, 11));
 		}
-		if(Config.OC_BOARD_CAPACITOR) {
+		if(Config.COMMON.OC_BOARD_CAPACITOR.get()) {
 			list.add(new ItemStack(this, 1, 12));
 		}
-		if(Config.OC_BOARD_SWITCH) {
+		if(Config.COMMON.OC_BOARD_SWITCH.get()) {
 			list.add(new ItemStack(this, 1, 13));
 		}
-		if(Config.OC_UPGRADE_SPEECH) {
+		if(Config.COMMON.OC_UPGRADE_SPEECH.get()) {
 			list.add(new ItemStack(this, 1, 14));
 		}
 	}
