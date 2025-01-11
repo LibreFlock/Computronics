@@ -1,10 +1,15 @@
 package org.libreflock.computronics.util.sound;
 
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.IChunk;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.Constants;
@@ -58,6 +63,11 @@ public class SoundBoard {
 
 		static Set<SoundBoard> envs = Collections.newSetFromMap(new WeakHashMap<SoundBoard, Boolean>());
 
+		private boolean isAtLocation(IChunk chunk, int x, int z) {
+			ChunkPos pos = chunk.getPos();
+			return pos.x == x && pos.z == z;
+		}
+
 		@OnlyIn(Dist.CLIENT)
 		private static SoundCardPacketClientHandler getHandler() {
 			return (SoundCardPacketClientHandler) AudioPacketRegistry.INSTANCE.getClientHandler(AudioPacketRegistry.INSTANCE.getId(SoundCardPacket.class));
@@ -67,7 +77,7 @@ public class SoundBoard {
 		public void onChunkUnload(ChunkEvent.Unload evt) {
 			for(SoundBoard env : envs) {
 				Vector3d pos = env.host.position();
-				if(env.host.world() == evt.getWorld() && evt.getChunk().isAtLocation(MathHelper.floor(pos.x) >> 4, MathHelper.floor(pos.z) >> 4)) {
+				if(env.host.world() == evt.getWorld() && isAtLocation(evt.getChunk(), MathHelper.floor(pos.x) >> 4, MathHelper.floor(pos.z) >> 4)) {
 					getHandler().setProcess(env.clientAddress, null);
 				}
 			}
@@ -93,7 +103,7 @@ public class SoundBoard {
 		if(world == null) {
 			return;
 		}
-		if(world.isRemote) {
+		if(world instanceof ServerWorld) {
 			SyncHandler.envs.add(this);
 			buildBuffer = null;
 			nextBuffer = null;
@@ -111,7 +121,7 @@ public class SoundBoard {
 
 	public void update() {
 		initBuffers();
-		if(!host.world().isRemote) {
+		if(host.world() instanceof ClientWorld) {
 			if(nextBuffer != null && !nextBuffer.isEmpty() && System.currentTimeMillis() >= timeout - 100) {
 				final ArrayDeque<Instruction> clone;
 				synchronized(nextBuffer) {

@@ -15,7 +15,14 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.libreflock.computronics.audio.DFPWMPlaybackManager;
+import org.libreflock.computronics.audio.SoundCardPlaybackManager;
+import org.libreflock.computronics.tape.StorageManager;
+import org.libreflock.computronics.tape.TapeStorageEventHandler;
+import org.libreflock.computronics.util.event.ServerTickHandler;
+import org.libreflock.asielib.network.PacketHandler;
 
+import java.util.concurrent.ExecutorService;
 import java.util.stream.Collectors;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -23,7 +30,21 @@ import java.util.stream.Collectors;
 public class Computronics {
 
     // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger log = LogManager.getLogger();
+
+    public static Computronics instance;
+
+    public static StorageManager storage;
+	public static TapeStorageEventHandler storageEventHandler;
+	// public static ManagedGuiHandler gui;
+	public static PacketHandler packet;
+	public static ExecutorService rsaThreads;
+	public static ServerTickHandler serverTickHandler;
+	public DFPWMPlaybackManager audio;
+	public int managerId;
+
+	public SoundCardPlaybackManager soundCardAudio;
+	public int soundCardManagerId;
 
     public Computronics() {
         // Register the setup method for modloading
@@ -41,23 +62,23 @@ public class Computronics {
 
     private void setup(final FMLCommonSetupEvent event) {
         // some preinit code
-        LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+        log.info("HELLO FROM PREINIT");
+        log.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
-        LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().options);
+        log.info("Got game settings {}", event.getMinecraftSupplier().get().options);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
         // some example code to dispatch IMC to another mod
-        InterModComms.sendTo("computronics", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
+        InterModComms.sendTo("computronics", "helloworld", () -> { log.info("Hello world from the MDK"); return "Hello world";});
     }
 
     private void processIMC(final InterModProcessEvent event) {
         // some example code to receive and process InterModComms from other mods
-        LOGGER.info("Got IMC {}", event.getIMCStream().
+        log.info("Got IMC {}", event.getIMCStream().
                 map(m->m.getMessageSupplier().get()).
                 collect(Collectors.toList()));
     }
@@ -66,7 +87,7 @@ public class Computronics {
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {
         // do something when the server starts
-        LOGGER.info("HELLO from server starting");
+        log.info("HELLO from server starting");
     }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
@@ -76,7 +97,7 @@ public class Computronics {
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
             // register a new block here
-            LOGGER.info("HELLO from Register Block");
+            log.info("HELLO from Register Block");
         }
     }
 }

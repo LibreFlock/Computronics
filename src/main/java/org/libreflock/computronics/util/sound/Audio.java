@@ -1,12 +1,11 @@
 package org.libreflock.computronics.util.sound;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent.ClientTickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.lwjgl.BufferUtils;
@@ -38,7 +37,7 @@ public class Audio {
 	private final Set<Source> sources = new HashSet<Source>();
 
 	private float volume() {
-		return Minecraft.getMinecraft().gameSettings.getSoundLevel(SoundCategory.BLOCKS);
+		return Minecraft.getInstance().options.getSoundSourceVolume(SoundCategory.BLOCKS);
 	}
 
 	private boolean disableAudio = false;
@@ -64,7 +63,7 @@ public class Audio {
 	}
 
 	public void play(float x, float y, float z, String pattern, AudioType type, float frequencyInHz, int durationInMilliseconds, int initialDelayInMilliseconds) {
-		Minecraft mc = Minecraft.getMinecraft();
+		Minecraft mc = Minecraft.getInstance();
 		float distanceBasedGain = ((float) Math.max(0, 1 - mc.player.getDistance(x, y, z) / maxDistance));
 		//float gain = distanceBasedGain * volume();
 		float gain = volume();
@@ -82,11 +81,11 @@ public class Audio {
 			float clampedFrequency = Math.min(Math.max(frequencyInHz - 20, 0), 1980) / 1980f + 0.5f;
 			int delay = 0;
 			for(char ch : pattern.toCharArray()) {
-				PositionedSoundRecord record = new PositionedSoundRecord(SoundEvents.BLOCK_NOTE_HARP, SoundCategory.BLOCKS, distanceBasedGain * gain, clampedFrequency, x, y, z);
+				PositionedSoundRecord record = new PositionedSoundRecord(SoundEvents.NOTE_BLOCK_HARP, SoundCategory.BLOCKS, distanceBasedGain * gain, clampedFrequency, x, y, z);
 				if(delay == 0) {
-					mc.getSoundHandler().playSound(record);
+					mc.getSoundManager().playSound(record);
 				} else {
-					mc.getSoundHandler().playDelayedSound(record, delay);
+					mc.getSoundManager().playDelayedSound(record, delay);
 				}
 				delay += Math.max((ch == '.' ? durationInMilliseconds : 2 * durationInMilliseconds) * 20 / 1000, 1);
 			}

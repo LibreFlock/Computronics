@@ -3,19 +3,20 @@ package org.libreflock.computronics.util.boom;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-// import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
-// import net.minecraft.entity.player.EntityPlayer;
-// import net.minecraft.entity.player.EntityPlayerMP;
-// import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.TileEntity;
-// import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
-// import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import org.libreflock.computronics.Computronics;
@@ -30,12 +31,13 @@ import java.io.IOException;
  */
 public class SelfDestruct extends Explosion {
 
+
 	protected World world;
 	protected float explosionSize;
 	private boolean destroyBlocks;
 
 	public SelfDestruct(World world, @Nullable Entity exploder, double x, double y, double z, float size, boolean destroyBlocks) {
-		super(world, exploder, x, y, z, size, false, true);
+		super(world, exploder, x, y, z, size, false, (destroyBlocks ? Explosion.Mode.DESTROY : Explosion.Mode.NONE));
 		this.world = world;
 		this.destroyBlocks = destroyBlocks;
 		this.explosionSize = size;
@@ -43,7 +45,7 @@ public class SelfDestruct extends Explosion {
 
 	//Unfortunately I had to copy a lot of code for this one.
 	@Override
-	public void doExplosionB(boolean spawnParticles) {
+	public void finalizeExplosion(boolean spawnParticles) {
 		Vector3d position = getPosition();
 		final double
 			explosionX = position.x,
@@ -51,18 +53,18 @@ public class SelfDestruct extends Explosion {
 			explosionZ = position.z;
 		final BlockPos explosionPos = new BlockPos(explosionX, explosionY, explosionZ);
 
-		this.world.playSound(null, explosionX, explosionY, explosionZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
+		this.world.playSound(null, explosionX, explosionY, explosionZ, SoundEvents.GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (this.world.random.nextFloat() - this.world.random.nextFloat()) * 0.2F) * 0.7F);
 
-		this.world.spawnParticle(ParticleTypes.EXPLOSION_HUGE, explosionX, explosionY, explosionZ, 1.0D, 0.0D, 0.0D);
+		this.world.addParticle(ParticleTypes.EXPLOSION, explosionX, explosionY, explosionZ, 1.0D, 0.0D, 0.0D); // EXPLOSION_HUGE
 
-		for(BlockPos blockpos : this.getAffectedBlockPositions()) {
+		for(BlockPos blockpos : this.getToBlow()) {
 			BlockState state = this.world.getBlockState(blockpos);
 			Block block = state.getBlock();
 
 			if(spawnParticles) {
-				double d0 = (double) ((float) blockpos.getX() + this.world.rand.nextFloat());
-				double d1 = (double) ((float) blockpos.getY() + this.world.rand.nextFloat());
-				double d2 = (double) ((float) blockpos.getZ() + this.world.rand.nextFloat());
+				double d0 = (double) ((float) blockpos.getX() + this.world.random.nextFloat());
+				double d1 = (double) ((float) blockpos.getY() + this.world.random.nextFloat());
+				double d2 = (double) ((float) blockpos.getZ() + this.world.random.nextFloat());
 				double d3 = d0 - explosionX;
 				double d4 = d1 - explosionY;
 				double d5 = d2 - explosionZ;
@@ -71,33 +73,35 @@ public class SelfDestruct extends Explosion {
 				d4 = d4 / d6;
 				d5 = d5 / d6;
 				double d7 = 0.5D / (d6 / (double) this.explosionSize + 0.1D);
-				d7 = d7 * (double) (this.world.rand.nextFloat() * this.world.rand.nextFloat() + 0.3F);
+				d7 = d7 * (double) (this.world.random.nextFloat() * this.world.random.nextFloat() + 0.3F);
 				d3 = d3 * d7;
 				d4 = d4 * d7;
 				d5 = d5 * d7;
-				this.world.spawnParticle(ParticleTypes.EXPLOSION_NORMAL, (d0 + explosionX * 1.0D) / 2.0D, (d1 + explosionY * 1.0D) / 2.0D, (d2 + explosionZ * 1.0D) / 2.0D, d3, d4, d5);
-				this.world.spawnParticle(ParticleTypes.SMOKE_NORMAL, d0, d1, d2, d3, d4, d5);
+				this.world.addParticle(ParticleTypes.EXPLOSION, (d0 + explosionX * 1.0D) / 2.0D, (d1 + explosionY * 1.0D) / 2.0D, (d2 + explosionZ * 1.0D) / 2.0D, d3, d4, d5); // EXPLOSION_NORMAL
+				this.world.addParticle(ParticleTypes.SMOKE, d0, d1, d2, d3, d4, d5); // SMOKE_NORMAL
 			}
 
 			if(state.getMaterial() != Material.AIR) {
-				if(!this.world.isRemote
+				if(this.world instanceof ClientWorld
 					&& blockpos.equals(explosionPos)) {
 					// This is the case.
-					TileEntity tile = this.world.getTileEntity(blockpos);
-					if(tile != null && !tile.isInvalid() && tile instanceof IInventory) {
+					TileEntity tile = this.world.getBlockEntity(blockpos);
+					if(tile != null && !tile.isRemoved() && tile instanceof IInventory) {
 						IInventory inv = (IInventory) tile;
-						inv.clear();
+						for (int i = 0; i < inv.getContainerSize(); i++) { inv.setItem(i, ItemStack.EMPTY); }
 					}
 				}
 
 				if(destroyBlocks) {
 					if(!blockpos.equals(explosionPos)) {
 						// This not is the case.
-						if(block.canDropFromExplosion(this)) {
-							block.dropBlockAsItemWithChance(this.world, blockpos, this.world.getBlockState(blockpos), 1.0F / this.explosionSize, 0);
+						if(block.canDropFromExplosion(state, this.world, blockpos, this)) {
+							// block.dropBlockAsItemWithChance(this.world, blockpos, this.world.getBlockState(blockpos), 1.0F / this.explosionSize, 0);
+							block.dropFromExplosion(this); // fixerino
 						}
 					}
-					block.onBlockExploded(this.world, blockpos, this);
+					// block.onBlockExploded(this.world, blockpos, this);
+					block.onBlockExploded(state, world, explosionPos, this);
 				}
 			}
 		}
@@ -109,18 +113,23 @@ public class SelfDestruct extends Explosion {
 
 	public static void goBoom(World world, double xPos, double yPos, double zPos, boolean destroyBlocks) {
 		SelfDestruct explosion = new SelfDestruct(world, null, xPos, yPos, zPos, 4.0F, destroyBlocks);
-		explosion.doExplosionA();
-		explosion.doExplosionB(false);
+		explosion.explode();
+		explosion.finalizeExplosion(false);
 
 		int x = (int) xPos;
 		int y = (int) yPos;
 		int z = (int) zPos;
 
-		for(EntityPlayer playerEntity : world.playerEntities) {
-			if(playerEntity instanceof EntityPlayerMP) {
-				EntityPlayerMP entityplayer = (EntityPlayerMP) playerEntity;
+		AxisAlignedBB worldBounds = new AxisAlignedBB(
+			Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY,
+			Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY
+		);
 
-				if(entityplayer.getDistanceSq(xPos, yPos, zPos) < 4096.0D) {
+		for(PlayerEntity playerEntity : world.getEntitiesOfClass(PlayerEntity.class, worldBounds)) {
+			if(playerEntity instanceof ServerPlayerEntity) {
+				ServerPlayerEntity PlayerEntity = (ServerPlayerEntity) playerEntity;
+
+				if(PlayerEntity.position().distanceToSqr(xPos, yPos, zPos) < 4096.0D) {
 					try {
 						Packet p = Computronics.packet.create(PacketType.COMPUTER_BOOM.ordinal())
 							.writeDouble(xPos)
@@ -128,11 +137,11 @@ public class SelfDestruct extends Explosion {
 							.writeDouble(zPos)
 							.writeFloat(4.0F)
 							.writeByte((byte) (destroyBlocks ? 1 : 0));
-						p.writeInt(explosion.getAffectedBlockPositions().size());
+						p.writeInt(explosion.getToBlow().size());
 
 						{
 							byte j, k, l;
-							for(BlockPos pos : explosion.getAffectedBlockPositions()) {
+							for(BlockPos pos : explosion.getToBlow()) {
 								j = (byte) (pos.getX() - x);
 								k = (byte) (pos.getY() - y);
 								l = (byte) (pos.getZ() - z);
@@ -142,7 +151,7 @@ public class SelfDestruct extends Explosion {
 							}
 						}
 
-						Vector3d motion = explosion.getPlayerKnockbackMap().get(entityplayer);
+						Vector3d motion = explosion.getPlayerKnockbackMap().get(PlayerEntity);
 						float motionX = 0;
 						float motionY = 0;
 						float motionZ = 0;
@@ -155,7 +164,7 @@ public class SelfDestruct extends Explosion {
 						p.writeFloat(motionX);
 						p.writeFloat(motionZ);
 
-						Computronics.packet.sendTo(p, entityplayer);
+						Computronics.packet.sendTo(p, PlayerEntity);
 					} catch(IOException e) {
 						e.printStackTrace();
 					}

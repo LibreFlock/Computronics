@@ -1,7 +1,7 @@
 package org.libreflock.computronics.audio;
 
-import org.libreflock.lib.audio.StreamingAudioPlayer;
-import org.libreflock.lib.audio.StreamingPlaybackManager;
+import org.libreflock.asielib.audio.StreamingAudioPlayer;
+import org.libreflock.asielib.audio.StreamingPlaybackManager;
 
 /**
  * @author gamax92

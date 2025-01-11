@@ -10,10 +10,9 @@ import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.machine.Value;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraftforge.fml.common.Optional;
+// import net.minecraftforge.fml.common.Optional;
 import org.libreflock.computronics.Computronics;
-import org.libreflock.computronics.reference.Mods;
-
+// import org.libreflock.computronics.reference.Mods;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -23,11 +22,11 @@ import java.util.concurrent.Future;
 /**
  * @author Vexatos
  */
-@Optional.InterfaceList({
-	@Optional.Interface(iface = "li.cil.oc.api.machine.Value", modid = Mods.OpenComputers),
-	@Optional.Interface(iface = "dan200.computercraft.api.lua.ILuaObject", modid = Mods.ComputerCraft)
-})
-public class RSAValue implements Value, ILuaObject {
+// @Optional.InterfaceList({
+// 	@Optional.Interface(iface = "li.cil.oc.api.machine.Value", modid = Mods.OpenComputers),
+// 	@Optional.Interface(iface = "dan200.computercraft.api.lua.ILuaObject", modid = Mods.ComputerCraft)
+// })
+public class RSAValue implements Value {
 
 	protected Map<Integer, String> publicKey;
 	protected Map<Integer, String> privateKey;
@@ -94,13 +93,13 @@ public class RSAValue implements Value, ILuaObject {
 	}
 
 	@Callback(doc = "function():table,table; Returns the two generated keys, or nil if they are still being generated", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] getKeys(Context c, Arguments a) throws Exception {
 		return this.getKeys();
 	}
 
 	@Callback(doc = "function():boolean; Returns whether key generation has finished", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] finished(Context c, Arguments a) throws Exception {
 		switch(checkFinished()) {
 			case -1: {
@@ -113,41 +112,41 @@ public class RSAValue implements Value, ILuaObject {
 		return new Object[] { publicKey != null && privateKey != null };
 	}
 
-	@Override
-	@Optional.Method(modid = Mods.ComputerCraft)
-	public String[] getMethodNames() {
-		return new String[] { "getKeys", "finished" };
-	}
+	// @Override
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// public String[] getMethodNames() {
+	// 	return new String[] { "getKeys", "finished" };
+	// }
+
+	// @Override
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// public Object[] callMethod(ILuaContext context, int method, Object[] arguments) throws LuaException, InterruptedException {
+	// 	try {
+	// 		switch(method) {
+	// 			case 0: {
+	// 				return getKeys();
+	// 			}
+	// 			case 1: {
+	// 				switch(checkFinished()) {
+	// 					case -1: {
+	// 						return new Object[] { null, "calculation returned no key set" };
+	// 					}
+	// 					case -2: {
+	// 						return new Object[] { null, "an error occured during key generation" };
+	// 					}
+	// 				}
+	// 				return new Object[] { publicKey != null && privateKey != null };
+	// 			}
+	// 		}
+	// 	} catch(Exception e) {
+	// 		throw new LuaException(e.getMessage());
+	// 	}
+	// 	return null;
+	// }
 
 	@Override
-	@Optional.Method(modid = Mods.ComputerCraft)
-	public Object[] callMethod(ILuaContext context, int method, Object[] arguments) throws LuaException, InterruptedException {
-		try {
-			switch(method) {
-				case 0: {
-					return getKeys();
-				}
-				case 1: {
-					switch(checkFinished()) {
-						case -1: {
-							return new Object[] { null, "calculation returned no key set" };
-						}
-						case -2: {
-							return new Object[] { null, "an error occured during key generation" };
-						}
-					}
-					return new Object[] { publicKey != null && privateKey != null };
-				}
-			}
-		} catch(Exception e) {
-			throw new LuaException(e.getMessage());
-		}
-		return null;
-	}
-
-	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
-	public void load(CompoundNBT nbt) {
+	// @Optional.Method(modid = Mods.OpenComputers)
+	public void loadData(CompoundNBT nbt) {
 		if(nbt == null) {
 			nbt = new CompoundNBT();
 		}
@@ -173,8 +172,8 @@ public class RSAValue implements Value, ILuaObject {
 	}
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
-	public void save(CompoundNBT nbt) {
+	// @Optional.Method(modid = Mods.OpenComputers)
+	public void saveData(CompoundNBT nbt) {
 		if(nbt == null) {
 			nbt = new CompoundNBT();
 		}
@@ -198,25 +197,25 @@ public class RSAValue implements Value, ILuaObject {
 	}
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object apply(Context context, Arguments arguments) {
 		return null;
 	}
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public void unapply(Context context, Arguments arguments) {
 
 	}
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] call(Context context, Arguments arguments) {
 		throw new RuntimeException("trying to call a non-callable value");
 	}
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public void dispose(Context context) {
 		if(this.task != null) {
 			task.cancel(true);

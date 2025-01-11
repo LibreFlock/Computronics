@@ -1,6 +1,6 @@
 package org.libreflock.computronics.api.audio;
 
-import org.libreflock.lib.network.Packet;
+import org.libreflock.asielib.network.Packet;
 
 import java.io.IOException;
 
