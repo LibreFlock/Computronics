@@ -151,7 +151,7 @@ public class SelfDestruct extends Explosion {
 							}
 						}
 
-						Vector3d motion = explosion.getPlayerKnockbackMap().get(PlayerEntity);
+						Vector3d motion = explosion.getHitPlayers().get(PlayerEntity);
 						float motionX = 0;
 						float motionY = 0;
 						float motionZ = 0;

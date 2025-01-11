@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import org.libreflock.computronics.api.audio.AudioPacketDFPWM;
 import org.libreflock.computronics.api.audio.AudioPacketRegistry;
 import org.libreflock.computronics.audio.SoundCardPacket;
-import org.libreflock.computronics.item.entity.EntityItemIndestructable;
+import org.libreflock.computronics.item.entity.ItemEntityIndestructable;
 import org.libreflock.computronics.reference.Mods;
 import org.libreflock.computronics.reference.Sounds;
 import org.libreflock.asielib.network.Packet;

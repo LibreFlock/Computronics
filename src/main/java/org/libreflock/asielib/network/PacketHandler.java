@@ -40,7 +40,7 @@ public class PacketHandler {
         channels.get(Side.SERVER).writeOutbound(message);
     }
 
-    public void sendTo(Packet message, EntityPlayerMP player)
+    public void sendTo(Packet message, ServerPlayerEntity player)
     {
         channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.PLAYER);
         channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(player);

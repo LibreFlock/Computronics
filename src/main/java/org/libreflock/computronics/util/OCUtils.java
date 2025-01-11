@@ -35,10 +35,10 @@ import static org.libreflock.asielib.reference.Capabilities.COLORABLE_CAPABILITY
 public class OCUtils {
 
 	public static CompoundNBT dataTag(final ItemStack stack) {
-		if(!stack.hasTagCompound()) {
-			stack.putCompound(new CompoundNBT());
+		if(!stack.hasTag()) {
+			stack.setTag(new CompoundNBT());
 		}
-		final CompoundNBT nbt = stack.getTagCompound();
+		final CompoundNBT nbt = stack.getTag();
 		// This is the suggested key under which to store item component data.
 		// You are free to change this as you please.
 		if(!nbt.contains("oc:data")) {
@@ -102,8 +102,8 @@ public class OCUtils {
 	@OnlyIn(Dist.CLIENT)
 	public static void addTooltip(ItemStack stack, List<String> tooltip, ITooltipFlag flag) {
 		{
-			FontRenderer font = Minecraft.getMinecraft().fontRenderer;
-			final String key = stack.getTranslationKey() + ".tip";
+			FontRenderer font = Minecraft.getInstance().font;
+			final String key = stack.getItem().getDescriptionId() + ".tip";
 			String tip = StringUtil.localize(key);
 			if(!tip.equals(key)) {
 				String[] lines = tip.split("\n");

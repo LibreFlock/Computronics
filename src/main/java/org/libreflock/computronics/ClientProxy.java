@@ -1,19 +1,23 @@
 package org.libreflock.computronics;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
+// import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+// import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.util.math.vector.Vector3d;
+// import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockDisplayReader;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Optional;
+// import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.api.audio.AudioPacketDFPWM;
@@ -101,15 +105,15 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	private void registerColors() {
-		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor() {
+		Minecraft.getInstance().getItemColors().register(new IItemColor() {
 			@Override
-			public int colorMultiplier(ItemStack stack, int tintIndex) {
+			public int getColor(ItemStack stack, int tintIndex) {
 				return stack.getItem() instanceof IItemWithColor ? ((IItemWithColor) stack.getItem()).getColorFromItemstack(stack, tintIndex) : 0xFFFFFFFF;
 			}
 		}, coloredItems.toArray(new Item[coloredItems.size()]));
-		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(new IBlockColor() {
+		Minecraft.getInstance().getBlockColors().register(new IBlockColor() {
 			@Override
-			public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) {
+			public int getColor(BlockState state, @Nullable IBlockDisplayReader worldIn, @Nullable BlockPos pos, int tintIndex) {
 				return pos != null && state.getBlock() instanceof IBlockWithColor ? ((IBlockWithColor) state.getBlock()).colorMultiplier(state, worldIn, pos, tintIndex) : 0xFFFFFFFF;
 			}
 		}, coloredBlocks.toArray(new Block[coloredBlocks.size()]));
@@ -128,9 +132,9 @@ public class ClientProxy extends CommonProxy {
 		/*if(Mods.API.hasAPI(Mods.API.BuildCraftStatements)) {
 			MinecraftForge.EVENT_BUS.register(new StatementTextureManager());
 		}*/
-		if(Computronics.railcraft != null) {
-			Computronics.railcraft.registerRenderers();
-		}
+		// if(Computronics.railcraft != null) {
+		// 	Computronics.railcraft.registerRenderers();
+		// }
 
 		ItemPortableTapeDrive.MeshDefinition.registerRenderers();
 	}
@@ -149,8 +153,8 @@ public class ClientProxy extends CommonProxy {
 			z = p.readDouble();
 		float force = p.readFloat();
 		boolean destroyBlocks = p.readByte() != 0;
-		Minecraft minecraft = Minecraft.getMinecraft();
-		SelfDestruct explosion = new SelfDestruct(minecraft.world,
+		Minecraft minecraft = Minecraft.getInstance();
+		SelfDestruct explosion = new SelfDestruct(minecraft.level,
 			null, x, y, z, force, destroyBlocks);
 		int size = p.readInt();
 		ArrayList<BlockPos> list = new ArrayList<BlockPos>(size);
@@ -167,25 +171,28 @@ public class ClientProxy extends CommonProxy {
 			}
 		}
 
-		explosion.getAffectedBlockPositions().clear();
-		explosion.getAffectedBlockPositions().addAll(list);
-		explosion.doExplosionB(true);
-		minecraft.player.motionX += (double) p.readFloat();
-		minecraft.player.motionY += (double) p.readFloat();
-		minecraft.player.motionZ += (double) p.readFloat();
+		explosion.getToBlow().clear();
+		explosion.getToBlow().addAll(list);
+		explosion.finalizeExplosion(true);
+		
+		Vector3d vec = new Vector3d( (double) p.readFloat(), (double) p.readFloat(), (double) p.readFloat());
+		minecraft.player.setDeltaMovement(vec);
+		// minecraft.player.motionX += (double) p.readFloat();
+		// minecraft.player.motionY += (double) p.readFloat();
+		// minecraft.player.motionZ += (double) p.readFloat();
 	}
 
-	@Override
-	@Optional.Method(modid = Mods.Forestry)
-	public void spawnSwarmParticle(World world, double xPos, double yPos, double zPos, int color) {
-		Computronics.forestry.spawnSwarmParticle(world, xPos, yPos, zPos, color);
-	}
+	// @Override
+	// @Optional.Method(modid = Mods.Forestry)
+	// public void spawnSwarmParticle(World world, double xPos, double yPos, double zPos, int color) {
+	// 	Computronics.forestry.spawnSwarmParticle(world, xPos, yPos, zPos, color);
+	// }
 
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	private void registerOpenComputersRenderers() {
-		if(Computronics.forestry != null) {
-			Computronics.forestry.registerOCEntityRenderers();
-		}
+		// if(Computronics.forestry != null) {
+		// 	Computronics.forestry.registerOCEntityRenderers();
+		// }
 		if(IntegrationOpenComputers.upgradeRenderer == null) {
 			IntegrationOpenComputers.upgradeRenderer = new UpgradeRenderer();
 		}
