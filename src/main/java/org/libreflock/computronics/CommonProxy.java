@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-// import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.registries.DeferredRegister;
 import org.libreflock.computronics.api.audio.AudioPacketDFPWM;
 import org.libreflock.computronics.api.audio.AudioPacketRegistry;
 import org.libreflock.computronics.audio.SoundCardPacket;
@@ -17,6 +17,8 @@ import java.io.IOException;
 
 public class CommonProxy {
 
+	public static final DeferredRegister<> ENTITIES;
+
 	public boolean isClient() {
 		return false;
 	}
@@ -27,7 +29,7 @@ public class CommonProxy {
 	}
 
 	public void registerEntities() {
-		EntityRegistry.registerModEntity(new ResourceLocation(Mods.Computronics, "tape_item"), EntityItemIndestructable.class, "tape_item", 1, Computronics.instance, 64, 20, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Mods.Computronics, "tape_item"), ItemEntityIndestructable.class, "tape_item", 1, Computronics.instance, 64, 20, true);
 	}
 
 	public void registerItemModel(Item item, int meta, String name) {

@@ -19,8 +19,9 @@ public class ColorUtils extends org.libreflock.asielib.util.ColorUtils {
 		if(Mods.isLoaded(Mods.OpenComputers)) {
 			return OCUtils.getColorable(provider, side);
 		}
-		if(provider != null && provider.hasCapability(COLORABLE_CAPABILITY, side)) {
-			return provider.getCapability(COLORABLE_CAPABILITY, side);
+		if(provider != null) {
+			// LazyOptional = provider.getCapability(COLORABLE_CAPABILITY, side).equals(LazyOptional.empty());
+			return provider.getCapability(COLORABLE_CAPABILITY, side).orElse(null);
 		}
 		return null;
 	}

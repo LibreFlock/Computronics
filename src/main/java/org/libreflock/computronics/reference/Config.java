@@ -57,12 +57,18 @@ public class Config
 		public final ConfigValue<Integer> SOUND_SAMPLE_RATE; // = 44100;
 		public final ForgeConfigSpec.IntValue SOUND_VOLUME; // = 32;
 		public final ConfigValue<Integer> SOUND_RADIUS; // = 24;
-		//public static ConfigValue<Integer> SOUND_CARD_MAX_DELAY // = 5000; // TODO
-		//public static ConfigValue<Integer> SOUND_CARD_QUEUE_SIZE // = 1024; // TODO
+		// public static ConfigValue<Integer> SOUND_CARD_MAX_DELAY // = 5000; // TODO
+		// public static ConfigValue<Integer> SOUND_CARD_QUEUE_SIZE // = 1024; // TODO
 		//public static ConfigValue<Integer> SOUND_CARD_CHANNEL_COUNT // = 8; // TODO
 
 		// public static boolean TTS_ENABLED;
 		// public static int TTS_MAX_LENGTH = 300; // TODO
+
+		// TERRIBLE SOLUTION FOR TODO STUFF
+		public static int SOUND_CARD_MAX_DELAY = 5000;// = 5000; // TODO
+		public static int SOUND_CARD_QUEUE_SIZE = 1024; // = 1024; // TODO
+		public static int SOUND_CARD_CHANNEL_COUNT = 8; // = 8; // TODO
+
 
 		public final ConfigValue<Boolean> OC_UPGRADE_CAMERA;
 		public final ConfigValue<Boolean> OC_UPGRADE_CHATBOX;

@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.registry.Registry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
@@ -28,11 +29,11 @@ public class RecipeUtils {
 				warnCrafting(result, recipe);
 				return;
 			}
-			if(o instanceof Block && Block.getIdFromBlock((Block) o) < 0) {
+			if(o instanceof Block && Registry.BLOCK.getId((Block) o) < 0) {
 				warnCrafting(result, recipe);
 				return;
 			}
-			if(o instanceof Item && Item.getIdFromItem((Item) o) < 0) {
+			if(o instanceof Item && Registry.ITEM.getId((Item) o) < 0) {
 				warnCrafting(result, recipe);
 				return;
 			}

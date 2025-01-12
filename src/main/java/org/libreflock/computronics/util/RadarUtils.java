@@ -26,11 +26,11 @@ public class RadarUtils {
 			double dx = entity.posX - xCoord;
 			double dy = entity.posY - yCoord;
 			double dz = entity.posZ - zCoord;
-			if(Math.sqrt(dx * dx + dy * dy + dz * dz) < Config.RADAR_RANGE) {
+			if(Math.sqrt(dx * dx + dy * dy + dz * dz) < Config.COMMON.RADAR_RANGE.get()) {
 				// Maps are converted to tables on the Lua side.
 				Map<String, Object> entry = new HashMap<String, Object>();
 				entry.put("name", entity.getName());
-				if(!Config.RADAR_ONLY_DISTANCE) {
+				if(!Config.COMMON.RADAR_ONLY_DISTANCE.get()) {
 					entry.put("x", (int) dx);
 					entry.put("y", (int) dy);
 					entry.put("z", (int) dz);
@@ -52,7 +52,7 @@ public class RadarUtils {
 			double dx = entity.posX - xCoord;
 			double dy = entity.posY - yCoord;
 			double dz = entity.posZ - zCoord;
-			if(Math.sqrt(dx * dx + dy * dy + dz * dz) < Config.RADAR_RANGE) {
+			if(Math.sqrt(dx * dx + dy * dy + dz * dz) < Config.COMMON.RADAR_RANGE.get()) {
 				// Maps are converted to tables on the Lua side.
 				Map<String, Object> entry = new HashMap<String, Object>();
 				ItemStack stack = entity.getItem();
@@ -62,7 +62,7 @@ public class RadarUtils {
 				entry.put("size", stack.getCount());
 				entry.put("label", stack.getDisplayName());
 
-				if(!Config.RADAR_ONLY_DISTANCE) {
+				if(!Config.COMMON.RADAR_ONLY_DISTANCE.get()) {
 					entry.put("x", (int) dx);
 					entry.put("y", (int) dy);
 					entry.put("z", (int) dz);

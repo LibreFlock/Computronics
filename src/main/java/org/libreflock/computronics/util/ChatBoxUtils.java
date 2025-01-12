@@ -36,7 +36,7 @@ public class ChatBoxUtils {
 	}
 
 	public static void sendChatMessage(World world, double xCoord, double yCoord, double zCoord, int distance, String prefix, String string) {
-		sendChatMessage(world, xCoord, yCoord, zCoord, distance, prefix, string, Config.CHATBOX_MAGIC);
+		sendChatMessage(world, xCoord, yCoord, zCoord, distance, prefix, string, Config.COMMON.CHATBOX_MAGIC.get());
 	}
 
 	public static void sendChatMessage(TileEntity te, int d, String prefix, String string, boolean sendToAll) {

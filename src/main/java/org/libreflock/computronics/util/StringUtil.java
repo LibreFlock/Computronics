@@ -3,18 +3,18 @@ package org.libreflock.computronics.util;
 /**
  * @author Vexatos
  */
-@SuppressWarnings("deprecation")
+// @SuppressWarnings("deprecation")
 public class StringUtil {
 
 	public static String localize(String key) {
-		return net.minecraft.util.text.translation.I18n.translateToLocal(key).replace("\\n", "\n");
+		return net.minecraft.client.resources.I18n.get(key).replace("\\n", "\n");
 	}
 
 	public static String localizeAndFormat(String key, Object... formatting) {
-		return net.minecraft.util.text.translation.I18n.translateToLocalFormatted(key, formatting);
+		return String.format(net.minecraft.client.resources.I18n.get(key), formatting);
 	}
 
 	public static boolean canTranslate(String key) {
-		return net.minecraft.util.text.translation.I18n.canTranslate(key);
+		return net.minecraft.client.resources.I18n.get(key).equals(key);
 	}
 }

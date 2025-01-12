@@ -159,10 +159,11 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    implementation fg.deobf("li.cil.oc:api:1.8.7")
-    // compileOnly fg.deobf("blank:OpenComputers-MC${minecraft_version}-api:${oc.version}")
-    // compileOnly fg.deobf("blank:OpenComputers-MC${minecraft_version}-javadoc:${oc.version}")
-    // runtimeOnly fg.deobf("blank:OpenComputers-MC${minecraft_version}:${oc.version}")
+    implementation fg.deobf("li.cil.oc:oc-api:1.8.7")
+    implementation fg.deobf("li.cil.oc:oc:1.8.7")
+    compileOnly fg.deobf("li.cil.oc:oc-api:1.8.7")
+    compileOnly fg.deobf("li.cil.oc:oc-javadoc:1.8.7")
+    runtimeOnly fg.deobf("li.cil.oc:oc:1.8.7")
 
 }
 

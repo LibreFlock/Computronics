@@ -40,7 +40,7 @@ import java.util.WeakHashMap;
 public class SoundBoard {
 
 	public SoundBoard(ISoundHost host) {
-		process = new AudioProcess(Config.Common.SOUND_CARD_CHANNEL_COUNT);
+		process = new AudioProcess(Config.COMMON.SOUND_CARD_CHANNEL_COUNT);
 		this.host = host;
 		initBuffers();
 	}
@@ -310,7 +310,7 @@ public class SoundBoard {
 				if(buildBuffer.size() == 0) {
 					return new Object[] { true };
 				}
-				if(!host.tryConsumeEnergy(Config.Common.SOUND_CARD_ENERGY_COST * (buildDelay / 1000D))) {
+				if(!host.tryConsumeEnergy(Config.COMMON.SOUND_CARD_ENERGY_COST.get() * (buildDelay / 1000D))) {
 					return new Object[] { false, "not enough energy" };
 				}
 				synchronized(nextBuffer) {

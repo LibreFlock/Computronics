@@ -3,6 +3,7 @@ package org.libreflock.computronics.util.sound;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent.ClientTickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -64,7 +65,8 @@ public class Audio {
 
 	public void play(float x, float y, float z, String pattern, AudioType type, float frequencyInHz, int durationInMilliseconds, int initialDelayInMilliseconds) {
 		Minecraft mc = Minecraft.getInstance();
-		float distanceBasedGain = ((float) Math.max(0, 1 - mc.player.getDistance(x, y, z) / maxDistance));
+		Vector3d pos = mc.player.position();
+		float distanceBasedGain = ((float) Math.max(0, 1 - pos.distanceTo(new Vector3d(x, y, z)) / maxDistance));
 		//float gain = distanceBasedGain * volume();
 		float gain = volume();
 		if(gain <= 0 || amplitude <= 0) {
@@ -305,9 +307,9 @@ public class Audio {
 	}
 
 	private Audio() {
-		sampleRate = Config.SOUND_SAMPLE_RATE;
-		amplitude = Config.SOUND_VOLUME;
-		maxDistance = Config.SOUND_RADIUS;
+		sampleRate = Config.COMMON.SOUND_SAMPLE_RATE.get();
+		amplitude = Config.COMMON.SOUND_VOLUME.get();
+		maxDistance = Config.COMMON.SOUND_RADIUS.get();
 	}
 
 	@SubscribeEvent

@@ -8,7 +8,7 @@ import li.cil.oc.client.KeyBindings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.EnumRarity;
+import net.minecraft.item.Rarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
@@ -110,7 +110,7 @@ public class OCUtils {
 				if(font == null) {
 					Collections.addAll(tooltip, lines);
 				} else {
-					boolean shouldShorten = (font.getStringWidth(tip) > maxWidth) && !KeyBindings.showExtendedTooltips();
+					boolean shouldShorten = (font.width(tip) > maxWidth) && !KeyBindings.showExtendedTooltips();
 					if(shouldShorten) {
 						tooltip.add(StringUtil.localizeAndFormat("oc:tooltip.toolong",
 							KeyBindings.getKeyBindingName(KeyBindings.extendedTooltip())));

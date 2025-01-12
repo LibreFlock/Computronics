@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 
 
-// NOTE: i change Config.SOUND_SAMPLE_RATE to Config.Common.SOUND_SAMPLE_RATE, but that may not be correct
+// NOTE: i change Config.SOUND_SAMPLE_RATE to Config.COMMON.SOUND_SAMPLE_RATE, but that may not be correct
 // Adjust if this is a mistake
 
 
@@ -29,7 +29,7 @@ public class AudioUtil {
 				if(state.freqMod != null && !state.isFreqMod && !state.isAmpMod) {
 					value = state.freqMod.getModifiedValue(process, state, value);
 				} else {
-					state.offset += state.frequencyInHz / Config.Common.SOUND_SAMPLE_RATE; // is this right?
+					state.offset += state.frequencyInHz / Config.COMMON.SOUND_SAMPLE_RATE.get(); // is this right?
 				}
 				if(state.offset > 1) {
 					state.offset %= 1.0F;
@@ -88,7 +88,7 @@ public class AudioUtil {
 		public double getModifiedValue(AudioProcess process, State state, double value) {
 			State mstate = process.states.get(modulatorIndex);
 			double deviation = mstate.gate.getValue(process, mstate, true) * index;
-			state.offset += (state.frequencyInHz + deviation) / Config.Common.SOUND_SAMPLE_RATE;
+			state.offset += (state.frequencyInHz + deviation) / Config.COMMON.SOUND_SAMPLE_RATE.get();
 			return value;
 		}
 	}
@@ -130,7 +130,7 @@ public class AudioUtil {
 			this.attenuation = Math.min(Math.max(attenuation, 0), 1);
 			this.releaseDuration = Math.max(releaseDuration, 0);
 
-			this.attackSpeed = 1000D / (this.attackDuration * Config.Common.SOUND_SAMPLE_RATE);
+			this.attackSpeed = 1000D / (this.attackDuration * Config.COMMON.SOUND_SAMPLE_RATE.get());
 			if(this.attackDuration == 0) {
 				if(this.decayDuration == 0) {
 					this.initialPhase = this.phase = Phase.Sustain;
@@ -143,8 +143,8 @@ public class AudioUtil {
 				this.initialPhase = Phase.Attack;
 				this.initialProgress = this.progress = 0;
 			}
-			this.decaySpeed = this.decayDuration == 0 ? Double.POSITIVE_INFINITY : ((this.attenuation - 1D) * 1000D) / (this.decayDuration * Config.Common.SOUND_SAMPLE_RATE);
-			this.releaseSpeed = this.releaseDuration == 0 ? Double.NEGATIVE_INFINITY : (-this.attenuation * 1000D) / (this.releaseDuration * Config.Common.SOUND_SAMPLE_RATE);
+			this.decaySpeed = this.decayDuration == 0 ? Double.POSITIVE_INFINITY : ((this.attenuation - 1D) * 1000D) / (this.decayDuration * Config.COMMON.SOUND_SAMPLE_RATE.get());
+			this.releaseSpeed = this.releaseDuration == 0 ? Double.NEGATIVE_INFINITY : (-this.attenuation * 1000D) / (this.releaseDuration * Config.COMMON.SOUND_SAMPLE_RATE.get());
 		}
 
 		public double getModifiedValue(State state, double value) {
