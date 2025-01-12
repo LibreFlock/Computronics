@@ -2,7 +2,7 @@ package org.libreflock.computronics.item;
 
 import li.cil.oc.api.driver.EnvironmentProvider;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.EnumRarity;
+import net.minecraft.item.Rarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -40,10 +40,10 @@ public class ItemOCSpecialParts extends ItemMultipleComputronics implements IIte
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack stack) {
+	public Rarity getRarity(ItemStack stack) {
 		switch(stack.getItemDamage()) {
 			case 0:
-				return EnumRarity.EPIC;
+				return Rarity.EPIC;
 			default:
 				return OCUtils.getRarityByTier(stack);
 		}

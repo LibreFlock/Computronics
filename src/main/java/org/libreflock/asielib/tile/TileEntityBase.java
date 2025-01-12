@@ -1,10 +1,10 @@
 package org.libreflock.asielib.tile;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -24,13 +24,13 @@ public class TileEntityBase extends TileEntity {
 
 	}
 
-	public boolean isUsableByPlayer(EntityPlayer player) {
+	public boolean isUsableByPlayer(PlayerEntity player) {
 		return this.world.getTileEntity(getPos()) == this
 			&& player.getDistanceSq(getPos().add(0.5, 0.5, 0.5)) <= 64.0D;
 	}
 
 	@Override
-	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+	public boolean shouldRefresh(World world, BlockPos pos, BlockState oldState, BlockState newState) {
 		return oldState.getBlock() != newState.getBlock();
 	}
 
@@ -45,8 +45,8 @@ public class TileEntityBase extends TileEntity {
 
 	@Override
 	@Nullable
-	public SPacketUpdateTileEntity getUpdatePacket() {
-		return new SPacketUpdateTileEntity(getPos(), getBlockMetadata(), getUpdateTag());
+	public SUpdateTileEntityPacket getUpdatePacket() {
+		return new SUpdateTileEntityPacket(getPos(), getBlockMetadata(), getUpdateTag());
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class TileEntityBase extends TileEntity {
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
 		CompoundNBT tag = pkt.getNbtCompound();
 		if(tag != null) {
 			this.readFromRemoteNBT(tag);

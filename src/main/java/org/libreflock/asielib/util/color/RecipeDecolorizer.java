@@ -1,6 +1,6 @@
 package org.libreflock.asielib.util.color;
 
-import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -23,7 +23,7 @@ public class RecipeDecolorizer extends IForgeRegistryEntry.Impl<IRecipe> impleme
 	}
 
 	@Override
-	public boolean matches(InventoryCrafting crafting, World par2World) {
+	public boolean matches(CraftingInventory crafting, World par2World) {
 		boolean hasTargetStack = false;
 		boolean hasBucket = false;
 
@@ -47,7 +47,7 @@ public class RecipeDecolorizer extends IForgeRegistryEntry.Impl<IRecipe> impleme
 	 * Returns an Item that is the result of this recipe
 	 */
 	@Override
-	public ItemStack getCraftingResult(InventoryCrafting crafting) {
+	public ItemStack getCraftingResult(CraftingInventory crafting) {
 		ItemStack targetStack = ItemStack.EMPTY;
 
 		for(int i = 0; i < crafting.getSizeInventory(); i++) {
@@ -82,7 +82,7 @@ public class RecipeDecolorizer extends IForgeRegistryEntry.Impl<IRecipe> impleme
 	}
 
 	@Override
-	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
+	public NonNullList<ItemStack> getRemainingItems(CraftingInventory inv) {
 		return ForgeHooks.defaultRecipeGetRemainingItems(inv);
 	}
 }

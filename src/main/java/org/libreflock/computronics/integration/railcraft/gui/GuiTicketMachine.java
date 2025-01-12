@@ -3,7 +3,7 @@ package org.libreflock.computronics.integration.railcraft.gui;
 import mods.railcraft.client.gui.GuiContainerRailcraft;
 import mods.railcraft.common.gui.tooltips.ToolTip;
 import mods.railcraft.common.gui.widgets.Widget;
-import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.entity.player.PlayerInventory;
 import org.libreflock.computronics.integration.railcraft.gui.container.ContainerTicketMachine;
 import org.libreflock.computronics.integration.railcraft.gui.tooltip.ToolTips;
 import org.libreflock.computronics.integration.railcraft.gui.widget.ButtonWidget;
@@ -29,7 +29,7 @@ public class GuiTicketMachine extends GuiContainerRailcraft {
 	private static final ToolTip printToolTips = ToolTips.buildToolTip("tooltip.computronics.ticket.print", 0);
 	private static final ToolTip printLockedToolTips = ToolTips.buildToolTip("tooltip.computronics.ticket.printLocked", 0);
 
-	public GuiTicketMachine(InventoryPlayer inventory, TileTicketMachine tile, boolean maintenanceMode) {
+	public GuiTicketMachine(PlayerInventory inventory, TileTicketMachine tile, boolean maintenanceMode) {
 		super(new ContainerTicketMachine(inventory, tile, maintenanceMode), "computronics:textures/gui/ticket_machine.png");
 		this.tile = tile;
 		this.maintenanceMode = maintenanceMode;

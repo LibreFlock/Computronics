@@ -1,9 +1,9 @@
 package org.libreflock.computronics.util;
 
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -18,10 +18,10 @@ public class ChatBoxUtils {
 		distance = Math.min(distance, 32767);
 		String text = TextFormatting.GRAY + "" + TextFormatting.ITALIC + "[" + prefix + "] ";
 		text += TextFormatting.RESET + "" + TextFormatting.GRAY + string;
-		TextComponentString component = new TextComponentString(text);
+		StringTextComponent component = new StringTextComponent(text);
 		component.setStyle(component.getStyle().setColor(TextFormatting.GRAY));
 		try {
-			for(EntityPlayerMP player : FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayers()) {
+			for(ServerPlayerEntity player : FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayers()) {
 				if(player == null) {
 					continue;
 				}

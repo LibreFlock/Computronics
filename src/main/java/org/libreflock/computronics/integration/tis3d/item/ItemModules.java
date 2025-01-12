@@ -4,7 +4,7 @@ import li.cil.tis3d.api.machine.Casing;
 import li.cil.tis3d.api.machine.Face;
 import li.cil.tis3d.api.module.Module;
 import li.cil.tis3d.api.module.ModuleProvider;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.api.distmarker.Dist;
@@ -38,7 +38,7 @@ public class ItemModules extends ItemMultipleComputronics implements ModuleProvi
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void getSubItems(CreativeTabs tabs, NonNullList<ItemStack> list) {
+	public void getSubItems(ItemGroup tabs, NonNullList<ItemStack> list) {
 		if(!this.isInCreativeTab(tabs)) {
 			return;
 		}

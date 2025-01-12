@@ -1,6 +1,6 @@
 package org.libreflock.asielib.util;
 
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -44,7 +44,7 @@ public class WorldUtils {
 		notifyBlockUpdate(world, pos, world.getBlockState(pos));
 	}
 
-	public static void notifyBlockUpdate(@Nullable World world, BlockPos pos, IBlockState state) {
+	public static void notifyBlockUpdate(@Nullable World world, BlockPos pos, BlockState state) {
 		if(world != null) {
 			world.notifyBlockUpdate(pos, state, state, 11);
 		}

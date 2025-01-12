@@ -6,7 +6,7 @@ import mods.railcraft.common.blocks.IVariantEnumBlock;
 import mods.railcraft.common.blocks.machine.ItemMachine;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelBakery;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -113,7 +113,7 @@ public class IntegrationRailcraft {
 	}
 
 	@Optional.Method(modid = Mods.Railcraft)
-	public void onMessageRailcraft(Packet packet, EntityPlayer player, boolean isServer) throws IOException {
+	public void onMessageRailcraft(Packet packet, PlayerEntity player, boolean isServer) throws IOException {
 		TileEntity entity = isServer ? packet.readTileEntityServer() : packet.readTileEntity();
 		if(entity instanceof TileTicketMachine) {
 			TileTicketMachine machine = (TileTicketMachine) entity;
@@ -127,7 +127,7 @@ public class IntegrationRailcraft {
 	}
 
 	@Optional.Method(modid = Mods.Railcraft)
-	public void printTicket(Packet packet, EntityPlayer player, boolean isServer) throws IOException {
+	public void printTicket(Packet packet, PlayerEntity player, boolean isServer) throws IOException {
 		TileEntity entity = isServer ? packet.readTileEntityServer() : packet.readTileEntity();
 		if(entity instanceof TileTicketMachine) {
 			((TileTicketMachine) entity).printTicket();

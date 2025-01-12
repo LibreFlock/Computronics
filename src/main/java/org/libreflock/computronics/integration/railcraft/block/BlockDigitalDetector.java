@@ -2,16 +2,16 @@ package org.libreflock.computronics.integration.railcraft.block;
 
 import li.cil.oc.api.network.Environment;
 import mods.railcraft.common.util.misc.MiscTools;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -44,7 +44,7 @@ public class BlockDigitalDetector extends BlockPeripheral implements IBlockWithP
 
 	@Deprecated
 	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
+	public BlockState getActualState(BlockState state, IBlockAccess world, BlockPos pos) {
 		state = super.getActualState(state, world, pos);
 		TileEntity t = world.getTileEntity(pos);
 
@@ -61,17 +61,17 @@ public class BlockDigitalDetector extends BlockPeripheral implements IBlockWithP
 
 	@Override
 	@Deprecated
-	public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, Direction side) {
+	public boolean isSideSolid(BlockState base_state, IBlockAccess world, BlockPos pos, Direction side) {
 		return true;
 	}
 
 	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) {
+	public TileEntity createTileEntity(World world, BlockState state) {
 		return new TileDigitalDetector();
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+	public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
 		TileEntity tile = world.getTileEntity(pos);
 		if((tile instanceof TileDigitalDetector)) {
 			((TileDigitalDetector) tile).direction = MiscTools.getSideFacingPlayer(pos, placer);
@@ -80,7 +80,7 @@ public class BlockDigitalDetector extends BlockPeripheral implements IBlockWithP
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, Direction side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, BlockState state, PlayerEntity player, Hand hand, Direction side, float hitX, float hitY, float hitZ) {
 		return false;
 	}
 
@@ -106,7 +106,7 @@ public class BlockDigitalDetector extends BlockPeripheral implements IBlockWithP
 	}
 
 	@Override
-	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+	public void onBlockAdded(World world, BlockPos pos, BlockState state) {
 		super.onBlockAdded(world, pos, state);
 		notifyBlockUpdate(world, pos, state);
 		if(world.isRemote) {
@@ -118,7 +118,7 @@ public class BlockDigitalDetector extends BlockPeripheral implements IBlockWithP
 	}
 
 	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state) {
+	public void breakBlock(World world, BlockPos pos, BlockState state) {
 		super.breakBlock(world, pos, state);
 		if(world.isRemote) {
 			return;
@@ -129,7 +129,7 @@ public class BlockDigitalDetector extends BlockPeripheral implements IBlockWithP
 	}
 
 	@Override
-	public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, Direction sid) {
+	public boolean canConnectRedstone(BlockState state, IBlockAccess world, BlockPos pos, Direction sid) {
 		return false;
 	}
 

@@ -1,20 +1,20 @@
 package org.libreflock.asielib.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Explosion;
@@ -60,7 +60,7 @@ public abstract class BlockBase extends Block /*implements
 
 	public BlockBase(Material material, Object parent, Rotation rotation) {
 		super(material);
-		this.setCreativeTab(CreativeTabs.MISC);
+		this.setCreativeTab(ItemGroup.MISC);
 		this.rotation = rotation;
 		this.setHardness(2.0F);
 		this.parent = parent;
@@ -68,8 +68,8 @@ public abstract class BlockBase extends Block /*implements
 		this.setDefaultState(this.createDefaultState());
 	}
 
-	protected IBlockState createDefaultState() {
-		IBlockState state = this.blockState.getBaseState();
+	protected BlockState createDefaultState() {
+		BlockState state = this.blockState.getBaseState();
 		if(rotation != Rotation.NONE) {
 			state = state.withProperty(rotation.FACING, Direction.NORTH);
 		}
@@ -103,8 +103,8 @@ public abstract class BlockBase extends Block /*implements
 
 	@Override
 	@Deprecated
-	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
-		IBlockState actualState = super.getActualState(state, world, pos);
+	public BlockState getActualState(BlockState state, IBlockAccess world, BlockPos pos) {
+		BlockState actualState = super.getActualState(state, world, pos);
 		if(this.supportsBundledRedstone()) {
 			actualState = actualState.withProperty(BUNDLED, Mods.hasBundledRedstoneMod());
 		}
@@ -113,8 +113,8 @@ public abstract class BlockBase extends Block /*implements
 
 	@Override
 	@Deprecated
-	public IBlockState getStateFromMeta(int meta) {
-		IBlockState state = this.getDefaultState();
+	public BlockState getStateFromMeta(int meta) {
+		BlockState state = this.getDefaultState();
 		switch(rotation) {
 			case FOUR:
 				return state.withProperty(rotation.FACING, Direction.byHorizontalIndex(meta));
@@ -125,7 +125,7 @@ public abstract class BlockBase extends Block /*implements
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state) {
+	public int getMetaFromState(BlockState state) {
 		switch(rotation) {
 			case FOUR:
 				return state.getValue(rotation.FACING).getHorizontalIndex();
@@ -147,7 +147,7 @@ public abstract class BlockBase extends Block /*implements
 
 	@Override
 	@Deprecated
-	public boolean canProvidePower(IBlockState state) {
+	public boolean canProvidePower(BlockState state) {
 		return true;
 	}
 
@@ -158,7 +158,7 @@ public abstract class BlockBase extends Block /*implements
 
 	@Override
 	@Deprecated
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos otherPos) {
+	public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos otherPos) {
 		if(receivesRedstone(world, pos)) {
 			TileEntity tile = world.getTileEntity(pos);
 			if(tile != null && tile instanceof TileEntityBase) {
@@ -179,13 +179,13 @@ public abstract class BlockBase extends Block /*implements
 	}
 
 	@Override
-	public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, Direction side) {
+	public boolean canConnectRedstone(BlockState state, IBlockAccess world, BlockPos pos, Direction side) {
 		return (emitsRedstone(world, pos, side) || receivesRedstone(world, pos));
 	}
 
 	@Override
 	@Deprecated
-	public int getWeakPower(IBlockState state, IBlockAccess world, BlockPos pos, Direction side) {
+	public int getWeakPower(BlockState state, IBlockAccess world, BlockPos pos, Direction side) {
 		if(!emitsRedstone(world, pos, side)) {
 			return 0;
 		}
@@ -197,10 +197,10 @@ public abstract class BlockBase extends Block /*implements
 	}
 
 	@Override
-	public abstract boolean hasTileEntity(IBlockState state);
+	public abstract boolean hasTileEntity(BlockState state);
 
 	@Override
-	public abstract TileEntity createTileEntity(World world, IBlockState state);
+	public abstract TileEntity createTileEntity(World world, BlockState state);
 
 	/*public int getFrontSide(int m) {
 		switch(this.rotation) {
@@ -223,7 +223,7 @@ public abstract class BlockBase extends Block /*implements
 		return world.getBlockState(pos).getValue(rotation.FACING);
 	}
 
-	public Direction getFacingDirection(IBlockState state) {
+	public Direction getFacingDirection(BlockState state) {
 		return state.getValue(rotation.FACING);
 	}
 
@@ -270,7 +270,7 @@ public abstract class BlockBase extends Block /*implements
 	//private static final int[] ROT_TRANSFORM4 = { 2, 5, 3, 4 };
 
 	@Nullable
-	private Direction determineRotation(World world, BlockPos pos, EntityLivingBase entity) {
+	private Direction determineRotation(World world, BlockPos pos, LivingEntity entity) {
 		if(this.rotation == Rotation.NONE) {
 			return null;
 		}
@@ -311,7 +311,7 @@ public abstract class BlockBase extends Block /*implements
 
 	@Deprecated
 	@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, Direction side, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+	public BlockState getStateForPlacement(World world, BlockPos pos, Direction side, float hitX, float hitY, float hitZ, int meta, LivingEntity placer, Hand hand) {
 		if(this.rotation != Rotation.NONE) {
 			Direction rot = determineRotation(world, pos, placer);
 			return getDefaultState().withProperty(rotation.FACING, rot);
@@ -331,7 +331,7 @@ public abstract class BlockBase extends Block /*implements
 		return parent;
 	}
 
-	public boolean hasGui(World world, BlockPos pos, EntityPlayer player, Direction side) {
+	public boolean hasGui(World world, BlockPos pos, PlayerEntity player, Direction side) {
 		if(guiProvider != null) {
 			this.gui = guiProvider.getGuiID();
 		}
@@ -339,7 +339,7 @@ public abstract class BlockBase extends Block /*implements
 	}
 
 	@Nullable
-	public IGuiProvider getGuiProvider(World world, BlockPos pos, EntityPlayer player, Direction side) {
+	public IGuiProvider getGuiProvider(World world, BlockPos pos, PlayerEntity player, Direction side) {
 		return guiProvider;
 	}
 
@@ -348,7 +348,7 @@ public abstract class BlockBase extends Block /*implements
 		this.gui = guiProvider.getGuiID();
 	}
 
-	protected boolean rotate(World world, BlockPos pos, EntityPlayer player, Direction side) {
+	protected boolean rotate(World world, BlockPos pos, PlayerEntity player, Direction side) {
 		return !player.isSneaking() && rotateBlock(world, pos, side);
 	}
 
@@ -357,7 +357,7 @@ public abstract class BlockBase extends Block /*implements
 		if(rotation == Rotation.NONE) {
 			return false;
 		}
-		IBlockState state = world.getBlockState(pos);
+		BlockState state = world.getBlockState(pos);
 
 		Direction f = state.getValue(rotation.FACING);
 		if(side == f && isValidFacing(world, pos, f.getOpposite())) {
@@ -377,11 +377,11 @@ public abstract class BlockBase extends Block /*implements
 		return rotation.FACING.getAllowedValues().contains(f);
 	}
 
-	protected boolean onToolUsed(World world, BlockPos pos, EntityPlayer player, Direction side) {
+	protected boolean onToolUsed(World world, BlockPos pos, PlayerEntity player, Direction side) {
 		return false;
 	}
 
-	protected boolean useTool(World world, BlockPos pos, EntityPlayer player, EnumHand hand, Direction side) {
+	protected boolean useTool(World world, BlockPos pos, PlayerEntity player, Hand hand, Direction side) {
 		ItemStack held = player.inventory.getCurrentItem();
 		if(!held.isEmpty() && Integration.isTool(held, player, hand, pos) && this.rotation != null) {
 			boolean wrenched = Integration.useTool(held, player, hand, pos);
@@ -390,12 +390,12 @@ public abstract class BlockBase extends Block /*implements
 		return false;
 	}
 
-	protected boolean canUseTool(World world, BlockPos pos, EntityPlayer player, Direction side) {
+	protected boolean canUseTool(World world, BlockPos pos, PlayerEntity player, Direction side) {
 		return this.rotation != Rotation.NONE;
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, Direction side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, BlockState state, PlayerEntity player, Hand hand, Direction side, float hitX, float hitY, float hitZ) {
 		if(!world.isRemote) {
 			if(!this.canUseTool(world, pos, player, side) || !this.useTool(world, pos, player, hand, side)) {
 				IGuiProvider guiProvider = getGuiProvider(world, pos, player, side);
@@ -413,11 +413,11 @@ public abstract class BlockBase extends Block /*implements
 		return true;
 	}
 
-	protected boolean onOpenGui(World world, BlockPos pos, EntityPlayer player, Direction side) {
+	protected boolean onOpenGui(World world, BlockPos pos, PlayerEntity player, Direction side) {
 		return true;
 	}
 
-	protected void onOpenGuiDenied(World world, BlockPos pos, EntityPlayer player, Direction side) {
+	protected void onOpenGuiDenied(World world, BlockPos pos, PlayerEntity player, Direction side) {
 	}
 
 	/*// Simple textures
@@ -429,7 +429,7 @@ public abstract class BlockBase extends Block /*implements
 	}*/
 
 	// Block destroy unified handler and whatnot.
-	public void onBlockDestroyed(World world, BlockPos pos, IBlockState state) {
+	public void onBlockDestroyed(World world, BlockPos pos, BlockState state) {
 		TileEntity tileEntity = world.getTileEntity(pos);
 		if(tileEntity != null) {
 			if(tileEntity instanceof TileEntityBase) {
@@ -443,7 +443,7 @@ public abstract class BlockBase extends Block /*implements
 	}
 
 	@Override
-	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+	public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity player) {
 		super.onBlockHarvested(world, pos, state, player);
 		this.onBlockDestroyed(world, pos, state);
 	}
@@ -455,7 +455,7 @@ public abstract class BlockBase extends Block /*implements
 	}
 
 	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state) {
+	public void breakBlock(World world, BlockPos pos, BlockState state) {
 		this.onBlockDestroyed(world, pos, state);
 		super.breakBlock(world, pos, state);
 	}

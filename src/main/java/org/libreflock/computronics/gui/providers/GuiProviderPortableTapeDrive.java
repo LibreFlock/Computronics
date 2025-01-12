@@ -1,10 +1,10 @@
 package org.libreflock.computronics.gui.providers;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.container.ClickType;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -29,7 +29,7 @@ public class GuiProviderPortableTapeDrive extends GuiProviderBase {
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public GuiContainer makeGui(int ID, EntityPlayer player, final World world, int x, int y, int z) {
+	public ContainerScreen makeGui(int ID, PlayerEntity player, final World world, int x, int y, int z) {
 		ItemStack stack = player.getHeldItemMainhand();
 		if(!stack.isEmpty() && stack.getItem() instanceof ItemPortableTapeDrive) {
 			final PortableTapeDrive tapeDrive = PortableDriveManager.INSTANCE.getOrCreate(stack, world.isRemote);
@@ -71,7 +71,7 @@ public class GuiProviderPortableTapeDrive extends GuiProviderBase {
 	}
 
 	@Override
-	public Container makeContainer(int ID, EntityPlayer player, World world, int x, int y, int z) {
+	public Container makeContainer(int ID, PlayerEntity player, World world, int x, int y, int z) {
 		ItemStack stack = player.getHeldItemMainhand();
 		if(!stack.isEmpty() && stack.getItem() instanceof ItemPortableTapeDrive) {
 			return makeContainer(player, PortableDriveManager.INSTANCE.getOrCreate(stack, world.isRemote));
@@ -79,7 +79,7 @@ public class GuiProviderPortableTapeDrive extends GuiProviderBase {
 		return null;
 	}
 
-	protected ContainerInventory makeContainer(EntityPlayer player, PortableTapeDrive tapeDrive) {
+	protected ContainerInventory makeContainer(PlayerEntity player, PortableTapeDrive tapeDrive) {
 		return new ContainerPortableTapeDrive(tapeDrive, player.inventory);
 	}
 }

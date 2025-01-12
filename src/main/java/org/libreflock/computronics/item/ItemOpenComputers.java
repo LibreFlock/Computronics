@@ -16,8 +16,8 @@ import li.cil.oc.api.network.Environment;
 import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.ManagedEnvironment;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.EnumRarity;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.Rarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
@@ -323,7 +323,7 @@ public class ItemOpenComputers extends ItemMultipleComputronics implements Drive
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void getSubItems(CreativeTabs tabs, NonNullList<ItemStack> list) {
+	public void getSubItems(ItemGroup tabs, NonNullList<ItemStack> list) {
 		if(!this.isInCreativeTab(tabs)) {
 			return;
 		}
@@ -437,7 +437,7 @@ public class ItemOpenComputers extends ItemMultipleComputronics implements Drive
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack stack) {
+	public Rarity getRarity(ItemStack stack) {
 		return OCUtils.getRarityByTier(stack);
 	}
 

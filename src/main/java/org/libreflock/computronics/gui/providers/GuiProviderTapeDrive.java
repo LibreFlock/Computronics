@@ -1,10 +1,10 @@
 package org.libreflock.computronics.gui.providers;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.container.ClickType;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -28,7 +28,7 @@ public class GuiProviderTapeDrive extends GuiProviderBase {
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public GuiContainer makeGui(int guiID, EntityPlayer entityPlayer, World world, int x, int y, int z) {
+	public ContainerScreen makeGui(int guiID, PlayerEntity entityPlayer, World world, int x, int y, int z) {
 		TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
 		if(tileEntity instanceof TileTapeDrive) {
 			final TileTapeDrive tile = (TileTapeDrive) tileEntity;
@@ -66,7 +66,7 @@ public class GuiProviderTapeDrive extends GuiProviderBase {
 	}
 
 	@Override
-	public Container makeContainer(int guiID, EntityPlayer entityPlayer, World world, int x, int y, int z) {
+	public Container makeContainer(int guiID, PlayerEntity entityPlayer, World world, int x, int y, int z) {
 		TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
 		if(tileEntity instanceof TileTapeDrive) {
 			return makeContainer(entityPlayer, ((TileTapeDrive) tileEntity));
@@ -74,7 +74,7 @@ public class GuiProviderTapeDrive extends GuiProviderBase {
 		return null;
 	}
 
-	protected ContainerInventory makeContainer(EntityPlayer entityPlayer, TileTapeDrive tile) {
+	protected ContainerInventory makeContainer(PlayerEntity entityPlayer, TileTapeDrive tile) {
 		return new ContainerTapeReader(tile, entityPlayer.inventory);
 	}
 }

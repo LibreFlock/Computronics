@@ -4,7 +4,7 @@ import li.cil.oc.api.Nanomachines;
 import li.cil.oc.api.nanomachines.Controller;
 import li.cil.oc.api.nanomachines.DisableReason;
 import li.cil.oc.api.prefab.AbstractBehavior;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import org.libreflock.computronics.integration.forestry.entity.EntitySwarm;
 
@@ -17,7 +17,7 @@ public class SwarmBehavior extends AbstractBehavior {
 	//protected int amplifier;
 	//protected CompoundNBT entityTag;
 
-	protected SwarmBehavior(EntityPlayer player) {
+	protected SwarmBehavior(PlayerEntity player) {
 		super(player);
 	}
 

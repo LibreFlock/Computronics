@@ -1,6 +1,6 @@
 package org.libreflock.asielib.item;
 
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -16,7 +16,7 @@ public class ItemMultiple extends Item {
 		super();
 		this.mod = mod;
 		this.parts = parts;
-		this.setCreativeTab(CreativeTabs.MISC);
+		this.setCreativeTab(ItemGroup.MISC);
 		this.setHasSubtypes(true);
 		this.setMaxDamage(0);
 	}
@@ -38,7 +38,7 @@ public class ItemMultiple extends Item {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	@SuppressWarnings("unchecked")
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
+	public void getSubItems(ItemGroup tab, NonNullList<ItemStack> list) {
 		if(!this.isInCreativeTab(tab)) {
 			return;
 		}

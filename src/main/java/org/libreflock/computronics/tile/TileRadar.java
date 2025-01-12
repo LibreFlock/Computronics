@@ -7,9 +7,9 @@ import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.Connector;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.Optional;
@@ -69,8 +69,8 @@ public class TileRadar extends TileEntityPeripheralBase {
 		double energyNeeded = (Config.RADAR_ENERGY_COST_OC * distance * 1.75);
 		if(((Connector) node()).tryChangeBuffer(0 - energyNeeded)) {
 			AxisAlignedBB bounds = getBounds(distance);
-			entities.addAll(RadarUtils.getEntities(world, getPos(), bounds, EntityPlayer.class));
-			entities.addAll(RadarUtils.getEntities(world, getPos(), bounds, EntityLiving.class));
+			entities.addAll(RadarUtils.getEntities(world, getPos(), bounds, PlayerEntity.class));
+			entities.addAll(RadarUtils.getEntities(world, getPos(), bounds, MobEntity.class));
 			context.pause(0.5);
 		}
 		// The returned array is treated as a tuple, meaning if we return the
@@ -90,7 +90,7 @@ public class TileRadar extends TileEntityPeripheralBase {
 		double energyNeeded = (Config.RADAR_ENERGY_COST_OC * distance * 1.0);
 		if(((Connector) node()).tryChangeBuffer(0 - energyNeeded)) {
 			AxisAlignedBB bounds = getBounds(distance);
-			entities.addAll(RadarUtils.getEntities(world, getPos(), bounds, EntityPlayer.class));
+			entities.addAll(RadarUtils.getEntities(world, getPos(), bounds, PlayerEntity.class));
 			context.pause(0.5);
 		}
 		return new Object[] { TableUtils.convertSetToMap(entities) };
@@ -104,7 +104,7 @@ public class TileRadar extends TileEntityPeripheralBase {
 		double energyNeeded = (Config.RADAR_ENERGY_COST_OC * distance * 1.0);
 		if(((Connector) node()).tryChangeBuffer(0 - energyNeeded)) {
 			AxisAlignedBB bounds = getBounds(distance);
-			entities.addAll(RadarUtils.getEntities(world, getPos(), bounds, EntityLiving.class));
+			entities.addAll(RadarUtils.getEntities(world, getPos(), bounds, MobEntity.class));
 			context.pause(0.5);
 		}
 		return new Object[] { TableUtils.convertSetToMap(entities) };

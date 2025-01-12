@@ -5,8 +5,8 @@ package org.libreflock.asielib.network;
 // import cpw.mods.fml.common.network.NetworkRegistry;
 // import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 // import cpw.mods.fml.relauncher.Side;
+import net.minecraft.network.IPacket;
 import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -29,7 +29,7 @@ public class PacketHandler {
 		return new Packet().writeShort((short)prefix);
 	}
 
-    public net.minecraft.network.Packet getPacketFrom(Packet message)
+    public IPacket getPacketFrom(Packet message)
     {
         return channels.get(Side.SERVER).generatePacketFrom(message);
     }

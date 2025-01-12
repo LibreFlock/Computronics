@@ -1,7 +1,7 @@
 package org.libreflock.asielib.util.color;
 
-import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.EnumDyeColor;
+import net.minecraft.inventory.CraftingInventory;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -31,7 +31,7 @@ public class RecipeColorizer extends IForgeRegistryEntry.Impl<IRecipe> implement
 	}
 
 	@Override
-	public boolean matches(InventoryCrafting crafting, World par2World) {
+	public boolean matches(CraftingInventory crafting, World par2World) {
 		boolean hasTargetStack = false;
 		boolean hasDye = false;
 
@@ -57,7 +57,7 @@ public class RecipeColorizer extends IForgeRegistryEntry.Impl<IRecipe> implement
 	 * Returns an Item that is the result of this recipe
 	 */
 	@Override
-	public ItemStack getCraftingResult(InventoryCrafting crafting) {
+	public ItemStack getCraftingResult(CraftingInventory crafting) {
 		ItemStack targetStack = ItemStack.EMPTY;
 		int[] color = new int[3];
 		int colorCount = 0;
@@ -77,7 +77,7 @@ public class RecipeColorizer extends IForgeRegistryEntry.Impl<IRecipe> implement
 						return ItemStack.EMPTY;
 					}
 
-					float[] itemColor = EnumDyeColor.byDyeDamage(stackColor.ordinal()).getColorComponentValues();
+					float[] itemColor = DyeColor.byDyeDamage(stackColor.ordinal()).getColorComponentValues();
 					int red = (int) (itemColor[0] * 255.0F);
 					int green = (int) (itemColor[1] * 255.0F);
 					int blue = (int) (itemColor[2] * 255.0F);
@@ -133,7 +133,7 @@ public class RecipeColorizer extends IForgeRegistryEntry.Impl<IRecipe> implement
 	}
 
 	@Override
-	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
+	public NonNullList<ItemStack> getRemainingItems(CraftingInventory inv) {
 		return ForgeHooks.defaultRecipeGetRemainingItems(inv);
 	}
 }

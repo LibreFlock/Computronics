@@ -6,10 +6,10 @@ import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.Visibility;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import org.libreflock.computronics.reference.Config;
 import org.libreflock.computronics.util.OCUtils;
 
@@ -51,7 +51,7 @@ public class DriverBoardSwitch extends RackMountableWithComponentConnector {
 	};
 
 	@Override
-	public boolean onActivate(EntityPlayer player, EnumHand hand, ItemStack heldItem, float hitX, float hitY) {
+	public boolean onActivate(PlayerEntity player, Hand hand, ItemStack heldItem, float hitX, float hitY) {
 		if(player.world.isRemote) {
 			return true;
 		}

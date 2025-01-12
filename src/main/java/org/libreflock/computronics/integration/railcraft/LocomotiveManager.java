@@ -3,7 +3,7 @@ package org.libreflock.computronics.integration.railcraft;
 import com.google.common.collect.MapMaker;
 import mods.railcraft.api.charge.IBatteryCart;
 import mods.railcraft.common.carts.EntityLocomotiveElectric;
-import net.minecraft.entity.item.EntityMinecart;
+import net.minecraft.entity.item.minecart.AbstractMinecartEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
@@ -81,7 +81,7 @@ public class LocomotiveManager {
 
 	@SubscribeEvent
 	public void onMinecartUpdate(MinecartUpdateEvent event) {
-		EntityMinecart cart = event.getMinecart();
+		AbstractMinecartEntity cart = event.getMinecart();
 		if(!(cart instanceof EntityLocomotiveElectric)) {
 			return;
 		}

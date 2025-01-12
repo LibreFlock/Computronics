@@ -1,7 +1,7 @@
 package org.libreflock.computronics.network;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.INetHandler;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.particles.ParticleTypes;
@@ -26,7 +26,7 @@ public class NetworkHandlerClient extends MessageHandlerBase {
 	private static final AudioFormat DFPWM_DECODED_FORMAT = new AudioFormat(48000, 8, 1, false, false);
 
 	@Override
-	public void onMessage(Packet packet, INetHandler handler, EntityPlayer player, int command)
+	public void onMessage(Packet packet, INetHandler handler, PlayerEntity player, int command)
 		throws IOException {
 		PacketType type = PacketType.of(command);
 		if(type == null) {

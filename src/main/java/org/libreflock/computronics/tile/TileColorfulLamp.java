@@ -10,7 +10,7 @@ import elucent.albedo.lighting.Light;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.fml.common.Optional;
@@ -55,7 +55,7 @@ public class TileColorfulLamp extends TileEntityPeripheralBase implements IBundl
 		Computronics.serverTickHandler.schedule(new Runnable() {
 			@Override
 			public void run() {
-				IBlockState state = world.getBlockState(getPos());
+				BlockState state = world.getBlockState(getPos());
 				if(state.getBlock() instanceof BlockColorfulLamp) {
 					if(LampUtil.shouldColorLight()) {
 						setLightValue(state, color);
@@ -71,7 +71,7 @@ public class TileColorfulLamp extends TileEntityPeripheralBase implements IBundl
 		return color;
 	}
 
-	public void setLightValue(IBlockState state, int value) {
+	public void setLightValue(BlockState state, int value) {
 		if(LampUtil.shouldColorLight()) {
 			//Bit-shift all the things!
 			int r = (((value & 0x7C00) >>> 10) / 2),

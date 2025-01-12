@@ -1,14 +1,14 @@
 package org.libreflock.computronics.integration.railcraft.block;
 
 import li.cil.oc.api.network.Environment;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 import org.libreflock.computronics.block.BlockPeripheral;
@@ -27,7 +27,7 @@ public class BlockLocomotiveRelay extends BlockPeripheral implements IBlockWithP
 	}
 
 	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) {
+	public TileEntity createTileEntity(World world, BlockState state) {
 		return new TileLocomotiveRelay();
 	}
 
@@ -38,7 +38,7 @@ public class BlockLocomotiveRelay extends BlockPeripheral implements IBlockWithP
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, Direction side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, BlockState state, PlayerEntity player, Hand hand, Direction side, float hitX, float hitY, float hitZ) {
 		if(!world.isRemote && player.isSneaking() && player.getHeldItemMainhand().isEmpty() && player.getHeldItemOffhand().isEmpty()) {
 			TileEntity tile = world.getTileEntity(pos);
 			if(tile instanceof TileLocomotiveRelay) {
@@ -48,7 +48,7 @@ public class BlockLocomotiveRelay extends BlockPeripheral implements IBlockWithP
 				} else {
 					msg = "chat.computronics.relay.notBound";
 				}
-				player.sendMessage(new TextComponentTranslation(msg));
+				player.sendMessage(new TranslationTextComponent(msg));
 				return true;
 			}
 		}

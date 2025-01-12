@@ -2,12 +2,12 @@ package org.libreflock.computronics.block;
 
 import li.cil.oc.api.network.Environment;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -32,37 +32,37 @@ public class BlockSoundBoard extends BlockPeripheral implements IBlockWithPrefix
 
 	@Override
 	@Deprecated
-	public IBlockState getStateForPlacement(World world, BlockPos pos, Direction side, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-		IBlockState state = super.getStateForPlacement(world, pos, side, hitX, hitY, hitZ, meta, placer, hand);
+	public BlockState getStateForPlacement(World world, BlockPos pos, Direction side, float hitX, float hitY, float hitZ, int meta, LivingEntity placer, Hand hand) {
+		BlockState state = super.getStateForPlacement(world, pos, side, hitX, hitY, hitZ, meta, placer, hand);
 		return state.withProperty(rotation.FACING, side.getOpposite());
 	}
 
 	@Override
 	@Deprecated
-	public boolean isOpaqueCube(IBlockState state) {
+	public boolean isOpaqueCube(BlockState state) {
 		return false;
 	}
 
 	@Override
 	@Deprecated
-	public boolean isNormalCube(IBlockState state) {
+	public boolean isNormalCube(BlockState state) {
 		return false;
 	}
 
 	@Override
-	public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
-		return false;
-	}
-
-	@Override
-	@Deprecated
-	public boolean isBlockNormalCube(IBlockState state) {
+	public boolean isNormalCube(BlockState state, IBlockAccess world, BlockPos pos) {
 		return false;
 	}
 
 	@Override
 	@Deprecated
-	public boolean isFullCube(IBlockState state) {
+	public boolean isBlockNormalCube(BlockState state) {
+		return false;
+	}
+
+	@Override
+	@Deprecated
+	public boolean isFullCube(BlockState state) {
 		return false;
 	}
 
@@ -78,18 +78,18 @@ public class BlockSoundBoard extends BlockPeripheral implements IBlockWithPrefix
 
 	@Override
 	@Deprecated
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+	public AxisAlignedBB getBoundingBox(BlockState state, IBlockAccess source, BlockPos pos) {
 		int direction = state.getValue(rotation.FACING).ordinal();
 		return direction >= 0 && direction < BOXES.length ? BOXES[direction] : Block.FULL_BLOCK_AABB;
 	}
 
 	@Override
-	public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, Direction face) {
+	public boolean doesSideBlockRendering(BlockState state, IBlockAccess world, BlockPos pos, Direction face) {
 		return state.isOpaqueCube();
 	}
 
 	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) {
+	public TileEntity createTileEntity(World world, BlockState state) {
 		return new TileSoundBoard();
 	}
 

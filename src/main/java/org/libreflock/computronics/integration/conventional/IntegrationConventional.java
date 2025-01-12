@@ -1,6 +1,6 @@
 package org.libreflock.computronics.integration.conventional;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Optional;
 import org.libreflock.computronics.reference.Mods;
@@ -30,7 +30,7 @@ public class IntegrationConventional {
 	}
 
 	@Optional.Method(modid = Mods.Conventional)
-	public boolean isDenied(String permission, EntityPlayer player) {
+	public boolean isDenied(String permission, PlayerEntity player) {
 		return MinecraftForge.EVENT_BUS.post(new PermissionEvent(permission, player));
 	}
 }

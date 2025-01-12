@@ -118,7 +118,7 @@ public class IntegrationForestry {
 			acidRecipe);
 		Item bottleItem = Item.REGISTRY.getObject(new ResourceLocation(Mods.Forestry, "beverage"));
 		ItemStack bottle = bottleItem != null ? new ItemStack(bottleItem, 1, 0)
-			: new ItemStack(net.minecraft.init.Items.POTIONITEM, 1, 32);
+			: new ItemStack(net.minecraft.item.Items.POTIONITEM, 1, 32);
 		RecipeUtils.addShapelessRecipe(undisassemblable(Items.get("acid").createItemStack(1)),
 			new ItemStack(itemPartsForestry, 1, 1),
 			new ItemStack(itemPartsForestry, 1, 1),

@@ -1,10 +1,10 @@
 package org.libreflock.asielib.gui.container;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import org.libreflock.asielib.AsieLibMod;
 
@@ -36,7 +36,7 @@ public abstract class ContainerInventory extends Container {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
+	public ItemStack transferStackInSlot(PlayerEntity player, int slot) {
 		if(inventory == null) {
 			return ItemStack.EMPTY;
 		}
@@ -115,7 +115,7 @@ public abstract class ContainerInventory extends Container {
 
 	}
 
-	public void bindPlayerInventory(InventoryPlayer inventoryPlayer, int startX, int startY) {
+	public void bindPlayerInventory(PlayerInventory inventoryPlayer, int startX, int startY) {
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 9; j++) {
 				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9,

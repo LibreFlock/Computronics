@@ -1,8 +1,8 @@
 package org.libreflock.asielib.api.tool;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 
 /**
@@ -17,7 +17,7 @@ public interface IToolProvider {
 	 * @param pos The position the tool is used on
 	 * @return true if the provided ItemStack is a valid tool
 	 */
-	boolean isTool(ItemStack stack, EntityPlayer player, EnumHand hand, BlockPos pos);
+	boolean isTool(ItemStack stack, PlayerEntity player, Hand hand, BlockPos pos);
 
 	/**
 	 * @param stack The ItemStack to check
@@ -26,5 +26,5 @@ public interface IToolProvider {
 	 * @param pos The position the tool is used on
 	 * @return true if the tool has been successfully used
 	 */
-	boolean useTool(ItemStack stack, EntityPlayer player, EnumHand hand, BlockPos pos);
+	boolean useTool(ItemStack stack, PlayerEntity player, Hand hand, BlockPos pos);
 }

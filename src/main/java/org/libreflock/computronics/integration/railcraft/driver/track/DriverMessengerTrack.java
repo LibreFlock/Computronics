@@ -11,7 +11,7 @@ import mods.railcraft.common.blocks.tracks.outfitted.kits.TrackKitMessenger;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import org.libreflock.computronics.api.multiperipheral.IMultiPeripheral;
 import org.libreflock.computronics.integration.CCMultiPeripheral;
@@ -45,13 +45,13 @@ public class DriverMessengerTrack {
 
 			@Callback(doc = "function(title:string):string; Sets the title the track is set to. Returns true on success.")
 			public Object[] setTitle(Context c, Arguments a) {
-				tile.setTitle(new TextComponentString(a.checkString(0)));
+				tile.setTitle(new StringTextComponent(a.checkString(0)));
 				return new Object[] { true };
 			}
 
 			@Callback(doc = "function(subtitle:string):string; Sets the subtitle the track is set to. Returns true on success.")
 			public Object[] setSubtitle(Context c, Arguments a) {
-				tile.setSubtitle(new TextComponentString(a.checkString(0)));
+				tile.setSubtitle(new StringTextComponent(a.checkString(0)));
 				return new Object[] { true };
 			}
 		}
@@ -108,14 +108,14 @@ public class DriverMessengerTrack {
 					if(arguments.length < 1 || !(arguments[0] instanceof String)) {
 						throw new LuaException("first argument needs to be a string");
 					}
-					tile.setTitle(new TextComponentString((String) arguments[0]));
+					tile.setTitle(new StringTextComponent((String) arguments[0]));
 					return new Object[] { true };
 				}
 				case 3: {
 					if(arguments.length < 1 || !(arguments[0] instanceof String)) {
 						throw new LuaException("first argument needs to be a string");
 					}
-					tile.setSubtitle(new TextComponentString((String) arguments[0]));
+					tile.setSubtitle(new StringTextComponent((String) arguments[0]));
 					return new Object[] { true };
 				}
 			}

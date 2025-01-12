@@ -6,7 +6,7 @@ import dan200.computercraft.api.peripheral.IComputerAccess;
 import gnu.trove.set.hash.TIntHashSet;
 import li.cil.oc.api.network.Node;
 import li.cil.oc.api.network.SidedEnvironment;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
@@ -84,7 +84,7 @@ public class TileSpeaker extends TileEntityPeripheralBase implements IAudioRecei
 	@Override
 	public boolean connectsAudio(Direction side) {
 		if(hasWorld()) {
-			IBlockState state = world.getBlockState(getPos());
+			BlockState state = world.getBlockState(getPos());
 			return state.getValue(Computronics.speaker.rotation.FACING) != side;
 		} else {
 			return false;

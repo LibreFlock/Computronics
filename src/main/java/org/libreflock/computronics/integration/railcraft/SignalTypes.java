@@ -7,8 +7,8 @@ import mods.railcraft.common.blocks.machine.IEnumMachine;
 import mods.railcraft.common.blocks.machine.TileMachineBase;
 import mods.railcraft.common.util.inventory.InvTools;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.libreflock.computronics.Computronics;
@@ -66,7 +66,7 @@ public enum SignalTypes implements IEnumMachine<SignalTypes> {
 			private final Definition def = new Definition(this, getBaseTag(), null);
 
 			@Override
-			public IBlockState getState(@Nullable IVariantEnum variant) {
+			public BlockState getState(@Nullable IVariantEnum variant) {
 				return block() instanceof IRailcraftBlock ? ((IRailcraftBlock) block()).getState(variant) : this.getDefaultState();
 			}
 
@@ -84,7 +84,7 @@ public enum SignalTypes implements IEnumMachine<SignalTypes> {
 			}
 
 			@Override
-			public IBlockState getDefaultState() {
+			public BlockState getDefaultState() {
 				return block() == null ? Blocks.AIR.getDefaultState() : block().getDefaultState();
 			}
 

@@ -1,7 +1,7 @@
 package org.libreflock.computronics.block;
 
 import li.cil.oc.api.network.Environment;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -21,7 +21,7 @@ public class BlockCamera extends BlockPeripheral {
 	}
 
 	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) {
+	public TileEntity createTileEntity(World world, BlockState state) {
 		return new TileCamera();
 	}
 
@@ -32,13 +32,13 @@ public class BlockCamera extends BlockPeripheral {
 
 	@Override
 	@Deprecated
-	public boolean hasComparatorInputOverride(IBlockState state) {
+	public boolean hasComparatorInputOverride(BlockState state) {
 		return Config.REDSTONE_REFRESH;
 	}
 
 	@Override
 	@Deprecated
-	public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos) {
+	public int getComparatorInputOverride(BlockState state, World world, BlockPos pos) {
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile instanceof TileEntityBase) {
 			return ((TileEntityBase) tile).requestCurrentRedstoneValue(null);

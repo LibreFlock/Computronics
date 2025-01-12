@@ -15,9 +15,8 @@ import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.Node;
 import li.cil.oc.api.network.Visibility;
-import li.cil.oc.api.prefab.AbstractManagedEnvironment;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
@@ -109,7 +108,7 @@ public class DriverDockingUpgrade extends ManagedEnvironment implements DeviceIn
 	}
 
 	//Re-implemented from BuildCraft to respect pluggables
-	private int injectItem(TileGenericPipe pipe, ItemStack stack, boolean doAdd, Direction from, EnumDyeColor color) {
+	private int injectItem(TileGenericPipe pipe, ItemStack stack, boolean doAdd, Direction from, DyeColor color) {
 		if(!pipe.pipe.inputOpen(from)) {
 			return 0;
 		} else if(BlockGenericPipe.isValid(pipe.pipe) && pipe.pipe.transport instanceof PipeTransportItems && pipe.getPipePluggable(from) != null) {
@@ -145,7 +144,7 @@ public class DriverDockingUpgrade extends ManagedEnvironment implements DeviceIn
 		if(stack != null && stack.getItem() != null) {
 			stack = drone.mainInventory().decrStackSize(slot, count);
 			int rejected = stack.stackSize -
-				injectItem((TileGenericPipe) pipe, stack, true, side, args.count() > 2 && drone.tier() > 0 ? EnumDyeColor.byMetadata(args.checkInteger(2)) : null);
+				injectItem((TileGenericPipe) pipe, stack, true, side, args.count() > 2 && drone.tier() > 0 ? DyeColor.byMetadata(args.checkInteger(2)) : null);
 			drone.mainInventory().getStackInSlot(slot).stackSize += rejected;
 			stack.stackSize -= rejected;
 			return new Object[] { stack.stackSize };

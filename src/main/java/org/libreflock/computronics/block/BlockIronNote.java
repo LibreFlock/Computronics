@@ -2,7 +2,7 @@ package org.libreflock.computronics.block;
 
 import li.cil.oc.api.network.Environment;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -23,7 +23,7 @@ public class BlockIronNote extends BlockPeripheral /*implements IRedNetInputNode
 	}
 
 	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) {
+	public TileEntity createTileEntity(World world, BlockState state) {
 		return new TileIronNote();
 	}
 
@@ -34,7 +34,7 @@ public class BlockIronNote extends BlockPeripheral /*implements IRedNetInputNode
 
 	@Override
 	@Deprecated
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos otherPos) {
+	public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos otherPos) {
 		super.neighborChanged(state, world, pos, block, otherPos);
 		/*TileEntity tile = world.getTileEntity(pos);
 		if(Mods.isLoaded(Mods.ProjectRed))

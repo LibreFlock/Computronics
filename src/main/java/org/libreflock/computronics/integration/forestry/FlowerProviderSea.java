@@ -5,7 +5,7 @@ import forestry.api.genetics.IFlowerAcceptableRule;
 import forestry.api.genetics.IFlowerProvider;
 import forestry.api.genetics.IIndividual;
 import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -41,7 +41,7 @@ public class FlowerProviderSea implements IFlowerProvider, IFlowerAcceptableRule
 	}
 
 	@Override
-	public boolean isAcceptableFlower(IBlockState state, World world, BlockPos pos, String flowerType) {
+	public boolean isAcceptableFlower(BlockState state, World world, BlockPos pos, String flowerType) {
 		Fluid fluid = FluidRegistry.lookupFluidForBlock(state.getBlock());
 		if(fluid != null && FluidRegistry.isFluidRegistered(fluid)) {
 			if(!hasCheckedSaltwater) {

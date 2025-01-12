@@ -5,9 +5,9 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.ProbeMode;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
@@ -60,7 +60,7 @@ public class InfoTapeDrive extends ComputronicsInfoProvider {
 
 	@Override
 	@Optional.Method(modid = Mods.Waila)
-	public CompoundNBT getNBTData(EntityPlayerMP player, TileEntity te, CompoundNBT tag, World world, BlockPos pos) {
+	public CompoundNBT getNBTData(ServerPlayerEntity player, TileEntity te, CompoundNBT tag, World world, BlockPos pos) {
 		if(te instanceof TileTapeDrive) {
 			TileTapeDrive drive = (TileTapeDrive) te;
 			CompoundNBT data = new CompoundNBT();
@@ -80,7 +80,7 @@ public class InfoTapeDrive extends ComputronicsInfoProvider {
 
 	@Override
 	@Optional.Method(modid = Mods.TheOneProbe)
-	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
+	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, BlockState blockState, IProbeHitData data) {
 		TileEntity tileEntity = world.getTileEntity(data.getPos());
 		if(!(tileEntity instanceof TileTapeDrive)) {
 			return;

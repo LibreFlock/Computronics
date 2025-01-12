@@ -6,9 +6,9 @@ import li.cil.oc.api.Network;
 import li.cil.oc.api.driver.DriverItem;
 import li.cil.oc.api.driver.EnvironmentProvider;
 import li.cil.oc.api.fs.FileSystem;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.DyeColor;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
@@ -163,12 +163,12 @@ public class IntegrationOpenComputers {
 		ComputronicsPathProvider.initialize();
 
 		if(Computronics.tapeReader != null) {
-			li.cil.oc.api.Items.registerFloppy("tape", EnumDyeColor.WHITE, new ReadOnlyFS("tape"), true);
+			li.cil.oc.api.Items.registerFloppy("tape", DyeColor.WHITE, new ReadOnlyFS("tape"), true);
 			IMC.registerProgramDiskLabel("tape", "tape", "Lua 5.2", "Lua 5.3", "LuaJ");
 		}
 
 		if(Config.OC_CARD_BOOM || Config.OC_BOARD_BOOM) {
-			li.cil.oc.api.Items.registerFloppy("explode", EnumDyeColor.RED, new ReadOnlyFS("explode"), true);
+			li.cil.oc.api.Items.registerFloppy("explode", DyeColor.RED, new ReadOnlyFS("explode"), true);
 			IMC.registerProgramDiskLabel("explode", "explode", "Lua 5.2", "Lua 5.3", "LuaJ");
 		}
 

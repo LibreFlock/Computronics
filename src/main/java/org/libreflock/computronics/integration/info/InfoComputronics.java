@@ -7,9 +7,9 @@ import mcjty.theoneprobe.api.ProbeMode;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
@@ -80,7 +80,7 @@ public class InfoComputronics implements IWailaDataProvider, IProbeInfoProvider 
 
 	@Override
 	@Optional.Method(modid = Mods.Waila)
-	public CompoundNBT getNBTData(EntityPlayerMP player, TileEntity te, CompoundNBT tag, World world, BlockPos pos) {
+	public CompoundNBT getNBTData(ServerPlayerEntity player, TileEntity te, CompoundNBT tag, World world, BlockPos pos) {
 		for(InfoProviders p : InfoProviders.VALUES) {
 			if(p.isInstance(te.getBlockType())) {
 				tag = p.getProvider().getNBTData(player, te, tag, world, pos);
@@ -98,7 +98,7 @@ public class InfoComputronics implements IWailaDataProvider, IProbeInfoProvider 
 
 	@Override
 	@Optional.Method(modid = Mods.TheOneProbe)
-	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState state, IProbeHitData data) {
+	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, BlockState state, IProbeHitData data) {
 		TileEntity tile = world.getTileEntity(data.getPos());
 		if(tile == null) {
 			return;

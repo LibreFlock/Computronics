@@ -1,11 +1,11 @@
 package org.libreflock.asielib.gui;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.inventory.Container;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiBase<C extends Container> extends GuiContainer {
+public class GuiBase<C extends Container> extends ContainerScreen {
 
 	private final ResourceLocation texture;
 	public int xCenter, yCenter;

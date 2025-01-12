@@ -1,14 +1,14 @@
 package org.libreflock.computronics.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumDyeColor;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -40,7 +40,7 @@ public abstract class BlockPeripheral extends BlockBase implements IComputronics
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, Direction side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, BlockState state, PlayerEntity player, Hand hand, Direction side, float hitX, float hitY, float hitZ) {
 		TileEntity tile = world.getTileEntity(pos);
 		ItemStack heldItem = player.getHeldItem(hand);
 		if(tile instanceof TileEntityPeripheralBase && ((TileEntityPeripheralBase) tile).canBeColored() && !heldItem.isEmpty()) {
@@ -54,13 +54,13 @@ public abstract class BlockPeripheral extends BlockBase implements IComputronics
 		return super.onBlockActivated(world, pos, state, player, hand, side, hitX, hitY, hitZ);
 	}
 
-	public int getRenderColor(IBlockState state) {
+	public int getRenderColor(BlockState state) {
 		return 0xFFFFFF;
 	}
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public int colorMultiplier(IBlockState state, IBlockAccess world, BlockPos pos, int renderPass) {
+	public int colorMultiplier(BlockState state, IBlockAccess world, BlockPos pos, int renderPass) {
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile instanceof IColorable && ((IColorable) tile).canBeColored()) {
 			return ((IColorable) tile).getColor();
@@ -69,7 +69,7 @@ public abstract class BlockPeripheral extends BlockBase implements IComputronics
 	}
 
 	@Override
-	public boolean recolorBlock(World world, BlockPos pos, Direction side, EnumDyeColor color) {
+	public boolean recolorBlock(World world, BlockPos pos, Direction side, DyeColor color) {
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile instanceof IColorable && ((IColorable) tile).canBeColored()) {
 			((IColorable) tile).setColor(ColorUtils.fromColor(color).color);
@@ -81,46 +81,46 @@ public abstract class BlockPeripheral extends BlockBase implements IComputronics
 
 	@Override
 	@Deprecated
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos otherPos) {
+	public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos otherPos) {
 		super.neighborChanged(state, world, pos, block, otherPos);
 	}
 
 	@Override
-	public boolean hasTileEntity(IBlockState state) {
+	public boolean hasTileEntity(BlockState state) {
 		return true;
 	}
 
 	@Override
 	@Deprecated
-	public boolean isOpaqueCube(IBlockState state) {
+	public boolean isOpaqueCube(BlockState state) {
 		return true;
 	}
 
 	@Override
 	@Deprecated
-	public boolean isNormalCube(IBlockState state) {
+	public boolean isNormalCube(BlockState state) {
 		return true;
 	}
 
 	@Override
-	public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
-		return true;
-	}
-
-	@Override
-	@Deprecated
-	public boolean isBlockNormalCube(IBlockState state) {
+	public boolean isNormalCube(BlockState state, IBlockAccess world, BlockPos pos) {
 		return true;
 	}
 
 	@Override
 	@Deprecated
-	public boolean isFullCube(IBlockState state) {
+	public boolean isBlockNormalCube(BlockState state) {
 		return true;
 	}
 
 	@Override
-	public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, Direction face) {
+	@Deprecated
+	public boolean isFullCube(BlockState state) {
+		return true;
+	}
+
+	@Override
+	public boolean doesSideBlockRendering(BlockState state, IBlockAccess world, BlockPos pos, Direction face) {
 		return true;
 	}
 

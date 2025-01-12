@@ -3,7 +3,7 @@ package org.libreflock.computronics.integration.railcraft.block;
 import li.cil.oc.api.network.Environment;
 import mods.railcraft.common.blocks.BlockMeta;
 import mods.railcraft.common.blocks.machine.wayobjects.boxes.BlockMachineSignalBox;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -32,17 +32,17 @@ public class BlockDigitalSignalBox extends BlockMachineSignalBox<SignalTypes> im
 	}
 
 	@Override
-	public boolean canProvidePower(IBlockState state) {
+	public boolean canProvidePower(BlockState state) {
 		return false;
 	}
 
 	@Override
-	public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, Direction side) {
+	public boolean canConnectRedstone(BlockState state, IBlockAccess world, BlockPos pos, Direction side) {
 		return false;
 	}
 
 	@Override
-	public boolean shouldCheckWeakPower(IBlockState state, IBlockAccess world, BlockPos pos, Direction side) {
+	public boolean shouldCheckWeakPower(BlockState state, IBlockAccess world, BlockPos pos, Direction side) {
 		return false;
 	}
 

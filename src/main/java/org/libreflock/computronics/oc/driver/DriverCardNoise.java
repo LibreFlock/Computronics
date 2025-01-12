@@ -6,9 +6,9 @@ import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.Visibility;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.NBTTagFloat;
+import net.minecraft.nbt.FloatNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
@@ -280,7 +280,7 @@ public class DriverCardNoise extends DriverCardSoundBase {
 		for(int i = 0; i < channels.length; i++) {
 			iTypes[i] = channels[i].type.ordinal();
 			for(Channel.WaveEntry entry : channels[i].entries) {
-				freqList.appendTag(new NBTTagFloat(entry.freqPair.frequency));
+				freqList.appendTag(new FloatNBT(entry.freqPair.frequency));
 				durations[i] = entry.freqPair.duration;
 				delays[i] = entry.initialDelay;
 			}
@@ -336,7 +336,7 @@ public class DriverCardNoise extends DriverCardSoundBase {
 			Config.SOUND_RADIUS));
 	}
 
-	public static void onSound(Packet packet, EntityPlayer player) throws IOException {
+	public static void onSound(Packet packet, PlayerEntity player) throws IOException {
 		int dimension = packet.readInt();
 		if(isInDimension(player, dimension)) {
 			float x = packet.readFloat();

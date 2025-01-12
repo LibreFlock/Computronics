@@ -1,13 +1,13 @@
 package org.libreflock.asielib.tile;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import org.libreflock.asielib.api.tile.IBattery;
@@ -232,7 +232,7 @@ public class TileMachine extends TileEntityBase implements
 
 	@Override
 	public ITextComponent getDisplayName() {
-		return new TextComponentTranslation(getName());
+		return new TranslationTextComponent(getName());
 	}
 
 	@Override
@@ -241,12 +241,12 @@ public class TileMachine extends TileEntityBase implements
 	}
 
 	@Override
-	public void openInventory(EntityPlayer player) {
+	public void openInventory(PlayerEntity player) {
 
 	}
 
 	@Override
-	public void closeInventory(EntityPlayer player) {
+	public void closeInventory(PlayerEntity player) {
 
 	}
 
@@ -287,7 +287,7 @@ public class TileMachine extends TileEntityBase implements
 	}
 
 	@Override
-	public boolean isUsableByPlayer(EntityPlayer player) {
+	public boolean isUsableByPlayer(PlayerEntity player) {
 		return super.isUsableByPlayer(player);
 	}
 

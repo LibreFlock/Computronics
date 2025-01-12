@@ -1,15 +1,15 @@
 package org.libreflock.computronics.gui.container;
 
-import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.container.Slot;
 import org.libreflock.asielib.gui.container.ContainerBase;
 import org.libreflock.asielib.tile.TileEntityBase;
 
 public class ContainerCipherBlock extends ContainerBase {
 
 	public ContainerCipherBlock(TileEntityBase entity,
-		InventoryPlayer inventoryPlayer) {
+		PlayerInventory inventoryPlayer) {
 		super(entity, inventoryPlayer);
 		for(int i = 0; i < 6; i++) {
 			this.addSlotToContainer(new Slot((IInventory) entity, i, 35 + (i * 18), 34));

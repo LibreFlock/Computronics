@@ -1,6 +1,6 @@
 package org.libreflock.computronics.gui.providers;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -19,12 +19,12 @@ public class GuiProviderCipher extends LegacyGuiProvider {
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	protected GuiBase makeGuiBase(int guiID, EntityPlayer entityPlayer, World world, BlockPos pos, TileEntityBase tile) {
+	protected GuiBase makeGuiBase(int guiID, PlayerEntity entityPlayer, World world, BlockPos pos, TileEntityBase tile) {
 		return new GuiCipherBlock(makeContainerBase(guiID, entityPlayer, world, pos, tile));
 	}
 
 	@Override
-	protected ContainerBase makeContainerBase(int guiID, EntityPlayer entityPlayer, World world, BlockPos pos, TileEntityBase tile) {
+	protected ContainerBase makeContainerBase(int guiID, PlayerEntity entityPlayer, World world, BlockPos pos, TileEntityBase tile) {
 		return new ContainerCipherBlock(tile, entityPlayer.inventory);
 	}
 }

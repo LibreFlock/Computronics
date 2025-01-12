@@ -5,8 +5,8 @@ import buildcraft.api.statements.IStatementContainer;
 import buildcraft.api.statements.IStatementParameter;
 import buildcraft.api.statements.StatementMouseClick;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.Items;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.api.distmarker.Dist;
@@ -51,10 +51,10 @@ public class ActionParameterLampColor extends ComputronicsParameter {
 	public String getDescription() {
 		if(this.stack != null) {
 			return StringUtil.localizeAndFormat("tooltip.computronics.gate.action.lamp_color."
-				+ EnumDyeColor.byDyeDamage(this.color), stack.stackSize);
+				+ DyeColor.byDyeDamage(this.color), stack.stackSize);
 		}
 		return StringUtil.localizeAndFormat("tooltip.computronics.gate.action.lamp_color."
-			+ EnumDyeColor.byDyeDamage(this.color), 0);
+			+ DyeColor.byDyeDamage(this.color), 0);
 	}
 
 	@Override

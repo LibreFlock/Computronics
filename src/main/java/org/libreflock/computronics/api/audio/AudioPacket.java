@@ -1,6 +1,6 @@
 package org.libreflock.computronics.api.audio;
 
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import org.libreflock.computronics.Computronics;
@@ -45,7 +45,7 @@ public abstract class AudioPacket {
 
 	protected abstract void writeData(Packet p) throws IOException;
 
-	protected boolean canHearReceiver(EntityPlayerMP playerMP, IAudioReceiver receiver) {
+	protected boolean canHearReceiver(ServerPlayerEntity playerMP, IAudioReceiver receiver) {
 		if(receiver.getSoundWorld() != null && receiver.getSoundWorld().provider.getDimension() != playerMP.world.provider.getDimension()) {
 			return false;
 		}
@@ -60,7 +60,7 @@ public abstract class AudioPacket {
 
 	public final void sendPacket() {
 		try {
-			for(EntityPlayerMP playerMP : FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayers()) {
+			for(ServerPlayerEntity playerMP : FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayers()) {
 				if(playerMP == null || playerMP.world == null) {
 					continue;
 				}

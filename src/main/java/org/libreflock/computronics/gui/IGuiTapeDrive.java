@@ -1,7 +1,7 @@
 package org.libreflock.computronics.gui;
 
-import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.container.ClickType;
+import net.minecraft.inventory.container.Slot;
 import org.libreflock.computronics.tile.TapeDriveState.State;
 
 /**

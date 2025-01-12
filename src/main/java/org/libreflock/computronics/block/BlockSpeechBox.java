@@ -1,7 +1,7 @@
 package org.libreflock.computronics.block;
 
 import li.cil.oc.api.network.Environment;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import org.libreflock.computronics.tile.TileSpeechBox;
@@ -17,7 +17,7 @@ public class BlockSpeechBox extends BlockPeripheral {
 	}
 
 	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) {
+	public TileEntity createTileEntity(World world, BlockState state) {
 		return new TileSpeechBox();
 	}
 

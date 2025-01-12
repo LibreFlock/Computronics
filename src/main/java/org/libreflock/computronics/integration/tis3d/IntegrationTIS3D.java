@@ -2,7 +2,7 @@ package org.libreflock.computronics.integration.tis3d;
 
 import li.cil.tis3d.api.ModuleAPI;
 import li.cil.tis3d.api.SerialAPI;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Optional;

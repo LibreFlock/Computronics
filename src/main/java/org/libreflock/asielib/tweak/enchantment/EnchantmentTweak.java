@@ -1,12 +1,12 @@
 package org.libreflock.asielib.tweak.enchantment;
 
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Enchantments;
-import net.minecraft.init.Items;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
@@ -72,7 +72,7 @@ public class EnchantmentTweak {
 
 	@SubscribeEvent
 	public void enchEvent(TickEvent.PlayerTickEvent e) {
-		EntityPlayer player = e.player;
+		PlayerEntity player = e.player;
 		if(player.world.isRemote) {
 			return;
 		}
@@ -84,8 +84,8 @@ public class EnchantmentTweak {
 			if(target != null && target.typeOfHit == RayTraceResult.Type.ENTITY) {
 				Entity entity = target.entityHit;
 				if(entity != null
-					&& entity instanceof EntityLivingBase
-					&& ((EntityLivingBase) entity).getCreatureAttribute() == EnumCreatureAttribute.ARTHROPOD
+					&& entity instanceof LivingEntity
+					&& ((LivingEntity) entity).getCreatureAttribute() == EnumCreatureAttribute.ARTHROPOD
 					&& entity.hurtResistantTime <= 10
 					&& !player.isActiveItemStackBlocking()) {
 					player.attackTargetEntityWithCurrentItem(entity);

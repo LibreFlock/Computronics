@@ -3,8 +3,8 @@ package org.libreflock.computronics.integration.railcraft.block;
 import li.cil.oc.api.network.Environment;
 import mods.railcraft.api.charge.Charge;
 import mods.railcraft.api.charge.IChargeBlock;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -29,7 +29,7 @@ public class BlockTicketMachine extends BlockPeripheral implements IBlockWithPre
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+	public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
 		super.onBlockPlacedBy(world, pos, state, placer, stack);
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile instanceof TileTicketMachine) {
@@ -38,7 +38,7 @@ public class BlockTicketMachine extends BlockPeripheral implements IBlockWithPre
 	}
 
 	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) {
+	public TileEntity createTileEntity(World world, BlockState state) {
 		return new TileTicketMachine();
 	}
 
@@ -48,7 +48,7 @@ public class BlockTicketMachine extends BlockPeripheral implements IBlockWithPre
 	}
 
 	@Override
-	public Map<Charge, ChargeSpec> getChargeSpecs(IBlockState state, IBlockAccess world, BlockPos pos) {
+	public Map<Charge, ChargeSpec> getChargeSpecs(BlockState state, IBlockAccess world, BlockPos pos) {
 		return TileTicketMachine.CHARGE_SPECS;
 	}
 

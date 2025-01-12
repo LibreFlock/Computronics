@@ -1,8 +1,8 @@
 package org.libreflock.computronics.tape;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.MouseEvent;
@@ -24,7 +24,7 @@ public class TapeScrollEventHandler {
 
 	@SubscribeEvent
 	public void onMouseEvent(MouseEvent event) {
-		EntityPlayerSP player = Minecraft.getMinecraft().player;
+		ClientPlayerEntity player = Minecraft.getMinecraft().player;
 
 		if(event.getDwheel() != 0 && player != null && player.isSneaking()) {
 			ItemStack stack = player.getHeldItemMainhand();
@@ -47,7 +47,7 @@ public class TapeScrollEventHandler {
 		}
 	}
 
-	public static void scrollTapeDrive(ItemStack stack, EntityPlayer player, int dWheel) {
+	public static void scrollTapeDrive(ItemStack stack, PlayerEntity player, int dWheel) {
 		PortableTapeDrive tapeDrive = PortableDriveManager.INSTANCE.getOrCreate(stack, true);
 		State state = tapeDrive.getEnumState();
 		State newState = null;

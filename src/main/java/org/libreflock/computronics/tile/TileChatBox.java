@@ -6,7 +6,7 @@ import dan200.computercraft.api.peripheral.IComputerAccess;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ITickable;
@@ -41,14 +41,14 @@ public class TileChatBox extends TileEntityPeripheralBase implements IChatListen
 	}
 
 	@Override
-	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+	public boolean shouldRefresh(World world, BlockPos pos, BlockState oldState, BlockState newState) {
 		return oldState != newState;
 	}
 
 	public boolean isCreative() {
 		BlockPos pos = getPos();
 		if(Config.CHATBOX_CREATIVE && world != null && world.isBlockLoaded(pos)) {
-			IBlockState state = world.getBlockState(pos);
+			BlockState state = world.getBlockState(pos);
 			return state.getValue(BlockChatBox.CREATIVE);
 		}
 		return false;

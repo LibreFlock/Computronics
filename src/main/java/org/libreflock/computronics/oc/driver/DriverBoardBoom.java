@@ -7,12 +7,12 @@ import li.cil.oc.api.internal.Rack;
 import li.cil.oc.api.network.Message;
 import li.cil.oc.api.network.Node;
 import li.cil.oc.api.network.Visibility;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
@@ -177,7 +177,7 @@ public class DriverBoardBoom extends DriverCardBoom implements RackMountable {
 	}
 
 	@Override
-	public boolean onActivate(EntityPlayer player, EnumHand hand, ItemStack heldItem, float hitX, float hitY) {
+	public boolean onActivate(PlayerEntity player, Hand hand, ItemStack heldItem, float hitX, float hitY) {
 		return false;
 	}
 

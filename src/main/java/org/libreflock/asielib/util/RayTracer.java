@@ -1,7 +1,7 @@
 package org.libreflock.asielib.util;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
@@ -31,10 +31,10 @@ public class RayTracer {
 	protected RayTraceResult target = null;
 
 	/**
-	 * @param entity The {@link EntityLivingBase} to fire from
+	 * @param entity The {@link LivingEntity} to fire from
 	 * @param distance The max distance the ray can go
 	 */
-	public void fire(EntityLivingBase entity, double distance) {
+	public void fire(LivingEntity entity, double distance) {
 		if(entity.world.isRemote) {
 			return;
 		}
@@ -50,7 +50,7 @@ public class RayTracer {
 	}
 
 	@Nullable
-	protected RayTraceResult rayTrace(EntityLivingBase entity, double distance) {
+	protected RayTraceResult rayTrace(LivingEntity entity, double distance) {
 		Entity target;
 		Vector3d position = new Vector3d(entity.posX, entity.posY, entity.posZ);
 		if(entity.getEyeHeight() != 0.12F) {
@@ -84,7 +84,7 @@ public class RayTracer {
 	}
 
 	@Nullable
-	protected Entity getEntity(EntityLivingBase base, Vector3d position, Vector3d search, Vector3d look, AxisAlignedBB searchBox, double v) {
+	protected Entity getEntity(LivingEntity base, Vector3d position, Vector3d search, Vector3d look, AxisAlignedBB searchBox, double v) {
 		ArrayList<Entity> entityList = new ArrayList<Entity>();
 		List<Entity> entityObjects = base.world.getEntitiesWithinAABB(Entity.class, searchBox);
 		for(Entity entity : entityObjects) {

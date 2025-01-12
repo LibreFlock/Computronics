@@ -16,8 +16,8 @@ import mods.railcraft.common.blocks.interfaces.ITileCharge;
 import mods.railcraft.common.items.ItemTicket;
 import mods.railcraft.common.items.ItemTicketGold;
 import mods.railcraft.common.items.RailcraftItems;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
@@ -566,9 +566,9 @@ public class TileTicketMachine extends TileEntityPeripheralBase implements ITick
 
 	//Required stuff
 
-	public void onBlockPlacedBy(EntityLivingBase entityliving, ItemStack stack) {
-		if(entityliving instanceof EntityPlayer) {
-			this.owner = ((EntityPlayer) entityliving).getGameProfile();
+	public void onBlockPlacedBy(LivingEntity entityliving, ItemStack stack) {
+		if(entityliving instanceof PlayerEntity) {
+			this.owner = ((PlayerEntity) entityliving).getGameProfile();
 		}
 	}
 

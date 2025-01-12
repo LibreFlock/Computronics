@@ -10,7 +10,7 @@ import mods.railcraft.api.carts.CartToolsAPI;
 import mods.railcraft.common.carts.EntityLocomotive;
 import mods.railcraft.common.carts.IRailcraftCartContainer;
 import mods.railcraft.common.carts.RailcraftCarts;
-import net.minecraft.entity.item.EntityMinecart;
+import net.minecraft.entity.item.minecart.AbstractMinecartEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ITickable;
@@ -36,7 +36,7 @@ public class TileDigitalDetector extends TileEntityPeripheralBase
 	implements SidedEnvironment, ISidedPeripheral, ITickable {
 
 	public Direction direction;
-	private List<EntityMinecart> currentCarts = new ArrayList<EntityMinecart>();
+	private List<AbstractMinecartEntity> currentCarts = new ArrayList<AbstractMinecartEntity>();
 
 	public TileDigitalDetector() {
 		super(Names.Railcraft_DigitalDetector);
@@ -50,9 +50,9 @@ public class TileDigitalDetector extends TileEntityPeripheralBase
 			return;
 		}
 
-		List<EntityMinecart> carts = CartToolsAPI.getMinecartsOnAllSides(this.world, this.getPos(), 0.2F);
+		List<AbstractMinecartEntity> carts = CartToolsAPI.getMinecartsOnAllSides(this.world, this.getPos(), 0.2F);
 
-		for(EntityMinecart cart : carts) {
+		for(AbstractMinecartEntity cart : carts) {
 			if(!this.currentCarts.contains(cart)) {
 				ArrayList<Object> info = new ArrayList<Object>();
 				appendCartType(info, cart);
@@ -103,14 +103,14 @@ public class TileDigitalDetector extends TileEntityPeripheralBase
 		}
 	}
 
-	private void appendCartType(ArrayList<Object> info, EntityMinecart cart) {
+	private void appendCartType(ArrayList<Object> info, AbstractMinecartEntity cart) {
 		IRailcraftCartContainer type = RailcraftCarts.fromCart(cart);
 		info.add(type.getBaseTag().toLowerCase(Locale.ENGLISH));
 		String entityName = cart.getName();
 		info.add(entityName);
 	}
 
-	private void appendLocomotiveInformation(ArrayList<Object> info, EntityMinecart cart) {
+	private void appendLocomotiveInformation(ArrayList<Object> info, AbstractMinecartEntity cart) {
 		if(cart instanceof EntityLocomotive) {
 			EntityLocomotive locomotive = (EntityLocomotive) cart;
 

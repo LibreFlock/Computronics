@@ -2,9 +2,9 @@ package org.libreflock.computronics.integration.forestry.entity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
@@ -12,7 +12,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderSwarm extends RenderLiving<EntitySwarm> {
+public class RenderSwarm extends MobRenderer<EntitySwarm> {
 
 	public RenderSwarm() {
 		super(Minecraft.getMinecraft().getRenderManager(), new ModelBase(){
@@ -39,7 +39,7 @@ public class RenderSwarm extends RenderLiving<EntitySwarm> {
 	public static class Factory implements IRenderFactory<EntitySwarm> {
 
 		@Override
-		public Render<? super EntitySwarm> createRenderFor(RenderManager manager) {
+		public EntityRenderer<? super EntitySwarm> createRenderFor(EntityRendererManager manager) {
 			return new RenderSwarm();
 		}
 

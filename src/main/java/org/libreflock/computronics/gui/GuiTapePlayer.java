@@ -1,9 +1,9 @@
 package org.libreflock.computronics.gui;
 
 import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.container.Slot;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.inventory.container.ClickType;
 import net.minecraft.item.ItemStack;
 import org.libreflock.computronics.item.ItemTape;
 import org.libreflock.computronics.tile.TapeDriveState.State;

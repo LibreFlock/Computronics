@@ -2,14 +2,14 @@ package org.libreflock.computronics.block;
 
 import li.cil.oc.api.network.Environment;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -33,12 +33,12 @@ public class BlockColorfulLamp extends BlockPeripheral /*implements IRedNetInput
 	}
 
 	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) {
+	public TileEntity createTileEntity(World world, BlockState state) {
 		return new TileColorfulLamp();
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, Direction side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, BlockState state, PlayerEntity player, Hand hand, Direction side, float hitX, float hitY, float hitZ) {
 		/*if(!world.isRemote && Mods.isLoaded(Mods.MFR) && player.isSneaking()) {
 			TileEntity tile = world.getTileEntity(pos);
 			if(tile instanceof TileColorfulLamp) {
@@ -61,23 +61,23 @@ public class BlockColorfulLamp extends BlockPeripheral /*implements IRedNetInput
 
 	@Override
 	@Deprecated
-	public IBlockState getStateFromMeta(int meta) {
+	public BlockState getStateFromMeta(int meta) {
 		return super.getStateFromMeta(meta).withProperty(BRIGHTNESS, meta);
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state) {
+	public int getMetaFromState(BlockState state) {
 		return super.getMetaFromState(state) | state.getValue(BRIGHTNESS);
 	}
 
 	@Override
-	protected IBlockState createDefaultState() {
+	protected BlockState createDefaultState() {
 		return super.createDefaultState().withProperty(BRIGHTNESS, 0);
 	}
 
 	@Override
 	@Deprecated
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos otherPos) {
+	public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos otherPos) {
 		/*TileEntity tile = world.getTileEntity(x, y, z);
 		if(Mods.isLoaded(Mods.ProjectRed) && tile instanceof TileColorfulLamp) {
 			((TileColorfulLamp) tile).onProjectRedBundledInputChanged();
@@ -86,7 +86,7 @@ public class BlockColorfulLamp extends BlockPeripheral /*implements IRedNetInput
 	}
 
 	@Override
-	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+	public int getLightValue(BlockState state, IBlockAccess world, BlockPos pos) {
 		/*TileEntity tile = world.getTileEntity(pos);
 		if(tile instanceof TileColorfulLamp) {
 			int color = ((TileColorfulLamp) tile).getLampColor();
@@ -103,12 +103,12 @@ public class BlockColorfulLamp extends BlockPeripheral /*implements IRedNetInput
 
 	@Override
 	@Deprecated
-	public int getLightOpacity(IBlockState state) {
+	public int getLightOpacity(BlockState state) {
 		return super.getLightOpacity(state);
 	}
 
 	@Override
-	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos) {
+	public BlockState getExtendedState(BlockState state, IBlockAccess world, BlockPos pos) {
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile instanceof TileColorfulLamp) {
 			return state.withProperty(BRIGHTNESS, LampUtil.toBrightness(((TileColorfulLamp) tile).getLampColor()));
@@ -118,12 +118,12 @@ public class BlockColorfulLamp extends BlockPeripheral /*implements IRedNetInput
 	}
 
 	@Override
-	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+	public boolean canRenderInLayer(BlockState state, BlockRenderLayer layer) {
 		return layer == BlockRenderLayer.CUTOUT_MIPPED || super.canRenderInLayer(state, layer);
 	}
 
 	@Override
-	public int colorMultiplier(IBlockState state, IBlockAccess world, BlockPos pos, int pass) {
+	public int colorMultiplier(BlockState state, IBlockAccess world, BlockPos pos, int pass) {
 		if(pass != 0) {
 			return super.colorMultiplier(state, world, pos, pass);
 		}

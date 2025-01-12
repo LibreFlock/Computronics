@@ -9,9 +9,9 @@ import li.cil.oc.api.network.Connector;
 import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.Visibility;
 import li.cil.oc.api.prefab.AbstractManagedEnvironment;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import org.libreflock.computronics.reference.Config;
 import org.libreflock.computronics.util.OCUtils;
@@ -55,8 +55,8 @@ public class RobotUpgradeRadar extends AbstractManagedEnvironment implements Dev
 		int distance = getDistance(args);
 		if(((Connector) this.node()).tryChangeBuffer(0 - (Config.RADAR_ENERGY_COST_OC * distance * 1.75))) {
 			AxisAlignedBB bounds = getBounds(distance);
-			entities.addAll(RadarUtils.getEntities(container.world(), container.xPosition(), container.yPosition(), container.zPosition(), bounds, EntityPlayer.class));
-			entities.addAll(RadarUtils.getEntities(container.world(), container.xPosition(), container.yPosition(), container.zPosition(), bounds, EntityLiving.class));
+			entities.addAll(RadarUtils.getEntities(container.world(), container.xPosition(), container.yPosition(), container.zPosition(), bounds, PlayerEntity.class));
+			entities.addAll(RadarUtils.getEntities(container.world(), container.xPosition(), container.yPosition(), container.zPosition(), bounds, MobEntity.class));
 			context.pause(0.5);
 		}
 		// The returned array is treated as a tuple, meaning if we return the
@@ -74,7 +74,7 @@ public class RobotUpgradeRadar extends AbstractManagedEnvironment implements Dev
 		int distance = getDistance(args);
 		if(((Connector) this.node()).tryChangeBuffer(0 - (Config.RADAR_ENERGY_COST_OC * distance * 1.0))) {
 			AxisAlignedBB bounds = getBounds(distance);
-			entities.addAll(RadarUtils.getEntities(container.world(), container.xPosition(), container.yPosition(), container.zPosition(), bounds, EntityPlayer.class));
+			entities.addAll(RadarUtils.getEntities(container.world(), container.xPosition(), container.yPosition(), container.zPosition(), bounds, PlayerEntity.class));
 			context.pause(0.5);
 		}
 		return new Object[] { entities.toArray() };
@@ -86,7 +86,7 @@ public class RobotUpgradeRadar extends AbstractManagedEnvironment implements Dev
 		int distance = getDistance(args);
 		if(((Connector) this.node()).tryChangeBuffer(0 - (Config.RADAR_ENERGY_COST_OC * distance * 1.0))) {
 			AxisAlignedBB bounds = getBounds(distance);
-			entities.addAll(RadarUtils.getEntities(container.world(), container.xPosition(), container.yPosition(), container.zPosition(), bounds, EntityLiving.class));
+			entities.addAll(RadarUtils.getEntities(container.world(), container.xPosition(), container.yPosition(), container.zPosition(), bounds, MobEntity.class));
 			context.pause(0.5);
 		}
 		return new Object[] { entities.toArray() };

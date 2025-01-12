@@ -8,7 +8,7 @@ import li.cil.oc.api.network.Node;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -32,7 +32,7 @@ public class ColorfulUpgradeHandler {
 		if(color < 0) {
 			return;
 		}
-		e.player.sendStatusMessage(new TextComponentTranslation("chat.computronics.colorful_upgrade.color", "0x"
+		e.player.sendStatusMessage(new TranslationTextComponent("chat.computronics.colorful_upgrade.color", "0x"
 			+ String.format("%06x", color).toUpperCase(Locale.ENGLISH)), false);
 	}
 

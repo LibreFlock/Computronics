@@ -1,6 +1,6 @@
 package org.libreflock.asielib.gui.managed;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.world.World;
 
@@ -22,7 +22,7 @@ public abstract class GuiProviderBase implements IGuiProvider {
 	}
 
 	@Override
-	public boolean canOpen(World world, int x, int y, int z, EntityPlayer player, Direction side) {
+	public boolean canOpen(World world, int x, int y, int z, PlayerEntity player, Direction side) {
 		return true;
 	}
 }

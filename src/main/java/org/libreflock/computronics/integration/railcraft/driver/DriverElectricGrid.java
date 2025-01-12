@@ -16,7 +16,7 @@ import mods.railcraft.common.util.charge.ChargeNetwork;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
+import net.minecraft.world.ServerWorld;
 import net.minecraftforge.common.DimensionManager;
 import org.libreflock.computronics.api.multiperipheral.IMultiPeripheral;
 import org.libreflock.computronics.integration.CCMultiPeripheral;
@@ -32,13 +32,13 @@ public class DriverElectricGrid {
 
 	@Nullable
 	private static Charge.IAccess getAccess(int dimension, BlockPos pos) {
-		WorldServer world = DimensionManager.getWorld(dimension);
+		ServerWorld world = DimensionManager.getWorld(dimension);
 		return world == null ? null : ChargeManager.DISTRIBUTION.network(world).access(pos);
 	}
 
 	@Nullable
 	private static ChargeNetwork.ChargeNode getNode(int dimension, BlockPos pos) {
-		WorldServer world = DimensionManager.getWorld(dimension);
+		ServerWorld world = DimensionManager.getWorld(dimension);
 		if(world != null) {
 			Charge.IAccess access = ChargeManager.DISTRIBUTION.network(world).access(pos);
 			if(access instanceof ChargeNetwork.ChargeNode) {

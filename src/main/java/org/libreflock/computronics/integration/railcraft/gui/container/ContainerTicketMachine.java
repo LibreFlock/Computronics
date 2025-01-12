@@ -8,11 +8,11 @@ import mods.railcraft.common.gui.widgets.ChargeNetworkIndicator;
 import mods.railcraft.common.gui.widgets.Widget;
 import mods.railcraft.common.items.ItemTicketGold;
 import mods.railcraft.common.plugins.forge.PlayerPlugin;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.IContainerListener;
-import net.minecraft.inventory.Slot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Slot;
+import net.minecraft.inventory.container.ClickType;
+import net.minecraft.inventory.container.IContainerListener;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -32,13 +32,13 @@ import javax.annotation.Nullable;
  */
 public class ContainerTicketMachine extends RailcraftContainer {
 
-	private final InventoryPlayer inventoryPlayer;
+	private final PlayerInventory inventoryPlayer;
 	private TileTicketMachine tile;
 	private boolean maintenanceMode = false;
 
 	private boolean isSelectLocked = true;
 
-	public ContainerTicketMachine(InventoryPlayer inventoryPlayer, TileTicketMachine tile, boolean maintenanceMode) {
+	public ContainerTicketMachine(PlayerInventory inventoryPlayer, TileTicketMachine tile, boolean maintenanceMode) {
 		super(inventoryPlayer);
 		this.inventoryPlayer = inventoryPlayer;
 		this.tile = tile;
@@ -84,7 +84,7 @@ public class ContainerTicketMachine extends RailcraftContainer {
 
 	@Nullable
 	@Override
-	public ItemStack slotClick(int slotId, int mouseButton, ClickType clickType, EntityPlayer player) {
+	public ItemStack slotClick(int slotId, int mouseButton, ClickType clickType, PlayerEntity player) {
 		if(!maintenanceMode()) {
 			setTicketsAndPaperLocked(true);
 		} else {
@@ -106,7 +106,7 @@ public class ContainerTicketMachine extends RailcraftContainer {
 		isSelectLocked = locked;
 	}
 
-	public InventoryPlayer getInventoryPlayer() {
+	public PlayerInventory getInventoryPlayer() {
 		return this.inventoryPlayer;
 	}
 
@@ -162,7 +162,7 @@ public class ContainerTicketMachine extends RailcraftContainer {
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer playerIn) {
+	public boolean canInteractWith(PlayerEntity playerIn) {
 		return this.tile.isUsableByPlayer(playerIn);
 	}
 }

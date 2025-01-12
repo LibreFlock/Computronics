@@ -11,7 +11,7 @@ import gregapi.util.OM;
 import mods.railcraft.common.items.ItemElectricMeter;
 import mods.railcraft.common.items.ItemRail;
 import mods.railcraft.common.items.RailcraftItem;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.integration.ModRecipes;

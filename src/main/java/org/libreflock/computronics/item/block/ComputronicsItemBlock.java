@@ -1,13 +1,13 @@
 package org.libreflock.computronics.item.block;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.util.internal.IItemWithColor;
 
-public class ComputronicsItemBlock extends ItemBlock implements IItemWithColor {
+public class ComputronicsItemBlock extends BlockItem implements IItemWithColor {
 
 	private IBlockWithSpecialText specialBlock;
 	private IBlockWithDifferentColors coloredBlock;

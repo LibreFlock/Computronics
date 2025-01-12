@@ -4,7 +4,7 @@ import li.cil.oc.api.driver.DeviceInfo;
 import li.cil.oc.api.network.Connector;
 import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.prefab.AbstractManagedEnvironment;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.libreflock.computronics.Computronics;
@@ -147,7 +147,7 @@ public abstract class DriverCardSoundBase extends AbstractManagedEnvironment imp
 
 	protected abstract AudioType getMode(int channel);
 
-	public static void onSound(Packet packet, EntityPlayer player) throws IOException {
+	public static void onSound(Packet packet, PlayerEntity player) throws IOException {
 		int dimension = packet.readInt();
 		if(isInDimension(player, dimension)) {
 			float x = packet.readFloat();
@@ -184,7 +184,7 @@ public abstract class DriverCardSoundBase extends AbstractManagedEnvironment imp
 		return value.doubleValue();
 	}
 
-	protected static boolean isInDimension(EntityPlayer player, int dimension) {
+	protected static boolean isInDimension(PlayerEntity player, int dimension) {
 		return player != null && player.world != null && player.world.provider != null
 			&& player.world.provider.getDimension() == dimension;
 	}

@@ -6,12 +6,12 @@ import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.Visibility;
+import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.api.distmarker.Dist;
@@ -185,7 +185,7 @@ public class DriverBoardLight extends RackMountableWithComponentConnector {
 		}
 
 		@OnlyIn(Dist.CLIENT)
-		public void registerIcons(TextureMap map) {
+		public void registerIcons(AtlasTexture map) {
 			background = map.registerSprite(new ResourceLocation(backgroundPath));
 		}
 
@@ -339,7 +339,7 @@ public class DriverBoardLight extends RackMountableWithComponentConnector {
 	}
 
 	@Override
-	public boolean onActivate(EntityPlayer player, EnumHand hand, ItemStack heldItem, float hitX, float hitY) {
+	public boolean onActivate(PlayerEntity player, Hand hand, ItemStack heldItem, float hitX, float hitY) {
 		if(player.world.isRemote) {
 			return true;
 		}

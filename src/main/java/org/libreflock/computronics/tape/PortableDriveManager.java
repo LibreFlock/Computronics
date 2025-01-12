@@ -3,8 +3,8 @@ package org.libreflock.computronics.tape;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -84,7 +84,7 @@ public final class PortableDriveManager {
 		if(event.phase != TickEvent.Phase.END) {
 			return;
 		}
-		for(EntityPlayerMP player : FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayers()) {
+		for(ServerPlayerEntity player : FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayers()) {
 			for(int i = 0; i < player.inventory.getSizeInventory(); i++) {
 				ItemStack stack = player.inventory.getStackInSlot(i);
 				if(!stack.isEmpty() && stack.getItem() instanceof ItemPortableTapeDrive) {
@@ -114,7 +114,7 @@ public final class PortableDriveManager {
 		if(event.phase != TickEvent.Phase.END) {
 			return;
 		}
-		EntityPlayer player = Minecraft.getMinecraft().player;
+		PlayerEntity player = Minecraft.getMinecraft().player;
 		if(player != null) {
 			for(int i = 0; i < player.inventory.getSizeInventory(); i++) {
 				ItemStack stack = player.inventory.getStackInSlot(i);

@@ -16,26 +16,26 @@ import forestry.api.core.ForestryAPI;
 import forestry.api.core.IErrorLogic;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeDesert;
+import net.minecraft.world.biome.DesertBiome;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -56,7 +56,7 @@ public class EntitySwarm extends EntityFlyingCreature implements IBeeHousing {
 	public static final DamageSource beeDamageSource = new BeeDamageSource("computronics.sting", 5);
 	public static final DamageSource beeDamageSourceSelf = new BeeDamageSource("computronics.sting.self", 1);
 
-	private EntityPlayer player;
+	private PlayerEntity player;
 
 	public EntitySwarm(World world) {
 		super(world);
@@ -92,7 +92,7 @@ public class EntitySwarm extends EntityFlyingCreature implements IBeeHousing {
 			}
 			if(!isTolerant() && world.getTotalWorldTime() % 40 == hashCode() % 40) {
 				Biome biome = world.getBiome(getPosition());
-				if(!(biome instanceof BiomeDesert) && (world.isRaining() || world.isThundering())) {
+				if(!(biome instanceof DesertBiome) && (world.isRaining() || world.isThundering())) {
 					this.setDead();
 				}
 			}
@@ -146,7 +146,7 @@ public class EntitySwarm extends EntityFlyingCreature implements IBeeHousing {
 
 	@Override
 	protected void updateAITasks() {
-		EntityLivingBase target = getAttackTarget();
+		LivingEntity target = getAttackTarget();
 		if(target != null) {
 			if(target.isDead || (target == player && !aggressive) || target.isInsideOfMaterial(Material.WATER)
 				|| (this.getDistanceSq(target) > 25 && !this.canEntityBeSeen(target))) {
@@ -156,7 +156,7 @@ public class EntitySwarm extends EntityFlyingCreature implements IBeeHousing {
 
 				//this.faceEntity(target, 10.0F, (float) this.getVerticalFaceSpeed());
 
-				if(dist < 1f && !(target instanceof EntityPlayer && BeeManager.armorApiaristHelper.wearsItems(target, "computronics:swarm", true) >= 4)) {
+				if(dist < 1f && !(target instanceof PlayerEntity && BeeManager.armorApiaristHelper.wearsItems(target, "computronics:swarm", true) >= 4)) {
 					target.attackEntityFrom(!aggressive ? beeDamageSource : beeDamageSourceSelf, getAmplifier() + (aggressive ? 1F : 0F));
 				}
 			}
@@ -171,7 +171,7 @@ public class EntitySwarm extends EntityFlyingCreature implements IBeeHousing {
 		}
 	}
 
-	private double circle(EntityLivingBase target, float yOffset, float modifier, float xFuzzy, float radius) {
+	private double circle(LivingEntity target, float yOffset, float modifier, float xFuzzy, float radius) {
 		final Vector3d direction;
 		{
 			Vector3d pos = getPositionVector();
@@ -206,11 +206,11 @@ public class EntitySwarm extends EntityFlyingCreature implements IBeeHousing {
 		return res;
 	}
 
-	private double moveTo(EntityLivingBase target, double yOffset, float modifier, float xFuzzy) {
+	private double moveTo(LivingEntity target, double yOffset, float modifier, float xFuzzy) {
 		return moveTo(target, yOffset, modifier, xFuzzy, xFuzzy);
 	}
 
-	private double moveTo(EntityLivingBase target, double yOffset, float modifier, float xFuzzy, float xFuzzyAttack) {
+	private double moveTo(LivingEntity target, double yOffset, float modifier, float xFuzzy, float xFuzzyAttack) {
 		return moveTo(target.posX, target.posY, target.posZ, target.width / 2f, yOffset, modifier, xFuzzy, xFuzzyAttack);
 	}
 
@@ -258,9 +258,9 @@ public class EntitySwarm extends EntityFlyingCreature implements IBeeHousing {
 	}
 
 	@Override
-	protected boolean processInteract(EntityPlayer player, EnumHand hand) {
+	protected boolean processInteract(PlayerEntity player, Hand hand) {
 		if(!world.isRemote && this.player != null) {
-			if(player == this.player && player.isSneaking() && hand == EnumHand.MAIN_HAND && player.getHeldItem(hand).isEmpty()) {
+			if(player == this.player && player.isSneaking() && hand == Hand.MAIN_HAND && player.getHeldItem(hand).isEmpty()) {
 				setDead();
 				SwarmProvider.swingItem(player, hand, null);
 				return true;
@@ -326,11 +326,11 @@ public class EntitySwarm extends EntityFlyingCreature implements IBeeHousing {
 		return this.dataManager.get(DATAMANAGER_ID_TOLERANCE);
 	}
 
-	public EntityPlayer getPlayer() {
+	public PlayerEntity getPlayer() {
 		return this.player;
 	}
 
-	public void setPlayer(@Nullable EntityPlayer player) {
+	public void setPlayer(@Nullable PlayerEntity player) {
 		this.player = player;
 	}
 
@@ -347,14 +347,14 @@ public class EntitySwarm extends EntityFlyingCreature implements IBeeHousing {
 	}
 
 	@Override
-	public void setAttackTarget(@Nullable EntityLivingBase entity) {
+	public void setAttackTarget(@Nullable LivingEntity entity) {
 		if(entity != this && (player == null || entity != player) && !(entity instanceof FakePlayer)) {
 			super.setAttackTarget(entity);
 		}
 	}
 
 	@Override
-	protected int getExperiencePoints(EntityPlayer player) {
+	protected int getExperiencePoints(PlayerEntity player) {
 		return 0;
 	}
 
@@ -475,7 +475,7 @@ public class EntitySwarm extends EntityFlyingCreature implements IBeeHousing {
 	}
 
 	@Override
-	public boolean isPotionApplicable(PotionEffect p_70687_1_) {
+	public boolean isPotionApplicable(EffectInstance p_70687_1_) {
 		return false;
 	}
 
@@ -513,13 +513,13 @@ public class EntitySwarm extends EntityFlyingCreature implements IBeeHousing {
 		}
 
 		@Override
-		public ITextComponent getDeathMessage(EntityLivingBase victim) {
-			EntityLivingBase damager = victim.getAttackingEntity();
+		public ITextComponent getDeathMessage(LivingEntity victim) {
+			LivingEntity damager = victim.getAttackingEntity();
 			String format = "death.attack." + this.damageType + (numCauses > 1 ? "." + (victim.world.rand.nextInt(this.numCauses) + 1) : "");
 			String withCauseFormat = format + ".player";
 			return damager != null && StringUtil.canTranslate(withCauseFormat) ?
-				new TextComponentTranslation(withCauseFormat, victim.getDisplayName(), damager.getDisplayName()) :
-				new TextComponentTranslation(format, victim.getDisplayName());
+				new TranslationTextComponent(withCauseFormat, victim.getDisplayName(), damager.getDisplayName()) :
+				new TranslationTextComponent(format, victim.getDisplayName());
 		}
 
 		/*public BeeDamageSource(EntityLivingBase entity) {

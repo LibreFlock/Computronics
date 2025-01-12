@@ -1,7 +1,7 @@
 package org.libreflock.computronics.block;
 
 import li.cil.oc.api.network.Environment;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
@@ -18,7 +18,7 @@ public class BlockRadar extends BlockPeripheral {
 	}
 
 	@Override
-	public TileEntity createTileEntity(World world, IBlockState metadata) {
+	public TileEntity createTileEntity(World world, BlockState metadata) {
 		return new TileRadar();
 	}
 

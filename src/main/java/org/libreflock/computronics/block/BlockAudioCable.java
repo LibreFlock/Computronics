@@ -1,17 +1,17 @@
 package org.libreflock.computronics.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumDyeColor;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -47,7 +47,7 @@ public class BlockAudioCable extends BlockBase implements IBlockWithDocumentatio
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, Direction side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, BlockState state, PlayerEntity player, Hand hand, Direction side, float hitX, float hitY, float hitZ) {
 		TileEntity tile = world.getTileEntity(pos);
 		ItemStack heldItem = player.getHeldItem(hand);
 		if(tile instanceof TileAudioCable && !heldItem.isEmpty()) {
@@ -65,13 +65,13 @@ public class BlockAudioCable extends BlockBase implements IBlockWithDocumentatio
 		return ColorUtils.Color.LightGray.color;
 	}
 
-	public int getRenderColor(IBlockState state) {
+	public int getRenderColor(BlockState state) {
 		return getRenderColor();
 	}
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public int colorMultiplier(IBlockState state, @Nullable IBlockAccess world, @Nullable BlockPos pos, int renderPass) {
+	public int colorMultiplier(BlockState state, @Nullable IBlockAccess world, @Nullable BlockPos pos, int renderPass) {
 		if(world != null && pos != null) {
 			TileEntity tile = world.getTileEntity(pos);
 			if(tile instanceof IColorable) {
@@ -82,7 +82,7 @@ public class BlockAudioCable extends BlockBase implements IBlockWithDocumentatio
 	}
 
 	@Override
-	public boolean recolorBlock(World world, BlockPos pos, Direction side, EnumDyeColor color) {
+	public boolean recolorBlock(World world, BlockPos pos, Direction side, DyeColor color) {
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile instanceof IColorable && ((IColorable) tile).canBeColored()) {
 			((IColorable) tile).setColor(ColorUtils.fromColor(color).color);
@@ -215,7 +215,7 @@ public class BlockAudioCable extends BlockBase implements IBlockWithDocumentatio
 
 	@Override
 	@Deprecated
-	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
+	public BlockState getActualState(BlockState state, IBlockAccess world, BlockPos pos) {
 		TileEntity t = world.getTileEntity(pos);
 
 		if(t instanceof TileAudioCable) {
@@ -234,7 +234,7 @@ public class BlockAudioCable extends BlockBase implements IBlockWithDocumentatio
 
 	@Override
 	@Deprecated
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos otherPos) {
+	public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos otherPos) {
 		TileEntity t = world.getTileEntity(pos);
 
 		if(t instanceof TileAudioCable) {
@@ -256,42 +256,42 @@ public class BlockAudioCable extends BlockBase implements IBlockWithDocumentatio
 
 	@Override
 	@Deprecated
-	public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, Direction side) {
+	public boolean isSideSolid(BlockState state, IBlockAccess world, BlockPos pos, Direction side) {
 		return false;
 	}
 
 	@Override
 	@Deprecated
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+	public AxisAlignedBB getBoundingBox(BlockState state, IBlockAccess world, BlockPos pos) {
 		return BoundingBox.getBox(neighbors(world, pos));
 	}
 
 	@Override
 	@Deprecated
-	public boolean isOpaqueCube(IBlockState state) {
+	public boolean isOpaqueCube(BlockState state) {
 		return false;
 	}
 
 	@Override
 	@Deprecated
-	public boolean isFullCube(IBlockState state) {
+	public boolean isFullCube(BlockState state) {
 		return false;
 	}
 
 	@Override
 	@Deprecated
 	@OnlyIn(Dist.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess worldIn, BlockPos pos, Direction side) {
+	public boolean shouldSideBeRendered(BlockState state, IBlockAccess worldIn, BlockPos pos, Direction side) {
 		return (connectionMask & (1 << side.ordinal())) != 0;
 	}
 
 	@Override
-	public boolean hasTileEntity(IBlockState state) {
+	public boolean hasTileEntity(BlockState state) {
 		return true;
 	}
 
 	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) {
+	public TileEntity createTileEntity(World world, BlockState state) {
 		return new TileAudioCable();
 	}
 

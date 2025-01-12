@@ -6,16 +6,16 @@ import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
@@ -48,9 +48,9 @@ public class ItemRelaySensor extends Item implements IItemWithPrefix {
 	}
 
 	@Override
-	public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, Direction side, float hitX, float hitY, float hitZ, EnumHand hand) {
+	public ActionResultType onItemUseFirst(PlayerEntity player, World world, BlockPos pos, Direction side, float hitX, float hitY, float hitZ, Hand hand) {
 		if(player.world.isRemote) {
-			return EnumActionResult.PASS;
+			return ActionResultType.PASS;
 		}
 		ItemStack stack = player.getHeldItem(hand);
 		TileEntity tile = world.getTileEntity(pos);
@@ -66,14 +66,14 @@ public class ItemRelaySensor extends Item implements IItemWithPrefix {
 				data.putBoolean("bound", true);
 				stack.putCompound(data);
 				player.swingArm(hand);
-				return EnumActionResult.SUCCESS;
+				return ActionResultType.SUCCESS;
 			}
 		}
-		return EnumActionResult.FAIL;
+		return ActionResultType.FAIL;
 	}
 
 	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
+	public boolean onLeftClickEntity(ItemStack stack, PlayerEntity player, Entity entity) {
 		if(player.isSneaking() && entity != null) {
 			if(stack.hasTagCompound() && stack.getTagCompound().getBoolean("bound") && !player.world.isRemote) {
 				CompoundNBT data = stack.getTagCompound();
@@ -84,7 +84,7 @@ public class ItemRelaySensor extends Item implements IItemWithPrefix {
 				);
 				if(entity instanceof EntityLocomotiveElectric) {
 					if(!player.world.isBlockLoaded(pos)) {
-						player.sendMessage(new TextComponentTranslation("chat.computronics.sensor.noRelayDetected"));
+						player.sendMessage(new TranslationTextComponent("chat.computronics.sensor.noRelayDetected"));
 						return true;
 					}
 					TileEntity tile = entity.world.getTileEntity(pos);
@@ -94,21 +94,21 @@ public class ItemRelaySensor extends Item implements IItemWithPrefix {
 						if(loco.dimension == relay.getWorld().provider.getDimension()) {
 							if(loco.getDistanceSq(relay.getPos()) <= Config.LOCOMOTIVE_RELAY_RANGE * Config.LOCOMOTIVE_RELAY_RANGE) {
 								relay.setLocomotive(loco);
-								player.sendMessage(new TextComponentTranslation("chat.computronics.sensor.bound"));
-								player.swingArm(EnumHand.MAIN_HAND);
-								player.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
-								ForgeEventFactory.onPlayerDestroyItem(player, stack, EnumHand.MAIN_HAND);
+								player.sendMessage(new TranslationTextComponent("chat.computronics.sensor.bound"));
+								player.swingArm(Hand.MAIN_HAND);
+								player.setHeldItem(Hand.MAIN_HAND, ItemStack.EMPTY);
+								ForgeEventFactory.onPlayerDestroyItem(player, stack, Hand.MAIN_HAND);
 							} else {
-								player.sendMessage(new TextComponentTranslation("chat.computronics.sensor.tooFarAway"));
+								player.sendMessage(new TranslationTextComponent("chat.computronics.sensor.tooFarAway"));
 							}
 						} else {
-							player.sendMessage(new TextComponentTranslation("chat.computronics.sensor.wrongDim"));
+							player.sendMessage(new TranslationTextComponent("chat.computronics.sensor.wrongDim"));
 						}
 					} else {
-						player.sendMessage(new TextComponentTranslation("chat.computronics.sensor.noRelay"));
+						player.sendMessage(new TranslationTextComponent("chat.computronics.sensor.noRelay"));
 					}
 				} else if(entity instanceof EntityLocomotive) {
-					player.sendMessage(new TextComponentTranslation("chat.computronics.sensor.wrongLoco"));
+					player.sendMessage(new TranslationTextComponent("chat.computronics.sensor.wrongLoco"));
 					return true;
 				}
 			}

@@ -9,14 +9,14 @@ import li.cil.oc.api.nanomachines.Behavior;
 import li.cil.oc.api.nanomachines.Controller;
 import li.cil.oc.api.prefab.AbstractProvider;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.play.server.SPacketAnimation;
+import net.minecraft.network.play.server.SAnimateHandPacket;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
@@ -40,7 +40,7 @@ public class SwarmProvider extends AbstractProvider {
 	}
 
 	@Override
-	protected Behavior readBehaviorFromNBT(EntityPlayer player, CompoundNBT nbt) {
+	protected Behavior readBehaviorFromNBT(PlayerEntity player, CompoundNBT nbt) {
 		//SwarmBehavior behavior = new SwarmBehavior(player);
 		//behavior.readFromNBT(nbt);
 		return new SwarmBehavior(player);
@@ -54,11 +54,11 @@ public class SwarmProvider extends AbstractProvider {
 	}
 
 	@Override
-	public Iterable<Behavior> createBehaviors(EntityPlayer player) {
+	public Iterable<Behavior> createBehaviors(PlayerEntity player) {
 		return Collections.<Behavior>singletonList(new SwarmBehavior(player));
 	}
 
-	private void findTarget(EntityPlayer player, EnumHand hand, @Nullable ItemStack stack, Event e) {
+	private void findTarget(PlayerEntity player, Hand hand, @Nullable ItemStack stack, Event e) {
 		if(stack != null && player.getCooldownTracker().hasCooldown(stack.getItem())) {
 			return;
 		}
@@ -69,8 +69,8 @@ public class SwarmProvider extends AbstractProvider {
 				RayTraceResult target = RayTracer.instance().getTarget();
 				if((target != null) && (target.typeOfHit == RayTraceResult.Type.ENTITY)) {
 					Entity entity = target.entityHit;
-					if(entity != null && entity instanceof EntityLivingBase && entity != behavior.entity) {
-						behavior.entity.setAttackTarget((EntityLivingBase) entity);
+					if(entity != null && entity instanceof LivingEntity && entity != behavior.entity) {
+						behavior.entity.setAttackTarget((LivingEntity) entity);
 						swingItem(player, hand, stack, e);
 					}
 				} else if(behavior.entity.getAttackTarget() != null) {
@@ -100,7 +100,7 @@ public class SwarmProvider extends AbstractProvider {
 		}*/
 	}
 
-	private void makeSwarm(double x, double y, double z, EntityPlayer player, EnumHand hand, @Nullable ItemStack stack, IBeeHousing tile, Event e) {
+	private void makeSwarm(double x, double y, double z, PlayerEntity player, Hand hand, @Nullable ItemStack stack, IBeeHousing tile, Event e) {
 		if(stack != null && player.getCooldownTracker().hasCooldown(stack.getItem())) {
 			return;
 		}
@@ -128,7 +128,7 @@ public class SwarmProvider extends AbstractProvider {
 
 	@SubscribeEvent
 	public void onPlayerInteract(PlayerInteractEvent e) {
-		EntityPlayer player = e.getEntityPlayer();
+		PlayerEntity player = e.getEntityPlayer();
 		if(player != null && !player.world.isRemote) {
 			ItemStack heldItem = e.getItemStack();
 			if(!heldItem.isEmpty() && heldItem.getItem() == IntegrationForestry.itemStickImpregnated) {
@@ -147,7 +147,7 @@ public class SwarmProvider extends AbstractProvider {
 						findTarget(player, e.getHand(), heldItem, e);
 					}
 				}
-			} else if(heldItem.isEmpty() && e.getHand() == EnumHand.MAIN_HAND && e instanceof PlayerInteractEvent.RightClickBlock) {
+			} else if(heldItem.isEmpty() && e.getHand() == Hand.MAIN_HAND && e instanceof PlayerInteractEvent.RightClickBlock) {
 				if(player.isSneaking() && e.getWorld().isBlockLoaded(e.getPos())) {
 					TileEntity te = e.getWorld().getTileEntity(e.getPos());
 					if(te instanceof IBeeHousing) {
@@ -161,7 +161,7 @@ public class SwarmProvider extends AbstractProvider {
 
 	@SubscribeEvent
 	public void onMinecartInteract(MinecartInteractEvent e) {
-		EntityPlayer player = e.getPlayer();
+		PlayerEntity player = e.getPlayer();
 		if(player != null && !player.world.isRemote) {
 			ItemStack heldItem = e.getItem();
 			if(!heldItem.isEmpty() && heldItem.getItem() == IntegrationForestry.itemStickImpregnated) {
@@ -170,7 +170,7 @@ public class SwarmProvider extends AbstractProvider {
 				} else {
 					findTarget(player, e.getHand(), heldItem, e);
 				}
-			} else if(heldItem.isEmpty() && e.getHand() == EnumHand.MAIN_HAND) {
+			} else if(heldItem.isEmpty() && e.getHand() == Hand.MAIN_HAND) {
 				if(player.isSneaking() && e.getMinecart() instanceof IBeeHousing) {
 					makeSwarm(e.getMinecart().posX, e.getMinecart().posY + 0.25, e.getMinecart().posZ, player, e.getHand(), null, (IBeeHousing) e.getMinecart(), e);
 				}
@@ -189,17 +189,17 @@ public class SwarmProvider extends AbstractProvider {
 		}
 	}*/
 
-	public static void swingItem(EntityPlayer player, EnumHand hand, @Nullable ItemStack stack, @Nullable Event e) {
+	public static void swingItem(PlayerEntity player, Hand hand, @Nullable ItemStack stack, @Nullable Event e) {
 		if(stack != null) {
 			player.getCooldownTracker().setCooldown(stack.getItem(), 20);
 		}
 		swingItem(player, hand, e);
 	}
 
-	public static void swingItem(EntityPlayer player, EnumHand hand, @Nullable Event e) {
+	public static void swingItem(PlayerEntity player, Hand hand, @Nullable Event e) {
 		player.swingArm(hand);
-		if(player instanceof EntityPlayerMP && ((EntityPlayerMP) player).connection != null) {
-			((EntityPlayerMP) player).connection.sendPacket(new SPacketAnimation(player, hand == EnumHand.MAIN_HAND ? 0 : 3));
+		if(player instanceof ServerPlayerEntity && ((ServerPlayerEntity) player).connection != null) {
+			((ServerPlayerEntity) player).connection.sendPacket(new SAnimateHandPacket(player, hand == Hand.MAIN_HAND ? 0 : 3));
 		}
 		if(e != null && e.isCancelable()) {
 			e.setCanceled(true);
@@ -217,7 +217,7 @@ public class SwarmProvider extends AbstractProvider {
 	//private final HashMap<String, SwarmBehavior> behaviors = new HashMap<String, SwarmBehavior>();
 
 	@Nullable
-	private SwarmBehavior getSwarmBehavior(EntityPlayer player) {
+	private SwarmBehavior getSwarmBehavior(PlayerEntity player) {
 		Controller controller = Nanomachines.getController(player);
 		if(controller != null) {
 			Iterable<Behavior> behaviors = controller.getActiveBehaviors();

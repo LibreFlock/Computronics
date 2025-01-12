@@ -1,7 +1,7 @@
 package org.libreflock.asielib.reference;
 
 import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagInt;
+import net.minecraft.nbt.IntNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
@@ -55,13 +55,13 @@ public class Capabilities {
 
 		@Override
 		public NBTBase writeNBT(Capability<IColorable> capability, IColorable instance, Direction side) {
-			return new NBTTagInt(instance.getColor());
+			return new IntNBT(instance.getColor());
 		}
 
 		@Override
 		public void readNBT(Capability<IColorable> capability, IColorable instance, Direction side, NBTBase nbt) {
-			if(nbt instanceof NBTTagInt) {
-				instance.setColor(((NBTTagInt) nbt).getInt());
+			if(nbt instanceof IntNBT) {
+				instance.setColor(((IntNBT) nbt).getInt());
 			}
 		}
 	}

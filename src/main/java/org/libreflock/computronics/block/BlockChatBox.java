@@ -1,11 +1,11 @@
 package org.libreflock.computronics.block;
 
 import li.cil.oc.api.network.Environment;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
@@ -42,14 +42,14 @@ public class BlockChatBox extends BlockPeripheral implements IBlockWithSpecialTe
 
 	// I'm such a cheater.
 	@Override
-	public int getRenderColor(IBlockState state) {
+	public int getRenderColor(BlockState state) {
 		return state.getValue(CREATIVE) ? 0xFF60FF : 0xFFFFFF;
 	}
 
 	// Cheaters never win! ~ jaquadro
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public int colorMultiplier(IBlockState state, IBlockAccess world, BlockPos pos, int renderPass) {
+	public int colorMultiplier(BlockState state, IBlockAccess world, BlockPos pos, int renderPass) {
 		return state.getValue(CREATIVE) ? getRenderColor(state) : super.colorMultiplier(state, world, pos, renderPass);
 	}
 
@@ -59,12 +59,12 @@ public class BlockChatBox extends BlockPeripheral implements IBlockWithSpecialTe
 	}
 
 	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) {
+	public TileEntity createTileEntity(World world, BlockState state) {
 		return new TileChatBox();
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs creativeTabs, NonNullList<ItemStack> blockList) {
+	public void getSubBlocks(ItemGroup creativeTabs, NonNullList<ItemStack> blockList) {
 		blockList.add(new ItemStack(this, 1, 0));
 		if(Config.CHATBOX_CREATIVE) {
 			blockList.add(new ItemStack(this, 1, 8));
@@ -73,17 +73,17 @@ public class BlockChatBox extends BlockPeripheral implements IBlockWithSpecialTe
 
 	@Override
 	@Deprecated
-	public IBlockState getStateFromMeta(int meta) {
+	public BlockState getStateFromMeta(int meta) {
 		return super.getStateFromMeta(meta).withProperty(CREATIVE, (meta & 8) != 0);
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state) {
+	public int getMetaFromState(BlockState state) {
 		return super.getMetaFromState(state) | (state.getValue(CREATIVE) ? 8 : 0);
 	}
 
 	@Override
-	public int damageDropped(IBlockState state) {
+	public int damageDropped(BlockState state) {
 		return getMetaFromState(state);
 	}
 
@@ -93,7 +93,7 @@ public class BlockChatBox extends BlockPeripheral implements IBlockWithSpecialTe
 	}
 
 	@Override
-	protected IBlockState createDefaultState() {
+	protected BlockState createDefaultState() {
 		return super.createDefaultState().withProperty(CREATIVE, false);
 	}
 
@@ -104,13 +104,13 @@ public class BlockChatBox extends BlockPeripheral implements IBlockWithSpecialTe
 
 	@Override
 	@Deprecated
-	public boolean hasComparatorInputOverride(IBlockState state) {
+	public boolean hasComparatorInputOverride(BlockState state) {
 		return Config.REDSTONE_REFRESH;
 	}
 
 	@Override
 	@Deprecated
-	public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos) {
+	public int getComparatorInputOverride(BlockState state, World world, BlockPos pos) {
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile instanceof TileEntityBase) {
 			return ((TileEntityBase) tile).requestCurrentRedstoneValue(null);

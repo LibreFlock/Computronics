@@ -1,8 +1,8 @@
 package org.libreflock.computronics.integration.forestry.entity;
 
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.MoverType;
-import net.minecraft.entity.passive.EntityAmbientCreature;
+import net.minecraft.entity.passive.AmbientEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 /**
  * Combination of EntityAmbientCreature and EntityFlying
  */
-public class EntityFlyingCreature extends EntityAmbientCreature {
+public class EntityFlyingCreature extends AmbientEntity {
 
 	public EntityFlyingCreature(World par1World) {
 		super(par1World);
@@ -21,7 +21,7 @@ public class EntityFlyingCreature extends EntityAmbientCreature {
 	}
 
 	@Override
-	protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
+	protected void updateFallState(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class EntityFlyingCreature extends EntityAmbientCreature {
 
 			if(this.onGround) {
 				BlockPos underPos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY) - 1, MathHelper.floor(this.posZ));
-				IBlockState underState = this.world.getBlockState(underPos);
+				BlockState underState = this.world.getBlockState(underPos);
 				f = underState.getBlock().getSlipperiness(underState, this.world, underPos, this) * 0.91F;
 			}
 
@@ -53,7 +53,7 @@ public class EntityFlyingCreature extends EntityAmbientCreature {
 
 			if(this.onGround) {
 				BlockPos underPos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY) - 1, MathHelper.floor(this.posZ));
-				IBlockState underState = this.world.getBlockState(underPos);
+				BlockState underState = this.world.getBlockState(underPos);
 				f = underState.getBlock().getSlipperiness(underState, this.world, underPos, this) * 0.91F;
 			}
 

@@ -1,6 +1,6 @@
 package org.libreflock.asielib.util;
 
-import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import org.libreflock.asielib.util.internal.IColorable;
@@ -58,7 +58,7 @@ public class ColorUtils {
 		return Color.White;
 	}
 
-	public static Color fromColor(EnumDyeColor color) {
+	public static Color fromColor(DyeColor color) {
 		return fromDyeMeta(color.getDyeDamage());
 	}
 

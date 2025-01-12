@@ -4,7 +4,7 @@ import dan200.computercraft.api.filesystem.IMount;
 import dan200.computercraft.api.media.IMedia;
 import dan200.computercraft.api.media.IMediaProvider;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -135,7 +135,7 @@ public class ItemTape extends Item implements IItemTapeStorage, IMedia, IMediaPr
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void getSubItems(CreativeTabs tabs, NonNullList<ItemStack> list) {
+	public void getSubItems(ItemGroup tabs, NonNullList<ItemStack> list) {
 		if(!this.isInCreativeTab(tabs)) {
 			return;
 		}

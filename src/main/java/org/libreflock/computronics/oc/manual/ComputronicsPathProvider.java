@@ -7,7 +7,7 @@ import li.cil.oc.api.prefab.ItemStackTabIconRenderer;
 import li.cil.oc.api.prefab.ResourceContentProvider;
 import li.cil.oc.api.prefab.TextureTabIconRenderer;
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -63,7 +63,7 @@ public class ComputronicsPathProvider implements PathProvider {
 						+ ((IItemWithDocumentation) stack.getItem()).getDocumentationName(stack)
 					: ((IItemWithDocumentation) stack.getItem()).getDocumentationName(stack));
 		}
-		if(stack.getItem() instanceof ItemBlock) {
+		if(stack.getItem() instanceof BlockItem) {
 			Block block = Block.getBlockFromItem(stack.getItem());
 			if(block != null && block instanceof IBlockWithDocumentation) {
 				return makePath("block",
