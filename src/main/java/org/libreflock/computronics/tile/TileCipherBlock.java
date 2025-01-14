@@ -56,7 +56,7 @@ public class TileCipherBlock extends TileEntityPeripheralBase implements IBundle
 				key[i * 5] = 0;
 				key[i * 5 + 1] = 0;
 			} else {
-				key[i * 5] = (byte) (Item.getIdFromItem(stack.getItem()) & 255);
+				key[i * 5] = (byte) (ForgeRegistries.ITEMS(stack.getItem()) & 255);
 				key[i * 5 + 1] = (byte) (Item.getIdFromItem(stack.getItem()) >> 8);
 			}
 
@@ -65,17 +65,17 @@ public class TileCipherBlock extends TileEntityPeripheralBase implements IBundle
 				key[i * 5 + 3] = 0;
 				iv[i * 2] = 0;
 			} else {
-				key[i * 5 + 2] = (byte) ((stack.getItemDamage() & 3) | (stack.getCount() << 2));
-				key[i * 5 + 3] = (byte) (stack.getItemDamage() >> 2);
-				iv[i * 2] = (byte) (stack.getItemDamage() ^ (stack.getItemDamage() >> 8));
+				key[i * 5 + 2] = (byte) ((stack.getDamageValue() & 3) | (stack.getCount() << 2));
+				key[i * 5 + 3] = (byte) (stack.getDamageValue() >> 2);
+				iv[i * 2] = (byte) (stack.getDamageValue() ^ (stack.getDamageValue() >> 8));
 			}
 
-			if(stack.isEmpty() || stack.getTagCompound() == null) {
+			if(stack.isEmpty() || stack.getTag() == null) {
 				key[i * 5 + 4] = 0;
 				iv[i * 2 + 1] = 0;
 			} else {
-				key[i * 5 + 4] = (byte) stack.getTagCompound().hashCode();
-				iv[i * 2 + 1] = (byte) (stack.getTagCompound().hashCode() >> 8);
+				key[i * 5 + 4] = (byte) stack.getTag().hashCode();
+				iv[i * 2 + 1] = (byte) (stack.getTag().hashCode() >> 8);
 			}
 		}
 		for(int i = 0; i < 16; i++) {
@@ -111,7 +111,7 @@ public class TileCipherBlock extends TileEntityPeripheralBase implements IBundle
 	}
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	protected OCUtils.Device deviceInfo() {
 		return new OCUtils.Device(
 			DeviceClass.Processor,
@@ -122,7 +122,7 @@ public class TileCipherBlock extends TileEntityPeripheralBase implements IBundle
 	}
 
 	@Callback(doc = "function(message:string):string; Encrypts the specified message", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] encrypt(Context context, Arguments args) throws Exception {
 		if(args.count() >= 1) {
 			if(args.isByteArray(0)) {
@@ -135,7 +135,7 @@ public class TileCipherBlock extends TileEntityPeripheralBase implements IBundle
 	}
 
 	@Callback(doc = "function(message:string):string; Decrypts the specified message", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] decrypt(Context context, Arguments args) throws Exception {
 		if(args.count() >= 1 && args.isString(0)) {
 			return new Object[] { decrypt(args.checkString(0)) };
@@ -144,13 +144,13 @@ public class TileCipherBlock extends TileEntityPeripheralBase implements IBundle
 	}
 
 	@Callback(doc = "function():boolean; Returns whether the block is currently locked", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] isLocked(Context context, Arguments args) throws Exception {
 		return new Object[] { isLocked() };
 	}
 
 	@Callback(doc = "function(locked:boolean); Sets whether the block is currently locked")
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] setLocked(Context context, Arguments args) throws Exception {
 		if(args.count() == 1 && args.isBoolean(0)) {
 			this.setLocked(args.checkBoolean(0));
@@ -158,37 +158,37 @@ public class TileCipherBlock extends TileEntityPeripheralBase implements IBundle
 		return null;
 	}
 
-	@Override
-	@Optional.Method(modid = Mods.ComputerCraft)
-	public String[] getMethodNames() {
-		return new String[] { "encrypt", "decrypt", "isLocked", "setLocked" };
-	}
+	// @Override
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// public String[] getMethodNames() {
+	// 	return new String[] { "encrypt", "decrypt", "isLocked", "setLocked" };
+	// }
 
-	@Override
-	@Optional.Method(modid = Mods.ComputerCraft)
-	public Object[] callMethod(IComputerAccess computer, ILuaContext context,
-		int method, Object[] arguments) throws LuaException,
-		InterruptedException {
-		try {
-			if(arguments.length == 1 && (arguments[0] instanceof String)) {
-				String message = ((String) arguments[0]);
-				switch(method) {
-					case 0:
-						return new Object[] { encrypt(message) };
-					case 1:
-						return new Object[] { decrypt(message) };
-				}
-			} else if(arguments.length == 1 && (arguments[0] instanceof Boolean) && method == 3) {
-				this.setLocked((Boolean) arguments[0]);
-				return null;
-			} else if(method == 2) {
-				return new Object[] { this.isLocked() };
-			}
-		} catch(Exception e) {
-			throw new LuaException(e.getMessage());
-		}
-		return null;
-	}
+	// @Override
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// public Object[] callMethod(IComputerAccess computer, ILuaContext context,
+	// 	int method, Object[] arguments) throws LuaException,
+	// 	InterruptedException {
+	// 	try {
+	// 		if(arguments.length == 1 && (arguments[0] instanceof String)) {
+	// 			String message = ((String) arguments[0]);
+	// 			switch(method) {
+	// 				case 0:
+	// 					return new Object[] { encrypt(message) };
+	// 				case 1:
+	// 					return new Object[] { decrypt(message) };
+	// 			}
+	// 		} else if(arguments.length == 1 && (arguments[0] instanceof Boolean) && method == 3) {
+	// 			this.setLocked((Boolean) arguments[0]);
+	// 			return null;
+	// 		} else if(method == 2) {
+	// 			return new Object[] { this.isLocked() };
+	// 		}
+	// 	} catch(Exception e) {
+	// 		throw new LuaException(e.getMessage());
+	// 	}
+	// 	return null;
+	// }
 
 	private int bundledXORData;
 
@@ -205,7 +205,7 @@ public class TileCipherBlock extends TileEntityPeripheralBase implements IBundle
 				stackId <<= 4;
 			}
 			key ^= stackId;
-			key ^= stack.getItemDamage();
+			key ^= stack.getDamageValue();
 			key ^= stack.getCount() * (193 * i);
 		}
 		return key;
@@ -229,7 +229,7 @@ public class TileCipherBlock extends TileEntityPeripheralBase implements IBundle
 			if(keyPart < 4096) {
 				keyPart <<= 4;
 			}
-			keyPart ^= stack.getItemDamage();
+			keyPart ^= stack.getDamageValue();
 			keyPart ^= stack.getCount() * (193 * i);
 			key ^= (keyPart << 3);
 		}
@@ -252,11 +252,11 @@ public class TileCipherBlock extends TileEntityPeripheralBase implements IBundle
 	}*/
 
 	protected Direction getBundledInputSide() {
-		return world.getBlockState(getPos()).getValue(Computronics.cipher.rotation.FACING).rotateY();
+		return getLevel().getBlockState(getBlockPos()).getValue(Computronics.cipher.rotation.FACING).rotateY();
 	}
 
 	protected Direction getBundledOutputSide() {
-		return world.getBlockState(getPos()).getValue(Computronics.cipher.rotation.FACING).rotateYCCW();
+		return getLevel().getBlockState(getBlockPos()).getValue(Computronics.cipher.rotation.FACING).rotateYCCW();
 	}
 
 	private byte[] getBundledOutput() {
@@ -279,7 +279,7 @@ public class TileCipherBlock extends TileEntityPeripheralBase implements IBundle
 		Computronics.serverTickHandler.schedule(new Runnable() {
 			@Override
 			public void run() {
-				world.notifyNeighborsOfStateExcept(getPos(), getBlockType(), getBundledInputSide());
+				getLevel().notifyNeighborsOfStateExcept(getBlockPos(), getBlockState(), getBundledInputSide());
 				updating = false;
 			}
 		});
@@ -315,17 +315,17 @@ public class TileCipherBlock extends TileEntityPeripheralBase implements IBundle
 	@Override
 	public void removeFromNBTForTransfer(CompoundNBT data) {
 		super.removeFromNBTForTransfer(data);
-		data.removeTag("cb_l");
+		data.remove("cb_l");
 	}
 
 	@Override
 	public boolean canBundledConnectToInput(@Nullable Direction side) {
-		return world != null && side == getBundledInputSide();
+		return getLevel() != null && side == getBundledInputSide();
 	}
 
 	@Override
 	public boolean canBundledConnectToOutput(@Nullable Direction side) {
-		return world != null && side == getBundledOutputSide();
+		return getLevel() != null && side == getBundledOutputSide();
 	}
 
 	@Nullable

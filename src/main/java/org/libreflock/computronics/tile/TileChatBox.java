@@ -9,7 +9,6 @@ import li.cil.oc.api.machine.Context;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ServerChatEvent;
@@ -22,7 +21,7 @@ import org.libreflock.computronics.reference.Mods;
 import org.libreflock.computronics.util.ChatBoxUtils;
 import org.libreflock.computronics.util.OCUtils;
 
-public class TileChatBox extends TileEntityPeripheralBase implements IChatListener, ITickable { // TODO: figure out ITickable
+public class TileChatBox extends TileEntityPeripheralBase implements IChatListener { // TODO: figure out ITickable
 
 	private int distance;
 	private boolean hasDistance = false;
