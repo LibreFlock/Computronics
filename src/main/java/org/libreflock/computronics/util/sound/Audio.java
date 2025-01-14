@@ -1,6 +1,7 @@
 package org.libreflock.computronics.util.sound;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.vector.Vector3d;
@@ -83,11 +84,12 @@ public class Audio {
 			float clampedFrequency = Math.min(Math.max(frequencyInHz - 20, 0), 1980) / 1980f + 0.5f;
 			int delay = 0;
 			for(char ch : pattern.toCharArray()) {
-				PositionedSoundRecord record = new PositionedSoundRecord(SoundEvents.NOTE_BLOCK_HARP, SoundCategory.BLOCKS, distanceBasedGain * gain, clampedFrequency, x, y, z);
+				// PositionedSoundRecord record = new PositionedSoundRecord(SoundEvents.NOTE_BLOCK_HARP, SoundCategory.BLOCKS, distanceBasedGain * gain, clampedFrequency, x, y, z);
+				SimpleSound record = new SimpleSound(SoundEvents.NOTE_BLOCK_HARP, SoundCategory.BLOCKS, distanceBasedGain * gain, clampedFrequency, x, y, z);
 				if(delay == 0) {
-					mc.getSoundManager().playSound(record);
+					mc.getSoundManager().play(record);
 				} else {
-					mc.getSoundManager().playDelayedSound(record, delay);
+					mc.getSoundManager().playDelayed(record, delay);
 				}
 				delay += Math.max((ch == '.' ? durationInMilliseconds : 2 * durationInMilliseconds) * 20 / 1000, 1);
 			}

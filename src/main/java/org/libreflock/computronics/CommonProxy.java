@@ -1,10 +1,13 @@
 package org.libreflock.computronics;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+
 import org.libreflock.computronics.api.audio.AudioPacketDFPWM;
 import org.libreflock.computronics.api.audio.AudioPacketRegistry;
 import org.libreflock.computronics.audio.SoundCardPacket;
@@ -15,9 +18,13 @@ import org.libreflock.asielib.network.Packet;
 
 import java.io.IOException;
 
+import javax.swing.text.html.parser.Entity;
+
 public class CommonProxy {
 
-	public static final DeferredRegister<> ENTITIES;
+	// public static final DeferredRegister<Item> ItemRegistry = DeferredRegister.create(ForgeRegistries.ITEMS, "computronics");
+	public static final DeferredRegister EntityRegistry = DeferredRegister.create(ForgeRegistries.ENTITIES, "computronics");
+	// public static final DeferredRegister<SoundEvent> SoundRegistry = DeferredRegister
 
 	public boolean isClient() {
 		return false;
@@ -29,7 +36,8 @@ public class CommonProxy {
 	}
 
 	public void registerEntities() {
-		EntityRegistry.registerModEntity(new ResourceLocation(Mods.Computronics, "tape_item"), ItemEntityIndestructable.class, "tape_item", 1, Computronics.instance, 64, 20, true);
+		// EntityRegistry.reig(new ResourceLocation(Mods.Computronics, "tape_item"), ItemEntityIndestructable.class, "tape_item", 1, Computronics.instance, 64, 20, true);
+		ItemRegistry.register("tape_item", null);
 	}
 
 	public void registerItemModel(Item item, int meta, String name) {
@@ -37,7 +45,7 @@ public class CommonProxy {
 	}
 
 	public void registerItemModel(Block block, int meta, String name) {
-		registerItemModel(Item.getItemFromBlock(block), meta, name);
+		// registerItemModel(Item.getItemFromBlock(block), meta, name);
 	}
 
 	public void preInit() {
@@ -48,7 +56,7 @@ public class CommonProxy {
 		Sounds.registerSounds();
 	}
 
-	public void goBoom(Packet p) throws IOException {
+	public void goBoom(Packet p) throws IOException { // ????
 		//NO-OP
 	}
 

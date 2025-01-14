@@ -1,6 +1,8 @@
 package org.libreflock.computronics.util;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
@@ -102,7 +104,7 @@ public class Camera {
 		ozPos = zPos;
 		// A little workaround for the way I do things (skipping the block right in front, that is)
 		BlockPos pos = new BlockPos((int) Math.floor(xPos), (int) Math.floor(yPos), (int) Math.floor(zPos));
-		if(!world.isAirBlock(pos)) {
+		if(!world.isEmptyBlock(pos)) {
 			hit = world.getBlockState(pos).getBlock();
 			return true;
 		}
@@ -114,21 +116,21 @@ public class Camera {
 
 		RayTraceContext context = new RayTraceContext(origin, target, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.NONE, null);
 
-		RayTraceResult mop = world.rayTrace(context);
+		RayTraceResult mop = world.clip(context);
 		if(mop != null) {
-			xPos = mop.hitVec.x;
-			yPos = mop.hitVec.y;
-			zPos = mop.hitVec.z;
+			xPos = mop.getLocation().x;
+			yPos = mop.getLocation().y;
+			zPos = mop.getLocation().z;
 			oxPos += oxOffset;
 			oyPos += oyOffset;
 			ozPos += ozOffset;
-			switch(mop.typeOfHit) {
+			switch(mop.getType()) {
 				case ENTITY: {
-					hit = mop.entityHit;
+					hit = ((EntityRayTraceResult) mop).getEntity();
 				}
 				break;
 				case BLOCK: {
-					hit = world.getBlockState(mop.getBlockPos());
+					hit = world.getBlockState(((BlockRayTraceResult)mop).getBlockPos());
 				}
 				break;
 				default:

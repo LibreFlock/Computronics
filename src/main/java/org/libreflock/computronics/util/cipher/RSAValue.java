@@ -1,7 +1,5 @@
 package org.libreflock.computronics.util.cipher;
 
-// TODO: somehow add the computercraft shit and figure out Optional
-
 // import dan200.computercraft.api.lua.ILuaContext;
 // import dan200.computercraft.api.lua.ILuaObject;
 // import dan200.computercraft.api.lua.LuaException;

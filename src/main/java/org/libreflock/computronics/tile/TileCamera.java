@@ -1,16 +1,16 @@
 package org.libreflock.computronics.tile;
 
-import dan200.computercraft.api.lua.ILuaContext;
-import dan200.computercraft.api.lua.ILuaTask;
-import dan200.computercraft.api.lua.LuaException;
-import dan200.computercraft.api.peripheral.IComputerAccess;
+// import dan200.computercraft.api.lua.ILuaContext;
+// import dan200.computercraft.api.lua.ILuaTask;
+// import dan200.computercraft.api.lua.LuaException;
+// import dan200.computercraft.api.peripheral.IComputerAccess;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.common.Optional;
+// import net.minecraftforge.fml.common.Optional;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.reference.Config;
 import org.libreflock.computronics.reference.Mods;
@@ -31,7 +31,7 @@ public class TileCamera extends TileEntityPeripheralBase implements ITickable {
 	}
 
 	private Direction getFacingDirection() {
-		return Computronics.camera.getFacingDirection(world, getPos());
+		return Computronics.camera.getFacingDirection(getLevel(), getBlockPos());
 	}
 
 	@Override
@@ -47,16 +47,16 @@ public class TileCamera extends TileEntityPeripheralBase implements ITickable {
 	@Override
 	public void update() {
 		super.update();
-		if(tick % 20 == 0 && Config.REDSTONE_REFRESH) {
-			BlockPos pos = getPos();
-			cameraRedstone.ray(world, pos.getX(), pos.getY(), pos.getZ(), getFacingDirection(), 0.0f, 0.0f);
-			this.world.notifyNeighborsOfStateChange(this.pos, this.getBlockType(), true);
+		if(tick % 20 == 0 && Config.COMMON.REDSTONE_REFRESH.get()) {
+			BlockPos pos = getBlockPos();
+			cameraRedstone.ray(getLevel(), pos.getX(), pos.getY(), pos.getZ(), getFacingDirection(), 0.0f, 0.0f);
+			this.getLevel().notifyNeighborsOfStateChange(this.getBlockPos(), this.getBlockState(), true);
 		}
 		tick++;
 	}
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	protected OCUtils.Device deviceInfo() {
 		return new OCUtils.Device(
 			DeviceClass.Multimedia,
@@ -70,7 +70,7 @@ public class TileCamera extends TileEntityPeripheralBase implements ITickable {
 	@Callback(doc = "function([x:number, y:number]):number; "
 		+ "Returns the distance to the block the ray is shot at with the specified x-y offset, "
 		+ "or of the block directly in front", direct = true, limit = CALL_LIMIT)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] distance(Context context, Arguments args) {
 		float x = 0.0f;
 		float y = 0.0f;
@@ -78,49 +78,49 @@ public class TileCamera extends TileEntityPeripheralBase implements ITickable {
 			x = (float) args.checkDouble(0);
 			y = (float) args.checkDouble(1);
 		}
-		BlockPos pos = getPos();
-		camera.ray(world, pos.getX(), pos.getY(), pos.getZ(), getFacingDirection(), x, y);
+		BlockPos pos = getBlockPos();
+		camera.ray(getLevel(), pos.getX(), pos.getY(), pos.getZ(), getFacingDirection(), x, y);
 		return new Object[] { camera.getDistance() };
 	}
 
-	@Override
-	@Optional.Method(modid = Mods.ComputerCraft)
-	public String[] getMethodNames() {
-		return new String[] { "distance" };
-	}
+	// @Override
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// public String[] getMethodNames() {
+	// 	return new String[] { "distance" };
+	// }
 
-	@Override
-	@Optional.Method(modid = Mods.ComputerCraft)
-	public Object[] callMethod(IComputerAccess computer, ILuaContext context,
-		int method, Object[] arguments) throws LuaException,
-		InterruptedException {
-		if(camera == null) {
-			return new Object[] {};
-		}
-		//Object[] rayDir = null;
-		switch(method) {
-			case 0: { // distance
-				float x = 0.0f;
-				float y = 0.0f;
-				if(arguments.length == 2 && arguments[0] instanceof Double && arguments[1] instanceof Double) {
-					//rayDir = new Object[]{
-					x = ((Double) arguments[0]).floatValue();
-					y = ((Double) arguments[1]).floatValue();
-					//};
-				}
-				float fx = x;
-				float fy = y;
-				return context.executeMainThreadTask(new ILuaTask() {
-					@Nullable
-					@Override
-					public Object[] execute() throws LuaException {
-						BlockPos pos = getPos();
-						camera.ray(world, pos.getX(), pos.getY(), pos.getZ(), getFacingDirection(), fx, fy);
-						return new Object[] { camera.getDistance() };
-					}
-				});
-			}
-		}
-		return new Object[] {};
-	}
+	// @Override
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// public Object[] callMethod(IComputerAccess computer, ILuaContext context,
+	// 	int method, Object[] arguments) throws LuaException,
+	// 	InterruptedException {
+	// 	if(camera == null) {
+	// 		return new Object[] {};
+	// 	}
+	// 	//Object[] rayDir = null;
+	// 	switch(method) {
+	// 		case 0: { // distance
+	// 			float x = 0.0f;
+	// 			float y = 0.0f;
+	// 			if(arguments.length == 2 && arguments[0] instanceof Double && arguments[1] instanceof Double) {
+	// 				//rayDir = new Object[]{
+	// 				x = ((Double) arguments[0]).floatValue();
+	// 				y = ((Double) arguments[1]).floatValue();
+	// 				//};
+	// 			}
+	// 			float fx = x;
+	// 			float fy = y;
+	// 			return context.executeMainThreadTask(new ILuaTask() {
+	// 				@Nullable
+	// 				@Override
+	// 				public Object[] execute() throws LuaException {
+	// 					BlockPos pos = getPos();
+	// 					camera.ray(world, pos.getX(), pos.getY(), pos.getZ(), getFacingDirection(), fx, fy);
+	// 					return new Object[] { camera.getDistance() };
+	// 				}
+	// 			});
+	// 		}
+	// 	}
+	// 	return new Object[] {};
+	// }
 }

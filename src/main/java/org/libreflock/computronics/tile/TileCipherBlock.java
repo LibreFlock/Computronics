@@ -1,8 +1,8 @@
 package org.libreflock.computronics.tile;
 
-import dan200.computercraft.api.lua.ILuaContext;
-import dan200.computercraft.api.lua.LuaException;
-import dan200.computercraft.api.peripheral.IComputerAccess;
+// import dan200.computercraft.api.lua.ILuaContext;
+// import dan200.computercraft.api.lua.LuaException;
+// import dan200.computercraft.api.peripheral.IComputerAccess;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
@@ -16,7 +16,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.LockCode;
-import net.minecraftforge.fml.common.Optional;
+// import net.minecraftforge.fml.common.Optional;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.gui.container.ContainerCipherBlock;
 import org.libreflock.computronics.reference.Config;

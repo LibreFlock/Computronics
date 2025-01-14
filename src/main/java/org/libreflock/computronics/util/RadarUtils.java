@@ -7,6 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.registries.ForgeRegistries;
+
 import org.libreflock.computronics.reference.Config;
 
 import java.util.HashMap;
@@ -22,10 +24,10 @@ public class RadarUtils {
 
 	public static Set<Map<String, Object>> getEntities(World world, double xCoord, double yCoord, double zCoord, AxisAlignedBB bounds, Class<? extends LivingEntity> eClass) {
 		Set<Map<String, Object>> entities = new HashSet<Map<String, Object>>();
-		for(LivingEntity entity : world.getEntitiesWithinAABB(eClass, bounds)) {
-			double dx = entity.posX - xCoord;
-			double dy = entity.posY - yCoord;
-			double dz = entity.posZ - zCoord;
+		for(LivingEntity entity : world.getEntitiesOfClass(eClass, bounds)) {
+			double dx = entity.position().x - xCoord;
+			double dy = entity.position().y - yCoord;
+			double dz = entity.position().z - zCoord;
 			if(Math.sqrt(dx * dx + dy * dy + dz * dz) < Config.COMMON.RADAR_RANGE.get()) {
 				// Maps are converted to tables on the Lua side.
 				Map<String, Object> entry = new HashMap<String, Object>();
@@ -48,17 +50,17 @@ public class RadarUtils {
 
 	public static Set<Map<String, Object>> getItems(World world, double xCoord, double yCoord, double zCoord, AxisAlignedBB bounds, Class<? extends ItemEntity> eClass) {
 		Set<Map<String, Object>> entities = new HashSet<Map<String, Object>>();
-		for(ItemEntity entity : world.getEntitiesWithinAABB(eClass, bounds)) {
-			double dx = entity.posX - xCoord;
-			double dy = entity.posY - yCoord;
-			double dz = entity.posZ - zCoord;
+		for(ItemEntity entity : world.getEntitiesOfClass(eClass, bounds)) {
+			double dx = entity.position().x - xCoord;
+			double dy = entity.position().y - yCoord;
+			double dz = entity.position().z - zCoord;
 			if(Math.sqrt(dx * dx + dy * dy + dz * dz) < Config.COMMON.RADAR_RANGE.get()) {
 				// Maps are converted to tables on the Lua side.
 				Map<String, Object> entry = new HashMap<String, Object>();
 				ItemStack stack = entity.getItem();
-				entry.put("name", Item.REGISTRY.getNameForObject(stack.getItem()));
-				entry.put("damage", stack.getItemDamage());
-				entry.put("hasTag", stack.hasTagCompound());
+				entry.put("name", ForgeRegistries.ITEMS.getKey(stack.getItem()));
+				entry.put("damage", stack.getDamageValue());
+				entry.put("hasTag", stack.hasTag());
 				entry.put("size", stack.getCount());
 				entry.put("label", stack.getDisplayName());
 

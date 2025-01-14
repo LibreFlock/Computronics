@@ -1,6 +1,9 @@
 package org.libreflock.computronics.tile;
 
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.api.audio.AudioPacket;
 import org.libreflock.computronics.api.audio.AudioPacketDFPWM;
@@ -69,12 +72,12 @@ public class TapeDriveState {
 	}
 
 	public void switchState(World world, State newState) {
-		if(world.isRemote) { // Client-side happening
+		if(world instanceof ClientWorld) { // Client-side happening
 			if(newState == state) {
 				return;
 			}
 		}
-		if(!world.isRemote) { // Server-side happening
+		if(world instanceof ServerWorld) { // Server-side happening
 			if(this.storage == null) {
 				newState = State.STOPPED;
 			}
@@ -113,7 +116,7 @@ public class TapeDriveState {
 
 	@Nullable
 	public AudioPacket update(IAudioSource source, World world) {
-		if(!world.isRemote) {
+		if(world instanceof ClientWorld) {
 			switch(state) {
 				case PLAYING: {
 					if(storage.getPosition() >= storage.getSize() || storage.getPosition() < 0) {

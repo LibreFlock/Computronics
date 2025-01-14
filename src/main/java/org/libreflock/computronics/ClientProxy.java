@@ -66,25 +66,25 @@ public class ClientProxy extends CommonProxy {
 		super.registerEntities();
 	}
 
-	@Override
-	public void registerItemModel(Item item, int meta, String name) {
-		if(item instanceof IItemWithColor) {
-			coloredItems.add(item);
-		}
-		if(name.contains("#")) {
-			ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(name.split("#")[0], name.split("#")[1]));
-		} else {
-			ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(name, "inventory"));
-		}
-	}
+	// @Override
+	// public void registerItemModel(Item item, int meta, String name) { // TODO: this shit
+	// 	if(item instanceof IItemWithColor) {
+	// 		coloredItems.add(item);
+	// 	}
+	// 	if(name.contains("#")) {
+	// 		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(name.split("#")[0], name.split("#")[1]));
+	// 	} else {
+	// 		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(name, "inventory"));
+	// 	}
+	// }
 
-	@Override
-	public void registerItemModel(Block block, int meta, String name) {
-		if(block instanceof IBlockWithColor) {
-			coloredBlocks.add(block);
-		}
-		super.registerItemModel(block, meta, name);
-	}
+	// @Override
+	// public void registerItemModel(Block block, int meta, String name) { // TODO: this shit, electric boogaloo
+	// 	if(block instanceof IBlockWithColor) {
+	// 		coloredBlocks.add(block);
+	// 	}
+	// 	super.registerItemModel(block, meta, name);
+	// }
 
 	private final List<Item> coloredItems = new ArrayList<Item>();
 	private final List<Block> coloredBlocks = new ArrayList<Block>();

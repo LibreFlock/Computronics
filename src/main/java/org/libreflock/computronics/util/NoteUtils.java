@@ -1,5 +1,6 @@
 package org.libreflock.computronics.util;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ResourceLocation;
@@ -8,7 +9,9 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.NoteBlockEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 
@@ -24,7 +27,8 @@ public class NoteUtils {
 		int yCoord = pos.getY();
 		int zCoord = pos.getZ();
 
-		SoundEvent ev = SoundEvent.REGISTRY.getObject(new ResourceLocation(instrument));
+		// SoundEvent ev = SoundEvent.REGISTRY.getObject(new ResourceLocation(instrument));
+		SoundEvent ev = ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation(instrument));
 		if(ev != null) {
 			world.playSound(null, (double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D, ev, SoundCategory.RECORDS, volume, f);
 		}
@@ -54,9 +58,9 @@ public class NoteUtils {
 						return task;
 					}
 				}*/
-				final IBlockState state = world.getBlockState(pos.down());
+				final BlockState state = world.getBlockState(pos.below());
 				Material m = state.getMaterial();
-				if(m == Material.ROCK) {
+				if(m == Material.STONE) {
 					b0 = 1;
 				}
 				if(m == Material.SAND) {

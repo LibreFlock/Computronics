@@ -16,6 +16,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.asielib.util.ColorUtils;
@@ -123,8 +124,8 @@ public class OCUtils {
 				}
 			}
 		}
-		if(stack.hasTagCompound() && stack.getTagCompound().contains("oc:data")) {
-			CompoundNBT data = stack.getTagCompound().getCompound("oc:data");
+		if(stack.hasTag() && stack.getTag().contains("oc:data")) {
+			CompoundNBT data = stack.getTag().getCompound("oc:data");
 			if(data.contains("node") && data.getCompound("node").contains("address")) {
 				tooltip.add(TextFormatting.DARK_GRAY
 					+ data.getCompound("node").getString("address").substring(0, 13) + "..."
@@ -137,15 +138,15 @@ public class OCUtils {
 		}
 	}
 
-	private static final EnumRarity[] rarities = new EnumRarity[] { EnumRarity.COMMON, EnumRarity.UNCOMMON, EnumRarity.RARE, EnumRarity.EPIC };
+	private static final Rarity[] rarities = new Rarity[] { Rarity.COMMON, Rarity.UNCOMMON, Rarity.RARE, Rarity.EPIC };
 
-	public static EnumRarity getRarityByTier(ItemStack stack) {
+	public static Rarity getRarityByTier(ItemStack stack) {
 		DriverItem item = Driver.driverFor(stack);
 		int tier = item != null ? Math.min(Math.max(item.tier(stack), 0), rarities.length - 1) : 0;
 		return rarities[tier];
 	}
 
-	public static EnumRarity getRarityByTier(int tier) {
+	public static Rarity getRarityByTier(int tier) {
 		return rarities[Math.min(Math.max(tier, 0), rarities.length - 1)];
 	}
 
@@ -154,11 +155,11 @@ public class OCUtils {
 
 	@Nullable
 	public static IColorable getColorable(@Nullable ICapabilityProvider provider, Direction side) {
-		if(provider != null && provider.hasCapability(COLORABLE_CAPABILITY, side)) {
-			return provider.getCapability(COLORABLE_CAPABILITY, side);
+		if(provider != null && provider.getCapability(COLORABLE_CAPABILITY, side).equals(LazyOptional.empty())) {
+			return provider.getCapability(COLORABLE_CAPABILITY, side).orElse(null);
 		}
-		if(provider != null && provider.hasCapability(COLORED_CAPABILITY, side)) {
-			return new ConvertedColorable(provider.getCapability(COLORED_CAPABILITY, side));
+		if(provider != null && provider.getCapability(COLORED_CAPABILITY, side).equals(LazyOptional.empty())) {
+			return new ConvertedColorable(provider.getCapability(COLORED_CAPABILITY, side).orElse(null));
 		}
 		return null;
 	}

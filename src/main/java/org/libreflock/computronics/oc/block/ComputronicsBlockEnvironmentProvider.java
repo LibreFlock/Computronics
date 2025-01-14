@@ -17,6 +17,6 @@ public class ComputronicsBlockEnvironmentProvider implements EnvironmentProvider
 		}
 
 		return ((IComputronicsEnvironmentBlock) ((BlockItem) stack.getItem()).getBlock())
-			.getTileEntityClass(stack.getItemDamage());
+			.getTileEntityClass(stack.getDamageValue());
 	}
 }

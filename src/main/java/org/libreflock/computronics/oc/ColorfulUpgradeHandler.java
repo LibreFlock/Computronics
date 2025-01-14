@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.fml.common.Optional;
+// import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.api.distmarker.Dist;
@@ -26,7 +26,7 @@ import java.util.Locale;
 public class ColorfulUpgradeHandler {
 
 	@SubscribeEvent
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public void onRobotAnalyze(RobotAnalyzeEvent e) {
 		int color = getColor(e.agent);
 		if(color < 0) {
@@ -38,7 +38,7 @@ public class ColorfulUpgradeHandler {
 
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent(priority = EventPriority.LOW)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public void onRobotRender(RobotRenderEvent e) {
 		int color = -1;
 		if(e.agent instanceof Robot) {
@@ -68,7 +68,7 @@ public class ColorfulUpgradeHandler {
 		GlStateManager.color(((color >> 16) & 0xFF) / 255f, ((color >> 8) & 0xFF) / 255f, (color & 0xFF) / 255f);
 	}
 
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	private int getColor(Agent agent) {
 		try {
 			for(Node node : agent.machine().node().reachableNodes()) {
