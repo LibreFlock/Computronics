@@ -84,16 +84,16 @@ public class DriverCardBoom extends ManagedEnvironmentWithComponentConnector {
 	}
 
 	@Override
-	public void load(CompoundNBT nbt) {
-		super.load(nbt);
+	public void loadData(CompoundNBT nbt) {
+		super.loadData(nbt);
 		if(nbt.getBoolean("ticking")) {
 			setTime(nbt.getInt("time"));
 		}
 	}
 
 	@Override
-	public void save(CompoundNBT nbt) {
-		super.save(nbt);
+	public void saveData(CompoundNBT nbt) {
+		super.saveData(nbt);
 		if(this.time >= 0) {
 			nbt.putBoolean("ticking", true);
 			nbt.putInt("time", this.time);

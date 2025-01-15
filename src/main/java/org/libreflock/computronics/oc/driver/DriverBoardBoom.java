@@ -16,14 +16,14 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.Optional;
+// import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.TickEvent.ServerTickEvent;
 import org.apache.commons.lang3.tuple.Pair;
 import org.libreflock.computronics.oc.IntegrationOpenComputers;
 import org.libreflock.computronics.reference.Config;
-import org.libreflock.computronics.reference.Mods;
+// import org.libreflock.computronics.reference.Mods;
 import org.libreflock.computronics.util.OCUtils;
 import org.libreflock.computronics.util.boom.SelfDestruct;
 
@@ -59,7 +59,7 @@ public class DriverBoardBoom extends DriverCardBoom implements RackMountable {
 
 	@Override
 	public void update() {
-		setActive(node.tryChangeBuffer(-Config.BOOM_BOARD_MAINTENANCE_COST));
+		setActive(node.tryChangeBuffer(-Config.COMMON.BOOM_BOARD_MAINTENANCE_COST.get()));
 		if(needsUpdate) {
 			container.markChanged(container.indexOfMountable(this));
 			needsUpdate = false;
@@ -97,12 +97,12 @@ public class DriverBoardBoom extends DriverCardBoom implements RackMountable {
 		while((cur = toSearch.poll()) != null) {
 			final World world = cur.world();
 			final BlockPos currentPos = new BlockPos(cur.xPosition(), cur.yPosition(), cur.zPosition());
-			for(Direction dir : Direction.VALUES) {
-				final BlockPos pos = currentPos.offset(dir);
+			for(Direction dir : Direction.values()) {
+				final BlockPos pos = currentPos.relative(dir);
 
-				if(origin.squareDistanceTo(new Vector3d(pos)) <= 256 &&
-					world.isBlockLoaded(pos)) {
-					TileEntity tile = world.getTileEntity(pos);
+				if(origin.distanceToSqr(pos.getX(), pos.getY(), pos.getZ()) <= 256 &&
+					world.isLoaded(pos)) {
+					TileEntity tile = world.getBlockEntity(pos);
 					if(tile instanceof Rack && racks.add((Rack) tile)) {
 						toSearch.add((Rack) tile);
 					}
@@ -143,16 +143,16 @@ public class DriverBoardBoom extends DriverCardBoom implements RackMountable {
 	}
 
 	@Override
-	public void load(CompoundNBT nbt) {
-		super.load(nbt);
+	public void loadData(CompoundNBT nbt) {
+		super.loadData(nbt);
 		if(nbt.getBoolean("active")) {
 			setActive(nbt.getBoolean("active"));
 		}
 	}
 
 	@Override
-	public void save(CompoundNBT nbt) {
-		super.save(nbt);
+	public void saveData(CompoundNBT nbt) {
+		super.saveData(nbt);
 		nbt.putBoolean("active", this.isActive);
 	}
 
@@ -191,14 +191,14 @@ public class DriverBoardBoom extends DriverCardBoom implements RackMountable {
 		private final Set<Pair<Rack, Queue<Set<Rack>>>> boomQueue = new HashSet<Pair<Rack, Queue<Set<Rack>>>>();
 
 		@SubscribeEvent
-		@Optional.Method(modid = Mods.OpenComputers)
+		// @Optional.Method(modid = Mods.OpenComputers)
 		public void onServerTick(ServerTickEvent e) {
 			if(e.phase != TickEvent.Phase.START || boomQueue.isEmpty()) {
 				return;
 			}
 			Set<Pair<Rack, Queue<Set<Rack>>>> toRemove = new HashSet<Pair<Rack, Queue<Set<Rack>>>>();
 			for(Pair<Rack, Queue<Set<Rack>>> lists : boomQueue) {
-				if((lists.getKey().world().getTotalWorldTime() + lists.hashCode()) % 5 != 0) {
+				if((lists.getKey().world().getGameTime() + lists.hashCode()) % 5 != 0) {
 					continue; // Only explode every five ticks.
 				}
 				Set<Rack> current = lists.getValue().poll();
@@ -212,7 +212,7 @@ public class DriverBoardBoom extends DriverCardBoom implements RackMountable {
 			boomQueue.removeAll(toRemove);
 		}
 
-		@Optional.Method(modid = Mods.OpenComputers)
+		// @Optional.Method(modid = Mods.OpenComputers)
 		public void queue(Rack owner, Queue<Set<Rack>> rackList) {
 			boomQueue.add(Pair.of(owner, rackList));
 		}

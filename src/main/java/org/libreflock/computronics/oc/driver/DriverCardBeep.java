@@ -65,7 +65,7 @@ public class DriverCardBeep extends DriverCardSoundBase {
 				double duration = optDouble(durObj != null ? (Number) durObj : null, 0.1);
 				int durationInMilliseconds = Math.max(50, Math.min(5000, (int) (duration * 1000)));
 				longest = Math.max(longest, Math.max(50, Math.min(5000, (duration * 1000))));
-				long time = host.world().getTotalWorldTime() + (long) (durationInMilliseconds / 1000 * 20);
+				long time = host.world().getGameTime() + (long) (durationInMilliseconds / 1000 * 20);
 				for(int i = 0; i < expirationList.length; i++) {
 					if(expirationList[i] == null) {
 						expirationList[i] = time;
@@ -75,7 +75,7 @@ public class DriverCardBeep extends DriverCardSoundBase {
 				}
 			}
 		}
-		return tryQueueSound(freqPairs, new Object[] { true }, Config.BEEP_ENERGY_COST * getNonNullCount(freqPairs) * (longest / 1000D), playMethodName);
+		return tryQueueSound(freqPairs, new Object[] { true }, Config.COMMON.BEEP_ENERGY_COST.get() * getNonNullCount(freqPairs) * (longest / 1000D), playMethodName);
 	}
 
 	@Override

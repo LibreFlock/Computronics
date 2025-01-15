@@ -1,14 +1,14 @@
 package org.libreflock.computronics.tile;
 
 import com.google.common.base.Charsets;
-import dan200.computercraft.api.lua.ILuaContext;
-import dan200.computercraft.api.lua.LuaException;
-import dan200.computercraft.api.peripheral.IComputerAccess;
+// import dan200.computercraft.api.lua.ILuaContext;
+// import dan200.computercraft.api.lua.LuaException;
+// import dan200.computercraft.api.peripheral.IComputerAccess;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.Connector;
-import net.minecraftforge.fml.common.Optional;
+// import net.minecraftforge.fml.common.Optional;
 import org.libreflock.computronics.reference.Config;
 import org.libreflock.computronics.reference.Mods;
 import org.libreflock.computronics.util.OCUtils;
@@ -33,7 +33,7 @@ import java.util.Map;
 public class TileCipherBlockAdvanced extends TileEntityPeripheralBase {
 
 	public TileCipherBlockAdvanced() {
-		super("advanced_cipher", Config.CIPHER_ENERGY_STORAGE);
+		super("advanced_cipher", Config.COMMON.CIPHER_ENERGY_STORAGE.get());
 	}
 
 	/*@Override
@@ -47,7 +47,7 @@ public class TileCipherBlockAdvanced extends TileEntityPeripheralBase {
 	}
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	protected OCUtils.Device deviceInfo() {
 		return new OCUtils.Device(
 			DeviceClass.Processor,
@@ -173,7 +173,7 @@ public class TileCipherBlockAdvanced extends TileEntityPeripheralBase {
 	}
 
 	@Callback(doc = "function([keylength:number]):keygen; Creates the key generator from two random prime numbers (optionally with given key length)", direct = true, limit = 1)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] createRandomKeySet(Context c, Arguments a) {
 		RSAValue val = new RSAValue();
 		if(a.count() > 0) {
@@ -185,43 +185,43 @@ public class TileCipherBlockAdvanced extends TileEntityPeripheralBase {
 		} else {
 			val.startCalculation();
 		}
-		Object[] result = this.tryConsumeEnergy(new Object[] { val }, Config.CIPHER_KEY_CONSUMPTION, "createRandomKeySet");
+		Object[] result = this.tryConsumeEnergy(new Object[] { val }, Config.COMMON.CIPHER_KEY_CONSUMPTION.get(), "createRandomKeySet");
 		c.pause(0.5);
 		return result;
 	}
 
 	@Callback(doc = "function(num1:number, num2:number):keygen; Creates the key generator from the two given prime numbers", direct = true, limit = 1)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] createKeySet(Context c, Arguments a) {
 		RSAValue val = new RSAValue();
 		val.startCalculation(
 			checkPrime(a.checkInteger(0), 0),
 			checkPrime(a.checkInteger(1), 1));
 		Object[] result = new Object[] { val };
-		return this.tryConsumeEnergy(result, Config.CIPHER_KEY_CONSUMPTION, "createKeySet");
+		return this.tryConsumeEnergy(result, Config.COMMON.CIPHER_KEY_CONSUMPTION.get(), "createKeySet");
 	}
 
 	@Callback(doc = "function(message:string, publicKey:table):string; Encrypts the specified message using the specified public RSA key", direct = true, limit = 1)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] encrypt(Context c, Arguments a) throws Exception {
 		byte[] message = a.checkByteArray(0);
 		Object[] result = this.encrypt(
 			checkValidKey(a.checkTable(1), 1),
 			message);
-		return this.tryConsumeEnergy(result, Config.CIPHER_WORK_CONSUMPTION + 0.2 * message.length, "encrypt");
+		return this.tryConsumeEnergy(result, Config.COMMON.CIPHER_WORK_CONSUMPTION.get() + 0.2 * message.length, "encrypt");
 	}
 
 	@Callback(doc = "function(message:string, privateKey:table):string; Decrypts the specified message using the specified RSA key", direct = true, limit = 1)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] decrypt(Context c, Arguments a) throws Exception {
 		byte[] message = a.checkByteArray(0);
 		Object[] result = this.decrypt(
 			checkValidKey(a.checkTable(1), 1),
 			message, Charsets.UTF_8);
-		return this.tryConsumeEnergy(result, Config.CIPHER_WORK_CONSUMPTION + 0.2 * message.length, "decrypt");
+		return this.tryConsumeEnergy(result, Config.COMMON.CIPHER_WORK_CONSUMPTION.get() + 0.2 * message.length, "decrypt");
 	}
 
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	private Object[] tryConsumeEnergy(Object[] result, double v, String methodName) {
 		if(this.node() instanceof Connector) {
 			int power = this.tryConsumeEnergy(v);
@@ -233,7 +233,7 @@ public class TileCipherBlockAdvanced extends TileEntityPeripheralBase {
 		return result;
 	}
 
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	private int tryConsumeEnergy(double v) {
 		if(v < 0) {
 			return -2;
@@ -247,73 +247,73 @@ public class TileCipherBlockAdvanced extends TileEntityPeripheralBase {
 		return 0;
 	}
 
-	@Override
-	@Optional.Method(modid = Mods.ComputerCraft)
-	public String[] getMethodNames() {
-		return new String[] { "createRandomKeySet", "createKeySet", "encrypt", "decrypt" };
-	}
+	// @Override
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// public String[] getMethodNames() {
+	// 	return new String[] { "createRandomKeySet", "createKeySet", "encrypt", "decrypt" };
+	// }
 
-	@Override
-	@Optional.Method(modid = Mods.ComputerCraft)
-	public Object[] callMethod(IComputerAccess computer, ILuaContext context, int method, Object[] arguments) throws LuaException, InterruptedException {
-		try {
-			switch(method) {
-				case 0: {
-					RSAValue val = new RSAValue();
-					if(arguments.length > 0) {
-						if(!(arguments[0] instanceof Number)) {
-							throw new LuaException("first argument needs to be a number, or there must not be any arguments");
-						}
-						int length = ((Number) arguments[0]).intValue();
-						if(length <= 0 || length > 2048) {
-							throw new LuaException("bitlength must be between 1 and 2048");
-						}
-						val.startCalculation(length);
-						return new Object[] { val };
-					} else {
-						val.startCalculation();
-						return new Object[] { val };
-					}
-				}
-				case 1: {
-					if(!(arguments.length >= 1 && arguments[0] instanceof Number)) {
-						throw new LuaException("first argument needs to be a number");
-					} else if(!(arguments.length >= 2 && arguments[1] instanceof Number)) {
-						throw new LuaException("second argument needs to be a number");
-					}
-					RSAValue val = new RSAValue();
-					val.startCalculation(checkPrime(((Number) arguments[0]).intValue(), 0),
-						checkPrime(((Number) arguments[1]).intValue(), 1));
-					return new Object[] { val };
-				}
-				case 2: {
-					if(!(arguments.length >= 1 && arguments[0] instanceof String)) {
-						throw new LuaException("first argument needs to be a string");
-					} else if(!(arguments.length >= 2 && arguments[1] instanceof Map)) {
-						throw new LuaException("second argument needs to be a table");
-					}
-					return this.encrypt(
-						checkValidKey((Map) arguments[1], 1),
-						(String) arguments[0]);
-				}
-				case 3: {
-					if(!(arguments.length >= 1 && arguments[0] instanceof String)) {
-						throw new LuaException("first argument needs to be a string");
-					} else if(!(arguments.length >= 2 && arguments[1] instanceof Map)) {
-						throw new LuaException("second argument needs to be a table");
-					}
-					return this.decrypt(
-						checkValidKey((Map) arguments[1], 1),
-						(String) arguments[0]);
-				}
-			}
-		} catch(InterruptedException ie) {
-			throw ie;
-		} catch(LuaException le) {
-			throw le;
-		} catch(Exception e) {
-			throw new LuaException(e.getMessage());
-		}
-		return null;
-	}
+	// @Override
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// public Object[] callMethod(IComputerAccess computer, ILuaContext context, int method, Object[] arguments) throws LuaException, InterruptedException {
+	// 	try {
+	// 		switch(method) {
+	// 			case 0: {
+	// 				RSAValue val = new RSAValue();
+	// 				if(arguments.length > 0) {
+	// 					if(!(arguments[0] instanceof Number)) {
+	// 						throw new LuaException("first argument needs to be a number, or there must not be any arguments");
+	// 					}
+	// 					int length = ((Number) arguments[0]).intValue();
+	// 					if(length <= 0 || length > 2048) {
+	// 						throw new LuaException("bitlength must be between 1 and 2048");
+	// 					}
+	// 					val.startCalculation(length);
+	// 					return new Object[] { val };
+	// 				} else {
+	// 					val.startCalculation();
+	// 					return new Object[] { val };
+	// 				}
+	// 			}
+	// 			case 1: {
+	// 				if(!(arguments.length >= 1 && arguments[0] instanceof Number)) {
+	// 					throw new LuaException("first argument needs to be a number");
+	// 				} else if(!(arguments.length >= 2 && arguments[1] instanceof Number)) {
+	// 					throw new LuaException("second argument needs to be a number");
+	// 				}
+	// 				RSAValue val = new RSAValue();
+	// 				val.startCalculation(checkPrime(((Number) arguments[0]).intValue(), 0),
+	// 					checkPrime(((Number) arguments[1]).intValue(), 1));
+	// 				return new Object[] { val };
+	// 			}
+	// 			case 2: {
+	// 				if(!(arguments.length >= 1 && arguments[0] instanceof String)) {
+	// 					throw new LuaException("first argument needs to be a string");
+	// 				} else if(!(arguments.length >= 2 && arguments[1] instanceof Map)) {
+	// 					throw new LuaException("second argument needs to be a table");
+	// 				}
+	// 				return this.encrypt(
+	// 					checkValidKey((Map) arguments[1], 1),
+	// 					(String) arguments[0]);
+	// 			}
+	// 			case 3: {
+	// 				if(!(arguments.length >= 1 && arguments[0] instanceof String)) {
+	// 					throw new LuaException("first argument needs to be a string");
+	// 				} else if(!(arguments.length >= 2 && arguments[1] instanceof Map)) {
+	// 					throw new LuaException("second argument needs to be a table");
+	// 				}
+	// 				return this.decrypt(
+	// 					checkValidKey((Map) arguments[1], 1),
+	// 					(String) arguments[0]);
+	// 			}
+	// 		}
+	// 	} catch(InterruptedException ie) {
+	// 		throw ie;
+	// 	} catch(LuaException le) {
+	// 		throw le;
+	// 	} catch(Exception e) {
+	// 		throw new LuaException(e.getMessage());
+	// 	}
+	// 	return null;
+	// }
 }

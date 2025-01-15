@@ -33,8 +33,8 @@ public class RobotUpgradeCamera extends AbstractManagedEnvironment implements De
 		if(entity instanceof Rotatable) {
 			return ((Rotatable) entity).facing();
 		} else {
-			int l = MathHelper.floor((double) (entity.world().getClosestPlayer(entity.xPosition(), entity.yPosition(), entity.zPosition(), 1.0D, false).rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-			return Direction.byHorizontalIndex(l);
+			int l = MathHelper.floor((double) (entity.world().getNearestPlayer(entity.xPosition(), entity.yPosition(), entity.zPosition(), 1.0D, false).getRotationVector().x * 4.0F / 360.0F) + 0.5D) & 3; // TODO: this isn't a todo but a note, if something is wrong with thhe direction, chang getRotationVector().x to getRotationVector().y
+			return Direction.from2DDataValue(l);
 		}
 	}
 

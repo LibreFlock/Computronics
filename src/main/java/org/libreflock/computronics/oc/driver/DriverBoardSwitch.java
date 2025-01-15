@@ -10,6 +10,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Hand;
+import net.minecraft.world.server.ServerWorld;
+
 import org.libreflock.computronics.reference.Config;
 import org.libreflock.computronics.util.OCUtils;
 
@@ -52,7 +54,7 @@ public class DriverBoardSwitch extends RackMountableWithComponentConnector {
 
 	@Override
 	public boolean onActivate(PlayerEntity player, Hand hand, ItemStack heldItem, float hitX, float hitY) {
-		if(player.world.isRemote) {
+		if(player.level instanceof ServerWorld) {
 			return true;
 		}
 		int xPix = (int) (hitX * 14);
@@ -80,7 +82,7 @@ public class DriverBoardSwitch extends RackMountableWithComponentConnector {
 	public void update() {
 		super.update();
 		for(int i = 0; i < switches.length; i++) {
-			if(switches[i] && !node.tryChangeBuffer(-Config.SWITCH_BOARD_MAINTENANCE_COST)) {
+			if(switches[i] && !node.tryChangeBuffer(-Config.COMMON.SWITCH_BOARD_MAINTENANCE_COST.get())) {
 				setActive(i, false, false);
 			}
 		}
@@ -135,8 +137,8 @@ public class DriverBoardSwitch extends RackMountableWithComponentConnector {
 	}
 
 	@Override
-	public void load(CompoundNBT tag) {
-		super.load(tag);
+	public void loadData(CompoundNBT tag) {
+		super.loadData(tag);
 		if(tag.contains("s")) {
 			byte switchData = tag.getByte("s");
 			for(int i = 0; i < switches.length; i++) {
@@ -146,8 +148,8 @@ public class DriverBoardSwitch extends RackMountableWithComponentConnector {
 	}
 
 	@Override
-	public void save(CompoundNBT tag) {
-		super.save(tag);
+	public void saveData(CompoundNBT tag) {
+		super.saveData(tag);
 		byte switchData = 0;
 		for(int i = 0; i < switches.length; i++) {
 			switchData |= (switches[i] ? 1 : 0) << i;

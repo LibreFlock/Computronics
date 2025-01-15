@@ -32,7 +32,7 @@ public class RobotUpgradeColorful extends ManagedEnvironmentWithComponentConnect
 	public Object[] setColor(Context context, Arguments args) {
 		int color = args.checkInteger(0);
 		if(color >= 0 && color <= 0xFFFFFF) {
-			if(node.tryChangeBuffer(-Config.COLORFUL_UPGRADE_COLOR_CHANGE_COST)) {
+			if(node.tryChangeBuffer(-Config.COMMON.COLORFUL_UPGRADE_COLOR_CHANGE_COST.get())) {
 				setColor(color);
 				return new Object[] { true };
 			}
@@ -48,7 +48,7 @@ public class RobotUpgradeColorful extends ManagedEnvironmentWithComponentConnect
 
 	@Callback(doc = "function():boolean; Resets the colour of the robot. Returns true on success, false and an error message otherwise", direct = true)
 	public Object[] resetColor(Context context, Arguments args) {
-		if(node.tryChangeBuffer(-Config.COLORFUL_UPGRADE_COLOR_CHANGE_COST)) {
+		if(node.tryChangeBuffer(-Config.COMMON.COLORFUL_UPGRADE_COLOR_CHANGE_COST.get())) {
 			setColor(-1);
 			return new Object[] { true };
 		}
@@ -90,8 +90,8 @@ public class RobotUpgradeColorful extends ManagedEnvironmentWithComponentConnect
 	}
 
 	@Override
-	public void load(CompoundNBT nbt) {
-		super.load(nbt);
+	public void loadData(CompoundNBT nbt) {
+		super.loadData(nbt);
 		if(nbt.contains("computronics:color")) {
 			setColor(nbt.getInt("computronics:color"));
 		}
@@ -99,8 +99,8 @@ public class RobotUpgradeColorful extends ManagedEnvironmentWithComponentConnect
 	}
 
 	@Override
-	public void save(CompoundNBT nbt) {
-		super.save(nbt);
+	public void saveData(CompoundNBT nbt) {
+		super.saveData(nbt);
 		nbt.putInt("computronics:color", this.color);
 	}
 

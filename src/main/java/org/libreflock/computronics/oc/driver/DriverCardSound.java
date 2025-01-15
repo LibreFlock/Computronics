@@ -8,14 +8,18 @@ import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.Message;
 import li.cil.oc.api.network.Visibility;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.fml.common.Optional;
+import net.minecraftforge.common.util.LazyOptional;
+
+// import net.minecraftforge.fml.common.Optional;
 import org.libreflock.computronics.api.audio.AudioPacket;
 import org.libreflock.computronics.api.audio.IAudioReceiver;
 import org.libreflock.computronics.api.audio.IAudioSource;
@@ -80,7 +84,7 @@ public class DriverCardSound extends ManagedEnvironmentWithComponentConnector im
 
 		@Override
 		public int getSoundDistance() {
-			return Config.SOUND_RADIUS;
+			return Config.COMMON.SOUND_RADIUS.get();
 		}
 
 		@Override
@@ -97,7 +101,7 @@ public class DriverCardSound extends ManagedEnvironmentWithComponentConnector im
 
 	@Override
 	public boolean canUpdate() {
-		return !host.world().isRemote;
+		return host.world() instanceof ClientWorld;
 	}
 
 	@Override
@@ -106,15 +110,15 @@ public class DriverCardSound extends ManagedEnvironmentWithComponentConnector im
 	}
 
 	@Override
-	public void load(CompoundNBT nbt) {
-		super.load(nbt);
+	public void loadData(CompoundNBT nbt) {
+		super.loadData(nbt);
 		board.load(nbt);
 	}
 
 	@Override
-	public void save(CompoundNBT nbt) {
-		super.save(nbt);
-		if(host.world().isRemote) {
+	public void saveData(CompoundNBT nbt) {
+		super.saveData(nbt);
+		if(host.world() instanceof ServerWorld) {
 			board.save(nbt);
 		}
 	}
@@ -147,99 +151,99 @@ public class DriverCardSound extends ManagedEnvironmentWithComponentConnector im
 	}
 
 	@Callback(doc = "function(volume:number); Sets the general volume of the entire sound card to a value between 0 and 1. Not an instruction, this affects all channels directly.", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] setTotalVolume(Context context, Arguments args) {
 		board.setTotalVolume(args.checkDouble(0));
 		return new Object[] {};
 	}
 
 	@Callback(doc = "function(); Clears the instruction queue.", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] clear(Context context, Arguments args) {
 		board.clear();
 		return new Object[] {};
 	}
 
 	@Callback(doc = "function(channel:number); Instruction; Opens the specified channel, allowing sound to be generated.", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] open(Context context, Arguments args) {
 		return board.tryAdd(new Open(checkChannel(args)));
 	}
 
 	@Callback(doc = "function(channel:number); Instruction; Closes the specified channel, stopping sound from being generated.", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] close(Context context, Arguments args) {
 		return board.tryAdd(new Close(checkChannel(args)));
 	}
 
 	@Callback(doc = "function(channel:number, type:number); Instruction; Sets the wave type on the specified channel.", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] setWave(Context context, Arguments args) {
 		return board.setWave(args.checkInteger(0), args.checkInteger(1));
 	}
 
 	@Callback(doc = "function(channel:number, frequency:number); Instruction; Sets the frequency on the specified channel.", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] setFrequency(Context context, Arguments args) {
 		return board.tryAdd(new SetFrequency(checkChannel(args), (float) args.checkDouble(1)));
 	}
 
 	@Callback(doc = "function(channel:number, initial:number, mask:number); Instruction; Makes the specified channel generate LFSR noise. Functions like a wave type.", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] setLFSR(Context context, Arguments args) {
 		return board.tryAdd(new SetLFSR(checkChannel(args), args.checkInteger(1), args.checkInteger(2)));
 	}
 
 	@Callback(doc = "function(duration:number); Instruction; Adds a delay of the specified duration in milliseconds, allowing sound to generate.", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] delay(Context context, Arguments args) {
 		return board.delay(args.checkInteger(0));
 	}
 
 	@Callback(doc = "function(channel:number, modIndex:number, intensity:number); Instruction; Assigns a frequency modulator channel to the specified channel with the specified intensity.", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] setFM(Context context, Arguments args) {
 		return board.tryAdd(new SetFM(checkChannel(args), checkChannel(args, 1), (float) args.checkDouble(2)));
 	}
 
 	@Callback(doc = "function(channel:number); Instruction; Removes the specified channel's frequency modulator.", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] resetFM(Context context, Arguments args) {
 		return board.tryAdd(new ResetFM(checkChannel(args)));
 	}
 
 	@Callback(doc = "function(channel:number, modIndex:number); Instruction; Assigns an amplitude modulator channel to the specified channel.", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] setAM(Context context, Arguments args) {
 		return board.tryAdd(new SetAM(checkChannel(args), checkChannel(args, 1)));
 	}
 
 	@Callback(doc = "function(channel:number); Instruction; Removes the specified channel's amplitude modulator.", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] resetAM(Context context, Arguments args) {
 		return board.tryAdd(new ResetAM(checkChannel(args)));
 	}
 
 	@Callback(doc = "function(channel:number, attack:number, decay:number, attenuation:number, release:number); Instruction; Assigns ADSR to the specified channel with the specified phase durations in milliseconds and attenuation between 0 and 1.", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] setADSR(Context context, Arguments args) {
 		return board.tryAdd(new SetADSR(checkChannel(args), args.checkInteger(1), args.checkInteger(2), (float) args.checkDouble(3), args.checkInteger(4)));
 	}
 
 	@Callback(doc = "function(channel:number); Instruction; Removes ADSR from the specified channel.", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] resetEnvelope(Context context, Arguments args) {
 		return board.tryAdd(new ResetEnvelope(checkChannel(args)));
 	}
 
 	@Callback(doc = "function(channel:number, volume:number); Instruction; Sets the volume of the channel between 0 and 1.", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] setVolume(Context context, Arguments args) {
 		return board.tryAdd(new SetVolume(checkChannel(args), (float) args.checkDouble(1)));
 	}
 
 	@Callback(doc = "function(); Starts processing the queue; Returns true is processing began, false if there is still a queue being processed.", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] process(Context context, Arguments args) {
 		return board.process();
 	}
@@ -251,7 +255,7 @@ public class DriverCardSound extends ManagedEnvironmentWithComponentConnector im
 		if(host instanceof TileEntity) {
 			if(Mods.API.hasAPI(Mods.API.CharsetAudio)) {
 				int oldReceivers = receivers;
-				receivers += IntegrationCharsetAudio.send(host.world(), ((TileEntity) host).getPos(), pkt, 1.0F, true);
+				receivers += IntegrationCharsetAudio.send(host.world(), ((TileEntity) host).getBlockPos(), pkt, 1.0F, true);
 				if(receivers > oldReceivers) {
 					sent = true;
 				}
@@ -259,17 +263,17 @@ public class DriverCardSound extends ManagedEnvironmentWithComponentConnector im
 		}
 		if(!sent) {
 			if(host instanceof TileEntity) {
-				for(Direction dir : Direction.VALUES) {
-					TileEntity tile = host.world().getTileEntity(((TileEntity) host).getPos().offset(dir));
+				for(Direction dir : Direction.values()) {
+					TileEntity tile = host.world().getBlockEntity(((TileEntity) host).getBlockPos().relative(dir));
 					if(tile != null) {
-						if(tile.hasCapability(AUDIO_RECEIVER_CAPABILITY, dir.getOpposite())) {
+						if(!tile.getCapability(AUDIO_RECEIVER_CAPABILITY, dir.getOpposite()).equals(LazyOptional.empty())) {
 							IColorable hostCol = ColorUtils.getColorable((TileEntity) host, dir);
 							IColorable targetCol = ColorUtils.getColorable(tile, dir.getOpposite());
 							if(hostCol != null && targetCol != null && hostCol.canBeColored() && targetCol.canBeColored()
 								&& !ColorUtils.isSameOrDefault(hostCol, targetCol)) {
 								continue;
 							}
-							tile.getCapability(AUDIO_RECEIVER_CAPABILITY, dir.getOpposite()).receivePacket(pkt, dir.getOpposite());
+							tile.getCapability(AUDIO_RECEIVER_CAPABILITY, dir.getOpposite()).orElse(null).receivePacket(pkt, dir.getOpposite());
 							receivers++;
 						}
 					}

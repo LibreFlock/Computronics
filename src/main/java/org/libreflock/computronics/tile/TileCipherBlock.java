@@ -14,9 +14,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
-import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.LockCode;
-// import net.minecraftforge.fml.common.Optional;
+import net.minecraftforge.registries.ForgeRegistries;
+// import net.minecraft.tileentity.LockableTileEntity;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.gui.container.ContainerCipherBlock;
 import org.libreflock.computronics.reference.Config;
@@ -30,7 +30,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-public class TileCipherBlock extends TileEntityPeripheralBase implements IBundledRedstoneProvider, ISidedInventory, ILockableContainer {
+public class TileCipherBlock extends TileEntityPeripheralBase implements IBundledRedstoneProvider, ISidedInventory {
 
 	private byte[] key = new byte[32];
 	private byte[] iv = new byte[16];
@@ -56,7 +56,7 @@ public class TileCipherBlock extends TileEntityPeripheralBase implements IBundle
 				key[i * 5] = 0;
 				key[i * 5 + 1] = 0;
 			} else {
-				key[i * 5] = (byte) (ForgeRegistries.ITEMS(stack.getItem()) & 255);
+				key[i * 5] = (byte) (ForgeRegistries.ITEMS.get(stack.getItem()) & 255);
 				key[i * 5 + 1] = (byte) (Item.getIdFromItem(stack.getItem()) >> 8);
 			}
 
@@ -294,17 +294,17 @@ public class TileCipherBlock extends TileEntityPeripheralBase implements IBundle
 	@Override
 	public void readFromNBT(CompoundNBT tag) {
 		super.readFromNBT(tag);
-		if(tag.contains("cb_l") && Config.CIPHER_CAN_LOCK) {
+		if(tag.contains("cb_l") && Config.COMMON.CIPHER_CAN_LOCK.get()) {
 			this.forceLocked = tag.getBoolean("cb_l");
 		}
-		this.code = LockCode.fromNBT(tag);
+		this.code = LockCode.fromTag(tag);
 	}
 
 	@Override
 	public CompoundNBT writeToNBT(CompoundNBT tag) {
 		super.writeToNBT(tag);
 		if(this.code != null) {
-			this.code.toNBT(tag);
+			this.code.addToTag(tag);
 		}
 		if(this.forceLocked) {
 			tag.putBoolean("cb_l", true);
@@ -402,7 +402,7 @@ public class TileCipherBlock extends TileEntityPeripheralBase implements IBundle
 		this.forceLocked = locked;
 	}
 
-	private LockCode code = LockCode.EMPTY_CODE;
+	private LockCode code = LockCode.NO_LOCK;
 
 	@Override
 	public void setLockCode(LockCode code) {

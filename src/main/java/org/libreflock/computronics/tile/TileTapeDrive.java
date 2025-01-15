@@ -3,14 +3,15 @@ package org.libreflock.computronics.tile;
 //import java.nio.file.FileSystem;
 
 import com.google.common.base.Charsets;
-import dan200.computercraft.api.filesystem.IMount;
-import dan200.computercraft.api.lua.ILuaContext;
-import dan200.computercraft.api.lua.LuaException;
-import dan200.computercraft.api.peripheral.IComputerAccess;
+// import dan200.computercraft.api.filesystem.IMount;
+// import dan200.computercraft.api.lua.ILuaContext;
+// import dan200.computercraft.api.lua.LuaException;
+// import dan200.computercraft.api.peripheral.IComputerAccess;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.Node;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -21,14 +22,17 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.Optional;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.util.LazyOptional;
+
+// import net.minecraftforge.fml.common.Optional;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.api.audio.AudioPacket;
 import org.libreflock.computronics.api.audio.IAudioReceiver;
 import org.libreflock.computronics.api.audio.IAudioSource;
 import org.libreflock.computronics.api.tape.IItemTapeStorage;
 import org.libreflock.computronics.audio.AudioUtils;
-import org.libreflock.computronics.cc.ComputronicsFileMount;
+// import org.libreflock.computronics.cc.ComputronicsFileMount;
 import org.libreflock.computronics.integration.charset.audio.IntegrationCharsetAudio;
 import org.libreflock.computronics.network.PacketType;
 import org.libreflock.computronics.reference.Config;
@@ -60,7 +64,7 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 
 		@Override
 		public Vector3d getSoundPos() {
-			return new Vector3d(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D);
+			return new Vector3d(getBlockPos().getX() + 0.5D, getBlockPos().getY() + 0.5D, getBlockPos().getZ() + 0.5D);
 		}
 
 		@Override
@@ -75,7 +79,7 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 
 		@Override
 		public String getID() {
-			return AudioUtils.positionId(getPos());
+			return AudioUtils.positionId(getBlockPos());
 		}
 
 	};
@@ -89,105 +93,105 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 		this.state = new TapeDriveState();
 	}
 
-	private static Object cc_fs;
-	private static Object cc_fs_autorun; // dan200, why?
-	protected ConcurrentHashMap<IComputerAccess, String> computerMountPointsCC;
-	protected ConcurrentHashMap<IComputerAccess, String> computerMountPointsCC_autorun;
+	// private static Object cc_fs;
+	// private static Object cc_fs_autorun; // dan200, why?
+	// protected ConcurrentHashMap<IComputerAccess, String> computerMountPointsCC;
+	// protected ConcurrentHashMap<IComputerAccess, String> computerMountPointsCC_autorun;
 
-	@Nullable
-	@Optional.Method(modid = Mods.ComputerCraft)
-	protected IMount cc_fs() {
-		return (IMount) cc_fs;
-	}
+	// @Nullable
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// protected IMount cc_fs() {
+	// 	return (IMount) cc_fs;
+	// }
 
-	@Nullable
-	@Optional.Method(modid = Mods.ComputerCraft)
-	protected IMount cc_autorun_fs() {
-		return (IMount) cc_fs_autorun;
-	}
+	// @Nullable
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// protected IMount cc_autorun_fs() {
+	// 	return (IMount) cc_fs_autorun;
+	// }
 
-	@Optional.Method(modid = Mods.ComputerCraft)
-	public static void initCCFilesystem() {
-		if(cc_fs == null) {
-			cc_fs = ComputronicsFileMount.createMount(Computronics.class, Mods.Computronics, "lua/peripheral/tape_drive/programs/tape_drive");
-			if(cc_fs == null) {
-				Computronics.log.error("Unable to create ComputerCraft mount for tape drive programs.");
-			}
-		}
-		if(cc_fs_autorun == null) {
-			cc_fs_autorun = ComputronicsFileMount.createMount(Computronics.class, Mods.Computronics, "lua/peripheral/tape_drive/autorun/tape_drive");
-			if(cc_fs == null) {
-				Computronics.log.error("Unable to create ComputerCraft mount for tape drive autorun program.");
-			}
-		}
-	}
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// public static void initCCFilesystem() {
+	// 	if(cc_fs == null) {
+	// 		cc_fs = ComputronicsFileMount.createMount(Computronics.class, Mods.Computronics, "lua/peripheral/tape_drive/programs/tape_drive");
+	// 		if(cc_fs == null) {
+	// 			Computronics.log.error("Unable to create ComputerCraft mount for tape drive programs.");
+	// 		}
+	// 	}
+	// 	if(cc_fs_autorun == null) {
+	// 		cc_fs_autorun = ComputronicsFileMount.createMount(Computronics.class, Mods.Computronics, "lua/peripheral/tape_drive/autorun/tape_drive");
+	// 		if(cc_fs == null) {
+	// 			Computronics.log.error("Unable to create ComputerCraft mount for tape drive autorun program.");
+	// 		}
+	// 	}
+	// }
+
+	// @Override
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// public void attach(IComputerAccess computer) {
+	// 	super.attach(computer);
+	// 	if(computerMountPointsCC == null) {
+	// 		computerMountPointsCC = new ConcurrentHashMap<IComputerAccess, String>(2);
+	// 	}
+	// 	IMount mount = cc_fs();
+	// 	if(mount != null) {
+	// 		String mountPoint = computer.mount("rom/programs/tape_drive", mount);
+	// 		if(mountPoint != null) {
+	// 			computerMountPointsCC.put(computer, mountPoint);
+	// 		}
+	// 	}
+	// 	if(computerMountPointsCC_autorun == null) {
+	// 		computerMountPointsCC_autorun = new ConcurrentHashMap<IComputerAccess, String>(2);
+	// 	}
+	// 	mount = cc_autorun_fs();
+	// 	if(mount != null) {
+	// 		String mountPoint = computer.mount("rom/autorun/tape_drive", mount);
+	// 		if(mountPoint != null) {
+	// 			computerMountPointsCC_autorun.put(computer, mountPoint);
+	// 		}
+	// 	}
+	// }
+
+	// @Override
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// public void detach(IComputerAccess computer) {
+	// 	super.detach(computer);
+	// 	if(computerMountPointsCC == null) {
+	// 		computerMountPointsCC = new ConcurrentHashMap<IComputerAccess, String>(2);
+	// 	}
+	// 	String mountPoint = computerMountPointsCC.remove(computer);
+	// 	if(mountPoint != null) {
+	// 		computer.unmount(mountPoint);
+	// 	}
+	// 	if(computerMountPointsCC_autorun == null) {
+	// 		computerMountPointsCC_autorun = new ConcurrentHashMap<IComputerAccess, String>(2);
+	// 	}
+	// 	mountPoint = computerMountPointsCC_autorun.remove(computer);
+	// 	if(mountPoint != null) {
+	// 		computer.unmount(mountPoint);
+	// 	}
+	// }
 
 	@Override
-	@Optional.Method(modid = Mods.ComputerCraft)
-	public void attach(IComputerAccess computer) {
-		super.attach(computer);
-		if(computerMountPointsCC == null) {
-			computerMountPointsCC = new ConcurrentHashMap<IComputerAccess, String>(2);
-		}
-		IMount mount = cc_fs();
-		if(mount != null) {
-			String mountPoint = computer.mount("rom/programs/tape_drive", mount);
-			if(mountPoint != null) {
-				computerMountPointsCC.put(computer, mountPoint);
-			}
-		}
-		if(computerMountPointsCC_autorun == null) {
-			computerMountPointsCC_autorun = new ConcurrentHashMap<IComputerAccess, String>(2);
-		}
-		mount = cc_autorun_fs();
-		if(mount != null) {
-			String mountPoint = computer.mount("rom/autorun/tape_drive", mount);
-			if(mountPoint != null) {
-				computerMountPointsCC_autorun.put(computer, mountPoint);
-			}
-		}
-	}
-
-	@Override
-	@Optional.Method(modid = Mods.ComputerCraft)
-	public void detach(IComputerAccess computer) {
-		super.detach(computer);
-		if(computerMountPointsCC == null) {
-			computerMountPointsCC = new ConcurrentHashMap<IComputerAccess, String>(2);
-		}
-		String mountPoint = computerMountPointsCC.remove(computer);
-		if(mountPoint != null) {
-			computer.unmount(mountPoint);
-		}
-		if(computerMountPointsCC_autorun == null) {
-			computerMountPointsCC_autorun = new ConcurrentHashMap<IComputerAccess, String>(2);
-		}
-		mountPoint = computerMountPointsCC_autorun.remove(computer);
-		if(mountPoint != null) {
-			computer.unmount(mountPoint);
-		}
-	}
-
-	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public void onConnect(final Node node) {
 		super.onConnect(node);
 	}
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	protected void onChunkUnload_OC() {
 		super.onChunkUnload_OC();
 	}
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	protected void invalidate_OC() {
 		super.invalidate_OC();
 	}
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	protected OCUtils.Device deviceInfo() {
 		return new OCUtils.Device(
 			DeviceClass.Tape,
@@ -200,7 +204,7 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 	// GUI/State
 
 	protected void sendState() {
-		if(world.isRemote) {
+		if(getLevel() instanceof ServerWorld) {
 			return;
 		}
 		try {
@@ -222,7 +226,7 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 	public void switchState(State s) {
 		//System.out.println("Switchy switch to " + s.name());
 		if(this.getEnumState() != s) {
-			this.state.switchState(world, s);
+			this.state.switchState(getLevel(), s);
 			this.sendState();
 		}
 	}
@@ -290,29 +294,29 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 	public void update() {
 		super.update();
 		State st = getEnumState();
-		AudioPacket pkt = state.update(this, world);
+		AudioPacket pkt = state.update(this, getLevel());
 		if(pkt != null) {
 			int receivers = 0;
 
 			boolean sent = false;
 			if(Mods.API.hasAPI(Mods.API.CharsetAudio)) {
 				int oldReceivers = receivers;
-				receivers += IntegrationCharsetAudio.send(getWorld(), getPos(), pkt, getVolume(), true);
+				receivers += IntegrationCharsetAudio.send(getLevel(), getBlockPos(), pkt, getVolume(), true);
 				if(receivers > oldReceivers) {
 					sent = true;
 				}
 			}
 
 			if(!sent) {
-				for(Direction dir : Direction.VALUES) {
-					TileEntity tile = world.getTileEntity(getPos().offset(dir));
-					if(tile != null && tile.hasCapability(AUDIO_RECEIVER_CAPABILITY, dir.getOpposite())) {
+				for(Direction dir : Direction.values()) {
+					TileEntity tile = getLevel().getBlockEntity(getBlockPos().relative(dir));
+					if(tile != null && !tile.getCapability(AUDIO_RECEIVER_CAPABILITY, dir.getOpposite()).equals(LazyOptional.empty())) {
 						IColorable targetCol = ColorUtils.getColorable(tile, dir.getOpposite());
 						if(targetCol != null && targetCol.canBeColored()
 							&& !ColorUtils.isSameOrDefault(this, targetCol)) {
 							continue;
 						}
-						tile.getCapability(AUDIO_RECEIVER_CAPABILITY, dir.getOpposite()).receivePacket(pkt, dir.getOpposite());
+						tile.getCapability(AUDIO_RECEIVER_CAPABILITY, dir.getOpposite()).orElse(null).receivePacket(pkt, dir.getOpposite());
 						receivers++;
 					}
 				}
@@ -323,7 +327,7 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 				pkt.sendPacket();
 			}
 		}
-		if(!world.isRemote && st != getEnumState()) {
+		if(getLevel() instanceof ClientWorld && st != getEnumState()) {
 			sendState();
 		}
 	}
@@ -332,11 +336,11 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 
 	private void setLabel(String label) {
 		ItemStack stack = this.getStackInSlot(0);
-		if(!stack.isEmpty() && stack.getTagCompound() != null) {
-			if(label.length() == 0 && stack.getTagCompound().contains("label")) {
-				stack.getTagCompound().removeTag("label");
+		if(!stack.isEmpty() && stack.getTag() != null) {
+			if(label.length() == 0 && stack.getTag().contains("label")) {
+				stack.getTag().remove("label");
 			} else if(label.length() > 0) {
-				stack.getTagCompound().putString("label", label);
+				stack.getTag().putString("label", label);
 			}
 			storageName = label;
 		}
@@ -355,9 +359,9 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 	}
 
 	@Override
-	public void invalidate() {
+	public void setRemoved() {
 		unloadStorage();
-		super.invalidate();
+		super.setRemoved();
 	}
 
 	@Override
@@ -385,7 +389,7 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 	// Storage handling
 
 	private void loadStorage() {
-		if(world != null && world.isRemote) {
+		if(this.level != null && getLevel() instanceof ServerWorld) {
 			return;
 		}
 
@@ -401,8 +405,8 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 			}
 
 			// Get possible label.
-			if(stack.getTagCompound() != null) {
-				CompoundNBT tag = stack.getTagCompound();
+			if(stack.getTag() != null) {
+				CompoundNBT tag = stack.getTag();
 				storageName = tag.contains("label") ? tag.getString("label") : "";
 			} else {
 				storageName = "";
@@ -415,7 +419,7 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 	}
 
 	private void unloadStorage() {
-		if(world.isRemote || state.getStorage() == null) {
+		if(getLevel() instanceof ServerWorld || state.getStorage() == null) {
 			return;
 		}
 
@@ -433,8 +437,8 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 		if(this.getStackInSlot(0).isEmpty()) {
 			if(state.getStorage() != null) { // Tape was inserted
 				// Play eject sound
-				BlockPos pos = getPos();
-				world.playSound(null, pos, Sounds.TAPE_EJECT.event, SoundCategory.BLOCKS, 1, 0);
+				BlockPos pos = getBlockPos();
+				getLevel().playSound(null, pos, Sounds.TAPE_EJECT.event, SoundCategory.BLOCKS, 1, 0);
 			}
 			unloadStorage();
 		} else {
@@ -442,8 +446,8 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 			ItemStack stack = this.getStackInSlot(0);
 			if(!stack.isEmpty() && stack.getItem() instanceof IItemTapeStorage) {
 				// Play insert sound
-				BlockPos pos = getPos();
-				world.playSound(null, pos, Sounds.TAPE_INSERT.event, SoundCategory.BLOCKS, 1, 0);
+				BlockPos pos = getBlockPos();
+				getLevel().playSound(null, pos, Sounds.TAPE_INSERT.event, SoundCategory.BLOCKS, 1, 0);
 			}
 		}
 	}
@@ -488,13 +492,13 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 	}
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public void readFromNBT_OC(CompoundNBT tag) {
 		super.readFromNBT_OC(tag);
 	}
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public void writeToNBT_OC(CompoundNBT tag) {
 		super.writeToNBT_OC(tag);
 	}
@@ -509,7 +513,7 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 	@Override
 	public void removeFromNBTForTransfer(CompoundNBT data) {
 		super.removeFromNBTForTransfer(data);
-		data.removeTag("state");
+		data.remove("state");
 	}
 
 	@Override
@@ -523,46 +527,46 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 	// OpenComputers
 
 	@Callback(doc = "function():boolean; Returns true if the tape drive is empty or the inserted tape has reached its end", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] isEnd(Context context, Arguments args) {
 		return new Object[] { isEnd() };
 	}
 
 	@Callback(doc = "function():boolean; Returns true if there is a tape inserted", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] isReady(Context context, Arguments args) {
 		return new Object[] { isReady() };
 	}
 
 	@Callback(doc = "function():number; Returns the size of the tape, in bytes", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] getSize(Context context, Arguments args) {
 		return new Object[] { getSize() };
 	}
 
 	@Callback(doc = "function():number; Returns the position of the tape, in bytes", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] getPosition(Context context, Arguments args) {
 		return new Object[] { getPosition() };
 	}
 
 	@Callback(doc = "function(label:string):string; Sets the label of the tape. "
 		+ "Returns the new label, or nil if there is no tape inserted")
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] setLabel(Context context, Arguments args) {
 		setLabel(args.checkString(0));
 		return new Object[] { (state.getStorage() != null ? storageName : null) };
 	}
 
 	@Callback(doc = "function():string; Returns the current label of the tape, or nil if there is no tape inserted")
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] getLabel(Context context, Arguments args) {
 		return new Object[] { (state.getStorage() != null ? storageName : null) };
 	}
 
 	@Callback(doc = "function(length:number):number; Seeks the specified amount of bytes on the tape. "
 		+ "Negative values for rewinding. Returns the amount of bytes sought, or nil if there is no tape inserted")
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] seek(Context context, Arguments args) {
 		if(state.getStorage() != null) {
 			return new Object[] { seek(args.checkInteger(0)) };
@@ -573,7 +577,7 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 	@Callback(doc = "function([length:number]):string; "
 		+ "Reads and returns the specified amount of bytes or a single byte from the tape. "
 		+ "Returns nil if there is no tape inserted")
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] read(Context context, Arguments args) {
 		if(state.getStorage() != null) {
 			if(args.count() >= 1 && args.isInteger(0) && (args.checkInteger(0) >= 0)) {
@@ -587,7 +591,7 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 	}
 
 	@Callback(doc = "function(data:number or string); Writes the specified data to the tape if there is one inserted")
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] write(Context context, Arguments args) {
 		if(state.getStorage() != null && args.count() >= 1) {
 			if(args.isInteger(0)) {
@@ -602,176 +606,176 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 	}
 
 	@Callback(doc = "function():boolean; Make the Tape Drive start playing the tape. Returns true on success")
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] play(Context context, Arguments args) {
 		switchState(State.PLAYING);
 		return new Object[] { state.getStorage() != null && this.getEnumState() == State.PLAYING };
 	}
 
 	@Callback(doc = "function():boolean; Make the Tape Drive stop playing the tape. Returns true on success")
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] stop(Context context, Arguments args) {
 		switchState(State.STOPPED);
 		return new Object[] { state.getStorage() != null && this.getEnumState() == State.STOPPED };
 	}
 
 	@Callback(doc = "function(speed:number):boolean; Sets the speed of the tape drive. Needs to be beween 0.25 and 2. Returns true on success")
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] setSpeed(Context context, Arguments args) {
 		return new Object[] { this.state.setSpeed((float) args.checkDouble(0)) };
 	}
 
 	@Callback(doc = "function(speed:number); Sets the volume of the tape drive. Needs to be beween 0 and 1")
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] setVolume(Context context, Arguments args) {
 		this.state.setVolume((float) args.checkDouble(0));
 		return new Object[] {};
 	}
 
 	@Callback(doc = "function():string; Returns the current state of the tape drive", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] getState(Context context, Arguments args) {
 		return new Object[] { state.getState().toString() };
 	}
 
-	@Override
-	@Optional.Method(modid = Mods.ComputerCraft)
-	public String[] getMethodNames() {
-		return new String[] { "isEnd", "isReady", "getSize", "getLabel", "getState", "setLabel", "setSpeed", "setVolume", "seek", "read", "write", "play", "stop", "getPosition" };
-	}
+	// @Override
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// public String[] getMethodNames() {
+	// 	return new String[] { "isEnd", "isReady", "getSize", "getLabel", "getState", "setLabel", "setSpeed", "setVolume", "seek", "read", "write", "play", "stop", "getPosition" };
+	// }
 
-	@Override
-	@Optional.Method(modid = Mods.ComputerCraft)
-	public Object[] callMethod(IComputerAccess computer, ILuaContext context,
-		int method, Object[] arguments) throws LuaException,
-		InterruptedException {
+	// @Override
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// public Object[] callMethod(IComputerAccess computer, ILuaContext context,
+	// 	int method, Object[] arguments) throws LuaException,
+	// 	InterruptedException {
 
-		// methods which don't take any arguments
-		switch(method) {
-			case 0: { // isEnd
-				return new Object[] { isEnd() };
-			}
-			case 1: { // isReady
-				return new Object[] { isReady() };
-			}
-			case 2: { // getSize
-				return new Object[] { getSize() };
-			}
-			case 3: { // getLabel
-				return new Object[] { (state.getStorage() != null ? storageName : null) };
-			}
-			case 4: { // getState
-				return new Object[] { state.getState().toString() };
-			}
-			case 9: { // read
-				if(arguments.length < 1) {
-					if(state.getStorage() != null) {
-						return new Object[] { read() };
-					} else {
-						return new Object[] {};
-					}
-				}
-				break;
-			}
-			case 11: { // play
-				switchState(State.PLAYING);
-				return new Object[] { state.getStorage() != null && this.getEnumState() == State.PLAYING };
-			}
-			case 12: { // stop
-				switchState(State.STOPPED);
-				return new Object[] { state.getStorage() != null && this.getEnumState() == State.STOPPED };
-			}
-			case 13: { // getPosition
-				return new Object[] { getPosition() };
-			}
-		}
+	// 	// methods which don't take any arguments
+	// 	switch(method) {
+	// 		case 0: { // isEnd
+	// 			return new Object[] { isEnd() };
+	// 		}
+	// 		case 1: { // isReady
+	// 			return new Object[] { isReady() };
+	// 		}
+	// 		case 2: { // getSize
+	// 			return new Object[] { getSize() };
+	// 		}
+	// 		case 3: { // getLabel
+	// 			return new Object[] { (state.getStorage() != null ? storageName : null) };
+	// 		}
+	// 		case 4: { // getState
+	// 			return new Object[] { state.getState().toString() };
+	// 		}
+	// 		case 9: { // read
+	// 			if(arguments.length < 1) {
+	// 				if(state.getStorage() != null) {
+	// 					return new Object[] { read() };
+	// 				} else {
+	// 					return new Object[] {};
+	// 				}
+	// 			}
+	// 			break;
+	// 		}
+	// 		case 11: { // play
+	// 			switchState(State.PLAYING);
+	// 			return new Object[] { state.getStorage() != null && this.getEnumState() == State.PLAYING };
+	// 		}
+	// 		case 12: { // stop
+	// 			switchState(State.STOPPED);
+	// 			return new Object[] { state.getStorage() != null && this.getEnumState() == State.STOPPED };
+	// 		}
+	// 		case 13: { // getPosition
+	// 			return new Object[] { getPosition() };
+	// 		}
+	// 	}
 
-		// Argument type check
-		switch(method) {
-			case 5: { // setLabel
-				if(arguments.length < 1 || !(arguments[0] instanceof String)) {
-					throw new LuaException("first argument needs to be a string");
-				}
-				break;
-			}
-			case 6:
-			case 7:
-			case 8: { // setSpeed, setVolume, seek
-				if(arguments.length < 1 || !(arguments[0] instanceof Number)) {
-					throw new LuaException("first argument needs to be a number");
-				}
-				break;
-			}
-			case 9: { // read
-				if(arguments.length < 1 || !(arguments[0] instanceof Number)) {
-					throw new LuaException("first argument needs to be a number or non-existant");
-				}
-				break;
-			}
-			case 10: { // write
-				if(arguments.length < 1 || (!(arguments[0] instanceof String) && !(arguments[0] instanceof Number))) {
-					throw new LuaException("first argument needs to be a number or string");
-				}
-				break;
-			}
-		}
+	// 	// Argument type check
+	// 	switch(method) {
+	// 		case 5: { // setLabel
+	// 			if(arguments.length < 1 || !(arguments[0] instanceof String)) {
+	// 				throw new LuaException("first argument needs to be a string");
+	// 			}
+	// 			break;
+	// 		}
+	// 		case 6:
+	// 		case 7:
+	// 		case 8: { // setSpeed, setVolume, seek
+	// 			if(arguments.length < 1 || !(arguments[0] instanceof Number)) {
+	// 				throw new LuaException("first argument needs to be a number");
+	// 			}
+	// 			break;
+	// 		}
+	// 		case 9: { // read
+	// 			if(arguments.length < 1 || !(arguments[0] instanceof Number)) {
+	// 				throw new LuaException("first argument needs to be a number or non-existant");
+	// 			}
+	// 			break;
+	// 		}
+	// 		case 10: { // write
+	// 			if(arguments.length < 1 || (!(arguments[0] instanceof String) && !(arguments[0] instanceof Number))) {
+	// 				throw new LuaException("first argument needs to be a number or string");
+	// 			}
+	// 			break;
+	// 		}
+	// 	}
 
-		if(arguments.length < 1) {
-			throw new LuaException("no first argument found");
-		}
+	// 	if(arguments.length < 1) {
+	// 		throw new LuaException("no first argument found");
+	// 	}
 
-		// Execution
-		if((arguments[0] instanceof String)) {
-			// methods which take strings and do something
-			switch(method) {
-				case 5: // setLabel
-					setLabel((String) arguments[0]);
-					return new Object[] { (state.getStorage() != null ? storageName : null) };
-				case 10: // write
-					if(state.getStorage() != null) {
-						return new Object[] { write(((String) arguments[0]).getBytes(Charsets.ISO_8859_1)) };
-					}
-					break;
-			}
-		} else if(arguments[0] instanceof Number) {
-			// methods which take floats and do something
-			switch(method) {
-				case 6: { // setSpeed
-					return new Object[] { this.state.setSpeed(((Number) arguments[0]).floatValue()) };
-				}
-				case 7: { // setVolume
-					this.state.setVolume(((Number) arguments[0]).floatValue());
-					return new Object[] {};
-				}
-				case 8: { // seek
-					if(state.getStorage() != null) {
-						return new Object[] { state.getStorage().seek(((Number) arguments[0]).intValue()) };
-					}
-					break;
-				}
-				case 9: { // read
-					int i = ((Number) arguments[0]).intValue();
-					if(state.getStorage() != null) {
-						if(i >= 256) {
-							i = 256;
-						}
-						return new Object[] { new String(read(i), Charsets.ISO_8859_1) };
-					} else {
-						return new Object[] {};
-					}
-				}
-				case 10: { // write
-					if(state.getStorage() != null) {
-						write((byte) ((Number) arguments[0]).intValue());
-					}
-					break;
-				}
-			}
-		}
+	// 	// Execution
+	// 	if((arguments[0] instanceof String)) {
+	// 		// methods which take strings and do something
+	// 		switch(method) {
+	// 			case 5: // setLabel
+	// 				setLabel((String) arguments[0]);
+	// 				return new Object[] { (state.getStorage() != null ? storageName : null) };
+	// 			case 10: // write
+	// 				if(state.getStorage() != null) {
+	// 					return new Object[] { write(((String) arguments[0]).getBytes(Charsets.ISO_8859_1)) };
+	// 				}
+	// 				break;
+	// 		}
+	// 	} else if(arguments[0] instanceof Number) {
+	// 		// methods which take floats and do something
+	// 		switch(method) {
+	// 			case 6: { // setSpeed
+	// 				return new Object[] { this.state.setSpeed(((Number) arguments[0]).floatValue()) };
+	// 			}
+	// 			case 7: { // setVolume
+	// 				this.state.setVolume(((Number) arguments[0]).floatValue());
+	// 				return new Object[] {};
+	// 			}
+	// 			case 8: { // seek
+	// 				if(state.getStorage() != null) {
+	// 					return new Object[] { state.getStorage().seek(((Number) arguments[0]).intValue()) };
+	// 				}
+	// 				break;
+	// 			}
+	// 			case 9: { // read
+	// 				int i = ((Number) arguments[0]).intValue();
+	// 				if(state.getStorage() != null) {
+	// 					if(i >= 256) {
+	// 						i = 256;
+	// 					}
+	// 					return new Object[] { new String(read(i), Charsets.ISO_8859_1) };
+	// 				} else {
+	// 					return new Object[] {};
+	// 				}
+	// 			}
+	// 			case 10: { // write
+	// 				if(state.getStorage() != null) {
+	// 					write((byte) ((Number) arguments[0]).intValue());
+	// 				}
+	// 				break;
+	// 			}
+	// 		}
+	// 	}
 
-		// catch all other methods
-		return new Object[] {};
-	}
+	// 	// catch all other methods
+	// 	return new Object[] {};
+	// }
 
 	@Override
 	public int getSourceId() {
@@ -780,6 +784,6 @@ public class TileTapeDrive extends TileEntityPeripheralBase implements IAudioSou
 
 	@Override
 	public boolean connectsAudio(Direction side) {
-		return world.getBlockState(getPos()).getValue(Computronics.tapeReader.rotation.FACING) != side;
+		return getlevel().getBlockState(getBlockPos()).getValue(Computronics.tapeReader.rotation.FACING) != side;
 	}
 }

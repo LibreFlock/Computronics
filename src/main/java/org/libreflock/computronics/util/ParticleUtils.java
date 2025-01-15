@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class ParticleUtils {
 
-	public static void sendParticlePacket(BasicParticleType particle, World world, double x, double y, double z, double vx, double vy, double vz) {
+	public static void sendParticlePacket(ParticleTypes particle, World world, double x, double y, double z, double vx, double vy, double vz) {
 		try {
 			Packet pkt = Computronics.packet.create(PacketType.PARTICLE_SPAWN.ordinal())
 				.writeFloat((float) x).writeFloat((float) y).writeFloat((float) z)

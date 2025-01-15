@@ -10,7 +10,7 @@ import li.cil.oc.api.network.Node;
 import li.cil.oc.api.network.Visibility;
 import li.cil.oc.api.prefab.AbstractManagedEnvironment;
 import net.minecraftforge.event.ServerChatEvent;
-import net.minecraftforge.fml.common.Optional;
+// import net.minecraftforge.fml.common.Optional;
 import org.libreflock.computronics.api.chat.ChatAPI;
 import org.libreflock.computronics.api.chat.IChatListener;
 import org.libreflock.computronics.reference.Config;
@@ -28,14 +28,14 @@ public class RobotUpgradeChatBox extends AbstractManagedEnvironment implements D
 
 	public RobotUpgradeChatBox(EnvironmentHost container) {
 		this.container = container;
-		distance = Config.CHATBOX_DISTANCE;
+		distance = Config.COMMON.CHATBOX_DISTANCE.get();
 		this.setNode(Network.newNode(this, Visibility.Network).withConnector().withComponent("chat", Visibility.Neighbors).create());
 	}
 
 	@Override
 	public void receiveChatMessage(ServerChatEvent event) {
-		if(!Config.CHATBOX_MAGIC && (event.getPlayer().world != this.container.world()
-			|| event.getPlayer().getDistanceSq(container.xPosition(), container.yPosition(), container.zPosition()) > distance * distance)) {
+		if(!Config.COMMON.CHATBOX_MAGIC.get() && (event.getPlayer().level != this.container.world()
+			|| event.getPlayer().distanceToSqr(container.xPosition(), container.yPosition(), container.zPosition()) > distance * distance)) {
 			return;
 		}
 
@@ -74,33 +74,33 @@ public class RobotUpgradeChatBox extends AbstractManagedEnvironment implements D
 			dist = 32767;
 		}
 
-		this.distance = Math.min(Config.CHATBOX_DISTANCE, dist);
+		this.distance = Math.min(Config.COMMON.CHATBOX_DISTANCE.get(), dist);
 		if(this.distance < 0) {
-			this.distance = Config.CHATBOX_DISTANCE;
+			this.distance = Config.COMMON.CHATBOX_DISTANCE.get();
 		}
 	}
 
 	@Callback(doc = "function():number; Returns the chat distance the chat box is currently set to", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] getDistance(Context context, Arguments args) {
 		return new Object[] { distance };
 	}
 
 	@Callback(doc = "function(distance:number):number; Sets the distance of the chat box. Returns the new distance", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] setDistance(Context context, Arguments args) {
 		setDistance(args.checkInteger(0));
 		return new Object[] { distance };
 	}
 
 	@Callback(doc = "function():string; Returns the name of the chat box", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] getName(Context context, Arguments args) {
 		return new Object[] { name };
 	}
 
 	@Callback(doc = "function(name:string):string; Sets the name of the chat box. Returns the new name", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] setName(Context context, Arguments args) {
 		this.name = args.checkString(0);
 		return new Object[] { this.name };
@@ -116,13 +116,13 @@ public class RobotUpgradeChatBox extends AbstractManagedEnvironment implements D
 			int d = distance;
 			if(args.count() >= 1) {
 				if(args.isInteger(1)) {
-					d = Math.min(Config.CHATBOX_DISTANCE, args.checkInteger(1));
+					d = Math.min(Config.COMMON.CHATBOX_DISTANCE.get(), args.checkInteger(1));
 					if(d <= 0) {
 						d = distance;
 					}
 				}
 				if(args.isString(0)) {
-					sendChatMessage(this.container, d, name.length() > 0 ? name : Config.CHATBOX_PREFIX, args.checkString(0));
+					sendChatMessage(this.container, d, name.length() > 0 ? name : Config.COMMON.CHATBOX_PREFIX.get(), args.checkString(0));
 					return new Object[] { true };
 				}
 			}

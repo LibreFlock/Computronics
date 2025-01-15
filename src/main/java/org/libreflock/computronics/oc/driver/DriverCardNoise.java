@@ -12,7 +12,7 @@ import net.minecraft.nbt.FloatNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
+// import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.network.PacketType;
 import org.libreflock.computronics.reference.Config;
@@ -151,7 +151,7 @@ public class DriverCardNoise extends DriverCardSoundBase {
 		}
 		channelSendBuffer = new Channel[8];
 		double longest = 0;
-		final long currentTickTime = host.world().getTotalWorldTime();
+		final long currentTickTime = host.world().getGameTime();
 		for(int i = 0; i < channels.length; i++) {
 			Channel channel = channels[i];
 			if(channel.entries.size() == 0) {
@@ -173,7 +173,7 @@ public class DriverCardNoise extends DriverCardSoundBase {
 			}
 			longest = Math.max(longest, Math.max(50, Math.min(5000, (totalDelay / 1000D))));
 		}
-		Object[] error = tryConsumeEnergy(Config.BEEP_ENERGY_COST * getNonNullCount(channelSendBuffer) * longest, "process");
+		Object[] error = tryConsumeEnergy(Config.COMMON.BEEP_ENERGY_COST.get() * getNonNullCount(channelSendBuffer) * longest, "process");
 		if(error != null) {
 			channelSendBuffer = null;
 			return error;
@@ -233,27 +233,27 @@ public class DriverCardNoise extends DriverCardSoundBase {
 			double duration = optDouble(durObj != null ? (Number) durObj : null, 0.1);
 			int durationInMilliseconds = Math.max(50, Math.min(5000, (int) (duration * 1000)));
 			longest = Math.max(longest, Math.max(50, Math.min(5000, (duration * 1000))));
-			long time = host.world().getTotalWorldTime() + (long) (durationInMilliseconds / 1000 * 20);
+			long time = host.world().getGameTime() + (long) (durationInMilliseconds / 1000 * 20);
 			int index = channel - 1;
 			if(expirationList[index] == null) {
 				expirationList[index] = time;
 				freqPairs[index] = new Channel.FreqPair(frequency, durationInMilliseconds);
 			}
 		}
-		return tryQueueSound(freqPairs, new Object[] { true }, Config.BEEP_ENERGY_COST * getNonNullCount(freqPairs) * (longest / 1000D), playMethodName);
+		return tryQueueSound(freqPairs, new Object[] { true }, Config.COMMON.BEEP_ENERGY_COST.get() * getNonNullCount(freqPairs) * (longest / 1000D), playMethodName);
 	}
 
 	@Override
-	public void load(CompoundNBT nbt) {
-		super.load(nbt);
+	public void loadData(CompoundNBT nbt) {
+		super.loadData(nbt);
 		int[] iTypes = nbt.getIntArray("types");
-		ListNBT frequencies = nbt.getTagList("freqs", Constants.NBT.TAG_FLOAT);
+		ListNBT frequencies = nbt.getList("freqs", Constants.NBT.TAG_FLOAT);
 		int[] durations = nbt.getIntArray("dur");
 		int[] delays = nbt.getIntArray("delays");
-		int size = min(iTypes.length, channels.length, frequencies.tagCount(), durations.length, delays.length);
+		int size = min(iTypes.length, channels.length, frequencies.size(), durations.length, delays.length);
 		for(int i = 0; i < size; i++) {
 			channels[i].type = AudioType.fromIndex(iTypes[i]);
-			channels[i].entries.add(new Channel.WaveEntry(new Channel.FreqPair(frequencies.getFloatAt(i), durations[i]), delays[i]));
+			channels[i].entries.add(new Channel.WaveEntry(new Channel.FreqPair(frequencies.getFloat(i), durations[i]), delays[i]));
 		}
 	}
 
@@ -271,8 +271,8 @@ public class DriverCardNoise extends DriverCardSoundBase {
 	}
 
 	@Override
-	public void save(CompoundNBT nbt) {
-		super.save(nbt);
+	public void saveData(CompoundNBT nbt) {
+		super.saveData(nbt);
 		int[] iTypes = new int[channels.length];
 		ListNBT freqList = new ListNBT();
 		int[] durations = new int[channels.length];
@@ -280,7 +280,7 @@ public class DriverCardNoise extends DriverCardSoundBase {
 		for(int i = 0; i < channels.length; i++) {
 			iTypes[i] = channels[i].type.ordinal();
 			for(Channel.WaveEntry entry : channels[i].entries) {
-				freqList.appendTag(new FloatNBT(entry.freqPair.frequency));
+				freqList.add(new FloatNBT(entry.freqPair.frequency));
 				durations[i] = entry.freqPair.duration;
 				delays[i] = entry.initialDelay;
 			}
@@ -310,7 +310,7 @@ public class DriverCardNoise extends DriverCardSoundBase {
 			}
 		}
 		Packet packet = Computronics.packet.create(PacketType.COMPUTER_NOISE.ordinal())
-			.writeInt(world.provider.getDimension())
+			.writeInt(world.dimension())
 			.writeFloat((float) x)
 			.writeFloat((float) y)
 			.writeFloat((float) z)
@@ -330,10 +330,10 @@ public class DriverCardNoise extends DriverCardSoundBase {
 				}
 			}
 		}
-		Computronics.packet.sendToAllAround(packet, new NetworkRegistry.TargetPoint(
-			world.provider.getDimension(),
+		Computronics.packet.sendToAllAround(packet, new ForgeRegistries.NETWORK..TargetPoint(
+			world.dimension(),
 			x, y, z,
-			Config.SOUND_RADIUS));
+			Config.COMMON.SOUND_RADIUS.get()));
 	}
 
 	public static void onSound(Packet packet, PlayerEntity player) throws IOException {

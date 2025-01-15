@@ -28,32 +28,32 @@ public class RobotUpgradeRadar extends AbstractManagedEnvironment implements Dev
 
 	public RobotUpgradeRadar(EnvironmentHost container) {
 		this.container = container;
-		this.setNode(Network.newNode(this, Visibility.Network).withConnector(Config.RADAR_ENERGY_COST_OC * Config.RADAR_RANGE * 1.75).withComponent("radar", Visibility.Neighbors).create());
+		this.setNode(Network.newNode(this, Visibility.Network).withConnector(Config.COMMON.RADAR_ENERGY_COST_OC.get() * Config.COMMON.RADAR_RANGE.get() * 1.75).withComponent("radar", Visibility.Neighbors).create());
 	}
 
 	private int getDistance(Arguments args) {
 		if(args.isInteger(0)) {
 			return args.checkInteger(0);
 		} else {
-			return Config.RADAR_RANGE;
+			return Config.COMMON.RADAR_RANGE.get();
 		}
 	}
 
 	private AxisAlignedBB getBounds(int d) {
-		int distance = Math.min(d, Config.RADAR_RANGE);
+		int distance = Math.min(d, Config.COMMON.RADAR_RANGE.get());
 		if(distance < 1) {
 			distance = 1;
 		}
 		return new AxisAlignedBB(
 			container.xPosition() - 0.5, container.yPosition() - 0.5, container.zPosition() - 0.5, container.xPosition() + 0.5, container.yPosition() + 0.5, container.zPosition() + 0.5).
-			grow(distance, distance, distance);
+			expandTowards(distance, distance, distance);
 	}
 
 	@Callback(doc = "function([distance:number]):table; Returns a list of all entities detected within the specified or the maximum range", direct = true, limit = CALL_LIMIT)
 	public Object[] getEntities(Context context, Arguments args) {
 		List<Map> entities = new ArrayList<Map>();
 		int distance = getDistance(args);
-		if(((Connector) this.node()).tryChangeBuffer(0 - (Config.RADAR_ENERGY_COST_OC * distance * 1.75))) {
+		if(((Connector) this.node()).tryChangeBuffer(0 - (Config.COMMON.RADAR_ENERGY_COST_OC.get() * distance * 1.75))) {
 			AxisAlignedBB bounds = getBounds(distance);
 			entities.addAll(RadarUtils.getEntities(container.world(), container.xPosition(), container.yPosition(), container.zPosition(), bounds, PlayerEntity.class));
 			entities.addAll(RadarUtils.getEntities(container.world(), container.xPosition(), container.yPosition(), container.zPosition(), bounds, MobEntity.class));
@@ -72,7 +72,7 @@ public class RobotUpgradeRadar extends AbstractManagedEnvironment implements Dev
 	public Object[] getPlayers(Context context, Arguments args) {
 		List<Map> entities = new ArrayList<Map>();
 		int distance = getDistance(args);
-		if(((Connector) this.node()).tryChangeBuffer(0 - (Config.RADAR_ENERGY_COST_OC * distance * 1.0))) {
+		if(((Connector) this.node()).tryChangeBuffer(0 - (Config.COMMON.RADAR_ENERGY_COST_OC.get() * distance * 1.0))) {
 			AxisAlignedBB bounds = getBounds(distance);
 			entities.addAll(RadarUtils.getEntities(container.world(), container.xPosition(), container.yPosition(), container.zPosition(), bounds, PlayerEntity.class));
 			context.pause(0.5);
@@ -84,7 +84,7 @@ public class RobotUpgradeRadar extends AbstractManagedEnvironment implements Dev
 	public Object[] getMobs(Context context, Arguments args) {
 		List<Map> entities = new ArrayList<Map>();
 		int distance = getDistance(args);
-		if(((Connector) this.node()).tryChangeBuffer(0 - (Config.RADAR_ENERGY_COST_OC * distance * 1.0))) {
+		if(((Connector) this.node()).tryChangeBuffer(0 - (Config.COMMON.RADAR_ENERGY_COST_OC.get() * distance * 1.0))) {
 			AxisAlignedBB bounds = getBounds(distance);
 			entities.addAll(RadarUtils.getEntities(container.world(), container.xPosition(), container.yPosition(), container.zPosition(), bounds, MobEntity.class));
 			context.pause(0.5);
@@ -96,7 +96,7 @@ public class RobotUpgradeRadar extends AbstractManagedEnvironment implements Dev
 	public Object[] getItems(Context context, Arguments args) {
 		List<Map> entities = new ArrayList<Map>();
 		int distance = getDistance(args);
-		if(((Connector) this.node()).tryChangeBuffer(0 - (Config.RADAR_ENERGY_COST_OC * distance * 2.0))) {
+		if(((Connector) this.node()).tryChangeBuffer(0 - (Config.COMMON.RADAR_ENERGY_COST_OC.get() * distance * 2.0))) {
 			AxisAlignedBB bounds = getBounds(distance);
 			entities.addAll(RadarUtils.getItems(container.world(), container.xPosition(), container.yPosition(), container.zPosition(), bounds, ItemEntity.class));
 			context.pause(0.5);

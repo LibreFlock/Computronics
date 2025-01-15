@@ -21,7 +21,7 @@ public class DriverBoardCapacitor extends RackMountableWithComponentConnector {
 		this.host = host;
 		this.setNode(Network.newNode(this, Visibility.Network).
 			withComponent("rack_capacitor", Visibility.Network).
-			withConnector(Config.RACK_CAPACITOR_CAPACITY).
+			withConnector(Config.COMMON.RACK_CAPACITOR_CAPACITY.get()).
 			create());
 	}
 

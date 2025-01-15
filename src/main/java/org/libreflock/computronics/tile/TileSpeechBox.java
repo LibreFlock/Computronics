@@ -1,8 +1,8 @@
 package org.libreflock.computronics.tile;
 
-import dan200.computercraft.api.lua.ILuaContext;
-import dan200.computercraft.api.lua.LuaException;
-import dan200.computercraft.api.peripheral.IComputerAccess;
+// import dan200.computercraft.api.lua.ILuaContext;
+// import dan200.computercraft.api.lua.LuaException;
+// import dan200.computercraft.api.peripheral.IComputerAccess;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
@@ -12,7 +12,10 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.Optional;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.util.LazyOptional;
+
+// import net.minecraftforge.fml.common.Optional;
 import org.libreflock.computronics.Computronics;
 import org.libreflock.computronics.api.audio.AudioPacket;
 import org.libreflock.computronics.api.audio.AudioPacketDFPWM;
@@ -50,17 +53,17 @@ public class TileSpeechBox extends TileEntityPeripheralBase implements IAudioSou
 
 		@Override
 		public World getSoundWorld() {
-			return world;
+			return getLevel();
 		}
 
 		@Override
 		public Vector3d getSoundPos() {
-			return new Vector3d(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D);
+			return new Vector3d(getBlockPos().getX() + 0.5D, getBlockPos().getY() + 0.5D, getBlockPos().getZ() + 0.5D);
 		}
 
 		@Override
 		public int getSoundDistance() {
-			return Config.TAPEDRIVE_DISTANCE;
+			return Config.COMMON.TAPEDRIVE_DISTANCE.get();
 		}
 
 		@Override
@@ -70,7 +73,7 @@ public class TileSpeechBox extends TileEntityPeripheralBase implements IAudioSou
 
 		@Override
 		public String getID() {
-			return AudioUtils.positionId(getPos());
+			return AudioUtils.positionId(getBlockPos());
 		}
 
 	};
@@ -96,22 +99,22 @@ public class TileSpeechBox extends TileEntityPeripheralBase implements IAudioSou
 			boolean sent = false;
 			if(Mods.API.hasAPI(Mods.API.CharsetAudio)) {
 				int oldReceivers = receivers;
-				receivers += IntegrationCharsetAudio.send(getWorld(), getPos(), pkt, getVolume(), true);
+				receivers += IntegrationCharsetAudio.send(getLevel(), getBlockPos(), pkt, getVolume(), true);
 				if(receivers > oldReceivers) {
 					sent = true;
 				}
 			}
 
 			if(!sent) {
-				for(Direction dir : Direction.VALUES) {
-					TileEntity tile = world.getTileEntity(getPos().offset(dir));
-					if(tile != null && tile.hasCapability(AUDIO_RECEIVER_CAPABILITY, dir.getOpposite())) {
+				for(Direction dir : Direction.values()) {
+					TileEntity tile = getLevel().getBlockEntity(getBlockPos().relative(dir));
+					if(tile != null && !tile.getCapability(AUDIO_RECEIVER_CAPABILITY, dir.getOpposite()).equals(LazyOptional.empty())) {
 						IColorable targetCol = org.libreflock.computronics.util.ColorUtils.getColorable(tile, dir.getOpposite());
 						if(targetCol != null && targetCol.canBeColored()
 							&& !org.libreflock.computronics.util.ColorUtils.isSameOrDefault(this, targetCol)) {
 							continue;
 						}
-						tile.getCapability(AUDIO_RECEIVER_CAPABILITY, dir.getOpposite()).receivePacket(pkt, dir.getOpposite());
+						tile.getCapability(AUDIO_RECEIVER_CAPABILITY, dir.getOpposite()).orElse(null).receivePacket(pkt, dir.getOpposite());
 						receivers++;
 					}
 				}
@@ -126,7 +129,7 @@ public class TileSpeechBox extends TileEntityPeripheralBase implements IAudioSou
 
 	@Override
 	public void startTalking(byte[] data) {
-		if(world.isRemote) {
+		if(getLevel() instanceof ServerWorld) {
 			return;
 		}
 		storage = new ByteArrayInputStream(data);
@@ -136,7 +139,7 @@ public class TileSpeechBox extends TileEntityPeripheralBase implements IAudioSou
 	}
 
 	private void stopTalking() {
-		if(hasWorld() && world.isRemote) {
+		if(this.level != null && getLevel() instanceof ServerWorld) {
 			return;
 		}
 		AudioUtils.removePlayer(Computronics.instance.managerId, codecId);
@@ -145,13 +148,14 @@ public class TileSpeechBox extends TileEntityPeripheralBase implements IAudioSou
 	}
 
 	private Object[] sendNewText(String text) throws IOException {
-		if(Computronics.tts != null) {
-			locked = true;
-			Computronics.tts.say(this, text);
-		} else {
-			return new Object[] { false, "text-to-speech system not available" };
-		}
-		return new Object[] { true };
+		// if(Computronics.tts != null) {
+		// 	locked = true;
+		// 	Computronics.tts.say(this, text);
+		// } else {
+		// 	return new Object[] { false, "text-to-speech system not available" };
+		// }
+		// return new Object[] { true };
+		return new Object[] {false, "text-to-speech system not available"} ;
 	}
 
 	private ByteArrayInputStream storage;
@@ -192,8 +196,8 @@ public class TileSpeechBox extends TileEntityPeripheralBase implements IAudioSou
 	}
 
 	@Override
-	public void invalidate() {
-		super.invalidate();
+	public void setRemoved() {
+		super.setRemoved();
 		stopTalking();
 	}
 
@@ -214,13 +218,13 @@ public class TileSpeechBox extends TileEntityPeripheralBase implements IAudioSou
 	}
 
 	@Callback(doc = "function(text:string):boolean; Say the specified message. Returns true on success, false and an error message otherwise.")
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] say(Context context, Arguments args) {
 		if(locked || storage != null) {
 			return new Object[] { false, "already processing" };
 		}
 		String text = args.checkString(0);
-		if(text.length() > Config.TTS_MAX_LENGTH) {
+		if(text.length() > Config.COMMON.TTS_MAX_LENGTH.get()) { // TODO: tts max length
 			return new Object[] { false, "text too long" };
 		}
 		try {
@@ -234,7 +238,7 @@ public class TileSpeechBox extends TileEntityPeripheralBase implements IAudioSou
 	}
 
 	@Callback(doc = "function():boolean; Stops the currently spoken phrase. Returns true on success, false and an error message otherwise.")
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] stop(Context context, Arguments args) {
 		if(locked || storage != null) {
 			stopTalking();
@@ -244,68 +248,68 @@ public class TileSpeechBox extends TileEntityPeripheralBase implements IAudioSou
 	}
 
 	@Callback(doc = "function():boolean; Returns true if the device is currently processing text.", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] isProcessing(Context context, Arguments args) {
 		return new Object[] { locked || storage != null };
 	}
 
 	@Callback(doc = "function(speed:number); Sets the volume of the speech box. Needs to be beween 0 and 1")
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] setVolume(Context context, Arguments args) {
 		this.setVolume((float) args.checkDouble(0));
 		return new Object[] {};
 	}
 
-	@Override
-	@Optional.Method(modid = Mods.ComputerCraft)
-	public String[] getMethodNames() {
-		return new String[] { "say", "stop", "isProcessing", "setVolume" };
-	}
+	// @Override
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// public String[] getMethodNames() {
+	// 	return new String[] { "say", "stop", "isProcessing", "setVolume" };
+	// }
+
+	// @Override
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// public Object[] callMethod(IComputerAccess computer, ILuaContext context, int method, Object[] arguments) throws LuaException, InterruptedException {
+	// 	switch(method) {
+	// 		case 0: {
+	// 			if(arguments.length < 1 || !(arguments[0] instanceof String)) {
+	// 				throw new LuaException("first argument needs to be a string");
+	// 			}
+	// 			if(locked || storage != null) {
+	// 				return new Object[] { false, "already processing" };
+	// 			}
+	// 			String text = (String) arguments[0];
+	// 			if(text.length() > Config.TTS_MAX_LENGTH) {
+	// 				return new Object[] { false, "text too long" };
+	// 			}
+	// 			try {
+	// 				return this.sendNewText(text);
+	// 			} catch(IOException e) {
+	// 				throw new LuaException("could not send string");
+	// 			}
+	// 		}
+	// 		case 1: {
+	// 			if(locked || storage != null) {
+	// 				stopTalking();
+	// 				return new Object[] { true };
+	// 			}
+	// 			return new Object[] { false, "not talking" };
+	// 		}
+	// 		case 2: {
+	// 			return new Object[] { locked || storage != null };
+	// 		}
+	// 		case 3: {
+	// 			if(arguments.length < 1 || !(arguments[0] instanceof Number)) {
+	// 				throw new LuaException("first argument needs to be a number");
+	// 			}
+	// 			this.setVolume(((Number) arguments[0]).floatValue());
+	// 			return new Object[] {};
+	// 		}
+	// 	}
+	// 	return new Object[] {};
+	// }
 
 	@Override
-	@Optional.Method(modid = Mods.ComputerCraft)
-	public Object[] callMethod(IComputerAccess computer, ILuaContext context, int method, Object[] arguments) throws LuaException, InterruptedException {
-		switch(method) {
-			case 0: {
-				if(arguments.length < 1 || !(arguments[0] instanceof String)) {
-					throw new LuaException("first argument needs to be a string");
-				}
-				if(locked || storage != null) {
-					return new Object[] { false, "already processing" };
-				}
-				String text = (String) arguments[0];
-				if(text.length() > Config.TTS_MAX_LENGTH) {
-					return new Object[] { false, "text too long" };
-				}
-				try {
-					return this.sendNewText(text);
-				} catch(IOException e) {
-					throw new LuaException("could not send string");
-				}
-			}
-			case 1: {
-				if(locked || storage != null) {
-					stopTalking();
-					return new Object[] { true };
-				}
-				return new Object[] { false, "not talking" };
-			}
-			case 2: {
-				return new Object[] { locked || storage != null };
-			}
-			case 3: {
-				if(arguments.length < 1 || !(arguments[0] instanceof Number)) {
-					throw new LuaException("first argument needs to be a number");
-				}
-				this.setVolume(((Number) arguments[0]).floatValue());
-				return new Object[] {};
-			}
-		}
-		return new Object[] {};
-	}
-
-	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	protected OCUtils.Device deviceInfo() {
 		return new OCUtils.Device(
 			DeviceClass.Multimedia,
@@ -322,6 +326,6 @@ public class TileSpeechBox extends TileEntityPeripheralBase implements IAudioSou
 
 	@Override
 	public boolean connectsAudio(Direction side) {
-		return world.getBlockState(getPos()).getValue(Computronics.speechBox.rotation.FACING) != side;
+		return getLevel().getBlockState(getBlockPos()).getValue(Computronics.speechBox.rotation.FACING) != side;
 	}
 }

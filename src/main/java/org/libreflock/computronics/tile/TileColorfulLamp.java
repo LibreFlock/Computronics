@@ -34,13 +34,13 @@ import static org.libreflock.computronics.block.BlockColorfulLamp.BRIGHTNESS;
 //import mrtjp.projectred.api.IBundledTile;
 //import mrtjp.projectred.api.ProjectRedAPI;
 
-@Optional.InterfaceList({
-	//@Optional.Interface(iface = "mods.immibis.redlogic.api.wiring.IBundledUpdatable", modid = Mods.RedLogic),
-	//@Optional.Interface(iface = "mods.immibis.redlogic.api.wiring.IConnectable", modid = Mods.RedLogic),
-	//@Optional.Interface(iface = "mrtjp.projectred.api.IBundledTile", modid = Mods.ProjectRed)
-	@Optional.Interface(iface = "elucent.albedo.lighting.ILightProvider", modid = Mods.Albedo),
-	@Optional.Interface(iface = "com.elytradev.mirage.lighting.IColoredLight", modid = Mods.Mirage)
-})
+// @Optional.InterfaceList({
+// 	//@Optional.Interface(iface = "mods.immibis.redlogic.api.wiring.IBundledUpdatable", modid = Mods.RedLogic),
+// 	//@Optional.Interface(iface = "mods.immibis.redlogic.api.wiring.IConnectable", modid = Mods.RedLogic),
+// 	//@Optional.Interface(iface = "mrtjp.projectred.api.IBundledTile", modid = Mods.ProjectRed)
+// 	@Optional.Interface(iface = "elucent.albedo.lighting.ILightProvider", modid = Mods.Albedo),
+// 	@Optional.Interface(iface = "com.elytradev.mirage.lighting.IColoredLight", modid = Mods.Mirage)
+// })
 public class TileColorfulLamp extends TileEntityPeripheralBase implements IBundledRedstoneProvider, ILightProvider, IColoredLight/*IBundledTile, IBundledUpdatable, IConnectable*/ {
 
 	public TileColorfulLamp() {
@@ -55,7 +55,7 @@ public class TileColorfulLamp extends TileEntityPeripheralBase implements IBundl
 		Computronics.serverTickHandler.schedule(new Runnable() {
 			@Override
 			public void run() {
-				BlockState state = world.getBlockState(getPos());
+				BlockState state = getLevel().getBlockState(getBlockPos());
 				if(state.getBlock() instanceof BlockColorfulLamp) {
 					if(LampUtil.shouldColorLight()) {
 						setLightValue(state, color);
@@ -81,33 +81,33 @@ public class TileColorfulLamp extends TileEntityPeripheralBase implements IBundl
 			g = value > 0x7FFF ? 15 : g < 0 ? 0 : g > 15 ? 15 : g;
 			b = value > 0x7FFF ? 15 : b < 0 ? 0 : b > 15 ? 15 : b;
 			int brightness = Math.max(Math.max(r, g), b);
-			world.setBlockState(getPos(), state.withProperty(BRIGHTNESS, brightness | ((b << 15) + (g << 10) + (r << 5))));
+			getLevel().setBlockState(getBlockPos(), state.withProperty(BRIGHTNESS, brightness | ((b << 15) + (g << 10) + (r << 5))));
 		} else {
-			world.setBlockState(getPos(), state.withProperty(BRIGHTNESS, value));
+			getLevel().setBlockState(getBlockPos(), state.withProperty(BRIGHTNESS, value));
 		}
 	}
 
 	public void setLampColor(int color) {
 		this.color = color & 0x7FFF;
-		if(world.getBlockState(getPos()).getBlock() instanceof BlockColorfulLamp) {
+		if(getLevel().getBlockState(getBlockPos()).getBlock() instanceof BlockColorfulLamp) {
 			if(LampUtil.shouldColorLight()) {
-				setLightValue(world.getBlockState(getPos()), this.color);
+				setLightValue(getLevel().getBlockState(getBlockPos()), this.color);
 			} else {
-				setLightValue(world.getBlockState(getPos()), LampUtil.toBrightness(color));
+				setLightValue(getLevel().getBlockState(getBlockPos()), LampUtil.toBrightness(color));
 			}
 		}
-		this.markDirty();
+		this.setChanged();
 		notifyBlockUpdate();
 	}
 
 	@Callback(doc = "function():number; Returns the current lamp color", direct = true)
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] getLampColor(Context context, Arguments args) throws Exception {
 		return new Object[] { this.getLampColor() };
 	}
 
 	@Callback(doc = "function(color:number):boolean; Sets the lamp color; Set to 0 to turn the off the lamp; Returns true on success")
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Object[] setLampColor(Context context, Arguments args) throws Exception {
 		if(args.checkInteger(0) >= 0 && args.checkInteger(0) <= 0xFFFF) {
 			this.setLampColor(args.checkInteger(0));
@@ -116,31 +116,31 @@ public class TileColorfulLamp extends TileEntityPeripheralBase implements IBundl
 		return new Object[] { false, "number must be between 0 and 32767" };
 	}
 
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	@Optional.Method(modid = Mods.Albedo)
-	public Light provideLight() {
-		return Light.builder()
-			.pos(getPos())
-			.color((color & (0x1F << 10)) << 9 | (color & (0x1F << 5)) << 6 | (color & 0x1F) << 3, false)
-			.radius(LampUtil.brightness(color) * 15F)
-			.build();
-	}
+	// @Override
+	// @OnlyIn(Dist.CLIENT)
+	// @Optional.Method(modid = Mods.Albedo)
+	// public Light provideLight() {
+	// 	return Light.builder()
+	// 		.pos(getPos())
+	// 		.color((color & (0x1F << 10)) << 9 | (color & (0x1F << 5)) << 6 | (color & 0x1F) << 3, false)
+	// 		.radius(LampUtil.brightness(color) * 15F)
+	// 		.build();
+	// }
 
-	@Nullable
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	@Optional.Method(modid = Mods.Mirage)
-	public com.elytradev.mirage.lighting.Light getColoredLight() {
-		return com.elytradev.mirage.lighting.Light.builder()
-			.pos(getPos())
-			.color((color & (0x1F << 10)) << 9 | (color & (0x1F << 5)) << 6 | (color & 0x1F) << 3, false)
-			.radius(LampUtil.brightness(color) * 15F)
-			.build();
-	}
+	// @Nullable
+	// @Override
+	// @OnlyIn(Dist.CLIENT)
+	// @Optional.Method(modid = Mods.Mirage)
+	// public com.elytradev.mirage.lighting.Light getColoredLight() {
+	// 	return com.elytradev.mirage.lighting.Light.builder()
+	// 		.pos(getPos())
+	// 		.color((color & (0x1F << 10)) << 9 | (color & (0x1F << 5)) << 6 | (color & 0x1F) << 3, false)
+	// 		.radius(LampUtil.brightness(color) * 15F)
+	// 		.build();
+	// }
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	protected OCUtils.Device deviceInfo() {
 		return new OCUtils.Device(
 			DeviceClass.Display,
@@ -150,37 +150,37 @@ public class TileColorfulLamp extends TileEntityPeripheralBase implements IBundl
 		);
 	}
 
-	@Override
-	@Optional.Method(modid = Mods.ComputerCraft)
-	public String[] getMethodNames() {
-		return new String[] { "getLampColor", "setLampColor" };
-	}
+	// @Override
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// public String[] getMethodNames() {
+	// 	return new String[] { "getLampColor", "setLampColor" };
+	// }
 
-	@Nullable
-	@Override
-	@Optional.Method(modid = Mods.ComputerCraft)
-	public Object[] callMethod(IComputerAccess computer, ILuaContext context,
-		int method, final Object[] arguments) throws LuaException,
-		InterruptedException {
-		switch(method) {
-			case 0:
-			default:
-				return new Object[] { this.color };
-			case 1: {
-				if(arguments.length > 0 && (arguments[0] instanceof Double)) {
-					context.executeMainThreadTask(new ILuaTask() {
-						@Override
-						public Object[] execute() throws LuaException {
-							TileColorfulLamp.this.setLampColor(((Double) arguments[0]).intValue());
-							return null;
-						}
-					});
-				}
-			}
-			break;
-		}
-		return null;
-	}
+	// @Nullable
+	// @Override
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// public Object[] callMethod(IComputerAccess computer, ILuaContext context,
+	// 	int method, final Object[] arguments) throws LuaException,
+	// 	InterruptedException {
+	// 	switch(method) {
+	// 		case 0:
+	// 		default:
+	// 			return new Object[] { this.color };
+	// 		case 1: {
+	// 			if(arguments.length > 0 && (arguments[0] instanceof Double)) {
+	// 				context.executeMainThreadTask(new ILuaTask() {
+	// 					@Override
+	// 					public Object[] execute() throws LuaException {
+	// 						TileColorfulLamp.this.setLampColor(((Double) arguments[0]).intValue());
+	// 						return null;
+	// 					}
+	// 				});
+	// 			}
+	// 		}
+	// 		break;
+	// 	}
+	// 	return null;
+	// }
 
 	@Override
 	public void readFromNBT(CompoundNBT tag) {
@@ -240,7 +240,7 @@ public class TileColorfulLamp extends TileEntityPeripheralBase implements IBundl
 			this.color = 0;
 		}
 		if(oldColor != this.color) {
-			this.world.markBlockRangeForRenderUpdate(getPos(), getPos());
+			this.getLevel().markBlockRangeForRenderUpdate(getBlockPos(), getBlockPos());
 		}
 	}
 

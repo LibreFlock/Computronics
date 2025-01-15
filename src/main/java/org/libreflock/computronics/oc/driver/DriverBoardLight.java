@@ -14,6 +14,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.libreflock.computronics.reference.Config;
@@ -186,7 +187,7 @@ public class DriverBoardLight extends RackMountableWithComponentConnector {
 
 		@OnlyIn(Dist.CLIENT)
 		public void registerIcons(AtlasTexture map) {
-			background = map.registerSprite(new ResourceLocation(backgroundPath));
+			background = map.registerSprite(new ResourceLocation(backgroundPath)); // TODO: this
 		}
 
 		@Nullable
@@ -254,7 +255,7 @@ public class DriverBoardLight extends RackMountableWithComponentConnector {
 		Light light = checkLight(args.checkInteger(0));
 		int color = args.checkInteger(1);
 		if(color >= 0 && color <= 0xFFFFFF) {
-			if(node.tryChangeBuffer(-Config.LIGHT_BOARD_COLOR_CHANGE_COST)) {
+			if(node.tryChangeBuffer(-Config.COMMON.LIGHT_BOARD_COLOR_CHANGE_COST.get())) {
 				setColor(light, color);
 				return new Object[] { true };
 			}
@@ -272,7 +273,7 @@ public class DriverBoardLight extends RackMountableWithComponentConnector {
 	public Object[] setActive(Context context, Arguments args) {
 		Light light = checkLight(args.checkInteger(0));
 		boolean active = args.checkBoolean(1);
-		if(node.tryChangeBuffer(-Config.LIGHT_BOARD_COLOR_CHANGE_COST)) {
+		if(node.tryChangeBuffer(-Config.COMMON.LIGHT_BOARD_COLOR_CHANGE_COST.get())) {
 			setActive(light, active);
 			return new Object[] { true };
 		}
@@ -298,7 +299,7 @@ public class DriverBoardLight extends RackMountableWithComponentConnector {
 	public void update() {
 		for(Light light : lights) {
 			if(light.isActive) {
-				if(!node.tryChangeBuffer(-Config.LIGHT_BOARD_COLOR_MAINTENANCE_COST)) {
+				if(!node.tryChangeBuffer(-Config.COMMON.LIGHT_BOARD_COLOR_MAINTENANCE_COST.get())) {
 					setActive(light, false);
 					break;
 				}
@@ -311,8 +312,8 @@ public class DriverBoardLight extends RackMountableWithComponentConnector {
 	}
 
 	@Override
-	public void load(CompoundNBT tag) {
-		super.load(tag);
+	public void loadData(CompoundNBT tag) {
+		super.loadData(tag);
 		if(tag.contains("m")) {
 			setMode(Mode.fromIndex(tag.getInt("m")));
 			for(Light light : lights) {
@@ -327,8 +328,8 @@ public class DriverBoardLight extends RackMountableWithComponentConnector {
 	}
 
 	@Override
-	public void save(CompoundNBT tag) {
-		super.save(tag);
+	public void saveData(CompoundNBT tag) {
+		super.saveData(tag);
 		tag.putInt("m", mode.index);
 		for(Light light : lights) {
 			tag.putBoolean("r_" + light.index, light.isActive);
@@ -340,7 +341,7 @@ public class DriverBoardLight extends RackMountableWithComponentConnector {
 
 	@Override
 	public boolean onActivate(PlayerEntity player, Hand hand, ItemStack heldItem, float hitX, float hitY) {
-		if(player.world.isRemote) {
+		if(player.level instanceof ServerWorld) {
 			return true;
 		}
 		final BlockPos pos = new BlockPos(host.xPosition(), host.yPosition(), host.zPosition());

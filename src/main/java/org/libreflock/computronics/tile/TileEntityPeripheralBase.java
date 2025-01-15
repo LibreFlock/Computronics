@@ -12,6 +12,7 @@ import li.cil.oc.api.network.Visibility;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.api.distmarker.Dist;
@@ -38,12 +39,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 //
 // #######################################################
 
-@Optional.InterfaceList({
-	@Optional.Interface(iface = "li.cil.oc.api.network.Environment", modid = Mods.OpenComputers),
-	@Optional.Interface(iface = "li.cil.oc.api.driver.DeviceInfo", modid = Mods.OpenComputers),
-	@Optional.Interface(iface = "li.cil.oc.api.network.BlacklistedPeripheral", modid = Mods.OpenComputers),
-	@Optional.Interface(iface = "org.libreflock.computronics.api.multiperipheral.IMultiPeripheral", modid = Mods.ComputerCraft)
-})
+// @Optional.InterfaceList({
+// 	@Optional.Interface(iface = "li.cil.oc.api.network.Environment", modid = Mods.OpenComputers),
+// 	@Optional.Interface(iface = "li.cil.oc.api.driver.DeviceInfo", modid = Mods.OpenComputers),
+// 	@Optional.Interface(iface = "li.cil.oc.api.network.BlacklistedPeripheral", modid = Mods.OpenComputers),
+// 	@Optional.Interface(iface = "org.libreflock.computronics.api.multiperipheral.IMultiPeripheral", modid = Mods.ComputerCraft)
+// })
 public abstract class TileEntityPeripheralBase extends TileMachine implements Environment, DeviceInfo,
 	IMultiPeripheral, IComputronicsPeripheral, BlacklistedPeripheral, IColorable {
 
@@ -67,16 +68,20 @@ public abstract class TileEntityPeripheralBase extends TileMachine implements En
 		soundRes = getSoundFor(getSoundName());
 	}
 
+	public boolean isInvalid() {
+		return this.level == null || !this.isRemoved();
+	}
+
 	public boolean isValid() {
 		return !isInvalid();
 	}
 
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	protected void initOC(double s) {
 		setNode(Network.newNode(this, Visibility.Network).withComponent(this.peripheralName, Visibility.Network).withConnector(s).create());
 	}
 
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	protected void initOC() {
 		setNode(Network.newNode(this, Visibility.Network).withComponent(this.peripheralName, Visibility.Network).create());
 	}
@@ -87,37 +92,37 @@ public abstract class TileEntityPeripheralBase extends TileMachine implements En
 	// Has to be an Object for getDeclaredFields to not error when
 	// called on this class without OpenComputers being present. Blame OpenPeripheral.
 	private Object node;
-	protected CopyOnWriteArrayList<IComputerAccess> attachedComputersCC;
+	// protected CopyOnWriteArrayList<IComputerAccess> attachedComputersCC;
 	protected boolean addedToNetwork = false;
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Node node() {
 		return (Node) node;
 	}
 
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public void setNode(final Node node) {
 		this.node = node;
 	}
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public void onConnect(final Node node) {
 	}
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public void onDisconnect(final Node node) {
 	}
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public void onMessage(final Message message) {
 	}
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public boolean isPeripheralBlacklisted() {
 		return true;
 	}
@@ -133,21 +138,21 @@ public abstract class TileEntityPeripheralBase extends TileMachine implements En
 	@Override
 	public void update() {
 		super.update();
-		if(world == null) {
+		if(getLevel() == null) {
 			return;
 		}
-		if(world.isRemote && hasSound()) {
+		if(getLevel() instanceof ServerWorld && hasSound()) {
 			updateSound();
 		}
 	}
 
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	protected void addToNetwork_OC() {
 		Computronics.opencomputers.scheduleForNetworkJoin(this);
 		this.onOCNetworkCreation();
 	}
 
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public void onOCNetworkCreation() {
 
 	}
@@ -161,24 +166,24 @@ public abstract class TileEntityPeripheralBase extends TileMachine implements En
 	}
 
 	@Override
-	public void invalidate() {
-		super.invalidate();
+	public void setRemoved() {
+		super.setRemoved();
 		if(Mods.isLoaded(Mods.OpenComputers)) {
 			invalidate_OC();
 		}
-		if(world.isRemote && hasSound()) {
+		if(getLevel() instanceof ServerWorld && hasSound()) {
 			updateSound();
 		}
 	}
 
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	protected void onChunkUnload_OC() {
 		if(node() != null) {
 			node().remove();
 		}
 	}
 
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	protected void invalidate_OC() {
 		if(node() != null) {
 			node().remove();
@@ -188,7 +193,7 @@ public abstract class TileEntityPeripheralBase extends TileMachine implements En
 	protected Map<String, String> deviceInfo;
 
 	@Override
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public Map<String, String> getDeviceInfo() {
 		if(deviceInfo == null) {
 			OCUtils.Device device = deviceInfo();
@@ -200,71 +205,71 @@ public abstract class TileEntityPeripheralBase extends TileMachine implements En
 	}
 
 	@Nullable
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	protected abstract OCUtils.Device deviceInfo();
 
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public void readFromNBT_OC(final CompoundNBT nbt) {
 		if(node() != null && node().host() == this) {
-			node().load(nbt.getCompound("oc:node"));
+			node().loadData(nbt.getCompound("oc:node"));
 		}
 	}
 
-	@Optional.Method(modid = Mods.OpenComputers)
+	// @Optional.Method(modid = Mods.OpenComputers)
 	public void writeToNBT_OC(final CompoundNBT nbt) {
 		if(node() != null && node().host() == this) {
 			final CompoundNBT nodeNbt = new CompoundNBT();
-			node().save(nodeNbt);
+			node().saveData(nodeNbt);
 			nbt.put("oc:node", nodeNbt);
 		}
 	}
 
 	@Override
-	@Optional.Method(modid = Mods.ComputerCraft)
+	// @Optional.Method(modid = Mods.ComputerCraft)
 	public String getType() {
 		return peripheralName;
 	}
 
-	@Override
-	@Optional.Method(modid = Mods.ComputerCraft)
-	public void attach(IComputerAccess computer) {
-		if(attachedComputersCC == null) {
-			attachedComputersCC = new CopyOnWriteArrayList<IComputerAccess>();
-		}
-		attachedComputersCC.add(computer);
-	}
+	// @Override
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// public void attach(IComputerAccess computer) {
+	// 	if(attachedComputersCC == null) {
+	// 		attachedComputersCC = new CopyOnWriteArrayList<IComputerAccess>();
+	// 	}
+	// 	attachedComputersCC.add(computer);
+	// }
 
-	@Override
-	@Optional.Method(modid = Mods.ComputerCraft)
-	public void detach(IComputerAccess computer) {
-		if(attachedComputersCC != null) {
-			attachedComputersCC.remove(computer);
-		}
-	}
+	// @Override
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// public void detach(IComputerAccess computer) {
+	// 	if(attachedComputersCC != null) {
+	// 		attachedComputersCC.remove(computer);
+	// 	}
+	// }
 
-	@Override
-	@Optional.Method(modid = Mods.ComputerCraft)
-	public boolean equals(IPeripheral other) {
-		if(other == null) {
-			return false;
-		}
-		if(this == other) {
-			return true;
-		}
-		if(other instanceof TileEntity) {
-			TileEntity tother = (TileEntity) other;
-			return tother.getWorld().equals(world)
-				&& tother.getPos().equals(this.getPos());
-		}
+	// @Override
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// public boolean equals(IPeripheral other) {
+	// 	if(other == null) {
+	// 		return false;
+	// 	}
+	// 	if(this == other) {
+	// 		return true;
+	// 	}
+	// 	if(other instanceof TileEntity) {
+	// 		TileEntity tother = (TileEntity) other;
+	// 		return tother.getWorld().equals(world)
+	// 			&& tother.getPos().equals(this.getPos());
+	// 	}
 
-		return false;
-	}
+	// 	return false;
+	// }
 
-	@Override
-	@Optional.Method(modid = Mods.ComputerCraft)
-	public int peripheralPriority() {
-		return 1;
-	}
+	// @Override
+	// @Optional.Method(modid = Mods.ComputerCraft)
+	// public int peripheralPriority() {
+	// 	return 1;
+	// }
 
 	protected int overlayColor = getDefaultColor();
 
@@ -281,7 +286,7 @@ public abstract class TileEntityPeripheralBase extends TileMachine implements En
 	@Override
 	public void setColor(int color) {
 		this.overlayColor = color;
-		this.markDirty();
+		this.setChanged();
 	}
 
 	@Override
@@ -300,7 +305,7 @@ public abstract class TileEntityPeripheralBase extends TileMachine implements En
 			this.overlayColor = getDefaultColor();
 		}
 		if(oldColor != this.overlayColor) {
-			this.world.markBlockRangeForRenderUpdate(getPos(), getPos());
+			this.getLevel().markBlockRangeForRenderUpdate(getBlockPos(), getBlockPos());
 		}
 	}
 
@@ -342,7 +347,7 @@ public abstract class TileEntityPeripheralBase extends TileMachine implements En
 	@Override
 	public void removeFromNBTForTransfer(CompoundNBT data) {
 		super.removeFromNBTForTransfer(data);
-		data.removeTag("oc:node");
+		data.remove("oc:node");
 	}
 
 	// Sound related, thanks to EnderIO code for this!
@@ -391,7 +396,7 @@ public abstract class TileEntityPeripheralBase extends TileMachine implements En
 		if(hasSound()) {
 			if(shouldPlaySound() && !isInvalid()) {
 				if(sound == null) {
-					sound = new MachineSound(getSoundRes(), getPos(), getVolume(), getPitch(), shouldRepeat());
+					sound = new MachineSound(getSoundRes(), getBlockPos(), getVolume(), getPitch(), shouldRepeat());
 					FMLClientHandler.instance().getClient().getSoundHandler().playSound(sound);
 				}
 			} else if(sound != null) {

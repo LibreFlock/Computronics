@@ -51,11 +51,11 @@ public class DriverCardFX extends AbstractManagedEnvironment implements DeviceIn
 		double yOffset = MathHelper.clamp(args.checkDouble(2), -65536D, 65536D);
 		double zOffset = MathHelper.clamp(args.checkDouble(3), -65536D, 65536D);
 		double distance = Math.sqrt(xOffset * xOffset + yOffset * yOffset + zOffset * zOffset);
-		if(Config.FX_RANGE >= 0 && distance > Config.FX_RANGE) {
+		if(Config.COMMON.FX_RANGE.get() >= 0 && distance > Config.COMMON.FX_RANGE.get()) {
 			return new Object[] { false, "out of range" };
 		}
-		if(((Connector) this.node()).tryChangeBuffer(0 - Config.FX_ENERGY_COST * distance)) {
-			Random rng = container.world().rand;
+		if(((Connector) this.node()).tryChangeBuffer(0 - Config.COMMON.FX_ENERGY_COST.get() * distance)) {
+			Random rng = container.world().random;
 			double x = container.xPosition() + xOffset;
 			double y = container.yPosition() + yOffset;
 			double z = container.zPosition() + zOffset;
