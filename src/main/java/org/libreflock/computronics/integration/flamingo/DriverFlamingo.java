@@ -25,7 +25,7 @@ import org.libreflock.computronics.reference.Names;
 public class DriverFlamingo {
 
 	private static void wiggle(TileEntityFlamingo tile) {
-		tile.getWorld().addBlockEvent(tile.getPos(), tile.getBlockType(), 0, 0);
+		tile.getWorld().addBlockEvent(tile.getBlockPos(), tile.getBlockType(), 0, 0);
 	}
 
 	public static class OCDriver extends DriverSpecificTileEntity<TileEntityFlamingo> {

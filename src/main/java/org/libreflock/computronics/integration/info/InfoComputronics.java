@@ -99,7 +99,7 @@ public class InfoComputronics implements IWailaDataProvider, IProbeInfoProvider 
 	@Override
 	@Optional.Method(modid = Mods.TheOneProbe)
 	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, BlockState state, IProbeHitData data) {
-		TileEntity tile = world.getTileEntity(data.getPos());
+		TileEntity tile = world.getTileEntity(data.getBlockPos());
 		if(tile == null) {
 			return;
 		}

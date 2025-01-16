@@ -75,7 +75,7 @@ public class DriverMannequin {
 	}
 
 	private static void updateMannequin(TileEntityMannequin tile) {
-		tile.markDirty();
+		tile.setChanged();
 		tile.getWorldObj().markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord);
 	}
 

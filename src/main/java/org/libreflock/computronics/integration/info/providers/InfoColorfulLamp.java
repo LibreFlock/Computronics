@@ -64,7 +64,7 @@ public class InfoColorfulLamp extends ComputronicsInfoProvider {
 	@Override
 	@Optional.Method(modid = Mods.TheOneProbe)
 	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, BlockState blockState, IProbeHitData data) {
-		TileEntity tileEntity = world.getTileEntity(data.getPos());
+		TileEntity tileEntity = world.getTileEntity(data.getBlockPos());
 		if(!(tileEntity instanceof TileColorfulLamp)) {
 			return;
 		}

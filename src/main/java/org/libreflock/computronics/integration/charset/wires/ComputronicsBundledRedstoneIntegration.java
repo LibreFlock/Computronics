@@ -107,7 +107,7 @@ public class ComputronicsBundledRedstoneIntegration {
 
 		@Override
 		public void onBundledInputChange() {
-			TileEntity tile = this.tile.getWorld().getTileEntity(this.tile.getPos().offset(side));
+			TileEntity tile = this.tile.getWorld().getTileEntity(this.tile.getBlockPos().offset(side));
 			if(tile != null && isEmitter(tile, side.getOpposite())) {
 				br.onBundledInputChange(side, getEmitter(tile, side.getOpposite()).getBundledSignal());
 			}

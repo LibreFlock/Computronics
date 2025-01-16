@@ -113,7 +113,7 @@ public class DriverDockingUpgrade extends ManagedEnvironment implements DeviceIn
 			return 0;
 		} else if(BlockGenericPipe.isValid(pipe.pipe) && pipe.pipe.transport instanceof PipeTransportItems && pipe.getPipePluggable(from) != null) {
 			if(doAdd) {
-				Vec3 pos = Utils.convertMiddle(pipe.getPos()).add(Utils.convert(from, 0.4));
+				Vec3 pos = Utils.convertMiddle(pipe.getBlockPos()).add(Utils.convert(from, 0.4));
 				TravelingItem pipedItem = TravelingItem.make(pos, stack);
 				pipedItem.color = color;
 				((PipeTransportItems) pipe.pipe.transport).injectItem(pipedItem, from.getOpposite());

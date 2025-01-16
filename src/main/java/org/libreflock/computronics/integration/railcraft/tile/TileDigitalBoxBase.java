@@ -259,7 +259,7 @@ public abstract class TileDigitalBoxBase extends TileBoxBase
 		if(other instanceof TileEntity) {
 			TileEntity tother = (TileEntity) other;
 			return tother.getWorld().equals(world)
-				&& tother.getPos().equals(this.getPos());
+				&& tother.getBlockPos().equals(this.getBlockPos());
 		}
 
 		return false;

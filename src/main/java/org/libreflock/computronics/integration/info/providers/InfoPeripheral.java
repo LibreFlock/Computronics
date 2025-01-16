@@ -86,7 +86,7 @@ public class InfoPeripheral extends ComputronicsInfoProvider {
 	@Override
 	@Optional.Method(modid = Mods.TheOneProbe)
 	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, BlockState blockState, IProbeHitData data) {
-		TileEntity tile = world.getTileEntity(data.getPos());
+		TileEntity tile = world.getTileEntity(data.getBlockPos());
 		if(Mods.isLoaded(Mods.OpenComputers) && mode == ProbeMode.EXTENDED) {
 			for(String s : getInfo_OC(getNBTData_OC(tile, new CompoundNBT()), new ArrayList<String>(1))) {
 				probeInfo.text(s);

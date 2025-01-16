@@ -50,7 +50,7 @@ public class TileDigitalDetector extends TileEntityPeripheralBase
 			return;
 		}
 
-		List<AbstractMinecartEntity> carts = CartToolsAPI.getMinecartsOnAllSides(this.world, this.getPos(), 0.2F);
+		List<AbstractMinecartEntity> carts = CartToolsAPI.getMinecartsOnAllSides(this.world, this.getBlockPos(), 0.2F);
 
 		for(AbstractMinecartEntity cart : carts) {
 			if(!this.currentCarts.contains(cart)) {

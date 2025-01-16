@@ -17,6 +17,17 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.libreflock.computronics.audio.DFPWMPlaybackManager;
 import org.libreflock.computronics.audio.SoundCardPlaybackManager;
+import org.libreflock.computronics.block.BlockAudioCable;
+import org.libreflock.computronics.block.BlockCamera;
+import org.libreflock.computronics.block.BlockChatBox;
+import org.libreflock.computronics.block.BlockCipher;
+import org.libreflock.computronics.block.BlockCipherAdvanced;
+import org.libreflock.computronics.block.BlockColorfulLamp;
+import org.libreflock.computronics.block.BlockIronNote;
+import org.libreflock.computronics.block.BlockRadar;
+import org.libreflock.computronics.block.BlockSpeaker;
+import org.libreflock.computronics.block.BlockSpeechBox;
+import org.libreflock.computronics.block.BlockTapeReader;
 import org.libreflock.computronics.tape.StorageManager;
 import org.libreflock.computronics.tape.TapeStorageEventHandler;
 import org.libreflock.computronics.util.event.ServerTickHandler;
@@ -43,6 +54,18 @@ public class Computronics {
 	public DFPWMPlaybackManager audio;
 	public int managerId;
 
+    public static BlockIronNote ironNote;
+	public static BlockTapeReader tapeReader;
+	public static BlockAudioCable audioCable;
+	public static BlockSpeaker speaker;
+	public static BlockSpeechBox speechBox;
+	public static BlockCamera camera;
+	public static BlockChatBox chatBox;
+	public static BlockCipher cipher;
+	public static BlockCipherAdvanced cipher_advanced;
+	public static BlockRadar radar;
+	public static BlockColorfulLamp colorfulLamp;
+
 	public SoundCardPlaybackManager soundCardAudio;
 	public int soundCardManagerId;
 
@@ -62,6 +85,8 @@ public class Computronics {
 
     private void setup(final FMLCommonSetupEvent event) {
         // some preinit code
+
+
         log.info("HELLO FROM PREINIT");
         log.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
     }

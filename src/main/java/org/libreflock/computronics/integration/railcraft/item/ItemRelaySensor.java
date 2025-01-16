@@ -92,7 +92,7 @@ public class ItemRelaySensor extends Item implements IItemWithPrefix {
 						TileLocomotiveRelay relay = (TileLocomotiveRelay) tile;
 						EntityLocomotiveElectric loco = (EntityLocomotiveElectric) entity;
 						if(loco.dimension == relay.getWorld().provider.getDimension()) {
-							if(loco.getDistanceSq(relay.getPos()) <= Config.LOCOMOTIVE_RELAY_RANGE * Config.LOCOMOTIVE_RELAY_RANGE) {
+							if(loco.getDistanceSq(relay.getBlockPos()) <= Config.LOCOMOTIVE_RELAY_RANGE * Config.LOCOMOTIVE_RELAY_RANGE) {
 								relay.setLocomotive(loco);
 								player.sendMessage(new TranslationTextComponent("chat.computronics.sensor.bound"));
 								player.swingArm(Hand.MAIN_HAND);

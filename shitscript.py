@@ -31,8 +31,7 @@ for file in get_filepaths("src"):
         # data = data.replace("pl.asie.lib", "org.libreflock.asielib")
         # data = data.replace("pl.asie", "org.libreflock")
 
-        data = data.replace("getCompoundTag", "getCompound")
-        data = data.replace("hasKey", "contains")
+        data = data.replace("markDirty()", "setChanged()")
         
         
         

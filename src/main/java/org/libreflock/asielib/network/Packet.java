@@ -120,7 +120,7 @@ public class Packet implements IMessage {
 			throw new RuntimeException("TileEntity is invalid!");
 		}
 		write.writeInt(te.getWorld().provider.getDimension());
-		BlockPos pos = te.getPos();
+		BlockPos pos = te.getBlockPos();
 		write.writeInt(pos.getX());
 		write.writeInt(pos.getY());
 		write.writeInt(pos.getZ());

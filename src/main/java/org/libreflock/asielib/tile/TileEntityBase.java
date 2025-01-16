@@ -25,8 +25,8 @@ public class TileEntityBase extends TileEntity {
 	}
 
 	public boolean isUsableByPlayer(PlayerEntity player) {
-		return this.world.getTileEntity(getPos()) == this
-			&& player.getDistanceSq(getPos().add(0.5, 0.5, 0.5)) <= 64.0D;
+		return this.world.getTileEntity(getBlockPos()) == this
+			&& player.getDistanceSq(getBlockPos().add(0.5, 0.5, 0.5)) <= 64.0D;
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class TileEntityBase extends TileEntity {
 	@Override
 	@Nullable
 	public SUpdateTileEntityPacket getUpdatePacket() {
-		return new SUpdateTileEntityPacket(getPos(), getBlockMetadata(), getUpdateTag());
+		return new SUpdateTileEntityPacket(getBlockPos(), getBlockMetadata(), getUpdateTag());
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class TileEntityBase extends TileEntity {
 	}
 
 	protected void notifyBlockUpdate() {
-		WorldUtils.notifyBlockUpdate(getWorld(), getPos());
+		WorldUtils.notifyBlockUpdate(getWorld(), getBlockPos());
 	}
 
 	// Dummy functions

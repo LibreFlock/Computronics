@@ -32,7 +32,7 @@ public class AudioReceiverCable implements IAudioReceiver {
 				continue;
 			}
 
-			BlockPos pos = cable.getPos().offset(dir);
+			BlockPos pos = cable.getBlockPos().offset(dir);
 			if(!worldObj.isBlockLoaded(pos)) {
 				continue;
 			}

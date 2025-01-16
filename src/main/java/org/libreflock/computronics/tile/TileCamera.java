@@ -114,7 +114,7 @@ public class TileCamera extends TileEntityPeripheralBase implements ITickable {
 	// 				@Nullable
 	// 				@Override
 	// 				public Object[] execute() throws LuaException {
-	// 					BlockPos pos = getPos();
+	// 					BlockPos pos = getBlockPos();
 	// 					camera.ray(world, pos.getX(), pos.getY(), pos.getZ(), getFacingDirection(), fx, fy);
 	// 					return new Object[] { camera.getDistance() };
 	// 				}

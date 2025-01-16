@@ -70,7 +70,7 @@
 
 // 		@Override
 // 		public Vector3d getSoundPos() {
-// 			return getPos();
+// 			return getBlockPos();
 // 		}
 
 // 		@Override
@@ -90,7 +90,7 @@
 
 // 	};
 
-// 	protected Vector3d getPos() {
+// 	protected Vector3d getBlockPos() {
 // 		return new Vector3d(host.xPosition(), host.yPosition(), host.zPosition());
 // 	}
 
@@ -345,7 +345,7 @@
 // 	public boolean connectsAudio(Direction side) {
 // 		if(host instanceof TileEntity) {
 // 			IColorable hostCol = ColorUtils.getColorable((TileEntity) host, side);
-// 			IColorable targetCol = ColorUtils.getColorable(host.world().getTileEntity(((TileEntity) host).getPos().offset(side)), side.getOpposite());
+// 			IColorable targetCol = ColorUtils.getColorable(host.world().getTileEntity(((TileEntity) host).getBlockPos().offset(side)), side.getOpposite());
 // 			if(hostCol != null && targetCol != null && hostCol.canBeColored() && targetCol.canBeColored()) {
 // 				return ColorUtils.isSameOrDefault(hostCol, targetCol);
 // 			}

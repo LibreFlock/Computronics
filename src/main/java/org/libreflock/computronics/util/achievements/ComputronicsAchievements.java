@@ -236,7 +236,7 @@ public class ComputronicsAchievements {
 						if(tile != null && tile instanceof TileLocomotiveRelay) {
 							TileLocomotiveRelay relay = (TileLocomotiveRelay) tile;
 							if(loco.dimension == relay.getWorld().provider.getDimension()
-								&& loco.getDistanceSq(relay.getPos()) <= Config.LOCOMOTIVE_RELAY_RANGE * Config.LOCOMOTIVE_RELAY_RANGE) {
+								&& loco.getDistanceSq(relay.getBlockPos()) <= Config.LOCOMOTIVE_RELAY_RANGE * Config.LOCOMOTIVE_RELAY_RANGE) {
 
 								Computronics.instance.achievements.triggerAchievement(player, EnumAchievements.Relay);
 							}

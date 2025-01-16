@@ -452,7 +452,7 @@ public class PortableTapeDrive implements IAudioSource {
 		}
 
 		@Override
-		public void markDirty() {
+		public void setChanged() {
 
 		}
 	};

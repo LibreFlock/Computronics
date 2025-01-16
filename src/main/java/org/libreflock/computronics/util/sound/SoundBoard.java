@@ -64,7 +64,7 @@ public class SoundBoard {
 		static Set<SoundBoard> envs = Collections.newSetFromMap(new WeakHashMap<SoundBoard, Boolean>());
 
 		private boolean isAtLocation(IChunk chunk, int x, int z) {
-			ChunkPos pos = chunk.getPos();
+			ChunkPos pos = chunk.getBlockPos();
 			return pos.x == x && pos.z == z;
 		}
 

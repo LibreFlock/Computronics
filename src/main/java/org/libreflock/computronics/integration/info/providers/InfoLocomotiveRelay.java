@@ -59,7 +59,7 @@ public class InfoLocomotiveRelay extends ComputronicsInfoProvider {
 	@Override
 	@Optional.Method(modid = Mods.TheOneProbe)
 	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, BlockState blockState, IProbeHitData data) {
-		TileEntity tile = world.getTileEntity(data.getPos());
+		TileEntity tile = world.getTileEntity(data.getBlockPos());
 		if(!(tile instanceof TileLocomotiveRelay)) {
 			return;
 		}

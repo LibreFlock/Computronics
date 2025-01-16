@@ -155,7 +155,7 @@ public class TileLocomotiveRelay extends TileEntityPeripheralBase implements ITi
 		if(locomotive.dimension != this.world.provider.getDimension()) {
 			return "relay and locomotive are in different dimensions";
 		}
-		if(locomotive.getDistanceSq(getPos()) > Config.LOCOMOTIVE_RELAY_RANGE * Config.LOCOMOTIVE_RELAY_RANGE) {
+		if(locomotive.getDistanceSq(getBlockPos()) > Config.LOCOMOTIVE_RELAY_RANGE * Config.LOCOMOTIVE_RELAY_RANGE) {
 			return "locomotive is too far away";
 		}
 		if(locomotive.isSecure()) {

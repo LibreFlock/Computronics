@@ -102,7 +102,7 @@ public class CCBundledRedstoneIntegration implements IBundledRedstoneProvider {
 
 		@Override
 		public byte[] getBundledSignal() {
-			int out = ComputerCraftAPI.getBundledRedstoneOutput(tile.getWorld(), tile.getPos(), side);
+			int out = ComputerCraftAPI.getBundledRedstoneOutput(tile.getWorld(), tile.getBlockPos(), side);
 			if(out < 0) {
 				return new byte[16];
 			}
@@ -122,7 +122,7 @@ public class CCBundledRedstoneIntegration implements IBundledRedstoneProvider {
 
 		@Override
 		public void onBundledInputChange() {
-			tile.getWorld().neighborChanged(tile.getPos(), tile.getWorld().getBlockState(tile.getPos().offset(side)).getBlock(), tile.getPos().offset(side));
+			tile.getWorld().neighborChanged(tile.getBlockPos(), tile.getWorld().getBlockState(tile.getBlockPos().offset(side)).getBlock(), tile.getBlockPos().offset(side));
 		}
 	}
 

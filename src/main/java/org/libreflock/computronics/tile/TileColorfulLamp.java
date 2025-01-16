@@ -121,7 +121,7 @@ public class TileColorfulLamp extends TileEntityPeripheralBase implements IBundl
 	// @Optional.Method(modid = Mods.Albedo)
 	// public Light provideLight() {
 	// 	return Light.builder()
-	// 		.pos(getPos())
+	// 		.pos(getBlockPos())
 	// 		.color((color & (0x1F << 10)) << 9 | (color & (0x1F << 5)) << 6 | (color & 0x1F) << 3, false)
 	// 		.radius(LampUtil.brightness(color) * 15F)
 	// 		.build();
@@ -133,7 +133,7 @@ public class TileColorfulLamp extends TileEntityPeripheralBase implements IBundl
 	// @Optional.Method(modid = Mods.Mirage)
 	// public com.elytradev.mirage.lighting.Light getColoredLight() {
 	// 	return com.elytradev.mirage.lighting.Light.builder()
-	// 		.pos(getPos())
+	// 		.pos(getBlockPos())
 	// 		.color((color & (0x1F << 10)) << 9 | (color & (0x1F << 5)) << 6 | (color & 0x1F) << 3, false)
 	// 		.radius(LampUtil.brightness(color) * 15F)
 	// 		.build();
@@ -209,9 +209,9 @@ public class TileColorfulLamp extends TileEntityPeripheralBase implements IBundl
 
 	public void setBinaryMode(boolean mode) {
 		this.binaryMode = mode;
-		this.markDirty();
-		this.world.markBlockForUpdate(getPos());
-		this.world.notifyBlockOfStateChange(getPos(), getBlockType());
+		this.setChanged();
+		this.world.markBlockForUpdate(getBlockPos());
+		this.world.notifyBlockOfStateChange(getBlockPos(), getBlockType());
 	}*/
 
 	@Override

@@ -27,8 +27,8 @@ public class AudioSinkSpeaker extends AudioSink {
 	}
 
 	@Override
-	public Vector3d getPos() {
-		return new Vector3d(speaker.getPos());
+	public Vector3d getBlockPos() {
+		return new Vector3d(speaker.getBlockPos());
 	}
 
 	@Override
@@ -45,9 +45,9 @@ public class AudioSinkSpeaker extends AudioSink {
 	public void writeData(ByteBuf buffer) {
 		super.writeData(buffer);
 		buffer.writeInt(speaker.getWorld().provider.getDimension());
-		buffer.writeInt(speaker.getPos().getX());
-		buffer.writeInt(speaker.getPos().getY());
-		buffer.writeInt(speaker.getPos().getZ());
+		buffer.writeInt(speaker.getBlockPos().getX());
+		buffer.writeInt(speaker.getBlockPos().getY());
+		buffer.writeInt(speaker.getBlockPos().getZ());
 	}
 
 	@Override

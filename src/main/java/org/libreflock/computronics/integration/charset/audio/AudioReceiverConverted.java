@@ -28,7 +28,7 @@ public class AudioReceiverConverted implements IAudioReceiver {
 
 	@Override
 	public Vector3d getSoundPos() {
-		return sink.getPos();
+		return sink.getBlockPos();
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class AudioReceiverConverted implements IAudioReceiver {
 
 	@Override
 	public String getID() {
-		return AudioUtils.positionId(sink.getPos());
+		return AudioUtils.positionId(sink.getBlockPos());
 	}
 
 	@Override

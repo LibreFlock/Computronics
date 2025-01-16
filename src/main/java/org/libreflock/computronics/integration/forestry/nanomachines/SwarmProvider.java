@@ -135,10 +135,10 @@ public class SwarmProvider extends AbstractProvider {
 				if(e instanceof PlayerInteractEvent.RightClickItem) {
 					findTarget(player, e.getHand(), heldItem, e);
 				} else if(e instanceof PlayerInteractEvent.RightClickBlock) {
-					if(player.isSneaking() && e.getWorld().isBlockLoaded(e.getPos())) {
-						TileEntity te = e.getWorld().getTileEntity(e.getPos());
+					if(player.isSneaking() && e.getWorld().isBlockLoaded(e.getBlockPos())) {
+						TileEntity te = e.getWorld().getTileEntity(e.getBlockPos());
 						if(te instanceof IBeeHousing) {
-							BlockPos pos = e.getPos();
+							BlockPos pos = e.getBlockPos();
 							makeSwarm(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, player, e.getHand(), heldItem, (IBeeHousing) te, e);
 						} else {
 							findTarget(player, e.getHand(), heldItem, e);
@@ -148,10 +148,10 @@ public class SwarmProvider extends AbstractProvider {
 					}
 				}
 			} else if(heldItem.isEmpty() && e.getHand() == Hand.MAIN_HAND && e instanceof PlayerInteractEvent.RightClickBlock) {
-				if(player.isSneaking() && e.getWorld().isBlockLoaded(e.getPos())) {
-					TileEntity te = e.getWorld().getTileEntity(e.getPos());
+				if(player.isSneaking() && e.getWorld().isBlockLoaded(e.getBlockPos())) {
+					TileEntity te = e.getWorld().getTileEntity(e.getBlockPos());
 					if(te instanceof IBeeHousing) {
-						BlockPos pos = e.getPos();
+						BlockPos pos = e.getBlockPos();
 						makeSwarm(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, player, e.getHand(), null, (IBeeHousing) te, e);
 					}
 				}

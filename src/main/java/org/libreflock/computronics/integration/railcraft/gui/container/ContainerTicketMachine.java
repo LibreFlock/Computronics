@@ -48,7 +48,7 @@ public class ContainerTicketMachine extends RailcraftContainer {
 
 		if(Config.TICKET_MACHINE_CONSUME_CHARGE) {
 			this.addWidget(new Widget(92, 54, 178, 40, 30, 16));
-			this.addWidget(new AnalogWidget(new ChargeNetworkIndicator(tile.getWorld(), tile.getPos()), 93, 55, 28, 14, 92+13, 54+12, 178+13, 40+12));
+			this.addWidget(new AnalogWidget(new ChargeNetworkIndicator(tile.getWorld(), tile.getBlockPos()), 93, 55, 28, 14, 92+13, 54+12, 178+13, 40+12));
 		}
 		this.addWidget(new ProgressBarWidget(tile, 136, 34, 208, 25, 10, 13));
 		if(maintenanceMode) {
